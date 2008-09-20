@@ -9,6 +9,10 @@
       <title localize="false"></title>
       <filename>HtmlSnippet2.html</filename>
     </component>
+    <component visibility="1" type="Documents" order="3">
+      <title localize="false">Product roadmap documents</title>
+      <showtemplates>false</showtemplates>
+    </component>
   </component_list>
 </page>
 
