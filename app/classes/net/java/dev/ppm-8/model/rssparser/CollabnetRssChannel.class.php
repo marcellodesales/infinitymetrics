@@ -1,5 +1,5 @@
 <?php
-
+require_once "RssChannel.class.php";
 /*
  * CollabnetRssChannel.php
  *
@@ -9,34 +9,58 @@
  */
 class CollabnetRssChannel {
 
-    private $projectName;
-    private $channelCategory;
+    private $rssChannel;
+    private $url;
 
-    private static $LIST = ".dev.java.net/servlets/BrowseList?list=";
+    public function __construct($url) {
+        $this->url = $url;
+        $this->rssChannel = new RssChannel();
+    }
 
+    public function newRssItemBuilder() {
+        return RssChannel::newRssItemBuilder();
+    }
+
+    public function addItem(RssItem $rssItem) {
+        $this->rssChannel->addItem($rssItem);
+    }
+
+    public function getItems() {
+        $this->rssChannel->getItems();
+    }
+
+    public function setTitle($title) {
+      $this->rssChannel->setTitle($title);
+    }
+
+    public function setLink($link) {
+        $this->rssChannel->setLink($link);
+    }
+
+    public function setDescription($description) {
+        $this->rssChannel->setDescription($description);
+    }
     /*
      * Returns the project name from the link tag.
      */    
     public function getProjectName() {
-        return $this->projectName;
+        return $this->rssChannel->getProjectName();
     }
 
     /*
      * Returns the channel category name from the link tag.
      */    
     public function getChannelCategory() {
-        return $this->channelCategory;
+        return $this->rssChannel->getChannelCategory();
+    }
+
+    public function getNumberOfItems() {
+        return $this->rssChannel->getNumberOfItems();
+    }
+    
+    public static function getUrl($projectName, $mailingList) {
+        return RssChannel::$PROTOCOL . $projectName . RssChannel::$DOMAIN . 
+                 RssChannel::$LIST . $mailingList;
     }
 }
-
-$rss = new CollabnetRssChannel("Message List in RSS Format for Project glassfish, Mailing List issues", 
-                              "https://glassfish.dev.java.net/servlets/BrowseList?list=issues",
-                              "Message List in RSS Format for Project glassfish, Mailing List issues");
-
-echo $rss->getTitle() . "<BR>";
-echo $rss->getLink() . "<BR>";
-echo $rss->getDescription() . "<BR>";
-echo $rss->getProjectName() . "<BR>";
-echo $rss->getChannelCategory() . "<BR>";
-
 ?>

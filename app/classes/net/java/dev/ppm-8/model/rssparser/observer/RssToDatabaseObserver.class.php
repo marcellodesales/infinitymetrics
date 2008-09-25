@@ -10,9 +10,9 @@ class RssToDatabaseObserver implements Observer {
     }
 
     public function update($collabnetRssChannel) {
-        echo "Connecting to the database...";
-        echo $collabnetRssChannel;
-        echo "sending rss to the database...";
+        echo "<BR><BR>Connecting to the database...";
+        echo $collabnetRssChannel->getNumberOfItems() . " ITEMS";
+        echo "sending rss to the database...<BR><BR>";
     }
 }
 ?>

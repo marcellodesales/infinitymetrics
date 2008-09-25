@@ -10,7 +10,7 @@ class RssToScreenObserver implements Observer {
     }
 
     public function update($collabnetRssChannel) {
-        echo $collabnetRssChannel . ": sending to the screen";
+        echo $collabnetRssChannel->getChannelCategory() . ": sending to the screen";
     }
 }
 ?>

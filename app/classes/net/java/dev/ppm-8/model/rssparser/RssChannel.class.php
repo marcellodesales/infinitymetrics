@@ -1,26 +1,58 @@
 <?php
+require_once "RssItemBuilder.class.php";
+
+require_once "RssItem.class.php";
 
 class RssChannel {
 
     private $title;
     private $description;
     private $items;
+    private $projectName;
+    private $channelCategory;
+    
+    public static $DOMAIN = ".dev.java.net";
+    public static $PROTOCOL = "https://";
+    public static $LIST = "/servlets/MailingListRSS?listName=";
 
     /* 
      * Creates a new CollabnetRssChannel class from the main tags from the
      * channel.
-     * @param string $title is the main title of the channel
-     * @param string $link is the main link of the channel
-     * @param string $desc is the description of the channel. If it is the same
      * as the title.
      */
-    public function __construct($title, $link, $desc) {
-        $this->title = $title;
-        $this->description = ($title == $desc) ? "" : $desc;
-        $this->projectName = substr($link, strlen("https://"), strpos($link, ".")-strlen("https://"));
+    public function __construct() {
+        $this->items = array();
+    }
+    
+    public function setLink($link) {
+        $this->projectName = substr($link, strlen(self::$PROTOCOL),
+                                    strpos($link, ".")-strlen(self::$PROTOCOL));
         $this->channelCategory = substr($link, strpos($link, "=")+1, strlen($link));
     }
+    
+    public function setTitle($title) {
+        $this->title = $title;
+    }
+    
+    public function setDescription($description) {
+        $this->description = ($title == $description) ? "" : $description;        
+    }
 
+    public static function newRssItemBuilder() {
+        return new RssItemBuilder();
+    }
+
+    public function addItem(RssItem $rssItem) {
+        $this->items[] = $rssItem;
+    }
+
+    public function getItems() {
+        return $this->items;
+    }
+
+    public function getNumberOfItems() {
+        return sizeof($this->items);
+    }
     /*
      * Returns the title tag from the rss feed.
      * <rss><channel><title>VALUE</title>...
@@ -34,7 +66,8 @@ class RssChannel {
      * <rss><channel><link>VALUE</link>...
      */
     public function getLink() {
-        return "https://" . $this->projectName . $this->LIST . $this->channelCategory;
+        return self::$protocol . $this->projectName . self::DOMAIN .
+                  $this->LIST . $this->channelCategory;
     }
     
     /*
@@ -43,7 +76,14 @@ class RssChannel {
      */
     public function getDescription() {
         return ($this->description == "") ? $this->title : $this->description;
-    } 
-}
+    }
 
+    public function getProjectName() {
+        return $this->projectName;
+    }
+
+    public function getChannelCategory() {
+        return $this->channelCategory;
+    }
+}
 ?>

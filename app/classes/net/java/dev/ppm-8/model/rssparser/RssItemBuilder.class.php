@@ -20,7 +20,7 @@
  */
  
 require_once('RssItem.class.php');
-require_once('../../util/go4/Builder.class.php');
+require_once('Builder.class.php');
 
 /**
  * The RssItemBuilder is a builder for an RSSItem builder based on RSS 2.0
@@ -156,15 +156,7 @@ class RssItemBuilder extends AbstractBuilder {
         $this->date = $date;
         return $this;
     }
-    /**
-     * Returns extracted username from a given email address
-     * @param string $emailAddress is a given email address. The string must
-     * contain the character @.
-     * @return string.
-     */
-    private function extractUsernameFromEmail($emailAddress) {
-        return substr($emailAddress, 0, strpos($emailAddress, "@"));
-    }
+
     /**
      * Builds an instance of the RssItem based on the given values for the
      * builder.
@@ -195,24 +187,34 @@ class RssItemBuilder extends AbstractBuilder {
         $this->rssItem->setIsoDate($this->date);
         return $this->rssItem;
     }
+    
+    /**
+     * Returns extracted username from a given email address
+     * @param string $emailAddress is a given email address. The string must
+     * contain the character @.
+     * @return string.
+     */
+    private function extractUsernameFromEmail($emailAddress) {
+        return substr($emailAddress, 0, strpos($emailAddress, "@"));
+    }
 }
 
-      $title = "[Issue 5750] [other]  Hudson : java.net.MalformedURLException: Unknown protocol:";
-      $link = "https://glassfish.dev.java.net/servlets/ReadMsg?list=issues&amp;msgNo=32302";
-      $description = "[Issue 5750] [other]  Hudson : java.net.MalformedURLException: Unknown protocol:";
-      $pubDate = "Mon, 15 Sep 2008 07:00:00 GMT";
-      $author = "mk111283@dev.java.net";
-      $guid = "https://glassfish.dev.java.net/servlets/ReadMsg?list=issues&amp;msgNo=32302";
-      $creator = "mk111283@dev.java.net";
-      $isoDate = "2008-09-15T07:00:00Z";
-
-$builder = new RssItemBuilder();
-$builder->title($title)->link($link)->description($description)->publicationDate($pubDate)->author($author)->guid($guid)->creator($creator)->date($isoDate);
-$rssItem = $builder->build();
-echo $rssItem;
-
-$pos = (strrpos("mar", "x"));
-$s = $pos == NULL;
-$bb = $pos == "";
-echo "<BR>--->$s ---- $bb";
+//      $title = "[Issue 5750] [other]  Hudson : java.net.MalformedURLException: Unknown protocol:";
+//      $link = "https://glassfish.dev.java.net/servlets/ReadMsg?list=issues&amp;msgNo=32302";
+//      $description = "[Issue 5750] [other]  Hudson : java.net.MalformedURLException: Unknown protocol:";
+//      $pubDate = "Mon, 15 Sep 2008 07:00:00 GMT";
+//      $author = "mk111283@dev.java.net";
+//      $guid = "https://glassfish.dev.java.net/servlets/ReadMsg?list=issues&amp;msgNo=32302";
+//      $creator = "mk111283@dev.java.net";
+//      $isoDate = "2008-09-15T07:00:00Z";
+//
+//$builder = new RssItemBuilder();
+//$builder->title($title)->link($link)->description($description)->publicationDate($pubDate)->author($author)->guid($guid)->creator($creator)->date($isoDate);
+//$rssItem = $builder->build();
+//echo $rssItem;
+//
+//$pos = (strrpos("mar", "x"));
+//$s = $pos == NULL;
+//$bb = $pos == "";
+//echo "<BR>--->$s ---- $bb";
 ?>
