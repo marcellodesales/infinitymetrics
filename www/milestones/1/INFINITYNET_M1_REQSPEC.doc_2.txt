@@ -1,0 +1,25 @@
+2.	REQUIREMENTS SPECIFICATIONS
+
+
+
+2.1.	Formal Requirements
+
+
+
+2.2.	Non-functional Requirements
+
+
+
+2.3.	Use Case Diagrams
+
+
+
+2.3.1.	Actors
+
+
+
+2.3.2.	User Management
+
+
+
+2.3.3.	Participation Metrics

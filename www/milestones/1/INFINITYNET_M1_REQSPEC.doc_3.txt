@@ -1,0 +1,9 @@
+3.	HIGH-LEVEL ARCHITECTURE
+
+
+
+3.1.	Database Server
+
+
+
+3.2.	Web Server and Web technology
