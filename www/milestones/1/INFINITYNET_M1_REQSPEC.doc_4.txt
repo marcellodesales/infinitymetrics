@@ -8,6 +8,6 @@
 
 4.2.	User Login
 
-
+User makes loging to the system... blabla...
 
 4.3.	Navigating and Viewing Metrics
