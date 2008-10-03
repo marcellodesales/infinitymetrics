@@ -1,14 +1,62 @@
 2.	REQUIREMENTS SPECIFICATIONS
 
+This section describes the requirements gathered from the High-Level specification documentation provided by Gary Thompson. Additionally, the wiki page for the PPM project was also explored. 
 
+Each section divides the requirements into packages for a better organization. In this way, the packages will categorize the requirements for the purpose of tracking each modules of InfinityNet.
 
 2.1.	Formal Requirements
 
-I'm the tool is working... balblabal
+This section lists the functional requirements, also kwnon as formal requirements. They describe specific beheviour that the system must do. 
 
+RQ002	As an instructor, I would like to track the Event of Code Repository, so that I know how many commits each student or the group did;
+RQ003	As an instructor, I would like to track the Event of Tracking System, so that I know how many changes to the Isseue Tracker the group did;
+RQ004	As an Instructor, I would like to track the Event of Emails sent to the available mailing lists, so that I know how many emails the group has sent;
+RQ005	As an Instructor, I would like to track the Event of Posts sent Dicussion Forum 
+RQ006	track event for documentation
+RQ007	track event for defined ones
+RQ010	instructors shall be able to monitor events
+RQ011	instructors shall be able to view events
+RQ012	instructors shall be able to analyze a set of events
+RQ014	instructor manually adds group interaction events (i.e. team disputes)
+RQ015	instructors shall be able to set up a project metrics configuration
+RQ016	instructors should be able to create a report for a configuration
+RQ017	instructors shall be able to share a configuration
+RQ018	instructors shall be able to filter their students on a given configuration
+RQ019	intructors shall be able to relate each java.net username of the groups to each of the prohject name in the configuration 
+RQ020	students shall be able to identify themselves into the system by using their java.net username and password.
+RQ021	instructors shall be able to send email to a given project alerting about students who haven't completed their profile information
+RQ022	instructors shall be able to add, remove and modify the configuration as they want throughout the configuration life-cycle
+RQ023	instructors shall be able to view reports in a tabular format
+RQ024	instructos shall be able to view reports in a graphical format
+RQ025	instructors shall be able to export reports in flat text files in delimited format
+RQ029	the system shall be able to display the report comparing all the projects in a configuration in tabular way
+RQ030	the system shall be able to display the report for a single project in a tabular 
+RQ031	the sytem shall be able to display the report on a single event categoy in a tabular
+RQ032	the system shall be able to display the report comparing all the projects in a configuration in graphics
+RQ033	the system shall be able to display the report for a single project in graphics
+RQ034	the sytem shall be able to display the report on a single event categoy in graphics
+RQ035	any user shall be able to register into the system
+RQ036	any user shall be able to login into the system
+RQ040	instructors shall be able to browse for projects
+RQ041	instructors shall be able to browse for events categories
+RQ042	instructors shall be able to search for projects
+RQ043	instructors shall be able to search for categories
+RQ044	the system shall be able to parse RSS feeds from the java.net 
+RQ045	the repost shall be able to show granular information about the users' login activities
+RQ046	the system shall be able to get the list of projects automatically
 
 2.2.	Non-functional Requirements
 
+RQ001	Access to the system shall be via Web – Browsers (e.g. Firefox, Netscape or Internet Explorer)
+RQ008	the capture of events data shall be automated
+RQ009	Data is stored on a database
+RQ013	the tool is targeting java.net collaborative platform
+RQ026	the system should not require general users training on the system
+RQ027	users must not be required to understand about web applications nor database system
+RQ028	the system should be used using high-speed Internet connection (DSL or cable)
+RQ037	the system shall provide online help
+RQ038	System shall respond to user query in less than 3 seconds.
+RQ039	the system shall be offered in a secure connection
 
 
 2.3.	Use Case Diagrams
