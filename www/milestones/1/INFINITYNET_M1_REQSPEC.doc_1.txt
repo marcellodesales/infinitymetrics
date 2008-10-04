@@ -1,8 +1,31 @@
+By real estate example:
+
+What is the market?
+What can we acheive in this market?
+Importance of acheiving this market.
+
+
+What is our project?
+What is special about it?
+Why is this sure to work?  (Tools)
+
+
+How are we catching the changing market?
+Ease of use for superusers.
+Ease of use for subusers.
+What is the main goal of our software?
+
+
+Important (new) features?  Labelled?
+Explain (new) features.
+How is this (new) feature great and superior?
+How does this (new) feature allow acheiving the market?
+
+
+
 1.	BUSINESS DOMAIN DEFINITION
 
-This is the domain definition... Finish it Finish it This is the domain definition... Finish it Finish it This is the domain definition... Finish it Finish it This is the domain definition... Finish it Finish it This is the domain definition... Finish it Finish it.
 
-This is the domain definition... Finish it Finish it New PARAGRAPH... This is the domain definition... Finish it Finish iThis is the domain definition... Finish it Finish it
 
 1.1.	Business Process
 
