@@ -22,7 +22,7 @@ RQ015	instructors shall be able to set up a project metrics configuration
 RQ016	instructors should be able to create a report for a configuration
 RQ017	instructors shall be able to share a configuration
 RQ018	instructors shall be able to filter their students on a given configuration
-RQ019	intructors shall be able to relate each java.net username of the groups to each of the prohject name in the configuration 
+RQ019	intructors shall be able to relate each java.net username of the groups to each of the project name in the configuration 
 RQ020	students shall be able to identify themselves into the system by using their java.net username and password.
 RQ021	instructors shall be able to send email to a given project alerting about students who haven't completed their profile information
 RQ022	instructors shall be able to add, remove and modify the configuration as they want throughout the configuration life-cycle
@@ -37,6 +37,7 @@ RQ033	the system shall be able to display the report for a single project in gra
 RQ034	the sytem shall be able to display the report on a single event categoy in graphics
 RQ035	any user shall be able to register into the system
 RQ036	any user shall be able to login into the system
+RQ019	intructors shall be able to identify actual name of students and their Student ID from their username
 RQ040	instructors shall be able to browse for projects
 RQ041	instructors shall be able to browse for events categories
 RQ042	instructors shall be able to search for projects
