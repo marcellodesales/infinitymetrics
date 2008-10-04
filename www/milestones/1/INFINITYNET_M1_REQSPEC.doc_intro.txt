@@ -1,5 +1,11 @@
 Introduction
 
+With the advent of software engineering education, it is necessary to thoroughly examine development and participation metrics of a class environment in an open-source web-based designing medium.  Instructors need the capability to record such metrics in a virtual environment just as easily as with things like hard copy essays or math homework.  Any instructor that wants to gain an active understanding in how their class is working needs to utilize an automated system to record development and participation metrics.
+
+
+
+
+
 By real estate example:
 
 What is the market?
