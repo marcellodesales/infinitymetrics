@@ -2,7 +2,7 @@ Introduction
 
 With the advent of software engineering education, it is necessary to thoroughly examine development and participation metrics of a class environment in an open-source web-based designing medium.  Instructors need the capability to record such metrics in a virtual environment just as easily as with things like hard copy essays or math homework.  Any instructor that wants to gain an active understanding in how their class is working needs to utilize an automated system to record development and participation metrics.
 
-
+Infiniftynet is an efficient, automatic, and user-friendly web application to record and report on software development participation in a class setting.  Included in this web application is web crawler technology which allows an instructor to automatically collect participation data during their log in session.  This is all done behind the scenes in an quick and thorough way.  Infinitynet uses extremely efficient and standardized tools to perform the automated cultivation of participation metrics thus allowing easy access to information even when a local system has a severe performance limitation.
 
 
 
