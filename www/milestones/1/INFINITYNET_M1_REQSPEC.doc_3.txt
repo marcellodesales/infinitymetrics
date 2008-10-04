@@ -1,9 +1,20 @@
 3.	HIGH-LEVEL System ARCHITECTURE
+	
 
-Working on section 3
+3.1.	Web Server and Web technology
 
-3.1.	Database Server
+		The "font-end" of the PPM implementation consists of an extensive User Interface, constructed mainly
+	in PHP and perhaps Ajax.  This user interface will be two-tiered: Student Interface and Instructor interface.
+	The student interface will be simplistic, authorizing valid java.net students to create, edit, and login to
+	their respective accounts.  The Instructor user interface will be more complex in functionality.  This UI
+	will be able to communicate with our Database Server, by requesting reports on team progress in a variety
+	of output formats of choice.  Also, our PPM system will provide the instructors with the capability to 
+	create a workspace, manage a workspace, and set-up a workspace in accordance with their specifications 
+	and needs required by the term project.
+	
+	
+		  
+		
+	
 
-
-
-3.2.	Web Server and Web technology
+3.2.	Database Server
