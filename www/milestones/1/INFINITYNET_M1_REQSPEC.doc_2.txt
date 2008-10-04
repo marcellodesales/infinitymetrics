@@ -37,7 +37,7 @@ RQ033	the system shall be able to display the report for a single project in gra
 RQ034	the sytem shall be able to display the report on a single event categoy in graphics
 RQ035	any user shall be able to register into the system
 RQ036	any user shall be able to login into the system
-RQ019	intructors shall be able to identify actual name of students and their Student ID from their username
+RQ037	intructors shall be able to identify actual name of students and their Student ID from their username
 RQ040	instructors shall be able to browse for projects
 RQ041	instructors shall be able to browse for events categories
 RQ042	instructors shall be able to search for projects
