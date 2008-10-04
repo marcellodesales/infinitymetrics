@@ -1,4 +1,4 @@
-3.	HIGH-LEVEL ARCHITECTURE
+3.	HIGH-LEVEL System ARCHITECTURE
 
 Working on section 3
 

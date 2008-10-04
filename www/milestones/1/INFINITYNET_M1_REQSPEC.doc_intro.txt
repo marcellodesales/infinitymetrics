@@ -1,3 +1,3 @@
 Introduction
 
-This is Im working on this introduction file as welll... the introduction
+Executive Summary of the project, explaining why we should get funded, our solution represents a better alternative to the existing ones (if any).
