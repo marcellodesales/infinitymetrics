@@ -6,10 +6,10 @@
 		The "font-end" of the PPM implementation consists of an extensive User Interface, constructed mainly
 	in PHP and perhaps Ajax.  PPM will be redesigning the StatsWidget Project, and in doing so, will work
 	to bring the StatsWidget project up-to-date with current technology by implementing a well-constructed, 
-	online-accessible user interface.  This user interface will be two-tiered: Student Interface and Instructor interface.
+	online-accessible user interface.  This user interface will be two-tiered: Student Interface and Instructor 	interface.
 	The student interface will be simplistic, authorizing valid java.net students to create, edit, and login to
 	their respective accounts.  The Instructor user interface will be more complex in functionality.  In 
-	addition to having the same functions as the student interface, the instructor interface will enable java.net
+	addition to having the same functions as the student interface, the instructor interface will enable 	java.net
 	instructors to create, edit, set-up, and manage a workspace.  This workspace will enable the instructors to 
 	manage their projects by providing them with the capabilities to track project events of their choosing.  
 		
