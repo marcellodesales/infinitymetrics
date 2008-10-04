@@ -6,9 +6,11 @@ Infiniftynet is an efficient, automatic, and user-friendly web application to re
 
 As software development becomes more and more advanced and higher level languages are used, it becomes harder to examine the development process.  The web crawler technology used in Infinitynet requires very little data entry and offers metric diagrams immediately upon use.  This allows a large amount of information to be available to the instructor with little to no effort exerted.  The purpose of Infinitynet is to simplify and display the data accumulation of participation metrics for use in a class setting.
 
+The web crawler implementation we use is the most important feature of our software.  We call it InfinityAgent and it accesses  and catalogues RSS Feeds as a representative of your unique Java.net account.  InfinityAgent then loads the data gathered from the RSS Feeds into raw usable and graphable data.  This gives instructors the capacity to view and manipulate the data in their own way without having to parse the RSS Feeds themselves.  This makes it possible for instructors to gain an in-depth understanding of class particiapation metrics in a straight-forward and efficient way.
 
 
-By real estate example:
+
+REMOVE: By real estate example:
 
 What is the market?
 What can we acheive in this market?
