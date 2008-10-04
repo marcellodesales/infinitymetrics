@@ -6,15 +6,25 @@
 		The "font-end" of the PPM implementation consists of an extensive User Interface, constructed mainly
 	in PHP and perhaps Ajax.  This user interface will be two-tiered: Student Interface and Instructor interface.
 	The student interface will be simplistic, authorizing valid java.net students to create, edit, and login to
-	their respective accounts.  The Instructor user interface will be more complex in functionality.  This UI
-	will be able to communicate with our Database Server, by requesting reports on team progress in a variety
-	of output formats of choice.  Also, our PPM system will provide the instructors with the capability to 
-	create a workspace, manage a workspace, and set-up a workspace in accordance with their specifications 
-	and needs required by the term project.
-	
+	their respective accounts.  The Instructor user interface will be more complex in functionality.  In 
+	addition to having the same functions as the student interface, the instructor interface will enable java.net
+	instructors to create, edit, set-up, and manage a workspace.  This workspace will enable the instructors to 
+	manage their projects by providing them with the capabilities to track project events of their choosing.  
+		
 
 3.2.	Database Server
 
-		The "back-end" of the PPM implementation contains our MySQL database.  In order to provide
-	Instructors with tracking capabilities of their team projects, an intricate database will
-	be created for information storage.
+		In order to overcome the short-comings of RSS feeds, where older data is tossed as new data is 
+	acquired, the "back-end" of the PPM system will contain a MySQL database for information storage.  
+	Even at the end of a given semester, or upon project completion, the information collected and stored 
+	will not be overwritten.  This will allow instructors to maintain access over the project growth and 
+	eventual project completion.  Information from the database will be accessible only to instrustors
+	of a given project, and the the selected information will be presented to the instructor, via the 
+	user interface, in a tabular or graphical manner. 
+	
+	
+
+
+
+
+/***********suggest simple UML diagram of of system architecture and how they will interact with eachother***/
