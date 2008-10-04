@@ -5,10 +5,13 @@
 4.1.	User registration
 
 
-I'm editing this file... blabla
-
 4.2.	User Login
 
 User makes loging to the system... popopo
 
 4.3.	Navigating and Viewing Metrics
+     the use of buttons like next , back ,previous, Home  
+
+4.4 It should allow user to use tab key to reach 
+     next field button from current field button
+4.5  screen layout
