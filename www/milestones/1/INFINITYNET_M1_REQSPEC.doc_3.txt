@@ -12,9 +12,9 @@
 	create a workspace, manage a workspace, and set-up a workspace in accordance with their specifications 
 	and needs required by the term project.
 	
-	
-		  
-		
-	
 
 3.2.	Database Server
+
+		The "back-end" of the PPM implementation contains our MySQL database.  In order to provide
+	Instructors with tracking capabilities of their team projects, an intricate database will
+	be created for information storage.
