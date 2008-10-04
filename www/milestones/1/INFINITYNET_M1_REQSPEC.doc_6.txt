@@ -1,3 +1,10 @@
 6. Team Allocation
 
-changing this bla
+		
+Role		Team Member		Date 
+Team Lead	Marcello de Sales	09/30/08
+Developer	Andres Ardila		09/30/08
+Developer	Brett Fisher		09/30/08
+Developer	Gurdeep Singh		09/30/08
+Developer	Marilyne Mendolla	09/30/08
+		
