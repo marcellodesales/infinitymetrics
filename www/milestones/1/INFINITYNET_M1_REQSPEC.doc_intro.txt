@@ -2,49 +2,13 @@ Introduction
 
 
 
-	With the advent of software engineering education, it is necessary to thoroughly examine development and 
+With the advent of software engineering education, it is necessary to thoroughly examine development and participation metrics of a class environment in an open-source web-based designing medium.  Instructors need to be able to monitor virtual environments as easily as hard copy homework solutions.  For virtual environments, the accumulation and storage of raw data metrics is necessary.  Any instructor that wants to gain an active understanding in how their class is working needs to utilize an automated system to record development and participation metrics.  
 
-participation metrics of a class environment in an open-source web-based designing medium.  Instructors need the 
+Infiniftynet is an efficient, automatic, and user-friendly web application to record and report on software development participation in a class setting.  Included in this web application is web crawler technology which allows an instructor to automatically collect participation data during their log in session.  This is all done behind the scenes in a quick and thorough way.  Infinitynet uses extremely efficient and standardized tools to perform the automated cultivation of participation metrics thus allowing easy access to information even when a local system has a severe performance limitation.
 
-capability to record such metrics in order to mooonitor progress in a virtual environment just as easily as 
-	
-judging progress through hard copy homework submissions. Any instructor that wants to gain an active understanding 
+As software development becomes more and more advanced and higher level languages are used, it becomes harder to examine the development process.  The web crawler technology used in Infinitynet requires very little data entry and offers metric data immediately upon use.  This allows a large amount of information to be available to the instructor with little to no effort exerted.  The purpose of Infinitynet is to simplify and display the data accumulation of participation metrics for use in a class setting.  
 
-in how their class is working needs to utilize an automated system to record development and participation metrics.
-
-Infiniftynet is an efficient, automatic, and user-friendly web application to record and report on software 
-
-development participation in a class setting.  Included in this web application is web crawler technology which 
-
-allows an instructor to automatically collect participation data during their log in session.  This is all done 
-
-behind the scenes in a quick and thorough way.  Infinitynet uses extremely efficient and standardized tools to 
-
-perform the automated cultivation of participation metrics thus allowing easy access to information even when a 
-
-local system has a severe performance limitation.
-
-As software development becomes more and more advanced and higher level languages are used, it becomes harder
-
- to examine the development process.  The web crawler technology used in Infinitynet requires very little data 
-
-entry and offers metric diagrams immediately upon use.  This allows a large amount of information to be available 
-
-to the instructor with little to no effort exerted.  The purpose of Infinitynet is to simplify and display the 
-
-data accumulation of participation metrics for use in a class setting.
-
-The web crawler implementation we use is the most important feature of our software.  We call it InfinityAgent and
-
- it accesses  and catalogues RSS Feeds as a representative of your unique Java.net account.  InfinityAgent then 
-
-loads the data gathered from the RSS Feeds into raw usable and graphable data.  This gives instructors the capacity
-
- to view and manipulate the data in their own way without having to parse the RSS Feeds themselves.  This makes 
-
-it possible for instructors to gain an in-depth understanding of class participation metrics in a straight-forward
-
-and efficient way.
+The web crawler implementation we use is the most important feature of our software.  We call it InfinityAgent and it accesses and catalogues RSS Feeds as a representative of your unique Java.net account.  InfinityAgent then loads the data gathered from the RSS Feeds into raw usable and graphable data.  The instructors are also free to decide which metrics to gather if they do not want to collect everything.  This gives instructors the capacity to view and manipulate the data in their own way without having to parse the RSS Feeds themselves.  This makes it possible for instructors to gain an in-depth understanding of class participation metrics in a straight-forwardand efficient way.
 
 
 
