@@ -3,20 +3,20 @@
 
 3.1.	Web Server and Web technology
 
-		The "font-end" of the PPM implementation consists of an extensive User Interface, constructed mainly
-	in PHP and perhaps Ajax.  PPM will be redesigning the core idea of the StatsWidget Project, and in doing so, 	will work to bring the StatsWidget project up-to-date with current technology by implementing a 	well-constructed, 
-	online-accessible user interface.  This user interface will be two-tiered: Student Interface and Instructor 		interface.  The student interface will be simplistic, authorizing valid java.net students to create, edit, 		and login to their respective accounts.  Students, however, will not have any database access granted to	 	them.  The Instructor user interface will be more complex in functionality.  In addition to having the same 	functions as the student interface, the instructor interface will enable java.net instructors to create, 	edit, set-up, and manage a workspace.  This workspace will enable the instructors to manage their projects 	by providing them with the capabilities to track project events of their choosing.  
+The "font-end" of the PPM implementation consists of an extensive User Interface, constructed mainly
+in PHP and perhaps Ajax.  PPM will be redesigning the core idea of the StatsWidget Project, and in doing so, will work to bring the StatsWidget project up-to-date with current technology by implementing a well-constructed, 
+online-accessible user interface.  This user interface will be two-tiered: Student Interface and Instructor 		interface.  The student interface will be simplistic, authorizing valid java.net students to create, edit, 		and login to their respective accounts.  Students, however, will not have any database access granted to	 	them.  The Instructor user interface will be more complex in functionality.  In addition to having the same 	functions as the student interface, the instructor interface will enable java.net instructors to create, 	edit, set-up, and manage a workspace.  This workspace will enable the instructors to manage their projects by providing them with the capabilities to track project events of their choosing.  
 		
 
 3.2.	Database Server
 
-		In order to overcome the short-comings of RSS feeds, where older data is tossed as new data is 
-	acquired, the "back-end" of the PPM system will contain a MySQL database for information storage.  
-	Even at the end of a given semester, or upon project completion, the information collected and stored 
-	will not be overwritten.  This will allow instructors to maintain access over the project growth and 
-	eventual project completion.  Information from the database will be accessible only to instrustors
-	of a given project, and the the selected information will be presented to the instructor, via the 
-	user interface, in a tabular or graphical manner. 
+In order to overcome the short-comings of RSS feeds, where older data is tossed as new data is 
+acquired, the "back-end" of the PPM system will contain a MySQL database for information storage.  
+Even at the end of a given semester, or upon project completion, the information collected and stored 
+will not be overwritten.  This will allow instructors to maintain access over the project growth and 
+eventual project completion.  Information from the database will be accessible only to instrustors
+of a given project, and the the selected information will be presented to the instructor, via the 
+user interface, in a tabular or graphical manner. 
 	
 	
 
