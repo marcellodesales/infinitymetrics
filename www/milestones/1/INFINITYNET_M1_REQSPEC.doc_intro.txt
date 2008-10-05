@@ -1,16 +1,10 @@
 Introduction
 
+Software Engineering is one of the fastest growing fields today, not only in industrial America, but in the global economy. This rapidly-evolving environment requires Software Engineering educational institutions and educators to adopt innovative changes in their curriculums in order to provide future professionals with the necessary skills to be competitive and expose them to the most common issues facing Software Engineers in today’s global industry. Precisely because of this globalization, more and more companies are designing software in virtual distributed environments across national boundaries, and so educational institutions have felt the need to restructure their curriculums to reflect this change in the industry by encouraging and simulating team software development in such an environment. This evolution of the pedagogy of Software Engineering in our educational institutions, however, presents new challenges to instructors and traditional methodologies for student evaluation. Therefore, having the proper tools to thoroughly examine team and individual student progress and participation within team class projects in virtual development environments has become of paramount importance for instructors and institutions alike.
 
+In view of these challenges and capitalizing on the opportunity it provides, InfinityNet will provide cutting-edge and unique tools to instructors who choose the Java.net development platform as part of a Software Engineering class curriculum by allowing them to monitor the participation of individual students in globally and/or locally distributed Java.net group projects as well as the progress of the team as a whole. InfiniftyNet will be an efficient, automated, and user-friendly web application that collects and reports student participation metrics for such class settings. The application allows an instructor or set of instructors in different locations (i.e. different concurrent SE courses taking place in different universities) to automatically collect participation data for a set of Java.net projects and report on its members’ contribution to the project at all stages of development. Because InfinityNet understands that the ease of use and low training, upkeep & maintenance requirements of any software tool are of vital importance to instructors, the system initial set-up will automatically generate the available metrics categories available for the given projects, whilst retaining full control by the instructor to modify these at any point throughout the semester.
 
-Software engineering is one of the fastest growing field in industrial America today.  As such, software engineering education has made drastic accomodations in order to provide students with the necessary skills to compete in a competitive world.  More and more companies and designing software in a virtual environment and educational institutions have restructured their programs to reflect this change.  It has become an obvious necessity encourage team software development in a virtual environment.  As such, it has become incredibly important for instructors to have the proper tools to thoroughly examine team development and individual student participation of team class projects in a web-based medium.  Instructors need to be able to monitor progress in virtual environments as easily as progress through the traditional hard copy submissions.  InfinityNet is designed to provide such tools to instructors of group projects under the java.net platform.
-
-InfiniftyNet is an efficient, automatic, and user-friendly web application that records and reports on software development participation in distributed or local virtual class settings.  This web application includes a web crawler which allows an instructor to automatically collect participation data for a set of Java.net projects.  Instructors will be able to set up their individual virtual environments, add their student projects, monitor java.net submissions from these student projects, and view reports of the information gathered in an organized way.  
-
-//As software development becomes more and more advanced and higher level languages are used, it becomes harder to //examine the development process.  The web crawler technology used in InfinityNet requires very little data entry //and offers metric data immediately upon use.  This allows a large amount of information to be available to the //instructor with little to no effort exerted.  The purpose of InfinityNet is to simplify and display the data //accumulation of participation metrics for use in a class setting.  
-//I think this whole section shouldn't be used
-
-//this seems to detailed for an intro...could just be me tho
-The web crawler implementation we use is the most important feature of our software.  We call it InfinityAgent and it accesses and catalogues RSS Feeds among other participation metrics as a representative of a unique Java.net account.  InfinityAgent then loads the data gathered from the RSS Feeds into a database from which the professor can extract meaningful reports in tabular or graphical view.  The instructors are also free to decide which metrics to gather if they do not want to collect everything.  This gives instructors the capacity to view and manipulate the data in their own way without having to parse the RSS Feeds themselves.  This makes it possible for instructors to gain an in-depth understanding of class participation metrics in a straight-forwardand efficient way.
+We believe that information is power. That’s why our system will provide instructors with the ability to collect and view a wide ranging variety of metrics from Java.net projects as well as other capabilities outside of this environment that will give more depth to the data when evaluating a team and its members; and the it will provide instructors with insightful information about trends or blockages that may arise in the development and learning processes. Our tool’s seamless integration with the Java.net platform, the valuable data it can extract & present –from granular to global, and its insignificant maintenance overhead will allow instructors to focus their efforts in the most important aspect of their task: teaching. InfinityNet will thus enable and improve the quality of learning for students by having an instructor who is more aware and involved in the progress of the class and its individuals.
 
 
 
@@ -23,7 +17,7 @@ Importance of achieving this market.
 
 What is our project?
 What is special about it?
-Why is this sure to work?  (Tools)
+Why is this sure to work? (Tools)
 
 
 How are we catching the changing market?
@@ -32,7 +26,7 @@ Ease of use for sub-users.
 What is the main goal of our software?
 
 
-Important (new) features?  Labeled?
+Important (new) features? Labeled?
 Explain (new) features.
 How is this (new) feature great and superior?
 How does this (new) feature allow achieving the market?
