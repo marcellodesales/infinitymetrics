@@ -7,8 +7,14 @@
   for( n=dd; n!=null; n=n.previousSibling ) {
     if(n.nodeType==1) { // if element
       if(n.tagName=="DD") { // kill all the link items
-        n.style.display = "none";
-      }
+		  if (n.innerHTML != "Project Collaboration" || 
+			  n.innerHTML != "Product Backlog" ||  
+			  n.innerHTML != "Sprint Iteration" ||
+			  n.innerHTML != "Releases" ||
+		      n.innerHTML != "Key metrics" ||
+		      n.innerHTML != "Help") 
+          	n.style.display = "none";
+      } else
       if(n.tagName=="DT") { // change the title
         n.innerHTML = "Project Collaboration";
       }
