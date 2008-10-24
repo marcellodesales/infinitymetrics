@@ -1,0 +1,13 @@
+5.1. Model
+
+The model is composed four main components: Users, Metrics Workspace, Participation Metrics and Dispute Tracker. The User component contains the user's information, including their java.net username & password, their real name, email address and Institution (in addition to Student ID in the case of Student type of User). The instructor creates a Metrics Workspace, from which we can collect the list of children java.net projects that is based on a given parent project. The Workspace can be shared with other Instructors and has a state (e.g. 'Active', 'Paused', 'Inactive'). The list of Event Categories available in each of the children projects is collected and allows the system to validate proyect ownership for Instructor registration and team leaders. These Event Categories, in turn, populate the list of RSS feeds that the Instructor's Personal Agent will visit in order to collect Participation Metrics. In addition, the instructor may add Disputes, which in turn contain Entries that will allow him/her to track individual events within a team pertaining to a Dispute.
+
+
+5.2. View
+
+The presentation of model is based on the Participation Metrics collected by the Personal Agent, which can be viewed through the Reports in either graphical or tabular presentation. These views include Participation Metrics by group, by student, by Event Category and by top performing project  (these can be exported to plain-text files). Views are also provided for user accounts. In addition, a View is provided for the set of Workpspaces that have been created and/or shared with an Instructor. Lastly, views are also available for the Dispute Tracker on which the Instructor can track entries related to a given Dispute.
+
+
+5.3. Controller
+
+In the Users component, its controller allows users to modify their java.net credentials and email address. Instructors can update the Workspace configuration, change the state of Workspaces as well as share them with other Instructors. Instructors can also modify the Dispute Tracker by changing its title, date, state, and adding or removing entries.
