@@ -1,0 +1,1741 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:taxo="http://purl.org/rss/1.0/modules/taxonomy/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
+  <channel>
+    <title>Message List in RSS Format for Project ppm-8, Forum General</title>
+    <link>https://ppm-8.dev.java.net/servlets/ForumMessageList?forumID=3254</link>
+    <description>Message Postings in RSS Format for Project ppm-8, Forum General</description>
+    <item>
+      <title>java.net upgrade to Collabnet Enterprise Edition 5.2 - Rhine</title>
+      <link>https://ppm-8.dev.java.net/servlets/ProjectForumMessageView?forumID=3254&amp;messageID=25978</link>
+      <description>Please see https://java-net.dev.java.net/upgrade_notes.html&#xD;
+&#xD;
+Basically java.net will be upgraded substantially on Jan&#xD;
+2009. I read the documentation provided in the link above&#xD;
+and did not find something that would affect our current&#xD;
+development. I would encourage you (esp. you Marcello since&#xD;
+you worked with CollabNet) to read and review the&#xD;
+documentation to check for upgrades/changes to java.net that&#xD;
+would directly affect our software and determine if we need&#xD;
+to make some contingency for these changes.</description>
+      <pubDate>Wed, 22 Oct 2008 09:38:09 GMT</pubDate>
+      <author>aardila</author>
+      <guid>https://ppm-8.dev.java.net/servlets/ProjectForumMessageView?forumID=3254&amp;messageID=25978</guid>
+      <dc:creator>aardila</dc:creator>
+      <dc:date>2008-10-22T09:38:09Z</dc:date>
+    </item>
+    <item>
+      <title>Re: T2000 Server: It's our Continuous Integration and Staging server!</title>
+      <link>https://ppm-8.dev.java.net/servlets/ProjectForumMessageView?forumID=3254&amp;messageID=25729</link>
+      <description>I have started the configuration of the server... The main&#xD;
+URL links back to our development page here...&#xD;
+&#xD;
+http://hci.cs.sfsu.edu/~group8&#xD;
+&#xD;
+Marcello</description>
+      <pubDate>Tue, 07 Oct 2008 22:45:23 GMT</pubDate>
+      <author>marcellosales</author>
+      <guid>https://ppm-8.dev.java.net/servlets/ProjectForumMessageView?forumID=3254&amp;messageID=25729</guid>
+      <dc:creator>marcellosales</dc:creator>
+      <dc:date>2008-10-07T22:45:23Z</dc:date>
+    </item>
+    <item>
+      <title>Re: T2000 Server: It's our Continuous Integration and Staging server!</title>
+      <link>https://ppm-8.dev.java.net/servlets/ProjectForumMessageView?forumID=3254&amp;messageID=25665</link>
+      <description>&gt;There's something I've been meaning to ask: As I&#xD;
+&gt;understand&#xD;
+&gt;it, our software will be hosted on SFSU's T2000 server and&#xD;
+&gt;it will run live from there to its prospective users.&#xD;
+&#xD;
+You're right here... As an Staging Server, it will be&#xD;
+running the different versions as I explained below for the&#xD;
+following users: customers, professors and the development&#xD;
+team. &#xD;
+&#xD;
+&gt;Since&#xD;
+&gt;this is an open source project, however, does it mean that&#xD;
+&gt;anyone can download a copy our software from Java.net as&#xD;
+&gt;well? &#xD;
+&#xD;
+I think we can assume 2 things when working with open-source&#xD;
+projects: we all use free open-source components to build&#xD;
+our own solution. That means, I use Open-source frameworks&#xD;
+as my building blocks. And here's where the difference is:&#xD;
+you can give final users the software as a download, or you&#xD;
+don't. For what I have in mind, we WILL NOT give final users&#xD;
+our final version of the software, BUT they will be able to&#xD;
+download the source code from the subversion repository. We&#xD;
+can make things difficult for users to build our software if&#xD;
+we desire to NOT give them the software for free...  &#xD;
+&#xD;
+&gt; If so, will that be maintained in parallel with&#xD;
+&gt;Subversion on the T2000, or how exactly will that work?&#xD;
+&gt;&#xD;
+&#xD;
+This is explained in the bottom of the page... When Gary and&#xD;
+the other IT guy explained about it, they said students were&#xD;
+going to use FTP to transfer files over... Are you kidding&#xD;
+me? Staging servers use Subversion to checkout from the same&#xD;
+repository, where we have control on the revision we want to&#xD;
+checkout... In this way, the continuous integration system&#xD;
+takes care of ALL the automation of creating directories,&#xD;
+moving artifacts around, MIGRATE MySQL DUMPS to the database&#xD;
+version (YES, Databases ARE VERSIONED and I will explain&#xD;
+later why) making the necessary configuration... There's&#xD;
+nothing else it does other than to grab the versions of our&#xD;
+RUNNING software. This is an Agile way to do things, where&#xD;
+we see where we are in the development... Read the topics&#xD;
+below as I explained the different versions of the software&#xD;
+that will be provided...&#xD;
+&#xD;
+What you can use this server for is as a Free MySQL server&#xD;
+for you... I don't think this is a good thing to do, since&#xD;
+you can work in your own computer (way faster). &#xD;
+&#xD;
+Let me know if you have any more "unanswered" questions...&#xD;
+READ topics 1 and 2 from the original post for details!!!!&#xD;
+&#xD;
+Marcello</description>
+      <pubDate>Fri, 03 Oct 2008 14:58:38 GMT</pubDate>
+      <author>marcellosales</author>
+      <guid>https://ppm-8.dev.java.net/servlets/ProjectForumMessageView?forumID=3254&amp;messageID=25665</guid>
+      <dc:creator>marcellosales</dc:creator>
+      <dc:date>2008-10-03T14:58:38Z</dc:date>
+    </item>
+    <item>
+      <title>Re: T2000 Server: It's our Continuous Integration and Staging server!</title>
+      <link>https://ppm-8.dev.java.net/servlets/ProjectForumMessageView?forumID=3254&amp;messageID=25664</link>
+      <description>There's something I've been meaning to ask: As I understand&#xD;
+it, our software will be hosted on SFSU's T2000 server and&#xD;
+it will run live from there to its prospective users. Since&#xD;
+this is an open source project, however, does it mean that&#xD;
+anyone can download a copy our software from Java.net as&#xD;
+well? If so, will that be maintained in parallel with&#xD;
+Subversion on the T2000, or how exactly will that work?&#xD;
+&#xD;
+Thanks! &#xD;
+&#xD;
+Andres&#xD;
+&#xD;
+&gt;Hello InfinityTEAM!&#xD;
+&gt;&#xD;
+&gt;Finally Gary and Prof. Petkovic presented the T2000&#xD;
+&gt;server.&#xD;
+&gt;It will be each team's staging and continuous integration&#xD;
+&gt;server... Everyone got the information for the server, but&#xD;
+&gt;unfortunately our team got the wrong password set up... I&#xD;
+&gt;tried loggin in and I couldn't... I have already sent an&#xD;
+&gt;email to Gary to solve the issue... So, they have a space&#xD;
+&gt;for group8 to host their executable, running software...&#xD;
+&gt;In&#xD;
+&gt;any open-source, distributed software development there&#xD;
+&gt;are&#xD;
+&gt;2 ideas for verifying the current development:&#xD;
+&gt;&#xD;
+&gt;1. Staging Version of the Software: this is the final&#xD;
+&gt;release of our software in a given version. Let's say:&#xD;
+&gt;&#xD;
+&gt;a) Version 0.1 containing the complete system running,&#xD;
+&gt;with&#xD;
+&gt;the version of the Database schema, etc; &#xD;
+&gt;b) Version 0.2 running, containing everything that evolved&#xD;
+&gt;from 0.1 and the features added/planned for 0.2.&#xD;
+&gt;&#xD;
+&gt;So, Staging is usually offered to the client as a way to&#xD;
+&gt;show it up and running. When the software is released to&#xD;
+&gt;stage, it is usually in the end of an iteration, and it is&#xD;
+&gt;said "to be ready for QA". That means that the TESTING&#xD;
+&gt;team&#xD;
+&gt;will use the software to see if it passes Requirement&#xD;
+&gt;tests,&#xD;
+&gt;defined in the documentation. This team usually works&#xD;
+&gt;"AGAINST" the development team in a way to try to BREAK&#xD;
+&gt;anything... :) &#xD;
+&gt;&#xD;
+&gt;2. Continuous Integration (CI) refers to how agile&#xD;
+&gt;products&#xD;
+&gt;are automatically integrated and built. Using Subversion,&#xD;
+&gt;the continuous integration server does SVN UPDATE every&#xD;
+&gt;day&#xD;
+&gt;whenever a new commit (a new revision) has been submitted&#xD;
+&gt;by&#xD;
+&gt;the developers. Also, it has the Nightly builds links so&#xD;
+&gt;developers/users of the application can get it from&#xD;
+&gt;there...&#xD;
+&gt;In this way, the CI server maintains a freshcopy of the&#xD;
+&gt;most&#xD;
+&gt;updated software from the subversion repository up and&#xD;
+&gt;running... If the build is broken, the software for CI&#xD;
+&gt;will&#xD;
+&gt;display the ERROR message, THE DEVELOPER's NAME who did&#xD;
+&gt;broke the build, etc. In this way, all the team members&#xD;
+&gt;will&#xD;
+&gt;get the idea that the module/package/class/function he/she&#xD;
+&gt;has written was correct and has not affected the current&#xD;
+&gt;software. For this reason, it is highly recommended that&#xD;
+&gt;before committing any code, you could do PAIR PROGRAMMING&#xD;
+&gt;PEER REVIEW, a practice where developers exchange DIFFS of&#xD;
+&gt;their current work and ask them to verify their work&#xD;
+&gt;locally.&#xD;
+&gt;&#xD;
+&gt;I will be setting up Phing http://phing.info/trac/. It is&#xD;
+&gt;similar to Apache ANT and will generate things for us&#xD;
+&gt;automatically...&#xD;
+&gt;&#xD;
+&gt;http://phpimpact.wordpress.com/2007/06/30/phing-php-project-build-system-based-on-apache-ant/&#xD;
+&gt;http://www.slideshare.net/arnoschn/continuous-integration-and-php&#xD;
+&gt;&#xD;
+&gt;This is the page of the CI software:&#xD;
+&gt;http://code.google.com/p/xinc/&#xD;
+&gt;&#xD;
+&gt;NOBODY will be NEEDED to learn about this... Just see the&#xD;
+&gt;result of your build whenever it is ready! It will email&#xD;
+&gt;everyone with the status :D However, if you are interested&#xD;
+&gt;to know more about it let me know...&#xD;
+&gt;&#xD;
+&gt;We will be able to CREATE additional databases for our&#xD;
+&gt;personal use, and use PHPMyAdmin. For development&#xD;
+&gt;purposes,&#xD;
+&gt;I would suggest to stick with your own local server in&#xD;
+&gt;your&#xD;
+&gt;machine, and if desired create a new username and password&#xD;
+&gt;online...  Here is the basic information about that:&#xD;
+&gt;&#xD;
+&gt;Server: hci.cs.sfsu.edu&#xD;
+&gt;&#xD;
+&gt;* Main FINAL INFINITYNET to be staged in December:&#xD;
+&gt;- http://hci.cs.sfsu.edu/~group8&#xD;
+&gt;&#xD;
+&gt;* Nightly Build:&#xD;
+&gt;- http://hci.cs.sfsu.edu/~group8/builds/ &#xD;
+&gt;general information, lists all the builds available, links&#xD;
+&gt;to download the versions...&#xD;
+&gt;&#xD;
+&gt;- http://hci.cs.sfsu.edu/~group8/builds/current&#xD;
+&gt;It has the most current build as for the current date...&#xD;
+&gt;It&#xD;
+&gt;can be broken, or not&#xD;
+&gt;&#xD;
+&gt;- http://hci.cs.sfsu.edu/~group8/builds/verified&#xD;
+&gt;It has the most current build that WAS VERIFIED BY QA&#xD;
+&gt;(tested, etc). I will cover more on automated tests later;&#xD;
+&gt;&#xD;
+&gt;- http://hci.cs.sfsu.edu/~group8/builds/nightly/yyyymmdd/&#xD;
+&gt;build for the nightly build version of previous dates&#xD;
+&gt;&#xD;
+&gt;Continuous Integration Build:&#xD;
+&gt;http://hci.cs.sfsu.edu/~group8/builds/&#xD;
+&gt;&#xD;
+&gt;MySQL to create users&#xD;
+&gt;http://hci.cs.sfsu.edu/mysql&#xD;
+&gt;&#xD;
+&gt;PHPMyADmin&#xD;
+&gt;http://hci.cs.sfsu.edu/phpmyadmin&#xD;
+&gt;&#xD;
+&gt;I also thought about creating a Subdomain name for the&#xD;
+&gt;project, instead of using the regular SFSU address... This&#xD;
+&gt;could be an optional stuff... &#xD;
+&gt;http://www.knows.it/&#xD;
+&gt;&#xD;
+&gt;Thanks,&#xD;
+&gt;Marcello</description>
+      <pubDate>Fri, 03 Oct 2008 14:37:04 GMT</pubDate>
+      <author>aardila</author>
+      <guid>https://ppm-8.dev.java.net/servlets/ProjectForumMessageView?forumID=3254&amp;messageID=25664</guid>
+      <dc:creator>aardila</dc:creator>
+      <dc:date>2008-10-03T14:37:04Z</dc:date>
+    </item>
+    <item>
+      <title>Re: Meeting Channels page</title>
+      <link>https://ppm-8.dev.java.net/servlets/ProjectForumMessageView?forumID=3254&amp;messageID=25643</link>
+      <description>Thank you!&#xD;
+&#xD;
+&gt;Done!!!&#xD;
+&gt;&#xD;
+&gt;&gt;Since we won't be using Google Docs, I don't think it's&#xD;
+&gt;&gt;necessary to display our Google username on the Meeting&#xD;
+&gt;&gt;Channels page. If it's OK with everyone, I'd like to take&#xD;
+&gt;&gt;mine off --My gmail is my only spam-free email and I'd&#xD;
+&gt;&gt;like&#xD;
+&gt;&gt;to keep it that way.&#xD;
+&gt;&gt;&#xD;
+&gt;&gt;Thanks,&#xD;
+&gt;&gt;&#xD;
+&gt;&gt;&#xD;
+&gt;&gt;Andres</description>
+      <pubDate>Thu, 02 Oct 2008 15:07:15 GMT</pubDate>
+      <author>aardila</author>
+      <guid>https://ppm-8.dev.java.net/servlets/ProjectForumMessageView?forumID=3254&amp;messageID=25643</guid>
+      <dc:creator>aardila</dc:creator>
+      <dc:date>2008-10-02T15:07:15Z</dc:date>
+    </item>
+    <item>
+      <title>Re: Meeting Channels page</title>
+      <link>https://ppm-8.dev.java.net/servlets/ProjectForumMessageView?forumID=3254&amp;messageID=25632</link>
+      <description>Done!!!&#xD;
+&#xD;
+&gt;Since we won't be using Google Docs, I don't think it's&#xD;
+&gt;necessary to display our Google username on the Meeting&#xD;
+&gt;Channels page. If it's OK with everyone, I'd like to take&#xD;
+&gt;mine off --My gmail is my only spam-free email and I'd&#xD;
+&gt;like&#xD;
+&gt;to keep it that way.&#xD;
+&gt;&#xD;
+&gt;Thanks,&#xD;
+&gt;&#xD;
+&gt;&#xD;
+&gt;Andres</description>
+      <pubDate>Thu, 02 Oct 2008 05:26:25 GMT</pubDate>
+      <author>marcellosales</author>
+      <guid>https://ppm-8.dev.java.net/servlets/ProjectForumMessageView?forumID=3254&amp;messageID=25632</guid>
+      <dc:creator>marcellosales</dc:creator>
+      <dc:date>2008-10-02T05:26:25Z</dc:date>
+    </item>
+    <item>
+      <title>Meeting Channels page</title>
+      <link>https://ppm-8.dev.java.net/servlets/ProjectForumMessageView?forumID=3254&amp;messageID=25631</link>
+      <description>Since we won't be using Google Docs, I don't think it's&#xD;
+necessary to display our Google username on the Meeting&#xD;
+Channels page. If it's OK with everyone, I'd like to take&#xD;
+mine off --My gmail is my only spam-free email and I'd like&#xD;
+to keep it that way.&#xD;
+&#xD;
+Thanks,&#xD;
+&#xD;
+&#xD;
+Andres</description>
+      <pubDate>Thu, 02 Oct 2008 05:13:26 GMT</pubDate>
+      <author>aardila</author>
+      <guid>https://ppm-8.dev.java.net/servlets/ProjectForumMessageView?forumID=3254&amp;messageID=25631</guid>
+      <dc:creator>aardila</dc:creator>
+      <dc:date>2008-10-02T05:13:26Z</dc:date>
+    </item>
+    <item>
+      <title>Re: Communication challenges: how to make the team work!</title>
+      <link>https://ppm-8.dev.java.net/servlets/ProjectForumMessageView?forumID=3254&amp;messageID=25597</link>
+      <description>Ok, nevermind my other post asking for detailed&#xD;
+instructions... (gosh, I feel inadequate :p)&#xD;
+&#xD;
+Thank you Marcello for posting these.&#xD;
+&#xD;
+So I downloaded ChatZilla&#xD;
+(https://addons.mozilla.org/en-US/firefox/addon/16?id=16)&#xD;
+and I _think_ I'm on the channel --I can see Brett there,&#xD;
+but haven't been able to communicate with him... If anyone&#xD;
+is on or can sign in I'd appreciate if they can get in touch&#xD;
+via the channel to kind of figure out how this works exactly.&#xD;
+&#xD;
+Also, if there are suggestions for a better client I'm all ears.&#xD;
+&#xD;
+Thanks again &amp; sorry!!&#xD;
+&#xD;
+&gt;hi team!&#xD;
+&gt;&#xD;
+&gt;From my experience with open-source software development,&#xD;
+&gt;I&#xD;
+&gt;think we are not getting engaged in the project as we need&#xD;
+&gt;to be... Local groups are in HUGE advantage because they&#xD;
+&gt;are&#xD;
+&gt;getting together locally at the campus, and doing their&#xD;
+&gt;jobs&#xD;
+&gt;from home... However, we have a much more interesting&#xD;
+&gt;group&#xD;
+&gt;set up and this will be the case in our future careers. &#xD;
+&gt;&#xD;
+&gt;Distributed teams usually work using Intranet IMs&#xD;
+&gt;(Motorola&#xD;
+&gt;uses a version from MS Messenger, Collabnet,  Google, Sun,&#xD;
+&gt;Apache use private/public IRC channels on freenode and&#xD;
+&gt;private IRC servers). That's not because of the big ones,&#xD;
+&gt;but because we need to maintain our contact alive and&#xD;
+&gt;because the professors will just want to participate on&#xD;
+&gt;online conversations and we still haven't get together in&#xD;
+&gt;our own setup... So, for this reason, I would require&#xD;
+&gt;everyone to be logged in to the IRC channel PPM-8 at&#xD;
+&gt;Freenode.net... whenever you are online in your private&#xD;
+&gt;time&#xD;
+&gt;we all could chat and actually have the daily conversation&#xD;
+&gt;about the project, milestone documentation, etc...&#xD;
+&gt;Whenever&#xD;
+&gt;possible, we would use DimDim.com for presentations with&#xD;
+&gt;our&#xD;
+&gt;desktop if needed... Just complete steps 1 through 7 at &#xD;
+&gt;&#xD;
+&gt;http://www.wikihow.com/Register-a-User-Name-on-Freenode...&#xD;
+&gt;&#xD;
+&gt;&#xD;
+&gt;I added my IRC client application today to the Startup, so&#xD;
+&gt;you could do the same to not forget about it... Our team&#xD;
+&gt;channel/chat room is called ppm-8. Once logged in to the&#xD;
+&gt;IRC, just type /join #ppm-8...&#xD;
+&gt;&#xD;
+&gt;Marcello</description>
+      <pubDate>Tue, 30 Sep 2008 16:03:18 GMT</pubDate>
+      <author>aardila</author>
+      <guid>https://ppm-8.dev.java.net/servlets/ProjectForumMessageView?forumID=3254&amp;messageID=25597</guid>
+      <dc:creator>aardila</dc:creator>
+      <dc:date>2008-09-30T16:03:18Z</dc:date>
+    </item>
+    <item>
+      <title>Communication challenges: how to make the team work!</title>
+      <link>https://ppm-8.dev.java.net/servlets/ProjectForumMessageView?forumID=3254&amp;messageID=25592</link>
+      <description>hi team!&#xD;
+&#xD;
+From my experience with open-source software development, I&#xD;
+think we are not getting engaged in the project as we need&#xD;
+to be... Local groups are in HUGE advantage because they are&#xD;
+getting together locally at the campus, and doing their jobs&#xD;
+from home... However, we have a much more interesting group&#xD;
+set up and this will be the case in our future careers. &#xD;
+&#xD;
+Distributed teams usually work using Intranet IMs (Motorola&#xD;
+uses a version from MS Messenger, Collabnet,  Google, Sun,&#xD;
+Apache use private/public IRC channels on freenode and&#xD;
+private IRC servers). That's not because of the big ones,&#xD;
+but because we need to maintain our contact alive and&#xD;
+because the professors will just want to participate on&#xD;
+online conversations and we still haven't get together in&#xD;
+our own setup... So, for this reason, I would require&#xD;
+everyone to be logged in to the IRC channel PPM-8 at&#xD;
+Freenode.net... whenever you are online in your private time&#xD;
+we all could chat and actually have the daily conversation&#xD;
+about the project, milestone documentation, etc... Whenever&#xD;
+possible, we would use DimDim.com for presentations with our&#xD;
+desktop if needed... Just complete steps 1 through 7 at &#xD;
+&#xD;
+http://www.wikihow.com/Register-a-User-Name-on-Freenode... &#xD;
+&#xD;
+I added my IRC client application today to the Startup, so&#xD;
+you could do the same to not forget about it... Our team&#xD;
+channel/chat room is called ppm-8. Once logged in to the&#xD;
+IRC, just type /join #ppm-8...&#xD;
+&#xD;
+Marcello</description>
+      <pubDate>Tue, 30 Sep 2008 13:02:10 GMT</pubDate>
+      <author>marcellosales</author>
+      <guid>https://ppm-8.dev.java.net/servlets/ProjectForumMessageView?forumID=3254&amp;messageID=25592</guid>
+      <dc:creator>marcellosales</dc:creator>
+      <dc:date>2008-09-30T13:02:10Z</dc:date>
+    </item>
+    <item>
+      <title>T2000 Server: It's our Continuous Integration and Staging server!</title>
+      <link>https://ppm-8.dev.java.net/servlets/ProjectForumMessageView?forumID=3254&amp;messageID=25591</link>
+      <description>Hello InfinityTEAM!&#xD;
+&#xD;
+Finally Gary and Prof. Petkovic presented the T2000 server.&#xD;
+It will be each team's staging and continuous integration&#xD;
+server... Everyone got the information for the server, but&#xD;
+unfortunately our team got the wrong password set up... I&#xD;
+tried loggin in and I couldn't... I have already sent an&#xD;
+email to Gary to solve the issue... So, they have a space&#xD;
+for group8 to host their executable, running software... In&#xD;
+any open-source, distributed software development there are&#xD;
+2 ideas for verifying the current development:&#xD;
+&#xD;
+1. Staging Version of the Software: this is the final&#xD;
+release of our software in a given version. Let's say:&#xD;
+&#xD;
+a) Version 0.1 containing the complete system running, with&#xD;
+the version of the Database schema, etc; &#xD;
+b) Version 0.2 running, containing everything that evolved&#xD;
+from 0.1 and the features added/planned for 0.2.&#xD;
+&#xD;
+So, Staging is usually offered to the client as a way to&#xD;
+show it up and running. When the software is released to&#xD;
+stage, it is usually in the end of an iteration, and it is&#xD;
+said "to be ready for QA". That means that the TESTING team&#xD;
+will use the software to see if it passes Requirement tests,&#xD;
+defined in the documentation. This team usually works&#xD;
+"AGAINST" the development team in a way to try to BREAK&#xD;
+anything... :) &#xD;
+&#xD;
+2. Continuous Integration (CI) refers to how agile products&#xD;
+are automatically integrated and built. Using Subversion,&#xD;
+the continuous integration server does SVN UPDATE every day&#xD;
+whenever a new commit (a new revision) has been submitted by&#xD;
+the developers. Also, it has the Nightly builds links so&#xD;
+developers/users of the application can get it from there...&#xD;
+In this way, the CI server maintains a freshcopy of the most&#xD;
+updated software from the subversion repository up and&#xD;
+running... If the build is broken, the software for CI will&#xD;
+display the ERROR message, THE DEVELOPER's NAME who did&#xD;
+broke the build, etc. In this way, all the team members will&#xD;
+get the idea that the module/package/class/function he/she&#xD;
+has written was correct and has not affected the current&#xD;
+software. For this reason, it is highly recommended that&#xD;
+before committing any code, you could do PAIR PROGRAMMING&#xD;
+PEER REVIEW, a practice where developers exchange DIFFS of&#xD;
+their current work and ask them to verify their work locally.&#xD;
+&#xD;
+I will be setting up Phing http://phing.info/trac/. It is&#xD;
+similar to Apache ANT and will generate things for us&#xD;
+automatically...&#xD;
+&#xD;
+http://phpimpact.wordpress.com/2007/06/30/phing-php-project-build-system-based-on-apache-ant/&#xD;
+http://www.slideshare.net/arnoschn/continuous-integration-and-php&#xD;
+&#xD;
+This is the page of the CI software:&#xD;
+http://code.google.com/p/xinc/&#xD;
+&#xD;
+NOBODY will be NEEDED to learn about this... Just see the&#xD;
+result of your build whenever it is ready! It will email&#xD;
+everyone with the status :D However, if you are interested&#xD;
+to know more about it let me know...&#xD;
+&#xD;
+We will be able to CREATE additional databases for our&#xD;
+personal use, and use PHPMyAdmin. For development purposes,&#xD;
+I would suggest to stick with your own local server in your&#xD;
+machine, and if desired create a new username and password&#xD;
+online...  Here is the basic information about that:&#xD;
+&#xD;
+Server: hci.cs.sfsu.edu&#xD;
+&#xD;
+* Main FINAL INFINITYNET to be staged in December:&#xD;
+- http://hci.cs.sfsu.edu/~group8&#xD;
+&#xD;
+* Nightly Build:&#xD;
+- http://hci.cs.sfsu.edu/~group8/builds/ &#xD;
+general information, lists all the builds available, links&#xD;
+to download the versions...&#xD;
+&#xD;
+- http://hci.cs.sfsu.edu/~group8/builds/current&#xD;
+It has the most current build as for the current date... It&#xD;
+can be broken, or not&#xD;
+&#xD;
+- http://hci.cs.sfsu.edu/~group8/builds/verified&#xD;
+It has the most current build that WAS VERIFIED BY QA&#xD;
+(tested, etc). I will cover more on automated tests later;&#xD;
+&#xD;
+- http://hci.cs.sfsu.edu/~group8/builds/nightly/yyyymmdd/&#xD;
+build for the nightly build version of previous dates&#xD;
+&#xD;
+Continuous Integration Build:&#xD;
+http://hci.cs.sfsu.edu/~group8/builds/&#xD;
+&#xD;
+MySQL to create users&#xD;
+http://hci.cs.sfsu.edu/mysql&#xD;
+&#xD;
+PHPMyADmin&#xD;
+http://hci.cs.sfsu.edu/phpmyadmin&#xD;
+&#xD;
+I also thought about creating a Subdomain name for the&#xD;
+project, instead of using the regular SFSU address... This&#xD;
+could be an optional stuff... &#xD;
+http://www.knows.it/&#xD;
+&#xD;
+Thanks,&#xD;
+Marcello</description>
+      <pubDate>Tue, 30 Sep 2008 12:58:40 GMT</pubDate>
+      <author>marcellosales</author>
+      <guid>https://ppm-8.dev.java.net/servlets/ProjectForumMessageView?forumID=3254&amp;messageID=25591</guid>
+      <dc:creator>marcellosales</dc:creator>
+      <dc:date>2008-09-30T12:58:40Z</dc:date>
+    </item>
+    <item>
+      <title>Re: First General meeting - Minutes</title>
+      <link>https://ppm-8.dev.java.net/servlets/ProjectForumMessageView?forumID=3254&amp;messageID=25556</link>
+      <description>This is great! Thanks for typing this up. I had my own&#xD;
+(significantly less comprehensive) version :p&#xD;
+&#xD;
+I think we also made the Weekly General Meeting time of&#xD;
+Thursdays 4-6 pm ET (1-3 pm PT) more definitive. Of course&#xD;
+things can change and we have to be flexible, but it helps&#xD;
+for planning/time-management purposes to have a&#xD;
+pre-established routine :)&#xD;
+&#xD;
+Thanks again!&#xD;
+&#xD;
+Andres&#xD;
+&#xD;
+&gt;As a matter of tracking the meeting minutes of our first&#xD;
+&gt;conf. call on Sep 26, on Skype.&#xD;
+&gt;&#xD;
+&gt;Members Present: Andres, Brett, Marcello and Marilyne.&#xD;
+&gt;Gurdeep will meet team lead on Sep 27.&#xD;
+&gt;&#xD;
+&gt;Agenda Items:&#xD;
+&gt;&#xD;
+&gt;0. Team members introductions;&#xD;
+&gt;1. What's the problem we have to address? &#xD;
+&gt;&#xD;
+&gt;- In general, everyone was having the same issues with the&#xD;
+&gt;development environment, subversion, etc;&#xD;
+&gt;- Xdebug was the most problematic one;&#xD;
+&gt;- Brett suggested the use of MicroXP in order to decrease&#xD;
+&gt;the size of the download of the virtualized development&#xD;
+&gt;environment deployed on VirtualBox;&#xD;
+&gt;- Although installation size only occupies 400MB, there&#xD;
+&gt;will&#xD;
+&gt;be still needs of additional space for the installation of&#xD;
+&gt;the applications that will run. I personally did 3&#xD;
+&gt;installations to test. The download size might decrease&#xD;
+&gt;from&#xD;
+&gt;1.5GB to less than 700MB (after being compressed);&#xD;
+&gt;- We talked about IRC communication... Still needs to&#xD;
+&gt;define&#xD;
+&gt;how we will get in touch;&#xD;
+&gt;&#xD;
+&gt;2. Suggestion to the general solution/approach, so we will&#xD;
+&gt;start working with the documentation for Milestone 1;&#xD;
+&gt;&#xD;
+&gt;- Marcello will be sending email with the template for the&#xD;
+&gt;draft. We will basically distribute team efforts to write&#xD;
+&gt;the documentation: Functional requirements, Non-functional&#xD;
+&gt;requirements, list of User Stories, Competitors analysis,&#xD;
+&gt;etc.&#xD;
+&gt;&#xD;
+&gt;3. Division of modules (Backend and Frontend layers) and&#xD;
+&gt;who&#xD;
+&gt;will be working with each piece, preferences, etc. I need&#xD;
+&gt;to&#xD;
+&gt;know specifically; &#xD;
+&gt;&#xD;
+&gt;- Not fully discussed. There will be talks on that after&#xD;
+&gt;Milestone 1.&#xD;
+&gt;&#xD;
+&gt;4. Pair programming and rotation (to help everyone learn&#xD;
+&gt;PHP&#xD;
+&gt;programming from other peers, help solving the problems,&#xD;
+&gt;etc). At least the development process...&#xD;
+&gt;&#xD;
+&gt;- Everyone talked a bit about the programming experience;&#xD;
+&gt;- We will push this effort when we start coding;&#xD;
+&gt;- we extended the conversation and talked about Agile&#xD;
+&gt;teams,&#xD;
+&gt;scrum, Issue Tracking (Brett talked about his experience&#xD;
+&gt;on&#xD;
+&gt;this last one);&#xD;
+&gt;&#xD;
+&gt;5. Presentation about the website structure, since I&#xD;
+&gt;managed&#xD;
+&gt;to change the menu and added information for the team, add&#xD;
+&gt;information about process, calendar, environment, etc... &#xD;
+&gt;&#xD;
+&gt;- Not discussed due to time constraints;&#xD;
+&gt;&#xD;
+&gt;6. Define the time for daily meetings (it's a meeting for&#xD;
+&gt;15&#xD;
+&gt;minutes to address the team's problem. See&#xD;
+&gt;https://ppm-8.dev.java.net/process/ for more information&#xD;
+&gt;about Daily Stand-up meeting... Everyone who can make it&#xD;
+&gt;will be good to be on the meeting...&#xD;
+&gt;&#xD;
+&gt;- Everyone talked about time constraints and for this&#xD;
+&gt;project, since it is too demanding;&#xD;
+&gt;- Daily meetings still to be discussed about the schedule.&#xD;
+&gt;&#xD;
+&gt;7. Additional topics you guys can suggest...&#xD;
+&gt;... &#xD;
+&gt;-------------------------------------------&#xD;
+&gt;&#xD;
+&gt;Please add or correct anything you might feel it's&#xD;
+&gt;missing/wrong...&#xD;
+&gt;&#xD;
+&gt;Marcello</description>
+      <pubDate>Mon, 29 Sep 2008 04:52:06 GMT</pubDate>
+      <author>aardila</author>
+      <guid>https://ppm-8.dev.java.net/servlets/ProjectForumMessageView?forumID=3254&amp;messageID=25556</guid>
+      <dc:creator>aardila</dc:creator>
+      <dc:date>2008-09-29T04:52:06Z</dc:date>
+    </item>
+    <item>
+      <title>Re: Gmail</title>
+      <link>https://ppm-8.dev.java.net/servlets/ProjectForumMessageView?forumID=3254&amp;messageID=25532</link>
+      <description>Mmm, I use FF3 and it wasn't using https until I changed the&#xD;
+setting in Gmail.&#xD;
+&#xD;
+&#xD;
+&gt;Thanks Andres for the tip!!! Just to notice that this&#xD;
+&gt;configuration is already set when using Firefox!!! This&#xD;
+&gt;configuration setting seems to be for Internet Explorer,&#xD;
+&gt;right??? In any case, that's a good one... &#xD;
+&gt;&#xD;
+&gt;SSL tunneling encrypts everything you are transferring&#xD;
+&gt;from&#xD;
+&gt;your browser to the server and anyone "listening" on the&#xD;
+&gt;port 80 would grab that information (pure clear HTTP/HTML&#xD;
+&gt;code flowing). However, SSL tunnels are on port 443 and&#xD;
+&gt;everything is encrypted! Just for another point of&#xD;
+&gt;interest,&#xD;
+&gt;this uses the RSA encryption algorithm, which is basically&#xD;
+&gt;based on Public Key encryption. Your computer always&#xD;
+&gt;creates&#xD;
+&gt;these keys for you while navigating in browsers with https&#xD;
+&gt;connections (which are tunneled through port 80).&#xD;
+&gt;&#xD;
+&gt;Have a good one everybody!&#xD;
+&gt;&#xD;
+&gt;Marcello&#xD;
+&gt;&#xD;
+&gt;&gt;This is somewhat unrelated, but since we're all using&#xD;
+&gt;&gt;Gmail&#xD;
+&gt;&gt;for the project, it concerns us all &amp; I thought I should&#xD;
+&gt;&gt;share what I heard on a podcast the other day. It turns&#xD;
+&gt;&gt;out&#xD;
+&gt;&gt;that Gmail by default doesn't use SSL to transfer&#xD;
+&gt;&gt;information between the browser and the server, so it's&#xD;
+&gt;&gt;pretty much a visible connection (not secure). This can&#xD;
+&gt;be&#xD;
+&gt;&gt;easily remedied by going into Settings -&gt; General tab -&gt;&#xD;
+&gt;&gt;Browser connection (last option) and select 'Always use&#xD;
+&gt;&gt;https'.&#xD;
+&gt;&gt;&#xD;
+&gt;&gt;Voila!</description>
+      <pubDate>Sat, 27 Sep 2008 14:06:35 GMT</pubDate>
+      <author>aardila</author>
+      <guid>https://ppm-8.dev.java.net/servlets/ProjectForumMessageView?forumID=3254&amp;messageID=25532</guid>
+      <dc:creator>aardila</dc:creator>
+      <dc:date>2008-09-27T14:06:35Z</dc:date>
+    </item>
+    <item>
+      <title>Re: Team name... Let's make a difference... DEADLINE!</title>
+      <link>https://ppm-8.dev.java.net/servlets/ProjectForumMessageView?forumID=3254&amp;messageID=25528</link>
+      <description>The DEADLINE for the decision on the name of the team will&#xD;
+be Monday, September 29th. So, please let me know what other&#xD;
+ideas you guys have!!!! C'mon guys!!!! Let's make noise!&#xD;
+&#xD;
+Marcello&#xD;
+&#xD;
+&gt;&gt;I think it's a great idea. And since I am horrible at&#xD;
+&gt;&gt;suggesting names (  I would have recommended&#xD;
+&gt;GoTeam#2)...I&#xD;
+&gt;&gt;will vote for InfinityNet.&#xD;
+&gt;&gt;&#xD;
+&gt;&gt;Marilyne&#xD;
+&gt;&#xD;
+&gt;Cool... I was browsing online for ideas of the logo,&#xD;
+&gt;etc...&#xD;
+&gt;As prof. Draguntin was talking about, Branding is very&#xD;
+&gt;important in Software Engineering... Let's rock!&#xD;
+&gt;&#xD;
+&gt;I found very cool images we could use :)&#xD;
+&gt;&#xD;
+&gt;1. A Microsoft-like windows approach :) &#xD;
+&gt;2. A geeky approach&#xD;
+&gt;3. Another geeky approach&#xD;
+&gt;&#xD;
+&gt;Suggestions??? Anyone good at design (Photoshop?)&#xD;
+&gt;&#xD;
+&gt;Marcello</description>
+      <pubDate>Sat, 27 Sep 2008 07:48:37 GMT</pubDate>
+      <author>marcellosales</author>
+      <guid>https://ppm-8.dev.java.net/servlets/ProjectForumMessageView?forumID=3254&amp;messageID=25528</guid>
+      <dc:creator>marcellosales</dc:creator>
+      <dc:date>2008-09-27T07:48:37Z</dc:date>
+    </item>
+    <item>
+      <title>Re: Gmail</title>
+      <link>https://ppm-8.dev.java.net/servlets/ProjectForumMessageView?forumID=3254&amp;messageID=25527</link>
+      <description>Thanks Andres for the tip!!! Just to notice that this&#xD;
+configuration is already set when using Firefox!!! This&#xD;
+configuration setting seems to be for Internet Explorer,&#xD;
+right??? In any case, that's a good one... &#xD;
+&#xD;
+SSL tunneling encrypts everything you are transferring from&#xD;
+your browser to the server and anyone "listening" on the&#xD;
+port 80 would grab that information (pure clear HTTP/HTML&#xD;
+code flowing). However, SSL tunnels are on port 443 and&#xD;
+everything is encrypted! Just for another point of interest,&#xD;
+this uses the RSA encryption algorithm, which is basically&#xD;
+based on Public Key encryption. Your computer always creates&#xD;
+these keys for you while navigating in browsers with https&#xD;
+connections (which are tunneled through port 80).&#xD;
+&#xD;
+Have a good one everybody!&#xD;
+&#xD;
+Marcello&#xD;
+&#xD;
+&gt;This is somewhat unrelated, but since we're all using&#xD;
+&gt;Gmail&#xD;
+&gt;for the project, it concerns us all &amp; I thought I should&#xD;
+&gt;share what I heard on a podcast the other day. It turns&#xD;
+&gt;out&#xD;
+&gt;that Gmail by default doesn't use SSL to transfer&#xD;
+&gt;information between the browser and the server, so it's&#xD;
+&gt;pretty much a visible connection (not secure). This can be&#xD;
+&gt;easily remedied by going into Settings -&gt; General tab -&gt;&#xD;
+&gt;Browser connection (last option) and select 'Always use&#xD;
+&gt;https'.&#xD;
+&gt;&#xD;
+&gt;Voila!</description>
+      <pubDate>Sat, 27 Sep 2008 07:45:56 GMT</pubDate>
+      <author>marcellosales</author>
+      <guid>https://ppm-8.dev.java.net/servlets/ProjectForumMessageView?forumID=3254&amp;messageID=25527</guid>
+      <dc:creator>marcellosales</dc:creator>
+      <dc:date>2008-09-27T07:45:56Z</dc:date>
+    </item>
+    <item>
+      <title>Re: Addressing the "e-paper trail" from Gary's email about Group Communication</title>
+      <link>https://ppm-8.dev.java.net/servlets/ProjectForumMessageView?forumID=3254&amp;messageID=25526</link>
+      <description>&gt;I think we should define in more detail and discern the&#xD;
+&gt;specific purposes for which we should use forums and&#xD;
+&gt;mailing&#xD;
+&gt;lists. Thinking in terms of the future, I think the tree&#xD;
+&gt;structure of the forums is a little easier to follow&#xD;
+&gt;compared to the search/archive feature of mailing lists,&#xD;
+&#xD;
+I totally agree with you... &#xD;
+&#xD;
+PROS: you can follow up better, and visualize better than&#xD;
+emails... &#xD;
+CONS: You can get lost by time since the threads get a bit&#xD;
+mixed up, etc...&#xD;
+&#xD;
+I've worked in teams that just don't use FORUMs because of&#xD;
+better email systems with search. So, anything would be&#xD;
+based on the topics you write, how you expose your ideas,&#xD;
+etc. You can also do search on Forums, but sometimes it's&#xD;
+just the process of receiving an email, and having to click&#xD;
+on the link, make the usual login, in order to finish the&#xD;
+process of reply. That takes way 5 minutes from you :) Count&#xD;
+those 5 minutes over a period of a month, or maybe this&#xD;
+semester and see what you would get from that... :D This is&#xD;
+the extreme line of thoughts... :) &#xD;
+&#xD;
+I think we should go with either one... However, as I'm&#xD;
+noticing in the project is that since I don't see that many&#xD;
+replies on Emails, it's easier to have the web forum to&#xD;
+monitor ourselves... We are going to be evaluated by our&#xD;
+participation as a team...&#xD;
+&#xD;
+So, the best way in the end is to play by the rules of the&#xD;
+game... (which I have already found a mid-term to write&#xD;
+documentation...)&#xD;
+&#xD;
+Marcello&#xD;
+&#xD;
+&gt;but&#xD;
+&gt;as an amateur to this environment and to the whole&#xD;
+&gt;open-source thing, it seems like there is no definite line&#xD;
+&gt;as to which should be use for a particular subject matter&#xD;
+&gt;--perhaps you can help us better define that line based on&#xD;
+&gt;your prior experience :)&#xD;
+&gt;&#xD;
+&gt;Either way, I'm definitely getting in the fold of things&#xD;
+&gt;regarding following and getting more involved in threads&#xD;
+&gt;in&#xD;
+&gt;forums &amp; mailing lists and will continue to do so.&#xD;
+&gt;&#xD;
+&gt;Andres&#xD;
+&gt;&#xD;
+&gt;&gt;Gary explained in his email today&#xD;
+&gt;&gt;(https://ppm.dev.java.net/servlets/ReadMsg?list=users&amp;msgNo=19)&#xD;
+&gt;&gt;about the e-paper trail we have to leave in this&#xD;
+&gt;&gt;project...&#xD;
+&gt;&gt;How are we going to address this? &#xD;
+&gt;&gt;&#xD;
+&gt;&gt;So, by nature, we are an open-source, distributed and&#xD;
+&gt;&gt;collaborative development team and that's what happens in&#xD;
+&gt;&gt;real world projects... All the communication is done&#xD;
+&gt;&gt;through&#xD;
+&gt;&gt;the online tools offered by the project hosting server&#xD;
+&gt;and&#xD;
+&gt;&gt;we are also remembered that this project will go on after&#xD;
+&gt;&gt;we&#xD;
+&gt;&gt;finish our cycle, but we need to leave our footprints and&#xD;
+&gt;&gt;our history on the project. Everything today is indexed&#xD;
+&gt;by&#xD;
+&gt;&gt;Google and this is a good opportunity for our future&#xD;
+&gt;&gt;careers. In this way, I want to remind you guys about our&#xD;
+&gt;&gt;communication challenge:&#xD;
+&gt;&gt;&#xD;
+&gt;&gt;1. Always use the General Forum to discuss about&#xD;
+&gt;something&#xD;
+&gt;&gt;we still have open. Something that will be in the history&#xD;
+&gt;&gt;of&#xD;
+&gt;&gt;the group such as the project name, regular team meetings&#xD;
+&gt;&gt;dates, decisions on the architecture to be used,&#xD;
+&gt;&gt;frameworks,&#xD;
+&gt;&gt;etc. But, it's important to have everyone participating&#xD;
+&gt;on&#xD;
+&gt;&gt;the decisions together; If you need to have a topic to be&#xD;
+&gt;&gt;decided, just open a new one and all the team is going to&#xD;
+&gt;&gt;be&#xD;
+&gt;&gt;happy to reply.&#xD;
+&gt;&gt;&#xD;
+&gt;&gt;2. The mailing lists are there for a purpose, when it&#xD;
+&gt;&gt;comes&#xD;
+&gt;&gt;to Open-source software development: they are the main&#xD;
+&gt;&gt;channel of asynchronous communication for us and for our&#xD;
+&gt;&gt;clients. They should be used according to its&#xD;
+&gt;&gt;specification.&#xD;
+&gt;&gt;Let's keep using them for daily activities, problems we&#xD;
+&gt;&gt;have&#xD;
+&gt;&gt;to address, fixes of problems created, etc.&#xD;
+&gt;&gt;&#xD;
+&gt;&gt;I started using the dev mailing list to discuss about&#xD;
+&gt;&gt;everything, and I realized 2 days ago that it was being&#xD;
+&gt;&gt;over&#xD;
+&gt;&gt;used. We will balance accordingly this time... Any&#xD;
+&gt;&gt;comments?&#xD;
+&gt;&gt;&#xD;
+&gt;&gt;Marcello</description>
+      <pubDate>Sat, 27 Sep 2008 07:05:52 GMT</pubDate>
+      <author>marcellosales</author>
+      <guid>https://ppm-8.dev.java.net/servlets/ProjectForumMessageView?forumID=3254&amp;messageID=25526</guid>
+      <dc:creator>marcellosales</dc:creator>
+      <dc:date>2008-09-27T07:05:52Z</dc:date>
+    </item>
+    <item>
+      <title>Gmail</title>
+      <link>https://ppm-8.dev.java.net/servlets/ProjectForumMessageView?forumID=3254&amp;messageID=25517</link>
+      <description>This is somewhat unrelated, but since we're all using Gmail&#xD;
+for the project, it concerns us all &amp; I thought I should&#xD;
+share what I heard on a podcast the other day. It turns out&#xD;
+that Gmail by default doesn't use SSL to transfer&#xD;
+information between the browser and the server, so it's&#xD;
+pretty much a visible connection (not secure). This can be&#xD;
+easily remedied by going into Settings -&gt; General tab -&gt;&#xD;
+Browser connection (last option) and select 'Always use https'.&#xD;
+&#xD;
+Voila!</description>
+      <pubDate>Sat, 27 Sep 2008 00:41:47 GMT</pubDate>
+      <author>aardila</author>
+      <guid>https://ppm-8.dev.java.net/servlets/ProjectForumMessageView?forumID=3254&amp;messageID=25517</guid>
+      <dc:creator>aardila</dc:creator>
+      <dc:date>2008-09-27T00:41:47Z</dc:date>
+    </item>
+    <item>
+      <title>Re: Addressing the "e-paper trail" from Gary's email about Group Communication</title>
+      <link>https://ppm-8.dev.java.net/servlets/ProjectForumMessageView?forumID=3254&amp;messageID=25516</link>
+      <description>I think we should define in more detail and discern the&#xD;
+specific purposes for which we should use forums and mailing&#xD;
+lists. Thinking in terms of the future, I think the tree&#xD;
+structure of the forums is a little easier to follow&#xD;
+compared to the search/archive feature of mailing lists, but&#xD;
+as an amateur to this environment and to the whole&#xD;
+open-source thing, it seems like there is no definite line&#xD;
+as to which should be use for a particular subject matter&#xD;
+--perhaps you can help us better define that line based on&#xD;
+your prior experience :)&#xD;
+&#xD;
+Either way, I'm definitely getting in the fold of things&#xD;
+regarding following and getting more involved in threads in&#xD;
+forums &amp; mailing lists and will continue to do so.&#xD;
+&#xD;
+Andres&#xD;
+&#xD;
+&gt;Gary explained in his email today&#xD;
+&gt;(https://ppm.dev.java.net/servlets/ReadMsg?list=users&amp;msgNo=19)&#xD;
+&gt;about the e-paper trail we have to leave in this&#xD;
+&gt;project...&#xD;
+&gt;How are we going to address this? &#xD;
+&gt;&#xD;
+&gt;So, by nature, we are an open-source, distributed and&#xD;
+&gt;collaborative development team and that's what happens in&#xD;
+&gt;real world projects... All the communication is done&#xD;
+&gt;through&#xD;
+&gt;the online tools offered by the project hosting server and&#xD;
+&gt;we are also remembered that this project will go on after&#xD;
+&gt;we&#xD;
+&gt;finish our cycle, but we need to leave our footprints and&#xD;
+&gt;our history on the project. Everything today is indexed by&#xD;
+&gt;Google and this is a good opportunity for our future&#xD;
+&gt;careers. In this way, I want to remind you guys about our&#xD;
+&gt;communication challenge:&#xD;
+&gt;&#xD;
+&gt;1. Always use the General Forum to discuss about something&#xD;
+&gt;we still have open. Something that will be in the history&#xD;
+&gt;of&#xD;
+&gt;the group such as the project name, regular team meetings&#xD;
+&gt;dates, decisions on the architecture to be used,&#xD;
+&gt;frameworks,&#xD;
+&gt;etc. But, it's important to have everyone participating on&#xD;
+&gt;the decisions together; If you need to have a topic to be&#xD;
+&gt;decided, just open a new one and all the team is going to&#xD;
+&gt;be&#xD;
+&gt;happy to reply.&#xD;
+&gt;&#xD;
+&gt;2. The mailing lists are there for a purpose, when it&#xD;
+&gt;comes&#xD;
+&gt;to Open-source software development: they are the main&#xD;
+&gt;channel of asynchronous communication for us and for our&#xD;
+&gt;clients. They should be used according to its&#xD;
+&gt;specification.&#xD;
+&gt;Let's keep using them for daily activities, problems we&#xD;
+&gt;have&#xD;
+&gt;to address, fixes of problems created, etc.&#xD;
+&gt;&#xD;
+&gt;I started using the dev mailing list to discuss about&#xD;
+&gt;everything, and I realized 2 days ago that it was being&#xD;
+&gt;over&#xD;
+&gt;used. We will balance accordingly this time... Any&#xD;
+&gt;comments?&#xD;
+&gt;&#xD;
+&gt;Marcello</description>
+      <pubDate>Sat, 27 Sep 2008 00:23:33 GMT</pubDate>
+      <author>aardila</author>
+      <guid>https://ppm-8.dev.java.net/servlets/ProjectForumMessageView?forumID=3254&amp;messageID=25516</guid>
+      <dc:creator>aardila</dc:creator>
+      <dc:date>2008-09-27T00:23:33Z</dc:date>
+    </item>
+    <item>
+      <title>Re: First General meeting - Minutes</title>
+      <link>https://ppm-8.dev.java.net/servlets/ProjectForumMessageView?forumID=3254&amp;messageID=25508</link>
+      <description>As a matter of tracking the meeting minutes of our first&#xD;
+conf. call on Sep 26, on Skype.&#xD;
+&#xD;
+Members Present: Andres, Brett, Marcello and Marilyne.&#xD;
+Gurdeep will meet team lead on Sep 27.&#xD;
+&#xD;
+Agenda Items:&#xD;
+&#xD;
+0. Team members introductions;&#xD;
+1. What's the problem we have to address? &#xD;
+&#xD;
+- In general, everyone was having the same issues with the&#xD;
+development environment, subversion, etc;&#xD;
+- Xdebug was the most problematic one;&#xD;
+- Brett suggested the use of MicroXP in order to decrease&#xD;
+the size of the download of the virtualized development&#xD;
+environment deployed on VirtualBox;&#xD;
+- Although installation size only occupies 400MB, there will&#xD;
+be still needs of additional space for the installation of&#xD;
+the applications that will run. I personally did 3&#xD;
+installations to test. The download size might decrease from&#xD;
+1.5GB to less than 700MB (after being compressed);&#xD;
+- We talked about IRC communication... Still needs to define&#xD;
+how we will get in touch;&#xD;
+&#xD;
+2. Suggestion to the general solution/approach, so we will&#xD;
+start working with the documentation for Milestone 1;&#xD;
+&#xD;
+- Marcello will be sending email with the template for the&#xD;
+draft. We will basically distribute team efforts to write&#xD;
+the documentation: Functional requirements, Non-functional&#xD;
+requirements, list of User Stories, Competitors analysis, etc.&#xD;
+&#xD;
+3. Division of modules (Backend and Frontend layers) and who&#xD;
+will be working with each piece, preferences, etc. I need to&#xD;
+know specifically; &#xD;
+&#xD;
+- Not fully discussed. There will be talks on that after&#xD;
+Milestone 1.&#xD;
+&#xD;
+4. Pair programming and rotation (to help everyone learn PHP&#xD;
+programming from other peers, help solving the problems,&#xD;
+etc). At least the development process...&#xD;
+&#xD;
+- Everyone talked a bit about the programming experience;&#xD;
+- We will push this effort when we start coding;&#xD;
+- we extended the conversation and talked about Agile teams,&#xD;
+scrum, Issue Tracking (Brett talked about his experience on&#xD;
+this last one);&#xD;
+&#xD;
+5. Presentation about the website structure, since I managed&#xD;
+to change the menu and added information for the team, add&#xD;
+information about process, calendar, environment, etc... &#xD;
+&#xD;
+- Not discussed due to time constraints;&#xD;
+&#xD;
+6. Define the time for daily meetings (it's a meeting for 15&#xD;
+minutes to address the team's problem. See&#xD;
+https://ppm-8.dev.java.net/process/ for more information&#xD;
+about Daily Stand-up meeting... Everyone who can make it&#xD;
+will be good to be on the meeting...&#xD;
+&#xD;
+- Everyone talked about time constraints and for this&#xD;
+project, since it is too demanding;&#xD;
+- Daily meetings still to be discussed about the schedule.&#xD;
+&#xD;
+7. Additional topics you guys can suggest...&#xD;
+... &#xD;
+-------------------------------------------&#xD;
+&#xD;
+Please add or correct anything you might feel it's&#xD;
+missing/wrong...&#xD;
+&#xD;
+Marcello</description>
+      <pubDate>Fri, 26 Sep 2008 16:52:56 GMT</pubDate>
+      <author>marcellosales</author>
+      <guid>https://ppm-8.dev.java.net/servlets/ProjectForumMessageView?forumID=3254&amp;messageID=25508</guid>
+      <dc:creator>marcellosales</dc:creator>
+      <dc:date>2008-09-26T16:52:56Z</dc:date>
+    </item>
+    <item>
+      <title>Re: First General meeting - Andreas REPLY BY TOMORROW!</title>
+      <link>https://ppm-8.dev.java.net/servlets/ProjectForumMessageView?forumID=3254&amp;messageID=25483</link>
+      <description>So, since we have to start work by Friday, we should have&#xD;
+the general meeting tomorrow. Considering that Gurdeep lives&#xD;
+close to the SFSU campus (I also live close to it), I will&#xD;
+get together with him on Friday. We can't postpone any other&#xD;
+day anymore, since we have the documentation to work during&#xD;
+the weekend until next week. &#xD;
+&#xD;
+Andreas, as my point of contact, please let me know which of&#xD;
+these 2 time slots are better for you. Talk to Marilyne and&#xD;
+get the best time and we will be ok here with both...&#xD;
+&#xD;
+1. Tomorrow: 1:00pm-3:00pm (PST) / 4:pm-6pm (EST)&#xD;
+2. Tomorrow: 3:00pm-5:pm (PST) / 6:00pm-8pm (EST)&#xD;
+&#xD;
+Marcello&#xD;
+&#xD;
+&gt;Hi Everyone&#xD;
+&gt;I think 1:30pm to 3:30 pm (PST) is the best time to do&#xD;
+&gt;general meetings as I have classes in the evening( on&#xD;
+&gt;Monday, Wednesday, Thursday). &#xD;
+&gt;But Please fix first general meeting on Friday as tomarrow&#xD;
+&gt;I&#xD;
+&gt;really have a urgent work during day and class in the&#xD;
+&gt;evening.&#xD;
+&gt;Thanks&#xD;
+&gt;&#xD;
+&gt;Gurdeep Singh&#xD;
+&gt;&#xD;
+&gt;&#xD;
+&gt;&#xD;
+&gt;&gt;Hello everyone,&#xD;
+&gt;&gt;&#xD;
+&gt;&gt;Let's vote for our first general meeting using the Forum,&#xD;
+&gt;&gt;since just a few people replied to the emails... Remember&#xD;
+&gt;&gt;that the professors will track who is participating the&#xD;
+&gt;&gt;activities... The final decision will be posted to the&#xD;
+&gt;&gt;Google Calendar later...&#xD;
+&gt;&gt;&#xD;
+&gt;&gt;Since most of the team is still working on Milestone 0&#xD;
+&gt;&gt;until&#xD;
+&gt;&gt;tomorrow, I decided to push the first General meeting for&#xD;
+&gt;&gt;this Thursday/Friday (Sep 25-26). I know that FAU will be&#xD;
+&gt;&gt;ahead of time, so PLEASE VOTE for the time schedules&#xD;
+&gt;&gt;during&#xD;
+&gt;&gt;the Eastern afternoon time (earlier suggestion was a time&#xD;
+&gt;&gt;slot from 15-18 EST (12-15 PST). &#xD;
+&gt;&gt;&#xD;
+&gt;&gt;It will be for about 2 hours and will cover the following&#xD;
+&gt;&gt;open topics on that meeting are the following:&#xD;
+&gt;&gt;&#xD;
+&gt;&gt;0. Team members introductions;&#xD;
+&gt;&gt;&#xD;
+&gt;&gt;1. What's the problem we have to address? &#xD;
+&gt;&gt;&#xD;
+&gt;&gt;2. Suggestion to the general solution/approach, so we&#xD;
+&gt;will&#xD;
+&gt;&gt;start working with the documentation for Milestone 1;&#xD;
+&gt;&gt;&#xD;
+&gt;&gt;3. Division of modules (Backend and Frontend layers) and&#xD;
+&gt;&gt;who&#xD;
+&gt;&gt;will be working with each piece, preferences, etc. I need&#xD;
+&gt;&gt;to&#xD;
+&gt;&gt;know specifically; &#xD;
+&gt;&gt;&#xD;
+&gt;&gt;4. Pair programming and rotation (to help everyone learn&#xD;
+&gt;&gt;PHP&#xD;
+&gt;&gt;programming from other peers, help solving the problems,&#xD;
+&gt;&gt;etc). At least the development process...&#xD;
+&gt;&gt;&#xD;
+&gt;&gt;5. Presentation about the website structure, since I&#xD;
+&gt;&gt;managed&#xD;
+&gt;&gt;to change the menu and added information for the team,&#xD;
+&gt;add&#xD;
+&gt;&gt;information about process, calendar, environment, etc... &#xD;
+&gt;&gt;&#xD;
+&gt;&gt;6. Define the time for daily meetings (it's a meeting for&#xD;
+&gt;&gt;15&#xD;
+&gt;&gt;minutes to address the team's problem. See&#xD;
+&gt;&gt;https://ppm-8.dev.java.net/process/ for more information&#xD;
+&gt;&gt;about Daily Stand-up meeting... Everyone who can make it&#xD;
+&gt;&gt;will be good to be on the meeting...&#xD;
+&gt;&gt;&#xD;
+&gt;&gt;7. Additional topics you guys can suggest...&#xD;
+&gt;&gt;&#xD;
+&gt;&gt;After we have come up with the date, I will update our&#xD;
+&gt;&gt;Google Calendar information about it... The idea is to&#xD;
+&gt;&gt;have&#xD;
+&gt;&gt;our activities in the Calendar...&#xD;
+&gt;&gt;&#xD;
+&gt;&gt;Thanks a lot, and let's rock!&#xD;
+&gt;&gt;Marcello</description>
+      <pubDate>Thu, 25 Sep 2008 05:57:27 GMT</pubDate>
+      <author>marcellosales</author>
+      <guid>https://ppm-8.dev.java.net/servlets/ProjectForumMessageView?forumID=3254&amp;messageID=25483</guid>
+      <dc:creator>marcellosales</dc:creator>
+      <dc:date>2008-09-25T05:57:27Z</dc:date>
+    </item>
+    <item>
+      <title>Re: First General meeting</title>
+      <link>https://ppm-8.dev.java.net/servlets/ProjectForumMessageView?forumID=3254&amp;messageID=25482</link>
+      <description>Hi Everyone&#xD;
+I think 1:30pm to 3:30 pm (PST) is the best time to do&#xD;
+general meetings as I have classes in the evening( on&#xD;
+Monday, Wednesday, Thursday). &#xD;
+But Please fix first general meeting on Friday as tomarrow I&#xD;
+really have a urgent work during day and class in the evening.&#xD;
+Thanks&#xD;
+&#xD;
+Gurdeep Singh&#xD;
+&#xD;
+&#xD;
+&#xD;
+&gt;Hello everyone,&#xD;
+&gt;&#xD;
+&gt;Let's vote for our first general meeting using the Forum,&#xD;
+&gt;since just a few people replied to the emails... Remember&#xD;
+&gt;that the professors will track who is participating the&#xD;
+&gt;activities... The final decision will be posted to the&#xD;
+&gt;Google Calendar later...&#xD;
+&gt;&#xD;
+&gt;Since most of the team is still working on Milestone 0&#xD;
+&gt;until&#xD;
+&gt;tomorrow, I decided to push the first General meeting for&#xD;
+&gt;this Thursday/Friday (Sep 25-26). I know that FAU will be&#xD;
+&gt;ahead of time, so PLEASE VOTE for the time schedules&#xD;
+&gt;during&#xD;
+&gt;the Eastern afternoon time (earlier suggestion was a time&#xD;
+&gt;slot from 15-18 EST (12-15 PST). &#xD;
+&gt;&#xD;
+&gt;It will be for about 2 hours and will cover the following&#xD;
+&gt;open topics on that meeting are the following:&#xD;
+&gt;&#xD;
+&gt;0. Team members introductions;&#xD;
+&gt;&#xD;
+&gt;1. What's the problem we have to address? &#xD;
+&gt;&#xD;
+&gt;2. Suggestion to the general solution/approach, so we will&#xD;
+&gt;start working with the documentation for Milestone 1;&#xD;
+&gt;&#xD;
+&gt;3. Division of modules (Backend and Frontend layers) and&#xD;
+&gt;who&#xD;
+&gt;will be working with each piece, preferences, etc. I need&#xD;
+&gt;to&#xD;
+&gt;know specifically; &#xD;
+&gt;&#xD;
+&gt;4. Pair programming and rotation (to help everyone learn&#xD;
+&gt;PHP&#xD;
+&gt;programming from other peers, help solving the problems,&#xD;
+&gt;etc). At least the development process...&#xD;
+&gt;&#xD;
+&gt;5. Presentation about the website structure, since I&#xD;
+&gt;managed&#xD;
+&gt;to change the menu and added information for the team, add&#xD;
+&gt;information about process, calendar, environment, etc... &#xD;
+&gt;&#xD;
+&gt;6. Define the time for daily meetings (it's a meeting for&#xD;
+&gt;15&#xD;
+&gt;minutes to address the team's problem. See&#xD;
+&gt;https://ppm-8.dev.java.net/process/ for more information&#xD;
+&gt;about Daily Stand-up meeting... Everyone who can make it&#xD;
+&gt;will be good to be on the meeting...&#xD;
+&gt;&#xD;
+&gt;7. Additional topics you guys can suggest...&#xD;
+&gt;&#xD;
+&gt;After we have come up with the date, I will update our&#xD;
+&gt;Google Calendar information about it... The idea is to&#xD;
+&gt;have&#xD;
+&gt;our activities in the Calendar...&#xD;
+&gt;&#xD;
+&gt;Thanks a lot, and let's rock!&#xD;
+&gt;Marcello</description>
+      <pubDate>Thu, 25 Sep 2008 05:34:39 GMT</pubDate>
+      <author>gurdeep22</author>
+      <guid>https://ppm-8.dev.java.net/servlets/ProjectForumMessageView?forumID=3254&amp;messageID=25482</guid>
+      <dc:creator>gurdeep22</dc:creator>
+      <dc:date>2008-09-25T05:34:39Z</dc:date>
+    </item>
+    <item>
+      <title>Re: First General meeting</title>
+      <link>https://ppm-8.dev.java.net/servlets/ProjectForumMessageView?forumID=3254&amp;messageID=25463</link>
+      <description>I'm totally up for the afternoon (PST) time... From SFSU I&#xD;
+think everyone is free during the afternoons (on Monday we&#xD;
+would have class at 4pm)... So I would suggest then tomorrow&#xD;
+after 3pm PST/6pm EST... With this time slot, we could&#xD;
+extend it to other meetings we will be hosting (daily&#xD;
+stand-up for those who wants to be, and iteration/milestones&#xD;
+meetings - once a week, 2 hours per session).&#xD;
+&#xD;
+Andreas, what about you and the other team member? &#xD;
+&#xD;
+Brett and Gurdeep, any comments??? &#xD;
+&#xD;
+&gt;I would definitely prefer evening times. I usually try not&#xD;
+&gt;to work past 5:30-6pm EST so meetings from 6pm onward&#xD;
+&gt;would&#xD;
+&gt;be great for me.  &#xD;
+&gt;             3pm Pacific/6pm EST and later work for me.&#xD;
+&gt;&#xD;
+&gt;Marilyne&#xD;
+&gt;&#xD;
+&gt;&#xD;
+&gt;&#xD;
+&gt;&gt;Yeah, the calendar are set with PST, so always add 3hs&#xD;
+&gt;for&#xD;
+&gt;&gt;the times.&#xD;
+&gt;&gt;&#xD;
+&gt;&gt;Well, as a team we have to find the time that works with&#xD;
+&gt;&gt;everyone... The daily stand-up meetings are on the&#xD;
+&gt;&gt;Calendar,&#xD;
+&gt;&gt;but ARE STILL NOT OFFICIAL... Sorry!!! I just added there&#xD;
+&gt;&gt;to&#xD;
+&gt;&gt;not forget myself :) to add, and remind us we still need&#xD;
+&gt;&gt;to&#xD;
+&gt;&gt;debate on that... Good that you replied about that... I&#xD;
+&gt;&gt;take&#xD;
+&gt;&gt;your position and I would be glad to have the session in&#xD;
+&gt;&gt;the&#xD;
+&gt;&gt;afternoon, or even in the evenings I have all my&#xD;
+&gt;&gt;afternoons&#xD;
+&gt;&gt;free, just Mondays and Tuesday commitments...&#xD;
+&gt;&gt;&#xD;
+&gt;&gt;1PM PST / 4PM EST to 7PM PST / 10 EST PM&#xD;
+&gt;&gt;&#xD;
+&gt;&gt;If you guys prefer meetings at night (that would be&#xD;
+&gt;easier&#xD;
+&gt;&gt;for everyone, right?) we could change all the meetings to&#xD;
+&gt;&gt;that time... What do you guys think?&#xD;
+&gt;&gt;&#xD;
+&gt;&gt;Marilyne, I really wish to have everyone participating on&#xD;
+&gt;&gt;the meetings, so maybe we should push our meetings for&#xD;
+&gt;the&#xD;
+&gt;&gt;evenings... &#xD;
+&gt;&gt;&#xD;
+&gt;&gt;What do other team members think? PLEASE, CONFIRM YOUR&#xD;
+&gt;&gt;BEST&#xD;
+&gt;&gt;TIME SLOT OR PREFERENCE TO AFTERNOON/EVENING MEETING&#xD;
+&gt;&gt;SESSION.&#xD;
+&gt;&gt;&#xD;
+&gt;&gt;Thanks a lot for the replies!!!</description>
+      <pubDate>Wed, 24 Sep 2008 20:34:03 GMT</pubDate>
+      <author>marcellosales</author>
+      <guid>https://ppm-8.dev.java.net/servlets/ProjectForumMessageView?forumID=3254&amp;messageID=25463</guid>
+      <dc:creator>marcellosales</dc:creator>
+      <dc:date>2008-09-24T20:34:03Z</dc:date>
+    </item>
+    <item>
+      <title>Re: Team name... Let's make a difference...</title>
+      <link>https://ppm-8.dev.java.net/servlets/ProjectForumMessageView?forumID=3254&amp;messageID=25462</link>
+      <description>&gt;I think it's a great idea. And since I am horrible at&#xD;
+&gt;suggesting names (  I would have recommended GoTeam#2)...I&#xD;
+&gt;will vote for InfinityNet.&#xD;
+&gt;&#xD;
+&gt;Marilyne&#xD;
+&#xD;
+Cool... I was browsing online for ideas of the logo, etc...&#xD;
+As prof. Draguntin was talking about, Branding is very&#xD;
+important in Software Engineering... Let's rock!&#xD;
+&#xD;
+I found very cool images we could use :)&#xD;
+&#xD;
+1. A Microsoft-like windows approach :) &#xD;
+2. A geeky approach&#xD;
+3. Another geeky approach&#xD;
+&#xD;
+Suggestions??? Anyone good at design (Photoshop?)&#xD;
+&#xD;
+Marcello</description>
+      <pubDate>Wed, 24 Sep 2008 20:07:27 GMT</pubDate>
+      <author>marcellosales</author>
+      <guid>https://ppm-8.dev.java.net/servlets/ProjectForumMessageView?forumID=3254&amp;messageID=25462</guid>
+      <dc:creator>marcellosales</dc:creator>
+      <dc:date>2008-09-24T20:07:27Z</dc:date>
+    </item>
+    <item>
+      <title>Re: First General meeting</title>
+      <link>https://ppm-8.dev.java.net/servlets/ProjectForumMessageView?forumID=3254&amp;messageID=25461</link>
+      <description>I would definitely prefer evening times. I usually try not&#xD;
+to work past 5:30-6pm EST so meetings from 6pm onward would&#xD;
+be great for me.  &#xD;
+             3pm Pacific/6pm EST and later work for me.&#xD;
+&#xD;
+Marilyne&#xD;
+&#xD;
+&#xD;
+&#xD;
+&gt;Yeah, the calendar are set with PST, so always add 3hs for&#xD;
+&gt;the times.&#xD;
+&gt;&#xD;
+&gt;Well, as a team we have to find the time that works with&#xD;
+&gt;everyone... The daily stand-up meetings are on the&#xD;
+&gt;Calendar,&#xD;
+&gt;but ARE STILL NOT OFFICIAL... Sorry!!! I just added there&#xD;
+&gt;to&#xD;
+&gt;not forget myself :) to add, and remind us we still need&#xD;
+&gt;to&#xD;
+&gt;debate on that... Good that you replied about that... I&#xD;
+&gt;take&#xD;
+&gt;your position and I would be glad to have the session in&#xD;
+&gt;the&#xD;
+&gt;afternoon, or even in the evenings I have all my&#xD;
+&gt;afternoons&#xD;
+&gt;free, just Mondays and Tuesday commitments...&#xD;
+&gt;&#xD;
+&gt;1PM PST / 4PM EST to 7PM PST / 10 EST PM&#xD;
+&gt;&#xD;
+&gt;If you guys prefer meetings at night (that would be easier&#xD;
+&gt;for everyone, right?) we could change all the meetings to&#xD;
+&gt;that time... What do you guys think?&#xD;
+&gt;&#xD;
+&gt;Marilyne, I really wish to have everyone participating on&#xD;
+&gt;the meetings, so maybe we should push our meetings for the&#xD;
+&gt;evenings... &#xD;
+&gt;&#xD;
+&gt;What do other team members think? PLEASE, CONFIRM YOUR&#xD;
+&gt;BEST&#xD;
+&gt;TIME SLOT OR PREFERENCE TO AFTERNOON/EVENING MEETING&#xD;
+&gt;SESSION.&#xD;
+&gt;&#xD;
+&gt;Thanks a lot for the replies!!!</description>
+      <pubDate>Wed, 24 Sep 2008 20:01:26 GMT</pubDate>
+      <author>mmendoll</author>
+      <guid>https://ppm-8.dev.java.net/servlets/ProjectForumMessageView?forumID=3254&amp;messageID=25461</guid>
+      <dc:creator>mmendoll</dc:creator>
+      <dc:date>2008-09-24T20:01:26Z</dc:date>
+    </item>
+    <item>
+      <title>Re: First General meeting</title>
+      <link>https://ppm-8.dev.java.net/servlets/ProjectForumMessageView?forumID=3254&amp;messageID=25459</link>
+      <description>Yeah, the calendar are set with PST, so always add 3hs for&#xD;
+the times.&#xD;
+&#xD;
+Well, as a team we have to find the time that works with&#xD;
+everyone... The daily stand-up meetings are on the Calendar,&#xD;
+but ARE STILL NOT OFFICIAL... Sorry!!! I just added there to&#xD;
+not forget myself :) to add, and remind us we still need to&#xD;
+debate on that... Good that you replied about that... I take&#xD;
+your position and I would be glad to have the session in the&#xD;
+afternoon, or even in the evenings I have all my afternoons&#xD;
+free, just Mondays and Tuesday commitments...&#xD;
+&#xD;
+1PM PST / 4PM EST to 7PM PST / 10 EST PM&#xD;
+&#xD;
+If you guys prefer meetings at night (that would be easier&#xD;
+for everyone, right?) we could change all the meetings to&#xD;
+that time... What do you guys think?&#xD;
+&#xD;
+Marilyne, I really wish to have everyone participating on&#xD;
+the meetings, so maybe we should push our meetings for the&#xD;
+evenings... &#xD;
+&#xD;
+What do other team members think? PLEASE, CONFIRM YOUR BEST&#xD;
+TIME SLOT OR PREFERENCE TO AFTERNOON/EVENING MEETING SESSION.&#xD;
+&#xD;
+Thanks a lot for the replies!!!</description>
+      <pubDate>Wed, 24 Sep 2008 19:32:25 GMT</pubDate>
+      <author>marcellosales</author>
+      <guid>https://ppm-8.dev.java.net/servlets/ProjectForumMessageView?forumID=3254&amp;messageID=25459</guid>
+      <dc:creator>marcellosales</dc:creator>
+      <dc:date>2008-09-24T19:32:25Z</dc:date>
+    </item>
+    <item>
+      <title>Addressing the "e-paper trail" from Gary's email about Group Communication</title>
+      <link>https://ppm-8.dev.java.net/servlets/ProjectForumMessageView?forumID=3254&amp;messageID=25457</link>
+      <description>Gary explained in his email today&#xD;
+(https://ppm.dev.java.net/servlets/ReadMsg?list=users&amp;msgNo=19)&#xD;
+about the e-paper trail we have to leave in this project...&#xD;
+How are we going to address this? &#xD;
+&#xD;
+So, by nature, we are an open-source, distributed and&#xD;
+collaborative development team and that's what happens in&#xD;
+real world projects... All the communication is done through&#xD;
+the online tools offered by the project hosting server and&#xD;
+we are also remembered that this project will go on after we&#xD;
+finish our cycle, but we need to leave our footprints and&#xD;
+our history on the project. Everything today is indexed by&#xD;
+Google and this is a good opportunity for our future&#xD;
+careers. In this way, I want to remind you guys about our&#xD;
+communication challenge:&#xD;
+&#xD;
+1. Always use the General Forum to discuss about something&#xD;
+we still have open. Something that will be in the history of&#xD;
+the group such as the project name, regular team meetings&#xD;
+dates, decisions on the architecture to be used, frameworks,&#xD;
+etc. But, it's important to have everyone participating on&#xD;
+the decisions together; If you need to have a topic to be&#xD;
+decided, just open a new one and all the team is going to be&#xD;
+happy to reply.&#xD;
+&#xD;
+2. The mailing lists are there for a purpose, when it comes&#xD;
+to Open-source software development: they are the main&#xD;
+channel of asynchronous communication for us and for our&#xD;
+clients. They should be used according to its specification.&#xD;
+Let's keep using them for daily activities, problems we have&#xD;
+to address, fixes of problems created, etc.&#xD;
+&#xD;
+I started using the dev mailing list to discuss about&#xD;
+everything, and I realized 2 days ago that it was being over&#xD;
+used. We will balance accordingly this time... Any comments?&#xD;
+&#xD;
+Marcello</description>
+      <pubDate>Wed, 24 Sep 2008 18:51:51 GMT</pubDate>
+      <author>marcellosales</author>
+      <guid>https://ppm-8.dev.java.net/servlets/ProjectForumMessageView?forumID=3254&amp;messageID=25457</guid>
+      <dc:creator>marcellosales</dc:creator>
+      <dc:date>2008-09-24T18:51:51Z</dc:date>
+    </item>
+    <item>
+      <title>Re: First General meeting</title>
+      <link>https://ppm-8.dev.java.net/servlets/ProjectForumMessageView?forumID=3254&amp;messageID=25455</link>
+      <description>Hi everyone,&#xD;
+&#xD;
+There are a few things I would like to mention.  First, is&#xD;
+it safe to assume that the times posted on our team calendar&#xD;
+are pacific time? If it is, that means that daily standup is&#xD;
+12 noon for us here in Florida. Andres and I have class or&#xD;
+are about to have class during that time monday thru&#xD;
+thursday. I completely understand that setting up a time for&#xD;
+everyone to meet will be difficult consider the time zones;&#xD;
+however, I would like to be able to participate in the&#xD;
+daily/weekly meetings, and for me, the only time I have&#xD;
+available is evenings (which would make it mid-to-late&#xD;
+afternoon for SFSU).  I realize that this may be&#xD;
+inconvenient for some, and if that is the case, then we can&#xD;
+stick to the time slotted now and I will simply get my info&#xD;
+from our local team leader.&#xD;
+&#xD;
+As far as I know, we are still on for our meeting tomorrow&#xD;
+at 3pm EST. I will be at work but i will have headphones (no&#xD;
+mic).&#xD;
+&#xD;
+Other than time scheduling, I have nothing I wish to add to&#xD;
+the agenda. &#xD;
+&#xD;
+Marilyne&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+&#xD;
+Hello everyone,&#xD;
+&gt;&#xD;
+&gt;Let's vote for our first general meeting using the Forum,&#xD;
+&gt;since just a few people replied to the emails... Remember&#xD;
+&gt;that the professors will track who is participating the&#xD;
+&gt;activities... The final decision will be posted to the&#xD;
+&gt;Google Calendar later...&#xD;
+&gt;&#xD;
+&gt;Since most of the team is still working on Milestone 0&#xD;
+&gt;until&#xD;
+&gt;tomorrow, I decided to push the first General meeting for&#xD;
+&gt;this Thursday/Friday (Sep 25-26). I know that FAU will be&#xD;
+&gt;ahead of time, so PLEASE VOTE for the time schedules&#xD;
+&gt;during&#xD;
+&gt;the Eastern afternoon time (earlier suggestion was a time&#xD;
+&gt;slot from 15-18 EST (12-15 PST). &#xD;
+&gt;&#xD;
+&gt;It will be for about 2 hours and will cover the following&#xD;
+&gt;open topics on that meeting are the following:&#xD;
+&gt;&#xD;
+&gt;0. Team members introductions;&#xD;
+&gt;&#xD;
+&gt;1. What's the problem we have to address? &#xD;
+&gt;&#xD;
+&gt;2. Suggestion to the general solution/approach, so we will&#xD;
+&gt;start working with the documentation for Milestone 1;&#xD;
+&gt;&#xD;
+&gt;3. Division of modules (Backend and Frontend layers) and&#xD;
+&gt;who&#xD;
+&gt;will be working with each piece, preferences, etc. I need&#xD;
+&gt;to&#xD;
+&gt;know specifically; &#xD;
+&gt;&#xD;
+&gt;4. Pair programming and rotation (to help everyone learn&#xD;
+&gt;PHP&#xD;
+&gt;programming from other peers, help solving the problems,&#xD;
+&gt;etc). At least the development process...&#xD;
+&gt;&#xD;
+&gt;5. Presentation about the website structure, since I&#xD;
+&gt;managed&#xD;
+&gt;to change the menu and added information for the team, add&#xD;
+&gt;information about process, calendar, environment, etc... &#xD;
+&gt;&#xD;
+&gt;6. Define the time for daily meetings (it's a meeting for&#xD;
+&gt;15&#xD;
+&gt;minutes to address the team's problem. See&#xD;
+&gt;https://ppm-8.dev.java.net/process/ for more information&#xD;
+&gt;about Daily Stand-up meeting... Everyone who can make it&#xD;
+&gt;will be good to be on the meeting...&#xD;
+&gt;&#xD;
+&gt;7. Additional topics you guys can suggest...&#xD;
+&gt;&#xD;
+&gt;After we have come up with the date, I will update our&#xD;
+&gt;Google Calendar information about it... The idea is to&#xD;
+&gt;have&#xD;
+&gt;our activities in the Calendar...&#xD;
+&gt;&#xD;
+&gt;Thanks a lot, and let's rock!&#xD;
+&gt;Marcello</description>
+      <pubDate>Wed, 24 Sep 2008 17:11:45 GMT</pubDate>
+      <author>mmendoll</author>
+      <guid>https://ppm-8.dev.java.net/servlets/ProjectForumMessageView?forumID=3254&amp;messageID=25455</guid>
+      <dc:creator>mmendoll</dc:creator>
+      <dc:date>2008-09-24T17:11:45Z</dc:date>
+    </item>
+    <item>
+      <title>Re: Team name... Let's make a difference...</title>
+      <link>https://ppm-8.dev.java.net/servlets/ProjectForumMessageView?forumID=3254&amp;messageID=25454</link>
+      <description>&gt;&gt;Hi everyone&#xD;
+&gt;&gt;This is great idea.I think No 3 &#xD;
+&gt;&gt;i.e 3. ∞Net (InfinityNet): automatic collaboration&#xD;
+&gt;&gt;metrics... will be better among these.&#xD;
+&gt;&gt;&#xD;
+&gt;&gt;Gurdeep&#xD;
+&gt;&#xD;
+&gt;Yeah, I think it's short (if we have the infinity special&#xD;
+&gt;character in front of the Net)... Since the solution will&#xD;
+&gt;be&#xD;
+&gt;grabbing the information online, it should give the name&#xD;
+&gt;its&#xD;
+&gt;value. :)&#xD;
+&gt;&#xD;
+&gt;Any more ideas?&#xD;
+&#xD;
+&#xD;
+I think it's a great idea. And since I am horrible at&#xD;
+suggesting names (  I would have recommended GoTeam#2)...I&#xD;
+will vote for InfinityNet.&#xD;
+&#xD;
+Marilyne</description>
+      <pubDate>Wed, 24 Sep 2008 16:49:47 GMT</pubDate>
+      <author>mmendoll</author>
+      <guid>https://ppm-8.dev.java.net/servlets/ProjectForumMessageView?forumID=3254&amp;messageID=25454</guid>
+      <dc:creator>mmendoll</dc:creator>
+      <dc:date>2008-09-24T16:49:47Z</dc:date>
+    </item>
+    <item>
+      <title>Re: Team name... Let's make a difference...</title>
+      <link>https://ppm-8.dev.java.net/servlets/ProjectForumMessageView?forumID=3254&amp;messageID=25450</link>
+      <description>&gt;Hi everyone&#xD;
+&gt;This is great idea.I think No 3 &#xD;
+&gt;i.e 3. ∞Net (InfinityNet): automatic collaboration&#xD;
+&gt;metrics... will be better among these.&#xD;
+&gt;&#xD;
+&gt;Gurdeep&#xD;
+&#xD;
+Yeah, I think it's short (if we have the infinity special&#xD;
+character in front of the Net)... Since the solution will be&#xD;
+grabbing the information online, it should give the name its&#xD;
+value. :)&#xD;
+&#xD;
+Any more ideas?</description>
+      <pubDate>Wed, 24 Sep 2008 09:06:29 GMT</pubDate>
+      <author>marcellosales</author>
+      <guid>https://ppm-8.dev.java.net/servlets/ProjectForumMessageView?forumID=3254&amp;messageID=25450</guid>
+      <dc:creator>marcellosales</dc:creator>
+      <dc:date>2008-09-24T09:06:29Z</dc:date>
+    </item>
+    <item>
+      <title>Re: Team name... Let's make a difference...</title>
+      <link>https://ppm-8.dev.java.net/servlets/ProjectForumMessageView?forumID=3254&amp;messageID=25449</link>
+      <description>&gt;Hello Team,&#xD;
+&gt;&#xD;
+&gt;We have to make a difference by choosing our team name... &#xD;
+&gt;professor Draguntin showed us the GoTeam:&#xD;
+&gt;http://go-team.dev.java.net. &#xD;
+&gt;&#xD;
+&gt;From the number 8, I thought about "Infinity", by&#xD;
+&gt;inverting&#xD;
+&gt;the number 8...&#xD;
+&gt;&#xD;
+&gt;1. ∞InfinityNet∞: automatic collaboration metrics&#xD;
+&gt;&#xD;
+&gt;2. ∞Java.Net∞ Collaboration Assessment Metrics&#xD;
+&gt;&#xD;
+&gt;3. ∞Net (InfinityNet): automatic collaboration metrics...&#xD;
+&gt;&#xD;
+&gt;Please, make suggestions, vote in any of the list... Let's&#xD;
+&gt;get a name for the team and make a difference!!!&#xD;
+&gt;&#xD;
+&gt;Marcello&#xD;
+&#xD;
+Hi everyone&#xD;
+This is great idea.I think No 3 &#xD;
+i.e 3. ∞Net (InfinityNet): automatic collaboration&#xD;
+metrics... will be better among these.&#xD;
+&#xD;
+Gurdeep</description>
+      <pubDate>Wed, 24 Sep 2008 08:41:13 GMT</pubDate>
+      <author>gurdeep22</author>
+      <guid>https://ppm-8.dev.java.net/servlets/ProjectForumMessageView?forumID=3254&amp;messageID=25449</guid>
+      <dc:creator>gurdeep22</dc:creator>
+      <dc:date>2008-09-24T08:41:13Z</dc:date>
+    </item>
+    <item>
+      <title>Team name... Let's make a difference...</title>
+      <link>https://ppm-8.dev.java.net/servlets/ProjectForumMessageView?forumID=3254&amp;messageID=25445</link>
+      <description>Hello Team,&#xD;
+&#xD;
+We have to make a difference by choosing our team name... &#xD;
+professor Draguntin showed us the GoTeam:&#xD;
+http://go-team.dev.java.net. &#xD;
+&#xD;
+From the number 8, I thought about "Infinity", by inverting&#xD;
+the number 8...&#xD;
+&#xD;
+1. ∞InfinityNet∞: automatic collaboration metrics&#xD;
+&#xD;
+2. ∞Java.Net∞ Collaboration Assessment Metrics&#xD;
+&#xD;
+3. ∞Net (InfinityNet): automatic collaboration metrics...&#xD;
+&#xD;
+Please, make suggestions, vote in any of the list... Let's&#xD;
+get a name for the team and make a difference!!!&#xD;
+&#xD;
+Marcello</description>
+      <pubDate>Wed, 24 Sep 2008 07:10:04 GMT</pubDate>
+      <author>marcellosales</author>
+      <guid>https://ppm-8.dev.java.net/servlets/ProjectForumMessageView?forumID=3254&amp;messageID=25445</guid>
+      <dc:creator>marcellosales</dc:creator>
+      <dc:date>2008-09-24T07:10:04Z</dc:date>
+    </item>
+    <item>
+      <title>First General meeting</title>
+      <link>https://ppm-8.dev.java.net/servlets/ProjectForumMessageView?forumID=3254&amp;messageID=25444</link>
+      <description>Hello everyone,&#xD;
+&#xD;
+Let's vote for our first general meeting using the Forum,&#xD;
+since just a few people replied to the emails... Remember&#xD;
+that the professors will track who is participating the&#xD;
+activities... The final decision will be posted to the&#xD;
+Google Calendar later...&#xD;
+&#xD;
+Since most of the team is still working on Milestone 0 until&#xD;
+tomorrow, I decided to push the first General meeting for&#xD;
+this Thursday/Friday (Sep 25-26). I know that FAU will be&#xD;
+ahead of time, so PLEASE VOTE for the time schedules during&#xD;
+the Eastern afternoon time (earlier suggestion was a time&#xD;
+slot from 15-18 EST (12-15 PST). &#xD;
+&#xD;
+It will be for about 2 hours and will cover the following&#xD;
+open topics on that meeting are the following:&#xD;
+&#xD;
+0. Team members introductions;&#xD;
+&#xD;
+1. What's the problem we have to address? &#xD;
+&#xD;
+2. Suggestion to the general solution/approach, so we will&#xD;
+start working with the documentation for Milestone 1;&#xD;
+&#xD;
+3. Division of modules (Backend and Frontend layers) and who&#xD;
+will be working with each piece, preferences, etc. I need to&#xD;
+know specifically; &#xD;
+&#xD;
+4. Pair programming and rotation (to help everyone learn PHP&#xD;
+programming from other peers, help solving the problems,&#xD;
+etc). At least the development process...&#xD;
+&#xD;
+5. Presentation about the website structure, since I managed&#xD;
+to change the menu and added information for the team, add&#xD;
+information about process, calendar, environment, etc... &#xD;
+&#xD;
+6. Define the time for daily meetings (it's a meeting for 15&#xD;
+minutes to address the team's problem. See&#xD;
+https://ppm-8.dev.java.net/process/ for more information&#xD;
+about Daily Stand-up meeting... Everyone who can make it&#xD;
+will be good to be on the meeting...&#xD;
+&#xD;
+7. Additional topics you guys can suggest...&#xD;
+&#xD;
+After we have come up with the date, I will update our&#xD;
+Google Calendar information about it... The idea is to have&#xD;
+our activities in the Calendar...&#xD;
+&#xD;
+Thanks a lot, and let's rock!&#xD;
+Marcello</description>
+      <pubDate>Wed, 24 Sep 2008 06:59:44 GMT</pubDate>
+      <author>marcellosales</author>
+      <guid>https://ppm-8.dev.java.net/servlets/ProjectForumMessageView?forumID=3254&amp;messageID=25444</guid>
+      <dc:creator>marcellosales</dc:creator>
+      <dc:date>2008-09-24T06:59:44Z</dc:date>
+    </item>
+  </channel>
+</rss>
+
+

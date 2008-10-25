@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:taxo="http://purl.org/rss/1.0/modules/taxonomy/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
+  <channel>
+    <title>Message List in RSS Format for Project ppm-8, Mailing List dev</title>
+    <link>https://ppm-8.dev.java.net/servlets/BrowseList?list=dev</link>
+    <description>Message List in RSS Format for Project ppm-8, Mailing List dev</description>
+    <item>
+      <title>Web to PNG tool</title>
+      <link>https://ppm-8.dev.java.net/servlets/ReadMsg?list=dev&amp;msgNo=148</link>
+      <description>Web to PNG tool</description>
+      <pubDate>Wed, 22 Oct 2008 07:00:00 GMT</pubDate>
+      <author>Marcello Sales</author>
+      <guid>https://ppm-8.dev.java.net/servlets/ReadMsg?list=dev&amp;msgNo=148</guid>
+      <dc:creator>Marcello Sales</dc:creator>
+      <dc:date>2008-10-22T07:00:00Z</dc:date>
+    </item>
+    <item>
+      <title>projectmetrics.dev.java.net</title>
+      <link>https://ppm-8.dev.java.net/servlets/ReadMsg?list=dev&amp;msgNo=147</link>
+      <description>projectmetrics.dev.java.net</description>
+      <pubDate>Wed, 22 Oct 2008 07:00:00 GMT</pubDate>
+      <author>Andres Ardila</author>
+      <guid>https://ppm-8.dev.java.net/servlets/ReadMsg?list=dev&amp;msgNo=147</guid>
+      <dc:creator>Andres Ardila</dc:creator>
+      <dc:date>2008-10-22T07:00:00Z</dc:date>
+    </item>
+    <item>
+      <title>CSC 640-848 - M2 due date moved to 10/24/08 3:30 PM - read more...</title>
+      <link>https://ppm-8.dev.java.net/servlets/ReadMsg?list=dev&amp;msgNo=146</link>
+      <description>CSC 640-848 - M2 due date moved to 10/24/08 3:30 PM - read more...</description>
+      <pubDate>Mon, 20 Oct 2008 07:00:00 GMT</pubDate>
+      <author>Marcello Sales</author>
+      <guid>https://ppm-8.dev.java.net/servlets/ReadMsg?list=dev&amp;msgNo=146</guid>
+      <dc:creator>Marcello Sales</dc:creator>
+      <dc:date>2008-10-20T07:00:00Z</dc:date>
+    </item>
+    <item>
+      <title>Sorry for not hosting the meeting...</title>
+      <link>https://ppm-8.dev.java.net/servlets/ReadMsg?list=dev&amp;msgNo=145</link>
+      <description>Sorry for not hosting the meeting...</description>
+      <pubDate>Mon, 20 Oct 2008 07:00:00 GMT</pubDate>
+      <author>Marcello Sales</author>
+      <guid>https://ppm-8.dev.java.net/servlets/ReadMsg?list=dev&amp;msgNo=145</guid>
+      <dc:creator>Marcello Sales</dc:creator>
+      <dc:date>2008-10-20T07:00:00Z</dc:date>
+    </item>
+    <item>
+      <title>Are we late? Should we ask for an extension?</title>
+      <link>https://ppm-8.dev.java.net/servlets/ReadMsg?list=dev&amp;msgNo=144</link>
+      <description>Are we late? Should we ask for an extension?</description>
+      <pubDate>Mon, 20 Oct 2008 07:00:00 GMT</pubDate>
+      <author>gurdeep singh</author>
+      <guid>https://ppm-8.dev.java.net/servlets/ReadMsg?list=dev&amp;msgNo=144</guid>
+      <dc:creator>gurdeep singh</dc:creator>
+      <dc:date>2008-10-20T07:00:00Z</dc:date>
+    </item>
+    <item>
+      <title>Losing data :( My linux crashed...</title>
+      <link>https://ppm-8.dev.java.net/servlets/ReadMsg?list=dev&amp;msgNo=143</link>
+      <description>Losing data :( My linux crashed...</description>
+      <pubDate>Mon, 20 Oct 2008 07:00:00 GMT</pubDate>
+      <author>gurdeep singh</author>
+      <guid>https://ppm-8.dev.java.net/servlets/ReadMsg?list=dev&amp;msgNo=143</guid>
+      <dc:creator>gurdeep singh</dc:creator>
+      <dc:date>2008-10-20T07:00:00Z</dc:date>
+    </item>
+    <item>
+      <title>Your Dimdim Web Meeting has started</title>
+      <link>https://ppm-8.dev.java.net/servlets/ReadMsg?list=dev&amp;msgNo=142</link>
+      <description>Your Dimdim Web Meeting has started</description>
+      <pubDate>Mon, 20 Oct 2008 07:00:00 GMT</pubDate>
+      <author>Dimdim Invitations</author>
+      <guid>https://ppm-8.dev.java.net/servlets/ReadMsg?list=dev&amp;msgNo=142</guid>
+      <dc:creator>Dimdim Invitations</dc:creator>
+      <dc:date>2008-10-20T07:00:00Z</dc:date>
+    </item>
+    <item>
+      <title>Meeting at 2pm PST</title>
+      <link>https://ppm-8.dev.java.net/servlets/ReadMsg?list=dev&amp;msgNo=141</link>
+      <description>Meeting at 2pm PST</description>
+      <pubDate>Mon, 20 Oct 2008 07:00:00 GMT</pubDate>
+      <author>Marcello Sales</author>
+      <guid>https://ppm-8.dev.java.net/servlets/ReadMsg?list=dev&amp;msgNo=141</guid>
+      <dc:creator>Marcello Sales</dc:creator>
+      <dc:date>2008-10-20T07:00:00Z</dc:date>
+    </item>
+    <item>
+      <title>Marcello de Sales has invited you to a Dimdim Web Meeting</title>
+      <link>https://ppm-8.dev.java.net/servlets/ReadMsg?list=dev&amp;msgNo=140</link>
+      <description>Marcello de Sales has invited you to a Dimdim Web Meeting</description>
+      <pubDate>Mon, 20 Oct 2008 07:00:00 GMT</pubDate>
+      <author>Dimdim Invitations</author>
+      <guid>https://ppm-8.dev.java.net/servlets/ReadMsg?list=dev&amp;msgNo=140</guid>
+      <dc:creator>Dimdim Invitations</dc:creator>
+      <dc:date>2008-10-20T07:00:00Z</dc:date>
+    </item>
+    <item>
+      <title>Marcello de Sales has invited you to a Dimdim Web Meeting</title>
+      <link>https://ppm-8.dev.java.net/servlets/ReadMsg?list=dev&amp;msgNo=139</link>
+      <description>Marcello de Sales has invited you to a Dimdim Web Meeting</description>
+      <pubDate>Mon, 20 Oct 2008 07:00:00 GMT</pubDate>
+      <author>Dimdim Invitations</author>
+      <guid>https://ppm-8.dev.java.net/servlets/ReadMsg?list=dev&amp;msgNo=139</guid>
+      <dc:creator>Dimdim Invitations</dc:creator>
+      <dc:date>2008-10-20T07:00:00Z</dc:date>
+    </item>
+    <item>
+      <title>Your Dimdim Web Meeting has started</title>
+      <link>https://ppm-8.dev.java.net/servlets/ReadMsg?list=dev&amp;msgNo=138</link>
+      <description>Your Dimdim Web Meeting has started</description>
+      <pubDate>Mon, 20 Oct 2008 07:00:00 GMT</pubDate>
+      <author>Dimdim Invitations</author>
+      <guid>https://ppm-8.dev.java.net/servlets/ReadMsg?list=dev&amp;msgNo=138</guid>
+      <dc:creator>Dimdim Invitations</dc:creator>
+      <dc:date>2008-10-20T07:00:00Z</dc:date>
+    </item>
+    <item>
+      <title>Losing data :( My linux crashed...</title>
+      <link>https://ppm-8.dev.java.net/servlets/ReadMsg?list=dev&amp;msgNo=137</link>
+      <description>Losing data :( My linux crashed...</description>
+      <pubDate>Mon, 20 Oct 2008 07:00:00 GMT</pubDate>
+      <author>Andres Ardila</author>
+      <guid>https://ppm-8.dev.java.net/servlets/ReadMsg?list=dev&amp;msgNo=137</guid>
+      <dc:creator>Andres Ardila</dc:creator>
+      <dc:date>2008-10-20T07:00:00Z</dc:date>
+    </item>
+    <item>
+      <title>Are we late? Should we ask for an extension?</title>
+      <link>https://ppm-8.dev.java.net/servlets/ReadMsg?list=dev&amp;msgNo=136</link>
+      <description>Are we late? Should we ask for an extension?</description>
+      <pubDate>Mon, 20 Oct 2008 07:00:00 GMT</pubDate>
+      <author>Marcello Sales</author>
+      <guid>https://ppm-8.dev.java.net/servlets/ReadMsg?list=dev&amp;msgNo=136</guid>
+      <dc:creator>Marcello Sales</dc:creator>
+      <dc:date>2008-10-20T07:00:00Z</dc:date>
+    </item>
+    <item>
+      <title>Losing data :( My linux crashed...</title>
+      <link>https://ppm-8.dev.java.net/servlets/ReadMsg?list=dev&amp;msgNo=135</link>
+      <description>Losing data :( My linux crashed...</description>
+      <pubDate>Mon, 20 Oct 2008 07:00:00 GMT</pubDate>
+      <author>Marcello Sales</author>
+      <guid>https://ppm-8.dev.java.net/servlets/ReadMsg?list=dev&amp;msgNo=135</guid>
+      <dc:creator>Marcello Sales</dc:creator>
+      <dc:date>2008-10-20T07:00:00Z</dc:date>
+    </item>
+    <item>
+      <title>FAU contribution to M2</title>
+      <link>https://ppm-8.dev.java.net/servlets/ReadMsg?list=dev&amp;msgNo=134</link>
+      <description>FAU contribution to M2</description>
+      <pubDate>Mon, 20 Oct 2008 07:00:00 GMT</pubDate>
+      <author>gurdeep singh</author>
+      <guid>https://ppm-8.dev.java.net/servlets/ReadMsg?list=dev&amp;msgNo=134</guid>
+      <dc:creator>gurdeep singh</dc:creator>
+      <dc:date>2008-10-20T07:00:00Z</dc:date>
+    </item>
+    <item>
+      <title>FAU contribution to M2</title>
+      <link>https://ppm-8.dev.java.net/servlets/ReadMsg?list=dev&amp;msgNo=133</link>
+      <description>FAU contribution to M2</description>
+      <pubDate>Mon, 20 Oct 2008 07:00:00 GMT</pubDate>
+      <author>Marcello Sales</author>
+      <guid>https://ppm-8.dev.java.net/servlets/ReadMsg?list=dev&amp;msgNo=133</guid>
+      <dc:creator>Marcello Sales</dc:creator>
+      <dc:date>2008-10-20T07:00:00Z</dc:date>
+    </item>
+    <item>
+      <title>Your Dimdim Web Meeting has started</title>
+      <link>https://ppm-8.dev.java.net/servlets/ReadMsg?list=dev&amp;msgNo=132</link>
+      <description>Your Dimdim Web Meeting has started</description>
+      <pubDate>Sun, 19 Oct 2008 07:00:00 GMT</pubDate>
+      <author>Dimdim Invitations</author>
+      <guid>https://ppm-8.dev.java.net/servlets/ReadMsg?list=dev&amp;msgNo=132</guid>
+      <dc:creator>Dimdim Invitations</dc:creator>
+      <dc:date>2008-10-19T07:00:00Z</dc:date>
+    </item>
+    <item>
+      <title>FAU contribution to M2</title>
+      <link>https://ppm-8.dev.java.net/servlets/ReadMsg?list=dev&amp;msgNo=131</link>
+      <description>FAU contribution to M2</description>
+      <pubDate>Sun, 19 Oct 2008 07:00:00 GMT</pubDate>
+      <author>Marilyne Mendolla</author>
+      <guid>https://ppm-8.dev.java.net/servlets/ReadMsg?list=dev&amp;msgNo=131</guid>
+      <dc:creator>Marilyne Mendolla</dc:creator>
+      <dc:date>2008-10-19T07:00:00Z</dc:date>
+    </item>
+    <item>
+      <title>Your Dimdim Web Meeting has started</title>
+      <link>https://ppm-8.dev.java.net/servlets/ReadMsg?list=dev&amp;msgNo=130</link>
+      <description>Your Dimdim Web Meeting has started</description>
+      <pubDate>Sun, 19 Oct 2008 07:00:00 GMT</pubDate>
+      <author>Dimdim Invitations</author>
+      <guid>https://ppm-8.dev.java.net/servlets/ReadMsg?list=dev&amp;msgNo=130</guid>
+      <dc:creator>Dimdim Invitations</dc:creator>
+      <dc:date>2008-10-19T07:00:00Z</dc:date>
+    </item>
+    <item>
+      <title>Your Dimdim Web Meeting has started</title>
+      <link>https://ppm-8.dev.java.net/servlets/ReadMsg?list=dev&amp;msgNo=129</link>
+      <description>Your Dimdim Web Meeting has started</description>
+      <pubDate>Sun, 19 Oct 2008 07:00:00 GMT</pubDate>
+      <author>Dimdim Invitations</author>
+      <guid>https://ppm-8.dev.java.net/servlets/ReadMsg?list=dev&amp;msgNo=129</guid>
+      <dc:creator>Dimdim Invitations</dc:creator>
+      <dc:date>2008-10-19T07:00:00Z</dc:date>
+    </item>
+  </channel>
+</rss>
+
+

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:taxo="http://purl.org/rss/1.0/modules/taxonomy/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
+  <channel>
+    <title>Message List in RSS Format for Project ppm-8, Mailing List users</title>
+    <link>https://ppm-8.dev.java.net/servlets/BrowseList?list=users</link>
+    <description>Message List in RSS Format for Project ppm-8, Mailing List users</description>
+    <item>
+      <title>Meeting today</title>
+      <link>https://ppm-8.dev.java.net/servlets/ReadMsg?list=users&amp;msgNo=3</link>
+      <description>Meeting today</description>
+      <pubDate>Thu, 25 Sep 2008 07:00:00 GMT</pubDate>
+      <author>Marcello Sales</author>
+      <guid>https://ppm-8.dev.java.net/servlets/ReadMsg?list=users&amp;msgNo=3</guid>
+      <dc:creator>Marcello Sales</dc:creator>
+      <dc:date>2008-09-25T07:00:00Z</dc:date>
+    </item>
+    <item>
+      <title>Meeting today</title>
+      <link>https://ppm-8.dev.java.net/servlets/ReadMsg?list=users&amp;msgNo=2</link>
+      <description>Meeting today</description>
+      <pubDate>Thu, 25 Sep 2008 07:00:00 GMT</pubDate>
+      <author>Andres Ardila</author>
+      <guid>https://ppm-8.dev.java.net/servlets/ReadMsg?list=users&amp;msgNo=2</guid>
+      <dc:creator>Andres Ardila</dc:creator>
+      <dc:date>2008-09-25T07:00:00Z</dc:date>
+    </item>
+    <item>
+      <title>Undelivered Mail Returned to Sender: FULDA EMAIL SERVER PROBLEMS</title>
+      <link>https://ppm-8.dev.java.net/servlets/ReadMsg?list=users&amp;msgNo=1</link>
+      <description>Undelivered Mail Returned to Sender: FULDA EMAIL SERVER PROBLEMS</description>
+      <pubDate>Fri, 19 Sep 2008 07:00:00 GMT</pubDate>
+      <author>Marcello Sales</author>
+      <guid>https://ppm-8.dev.java.net/servlets/ReadMsg?list=users&amp;msgNo=1</guid>
+      <dc:creator>Marcello Sales</dc:creator>
+      <dc:date>2008-09-19T07:00:00Z</dc:date>
+    </item>
+  </channel>
+</rss>
+
+
