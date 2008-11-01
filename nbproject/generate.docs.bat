@@ -1,0 +1,1 @@
+phpdoc -d ../app/classes -t ../app/docs/classes
