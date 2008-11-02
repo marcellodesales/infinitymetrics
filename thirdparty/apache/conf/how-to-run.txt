@@ -1,0 +1,9 @@
+Same virtual hosts
+http://infinitymetrics.local.net
+http://localhost/
+
+
+http://infinitymetrics.local.net/htdocs/
+http://infinitymetrics.local.net/phpmyadmin/
+http://localhost/htdocs/
+http://localhost/phpmyadmin/
