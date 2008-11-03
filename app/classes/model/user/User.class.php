@@ -44,9 +44,7 @@ class User {
     }
 
     /**
-     * Sets the value of the title tag
-     * @param string $title
-     * @return the instance of this builder.
+     * Returns the value of the name
      */
     public function getName() {
         return $this->firstName;
