@@ -1,9 +1,10 @@
 <?php
 
-require_once("../../../util/go4/observer/ObservableSubject.class.php");
 require_once("RssToDatabaseObserver.class.php");
 require_once("RssToScreenObserver.class.php");
-require_once("../CollabnetRssChannel.class.php");
+
+require_once("infinitymetrics/util/go4pattenrs/behavorial/observer/ObservableSubject.class.php");
+require_once("infinitymetrics/util/collabnetrss/CollabnetRssChannel.class.php");
 
 class JavanetRssAgentReader extends ObservableSubject {
 

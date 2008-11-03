@@ -20,7 +20,7 @@
  */
  
 require_once('RssItem.class.php');
-require_once('util/go4patterns/creational/AbstractBuilder.class.php');
+require_once('infinitymetrics/util/go4pattenrs/creational/AbstractBuilder.class.php');
 
 /**
  * The RssItemBuilder is a builder for an RSSItem builder based on RSS 2.0
@@ -28,7 +28,6 @@ require_once('util/go4patterns/creational/AbstractBuilder.class.php');
  * 
  * @author Marcello de Sales <marcello.sales@gmail.com>
  * @version $Id$
- * @package net.java.dev.ppm-8.model.rssparser
  * @see net.java.dev.ppm-8.util.go4.AbstractBuilder
  */
 class RssItemBuilder extends AbstractBuilder {

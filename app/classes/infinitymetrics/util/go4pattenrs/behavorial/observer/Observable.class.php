@@ -26,7 +26,6 @@
  * 
  * @author Marcello de Sales <marcello.sales@gmail.com>
  * @version $Id$
- * @package net.java.dev.ppm-8.util.go4.observer
  */
 interface Observable {
 

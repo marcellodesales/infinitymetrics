@@ -1,6 +1,6 @@
 <?php
 
-include_once('../../../util/go4/observer/Observer.class.php');
+include_once('infinitymetrics/util/go4pattenrs/behavorial/observer/Observable.class.php');
 
 define('BR', '<'.'BR'.'>');
 

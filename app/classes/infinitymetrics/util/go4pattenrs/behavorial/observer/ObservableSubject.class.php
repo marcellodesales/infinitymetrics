@@ -28,7 +28,6 @@ include_once('Observable.class.php');
  * 
  * @author Marcello de Sales <marcello.sales@gmail.com>
  * @version $Id$
- * @package net.java.dev.ppm-8.util.go4.observer
  */
 abstract class ObservableSubject implements Observable {
 

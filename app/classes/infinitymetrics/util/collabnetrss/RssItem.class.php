@@ -12,7 +12,6 @@
       <dc:date>2008-09-15T07:00:00Z</dc:date>
     </item>
  */
-
 class RssItem {
 
     public static $DOMAIN = "dev.java.net";
