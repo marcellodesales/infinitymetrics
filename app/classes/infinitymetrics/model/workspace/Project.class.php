@@ -11,7 +11,7 @@ class Project
     private $leader;
     private $summary;
 
-    public function __construct($name, Student $leader, $summary)
+    public function builder($name, Student $leader, $summary)
     {
         $this->name = $name;
         $this->leader = $leader;
