@@ -1,6 +1,6 @@
 <?php
 require_once 'infinitymetrics/model/user/User.class.php';
-require_once 'Institution.class.php';
+require_once 'infinitymetrics/model/institution/Institution.class.php';
 /**
  * The instructorinfinitymetrics class for the metrics workspace.
  * @author Gurdeep Singh <gurdeepsingh03@gmail.com>
