@@ -6,5 +6,21 @@
     </head>
     <body>
         Welcome to Infinity Metrics 0.1
+
+   <?php
+   
+   set_include_path("c:\ppm8-dev\app\classes\bookstore\build\classes" . PATH_SEPARATOR . get_include_path());
+   require_once 'propel/Propel.php';
+
+   Propel::init('bookstore/build/conf/bookstore-conf.php');
+
+   $author = new Author();
+    $author->setFirstName("Andres");
+    $author->setLastName("Ardila");
+    $author->save();
+
+   ?>
+
+
     </body>
 </html>

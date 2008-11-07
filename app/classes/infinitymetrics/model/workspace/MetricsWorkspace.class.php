@@ -17,10 +17,12 @@ class MetricsWorkspace
         $this->state = 'NEW';
     }
 
-    public function builder(User $creator, $description, $title) {
-        $this->description = $description;
-        $this->title = $title;
-        $this->creator = $creator;
+    public static function builder(User $creator, $description, $title) {
+        $mw = new MetricsWorkspace();
+        $mw->setCreator($creator);
+        $mw->setDescription($description);
+        $mw->setTitle($title);
+        return $mw;
     }
 
     public function getCreator() {

@@ -30,8 +30,13 @@ class Student extends User {
     public function getId($studentId){
         return $this->studentId = $studentId ;
     }
+
+    public function save() {
+        //$connetion = mysql
+        $newUser = "INSERT INTO ";
+
+        $newStudent =  "INSERT INTO STUDENT VALUE ()";
+        //$newUser =
+    }
 }
-
-
-
 ?>
