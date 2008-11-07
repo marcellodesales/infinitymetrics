@@ -11,8 +11,12 @@ class Project
     private $leader;
     private $summary;
 
-    public function builder($name, Student $leader, $summary)
-    {
+    public function __construct() {
+        //Intentionally left blank.
+        //Use builder method to populate object's data members
+    }
+
+    public function builder($name, Student $leader, $summary) {
         $this->name = $name;
         $this->leader = $leader;
         $this->summary = $summary;

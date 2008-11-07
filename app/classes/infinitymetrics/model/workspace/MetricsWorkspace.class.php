@@ -11,18 +11,18 @@ class MetricsWorkspace
     private $description;
     private $title;
     private $state;
-    private $projects = array();
+    private $projects;
 
     public function __construct() {
         $this->state = 'NEW';
+        $this->projects = array();
     }
 
-    public static function builder(User $creator, $description, $title) {
-        $mw = new MetricsWorkspace();
-        $mw->setCreator($creator);
-        $mw->setDescription($description);
-        $mw->setTitle($title);
-        return $mw;
+    public function builder(User $creator, $description, $title, array $projects) {
+        $this->description = $description;
+        $this->title = $title;
+        $this->creator = $creator;
+        $this->projects = $projects;
     }
 
     public function getCreator() {
