@@ -1,4 +1,8 @@
 <?php
+
+require_once 'infinitymetrics/model/institution/Instructor.class.php';
+require_once 'infinitymetrics/model/workspace/Project.class.php';
+
 /**
  * Description of MetricsWorkspace
  *
