@@ -31,7 +31,7 @@ class EventChannel
     }
 
     public function getCategory() {
-        return $this->category;
+        return $this->category->getEventCategory();
     }
 
     public function getDescription() {
@@ -66,8 +66,21 @@ class EventChannel
         $this->project = $project;
     }
 
+    public function setEvents(array $events) {
+        $this->project = $events;
+    }
+
     public function addEvent(Event $e) {
         $this->events[] = $e;
+    }
+
+    public function hasNoEvents() {
+        if ( count($this->events )) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }
 ?>

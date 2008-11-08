@@ -32,6 +32,10 @@ class EventCategory {
         $this->category = "MAILING_LIST";
     }
 
+    public function getEventCategory() {
+        return $this->category;
+    }
+
     public function __toString() {
         return $this->category;
     }
