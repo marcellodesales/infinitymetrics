@@ -27,7 +27,7 @@ class Project
     }
 
     public function getLeader() {
-        return $this->studentLeader;
+        return $this->leader;
     }
 
     public function getSummary() {

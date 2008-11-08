@@ -18,7 +18,7 @@ class MetricsWorkspace
         $this->projects = array();
     }
 
-    public function builder(User $creator, $description, $title, array $projects) {
+    public function builder(Instructor $creator, $description, $title, array $projects) {
         $this->description = $description;
         $this->title = $title;
         $this->creator = $creator;
@@ -41,7 +41,11 @@ class MetricsWorkspace
         return $this->state;
     }
 
-    public function setCreator(User $creator) {
+    public function getProjects() {
+        return $this->projects;
+    }
+
+    public function setCreator(Instructor $creator) {
         $this->creator = $creator;
     }
 
@@ -51,6 +55,10 @@ class MetricsWorkspace
 
     public function setTitle($title) {
         $this->title = $title;
+    }
+
+    public function setProjects(array $projects) {
+        $this->projects = $projects;
     }
 
     public function makeActive() {
@@ -65,8 +73,8 @@ class MetricsWorkspace
         $this->state = 'PAUSED';
     }
 
-    public function addProject(Project $p) {
-        $this->projects[] = $p;
+    public function addProject(Project $project) {
+        $this->projects[] = $project;
     }
 }
 
