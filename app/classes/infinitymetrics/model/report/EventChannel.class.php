@@ -1,4 +1,9 @@
 <?php
+
+require_once ('infinitymetrics/model/workspace/Project.class.php');
+require_once('infinitymetrics/model/report/Event.class.php');
+require_once('infinitymetrics/model/report/EventCategory.class.php');
+
 /**
  * Description of EventChannelclass
  *

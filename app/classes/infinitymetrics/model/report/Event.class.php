@@ -1,4 +1,7 @@
 <?php
+
+require_once('infinitymetrics/model/user/User.class.php');
+
 /**
  * Description of Eventclass
  *
@@ -11,7 +14,7 @@ class Event
     private $user;
 
     public function __construct() {
-        $this->date = DateTime::__construct();
+        $this->date = new DateTime();
     }
 
     public function builder(User $user, DateTime $date) {

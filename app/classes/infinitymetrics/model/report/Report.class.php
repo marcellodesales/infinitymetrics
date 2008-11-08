@@ -1,4 +1,8 @@
 <?php
+
+require_once 'infinitymetrics/model/workspace/Project.class.php';
+require_once('infinitymetrics/model/report/EventChannel.class.php');
+
 /**
  * Description of Report
  *
