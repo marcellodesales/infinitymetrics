@@ -63,7 +63,7 @@ class Report
             $tempEventChannel->setEvents($tempEventList);
             //if the resulting EventChannel contains Events, add it to the return array
             if ( ! $tempEventChannel->hasNoEvents() ) {
-                array_push($filteredChannelList, $tempEventChannel)
+                array_push($filteredChannelList, $tempEventChannel);
             }
         }
 
