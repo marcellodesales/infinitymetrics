@@ -29,24 +29,53 @@
 class User {
 
     /**
+     * It's the first name of the user.
+     * @var string the reference to the name
+     */
+    private $firstName;
+    /**
+     * It's the user's last name.
+     * @var string the instance of th last name
+     */
+    private $lastName;
+        /**
      * It's the name of the user.
      * @var RssItem instance
      */
-    private $firstName;
-
+    private $username;
     /**
      * Constructs a new user with a name {@link $rssItem}
      * @var firstName this is the first name.
+     * @var firstName this is the first name.
+     * @var firstName this is the first name.
      */
-    public function  __construct($firstName) {
+    public function  __construct($firstName, $lastName, $username) {
         $this->firstName = $firstName;
+        $this->lastName = $lastName;
+        $this->username = $username;
     }
 
     /**
      * Returns the value of the name
      */
-    public function getName() {
+    public function getFirstName() {
         return $this->firstName;
+    }
+
+    public function getLastName() {
+        return $this->lastName;
+    }
+
+    public function getUsername() {
+        return $this->username;
+    }
+
+    public function setFirstName($newFirstName) {
+        $this->firstName = $newFirstName;
+    }
+
+    public function setLastName($newLastName) {
+        $this->lastName = $newLastName;
     }
 }
 ?>

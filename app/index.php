@@ -15,8 +15,8 @@
    Propel::init('bookstore/build/conf/bookstore-conf.php');
 
    $author = new Author();
-    $author->setFirstName("Andres");
-    $author->setLastName("Ardila");
+    $author->setFirstName("Marcello");
+    $author->setLastName("de Sales");
     $author->save();
 
    ?>
