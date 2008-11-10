@@ -5,20 +5,19 @@ require_once('infinitymetrics/model/report/Event.class.php');
 require_once('infinitymetrics/model/report/EventCategory.class.php');
 
 /**
- * Description of EventChannelclass
+ * Description of EventChannel
  *
  * @author Andres Ardila
  */
 
 class EventChannel
 {
-    private $category;
     private $description;
     private $name;
     private $project;
     private $events;
     private $category;
-
+    
     public function __construct() {
         $this->events = array();
     }
@@ -26,33 +25,47 @@ class EventChannel
     public function builder($description,
                             $name,
                             Project $project,
-                            Event $events,
+                            array $events,
                             EventCategory $category)
     {
         $this->description = $description;
         $this->name = $name;
         $this->project = $project;
         $this->events = $events;
+        $this->category = $category;
     }
 
     public function getCategory() {
-        return $this->category->getEventCategory();
+        return $this->category;
     }
 
     public function getDescription() {
-        return $this->category;
+        return $this->description;
     }
 
     public function getName() {
-        return $this->category;
+        return $this->name;
     }
 
     public function getProject() {
-        return $this->category;
+        return $this->project;
     }
 
     public function getEvents() {
         return $this->events;
+    }
+
+    public function getEventsByDate(DateTime $startDate, DateTime $endDate) {
+        $filteredEventList = array();
+        
+        foreach ($this->events as $event)
+        {
+            if ($event->getDateObject() >= $startDate && $event->getDateObject() <= $endDate) {
+                array_push($filteredEventList, $event);
+            }
+        }
+        
+        return $filteredEventList;
     }
 
     public function setCategory(EventCategory $category) {
@@ -72,19 +85,19 @@ class EventChannel
     }
 
     public function setEvents(array $events) {
-        $this->project = $events;
+        $this->events = $events;
     }
 
-    public function addEvent(Event $e) {
-        $this->events[] = $e;
+    public function addEvent(Event $event) {
+        $this->events[] = $event;
     }
 
     public function hasNoEvents() {
         if ( count($this->events )) {
-            return true;
+            return false;
         }
         else {
-            return false;
+            return true;
         }
     }
 }

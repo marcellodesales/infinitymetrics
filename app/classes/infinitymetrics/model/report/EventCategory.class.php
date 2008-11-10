@@ -1,6 +1,6 @@
 <?php
 /**
- * Description of EventCategoryclass
+ * Description of EventCategory
  *
  * @author Andres Ardila
  */

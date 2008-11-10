@@ -3,7 +3,7 @@
 require_once('infinitymetrics/model/user/User.class.php');
 
 /**
- * Description of Eventclass
+ * Description of Event
  *
  * @author Andres Ardila
  */
@@ -19,7 +19,7 @@ class Event
 
     public function builder(User $user, DateTime $date) {
         $this->user;
-        $this->date;
+        $this->date->setDate($date->format('Y'), $date->format('m'), $date->format('d'));
     }
 
     public function getDateObject() {

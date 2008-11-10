@@ -32,12 +32,12 @@ class Report
         return $this->eventChannels;
     }
 
-    public function getEventsByCategory(EventCategory $category) {
+    public function filterByCategory(EventCategory $category) {
         $filteredList = array();
 
         foreach ($this->eventChannels as $channel)
         {
-            if ($channel->getCategory() == $channel->getEventCategory()) {
+            if ($channel->getCategory() == $category) {
                 array_push($filteredList, $channel);
             }
         }
@@ -45,29 +45,15 @@ class Report
         return $filteredList;
     }
 
-    public function getEventsByDate(DateTime $startDate, DateTime $endDate) {
+    public function filterByDate(DateTime $startDate, DateTime $endDate) {
         $filteredChannelList = array();
 
         //loop through all EventChannels
         foreach ($this->eventChannels as $channel)
         {
-            //make a copy of current EventChannel being looped through
-            $tempEventChannel = clone $channel;
-            //create an array to hold Events that match the criterion
-            $tempEventList = array();
-            //loop through all Events in the current EventChannel
-            foreach ($tempEventChannel->getEvents as $event)
-            {
-                //if the current Event matches the criterion, add it to the temp array
-                if ($event->getDate() >= $startDate && $event->getDate() <= $endDate) {
-                    array_push($tempEventList, $event);
-                }
-            }
-            //set the Events of the clone to those that matched the creterion
-            $tempEventChannel->setEvents($tempEventList);
-            //if the resulting EventChannel contains Events, add it to the return array
-            if ( ! $tempEventChannel->hasNoEvents() ) {
-                array_push($filteredChannelList, $tempEventChannel);
+            $filteredEventList = $channel->getEventsByDate($startDate, $endDate);
+            if (count($filteredEventList)) {
+                    array_push($filteredChannelList, $filteredEventList);
             }
         }
 
