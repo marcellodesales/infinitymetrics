@@ -14,11 +14,11 @@ class AbstractCollection implements Collection {
      * The elements of the collection.
      * @var string
      */
-    private $elements;
+    protected $elements;
     /**
      * Constructs a new abstract collection with an empty list 
      */
-    private function  __construct() {
+    protected function  __construct() {
         $this->elements = array();
     }
     /**

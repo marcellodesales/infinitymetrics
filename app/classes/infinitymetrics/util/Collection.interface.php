@@ -4,26 +4,24 @@
  * The Collection interface defines the methods for a given collection of
  * objects without restrictions on indexes, etc.
  *
- * @author Marcello de Sales <marcello.sales@gmail.com>
+ * @author Marcello de Sales <marcello.sales@gmail.com> Nov 09, 2008 22:34 PST
  * @version $Id$
  */
 interface Collection {
-
     /**
      * Adds an element to the list
-     * @param string $title
-     * @return the instance of this builder.
+     * @param object $newElement is an object to be added to the list
      */
     public function add($newElement);
     /**
      * Adds all elements from a given collection to the current collection
-     * @param string $collection
+     * @param Collection $collection the collection of items to add
      */
-    public function addAll(Collection $collection);
+    public function addAll($collection);
     /**
      * Removes an existing item from the list
-     * @param string $elementToRemove is the element ot be removed from the
-     * collection. It returns the current list if the given element is not found.
+     * @param object $elementToRemove is the element ot be removed from the
+     * collection.
      */
     public function remove($elementToRemove);
     /**
@@ -36,7 +34,7 @@ interface Collection {
     public function getElements();
     /**
      * @return The complemete list of elements.
-     * @param string element is the element that's trying to be found
+     * @param object element is the element that's trying to be found
      */
     public function contains($element);
     /**
