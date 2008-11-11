@@ -23,7 +23,7 @@ class ReportTest extends PHPUnit_Framework_TestCase {
         $this->report->builder($project, $eventChannels);
 
         $this->assertEquals($project, $this->report->getProject(), "Project is not equal");
-        $this->assertEquals($eventChannels, $this->report->getEventList(), "Event list is not equal");
+        $this->assertEquals($eventChannels, $this->report->getEventChannels(), "Event list is not equal");
     }
 
     public function testGetsSets() {
@@ -31,24 +31,24 @@ class ReportTest extends PHPUnit_Framework_TestCase {
         $this->report->setProject($project);
 
         $eventChannels = array_fill(0, 10, new EventChannel());
-        $this->report->setEvenChannels($eventChannels);
+        $this->report->setEventChannels($eventChannels);
 
         $this->assertEquals($project, $this->report->getProject(), "Project is not equal");
-        $this->assertEquals($eventChannels, $this->report->getEventList(), "Event list is not equal");
+        $this->assertEquals($eventChannels, $this->report->getEventChannels(), "Event list is not equal");
     }
 
     public function testAddEventChannel() {
         $eventChannel = new EventChannel();
         $this->report->addEventChannel($eventChannel);
 
-        $this->assertEquals(true, in_array($eventChannel, $this->report->getEventList()));
+        $this->assertEquals(true, in_array($eventChannel, $this->report->getEventChannels()));
     }
 
     public function testFilterByCategory() {
         $filterCategory = new EventCategory();
         $filterCategory->document();
 
-        $this->report->setEvenChannels( array() );
+        $this->report->setEventChannels( array() );
 
         for ($i = 0; $i < 20; $i++)
         {
@@ -68,15 +68,15 @@ class ReportTest extends PHPUnit_Framework_TestCase {
         $startDate = new DateTime('2008-06-01');
         $endDate = new DateTime('2008-11-30');
 
-        $this->report->setEvenChannels(array());
+        $this->report->setEventChannels(array());
         $controlList = array();
 
-        for ($i = 0; $i < 10; $i++)
+        for ($i = 0; $i < 5; $i++)
         {
             $eventChannel = new EventChannel();
             $controlEventChannel = new EventChannel();
 
-            for ($j = 0; $j < 50; $j++)
+            for ($j = 0; $j < 10; $j++)
             {
                 $event = new Event();
                 $mo = rand()%12 + 1;
@@ -93,7 +93,7 @@ class ReportTest extends PHPUnit_Framework_TestCase {
             array_push($controlList, $controlEventChannel);
         }
 
-        $this->assertEquals($controlEventChannel,
+        $this->assertEquals($controlList,
                             $this->report->filterByDate($startDate, $endDate),
                             "Array of EventChannels are not equal");
 
