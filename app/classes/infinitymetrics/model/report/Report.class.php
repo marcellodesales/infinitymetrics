@@ -57,6 +57,17 @@ class Report
         return $filteredChannelList;
     }
 
+    public function filterByUser(User $user) {
+        $filteredChannelList = array();
+
+        foreach ($this->eventChannels as $channel)
+        {
+            $filteredChannelList[] = $channel->getEventsByUser($user);
+        }
+
+        return $filteredChannelList;
+    }
+
     public function setProject(Project $project) {
         $this->project = $project;
     }

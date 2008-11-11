@@ -1,6 +1,6 @@
 <?php
 
-require_once ('infinitymetrics/model/workspace/Project.class.php');
+require_once('infinitymetrics/model/workspace/Project.class.php');
 require_once('infinitymetrics/model/report/Event.class.php');
 require_once('infinitymetrics/model/report/EventCategory.class.php');
 
@@ -60,11 +60,26 @@ class EventChannel
         
         foreach ($this->events as $event)
         {
-            if ($event->getDateObject() >= $startDate && $event->getDateObject() <= $endDate) {
+            if ($event->getDateObject() >= $startDate &&
+                $event->getDateObject() <= $endDate)
+            {
                 array_push($filteredEventList, $event);
             }
         }
         
+        return $filteredEventList;
+    }
+
+    public function getEventsByUser(User $user) {
+        $filteredEventList = array();
+
+        foreach ($this->events as $event)
+        {
+            if ($event->getUser() == $user) {
+                array_push($filteredEventList, $event);
+            }
+        }
+
         return $filteredEventList;
     }
 
