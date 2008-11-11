@@ -1,6 +1,6 @@
 <?php
 /**
- * $Id: UC002est.class.php 202 2008-11-10 12:01:40Z Gurdeep Singh $
+ * $Id: instructorRegistration.class.php 202 2008-11-10 12:01:40Z Gurdeep Singh $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
