@@ -28,7 +28,7 @@ class Report
         return $this->project;
     }
 
-    public function getEventList() {
+    public function getEventChannels() {
         return $this->eventChannels;
     }
 
@@ -51,10 +51,7 @@ class Report
         //loop through all EventChannels
         foreach ($this->eventChannels as $channel)
         {
-            $filteredEventList = $channel->getEventsByDate($startDate, $endDate);
-            if (count($filteredEventList)) {
-                    array_push($filteredChannelList, $filteredEventList);
-            }
+            $filteredChannelList[] = $channel->getEventsByDate($startDate, $endDate);
         }
 
         return $filteredChannelList;
@@ -64,7 +61,7 @@ class Report
         $this->project = $project;
     }
 
-    public function setEvenChannels(array $eventChannels) {
+    public function setEventChannels(array $eventChannels) {
         $this->eventChannels = $eventChannels;
     }
 
