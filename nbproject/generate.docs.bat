@@ -1,1 +1,1 @@
-phpdoc -d ../app/classes -t ../app/docs/classes
+phpdoc -d ../app/classes -t ../app/docs/api
