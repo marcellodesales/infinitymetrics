@@ -80,16 +80,16 @@ class EventChannelTest extends PHPUnit_Framework_TestCase {
         $events = array();
         $startDate = new DateTime('2008-09-01');
         $endDate = new DateTime('2008-11-30');
-
-        $user =  new User("userName");
         
         for ($i = 0; $i < 100; $i++)
         {
             $event = new Event();
-            $mo = rand()%12; $day = rand()%28;
+            $mo  = rand()%12 + 1;
+            $day = rand()%28 + 1;
             $dateStr = '2008-'.$mo.'-'.$day;
             $date = new DateTime($dateStr);
-            $event->builder($user, $date);
+            $event->setDate($date);
+
             $this->eventChannel->addEvent($event);
             if ($date >= $startDate && $date <= $endDate ) {
                 $events[] = $event;
@@ -103,12 +103,15 @@ class EventChannelTest extends PHPUnit_Framework_TestCase {
     }
 
     public function testHasNoEvents() {
-        $events = array();
-        $this->eventChannel->setEvents($events);
-        $this->assertEquals(true, $this->eventChannel->hasNoEvents(), "Events should be empty");
+        $this->eventChannel->setEvents(array());
+        $this->assertEquals(true, 
+                            $this->eventChannel->hasNoEvents(),
+                            "Events should be empty");
 
         $this->eventChannel->addEvent(new Event());
-        $this->assertEquals(false, $this->eventChannel->hasNoEvents(), "Events should not be empty");
+        $this->assertEquals(false, 
+                            $this->eventChannel->hasNoEvents(),
+                            "Events should not be empty");
     }
 
 }
