@@ -102,6 +102,9 @@ class EventChannelTest extends PHPUnit_Framework_TestCase {
             "Array of event is not equal");
     }
 
+    public function testGetEventsByUser() {
+    }
+
     public function testHasNoEvents() {
         $this->eventChannel->setEvents(array());
         $this->assertEquals(true, 
