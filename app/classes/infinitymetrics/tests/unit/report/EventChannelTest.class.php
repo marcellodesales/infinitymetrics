@@ -20,7 +20,6 @@ class EventChannelTest extends PHPUnit_Framework_TestCase {
     public function testBuilder() {
         $description = "Test Channel Description";
         $name = "Test Channel name";
-        $project = new Project();
         
         $events = array();
         for ($i = 0; $i < 10; $i++) {
@@ -30,11 +29,10 @@ class EventChannelTest extends PHPUnit_Framework_TestCase {
         $category = new EventCategory();
         $category->commit();
         
-        $this->eventChannel->builder($description, $name, $project, $events, $category);
+        $this->eventChannel->builder($description, $name, $events, $category);
         
         $this->assertEquals($description, $this->eventChannel->getDescription(), "Description is not equal");
         $this->assertEquals($name, $this->eventChannel->getName(), "Name is not equal");
-        $this->assertEquals($project, $this->eventChannel->getProject(), "Project is not equal");
         $this->assertEquals($events, $this->eventChannel->getEvents(), "Events is not equal");
         $this->assertEquals($category, $this->eventChannel->getCategory(), "Category is not equal");
     }
@@ -47,10 +45,6 @@ class EventChannelTest extends PHPUnit_Framework_TestCase {
         $name = "Name";
         $this->eventChannel->setName($name);
         $this->assertEquals($name, $this->eventChannel->getName(), "Name is not equal");
-
-        $project = new Project();
-        $this->eventChannel->setProject($project);
-        $this->assertEquals($project, $this->eventChannel->getProject(), "Project is not equal");
 
         $events = array();
         for ($i = 0; $i < 20; $i++) {
@@ -77,7 +71,8 @@ class EventChannelTest extends PHPUnit_Framework_TestCase {
 
     public function testGetEventsByDate() {
         $this->eventChannel->setEvents( array() );
-        $events = array();
+        $matchingEvents = array();
+
         $startDate = new DateTime('2008-09-01');
         $endDate = new DateTime('2008-11-30');
         
@@ -92,14 +87,14 @@ class EventChannelTest extends PHPUnit_Framework_TestCase {
 
             $this->eventChannel->addEvent($event);
             if ($date >= $startDate && $date <= $endDate ) {
-                $events[] = $event;
+                $matchingEvents[] = $event;
             }
         }
 
         $this->assertEquals(
-            $events,
+            $matchingEvents,
             $this->eventChannel->getEventsByDate($startDate, $endDate),
-            "Array of event is not equal");
+            "Array of Events is not equal");
     }
 
     public function testGetEventsByUser() {
@@ -107,15 +102,34 @@ class EventChannelTest extends PHPUnit_Framework_TestCase {
 
     public function testHasNoEvents() {
         $this->eventChannel->setEvents(array());
-        $this->assertEquals(true, 
-                            $this->eventChannel->hasNoEvents(),
-                            "Events should be empty");
+        $this->assertTrue($this->eventChannel->hasNoEvents(), "Events should be empty");
 
         $this->eventChannel->addEvent(new Event());
-        $this->assertEquals(false, 
-                            $this->eventChannel->hasNoEvents(),
-                            "Events should not be empty");
+        $this->assertFalse($this->eventChannel->hasNoEvents(), "Events should not be empty");
     }
 
+    public function testEquality() {
+        $this->eventChannel->setEvents(array());
+        $key = new EventChannel();
+
+        for ($i = 0; $i < 10; $i++)
+        {
+            $event = new Event();
+            $mo  = rand()%12 + 1;
+            $day = rand()%28 + 1;
+            $dateStr = '2008-'.$mo.'-'.$day;
+            $date = new DateTime($dateStr);
+            $event->setDate($date);
+
+            $this->eventChannel->addEvent($event);
+            $key->addEvent($event);
+        }
+
+        $this->assertTrue($this->eventChannel == $key);
+
+        $key->addEvent(new Event());
+
+        $this->assertFalse($this->eventChannel == $key);
+    }
 }
 ?>

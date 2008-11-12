@@ -32,7 +32,18 @@ class EventCategoryTest extends PHPUnit_Framework_TestCase {
 
         $this->eventCategory->mailingList();
         $this->assertEquals('MAILING_LIST', $this->eventCategory->getEventCategory(), "Mailing List was not set");
-        
-  }
+    }
+
+    public function testEquality() {
+        $this->eventCategory->commit();
+
+        $fixture = new EventCategory();
+        $fixture->commit();
+
+        $this->assertTrue($this->eventCategory == $fixture);
+
+        $fixture->document();
+        $this->assertTrue($this->eventCategory != $fixture);
+    }
 }
 ?>

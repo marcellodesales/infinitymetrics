@@ -74,19 +74,18 @@ class ReportTest extends PHPUnit_Framework_TestCase {
     }
 
     public function testFilterByDate() {
-        /*
-        $startDate = new DateTime('2008-06-01');
-        $endDate = new DateTime('2008-11-30');
-
         $this->report->setEventChannels(array());
-        $controlList = array();
+        $controlEventChannels = array();
 
-        for ($i = 0; $i < 5; $i++)
+        $startDate = new DateTime('2008-05-01');
+        $endDate = new DateTime('2008-08-31');
+
+        for ($i = 0; $i < 10; $i++)
         {
             $eventChannel = new EventChannel();
-            $controlEventChannel = new EventChannel();
+            $controlChannel = new EventChannel();
 
-            for ($j = 0; $j < 10; $j++)
+            for ($j = 0; $j < 25; $j++)
             {
                 $event = new Event();
                 $mo = rand()%12 + 1;
@@ -94,22 +93,57 @@ class ReportTest extends PHPUnit_Framework_TestCase {
                 $dateStr = '2008-'.$mo.'-'.$day;
                 $date = new DateTime($dateStr);
                 $event->setDate($date);
+
                 $eventChannel->addEvent($event);
                 if ($date >= $startDate && $date <= $endDate) {
-                    $controlEventChannel->addEvent($event);
+                    $controlChannel->addEvent($event);
                 }
             }
+
             $this->report->addEventChannel($eventChannel);
-            array_push($controlList, $controlEventChannel);
+            $controlEventChannels[] = $controlChannel;
         }
-
-        $this->assertEquals($controlList,
+        
+        $this->assertEquals($controlEventChannels,
                             $this->report->filterByDate($startDate, $endDate),
-                            "Array of EventChannels are not equal");
-         * 
-         */
-
+                            "Arrays of EventChannels are not equal");
     }
 
+    public function testFilterByUser() {
+        $this->report->setEventChannels(array());
+        $controlEventChannels = array();
+
+        $controlUser = new User("control", "control", "control");
+
+        for ($i = 0; $i < 10; $i++)
+        {
+            $eventChannel = new EventChannel();
+            $controlChannel = new EventChannel();
+
+            for ($j = 0; $j < 25; $j++)
+            {
+                $event = new Event();
+                $mo = rand()%12 + 1;
+                $day = rand()%28 + 1;
+                $dateStr = '2008-'.$mo.'-'.$day;
+                $date = new DateTime($dateStr);
+                if ($i == 5 || $i == 10 || $i ==15) {
+                    $user = clone $controlUser;
+                }
+                else {
+                    $user = new User("notTheControl", "notTheControl", "NotTheControl");
+                }
+                $event->builder($user, $date);
+                $eventChannel->addEvent($event);
+            }
+
+            $this->report->addEventChannel($eventChannel);
+            $controlEventChannels[] = $controlChannel;
+        }
+
+        $this->assertEquals($controlEventChannels,
+                            $this->report->filterByUser($controlUser),
+                            "Arrays of EventChannels are not equal");
+    }
 }
 ?>
