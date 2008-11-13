@@ -1,0 +1,268 @@
+C:\ppm8-dev\app>propel-gen
+Buildfile: C:\php5\pear\data\propel_generator\pear-build.xml
+[resolvepath] Resolved  to C:\ppm8-dev\app
+
+propel-project-builder > projdircheckExists:
+
+
+propel-project-builder > projdircheck:
+
+
+propel-project-builder > configure:
+
+     [echo] Loading project-specific props from /build.properties
+ [property] Loading C:\ppm8-dev\app\build.properties
+
+propel-project-builder > main:
+
+    [phing] Calling Buildfile 'C:\php5\pear\data\propel_generator\build-propel.x
+ml' with target 'main'
+ [property] Loading C:\php5\pear\data\propel_generator\.\build.properties
+ [property] Loading C:\php5\pear\data\propel_generator\.\default.properties
+
+propel > mysqli-check:
+
+
+propel > main:
+
+[phingcall] Calling Buildfile 'C:\php5\pear\data\propel_generator\build-propel.x
+ml' with target 'sql'
+ [property] Loading C:\php5\pear\data\propel_generator\.\build.properties
+ [property] Loading C:\php5\pear\data\propel_generator\.\default.properties
+
+propel > check-run-only-on-schema-change:
+
+
+propel > sql-check:
+
+
+propel > pgsql-quoting-check:
+
+
+propel > mysqli-check:
+
+
+propel > sql:
+
+     [echo] +------------------------------------------+
+     [echo] |                                          |
+     [echo] | Generating SQL for YOUR Propel project!  |
+     [echo] |                                          |
+     [echo] +------------------------------------------+
+[phingcall] Calling Buildfile 'C:\php5\pear\data\propel_generator\build-propel.x
+ml' with target 'sql-template'
+ [property] Loading C:\php5\pear\data\propel_generator\.\build.properties
+ [property] Loading C:\php5\pear\data\propel_generator\.\default.properties
+
+propel > sql-template:
+
+[propel-sql] Processing: schema.xml
+[propel-sql] Writing to SQL file: C:\ppm8-dev\app\db\sql\schema.sql
+[propel-sql]    + channel [builder: MysqlDDLBuilder]
+[propel-sql]    + dispute [builder: MysqlDDLBuilder]
+[propel-sql]    + dispute_entry [builder: MysqlDDLBuilder]
+[propel-sql]    + event [builder: MysqlDDLBuilder]
+[propel-sql]    + institution [builder: MysqlDDLBuilder]
+[propel-sql]    + instructors [builder: MysqlDDLBuilder]
+[propel-sql]    + project [builder: MysqlDDLBuilder]
+[propel-sql]    + student [builder: MysqlDDLBuilder]
+[propel-sql]    + student_x_project [builder: MysqlDDLBuilder]
+[propel-sql]    + user [builder: MysqlDDLBuilder]
+[propel-sql]    + workpace_x_project [builder: MysqlDDLBuilder]
+[propel-sql]    + workspace [builder: MysqlDDLBuilder]
+[propel-sql]    + workspace_share [builder: MysqlDDLBuilder]
+[phingcall] Calling Buildfile 'C:\php5\pear\data\propel_generator\build-propel.x
+ml' with target 'om'
+ [property] Loading C:\php5\pear\data\propel_generator\.\build.properties
+ [property] Loading C:\php5\pear\data\propel_generator\.\default.properties
+
+propel > check-run-only-on-schema-change:
+
+
+propel > om-check:
+
+
+propel > mysqli-check:
+
+
+propel > om:
+
+     [echo] +------------------------------------------+
+     [echo] |                                          |
+     [echo] | Generating Peer-based Object Model for   |
+     [echo] | YOUR Propel project!                     |
+     [echo] |                                          |
+     [echo] +------------------------------------------+
+[phingcall] Calling Buildfile 'C:\php5\pear\data\propel_generator\build-propel.x
+ml' with target 'om-template'
+ [property] Loading C:\php5\pear\data\propel_generator\.\build.properties
+ [property] Loading C:\php5\pear\data\propel_generator\.\default.properties
+
+propel > om-template:
+
+[propel-om] Processing: schema.xml
+[propel-om] Processing Datamodel : schema.xml
+[propel-om]   - processing database : infinitymetricsm201
+[propel-om]     + channel
+[propel-om]             -> BaseChannelPeer [builder: PHP5PeerBuilder]
+[propel-om]             -> BaseChannel [builder: PHP5ObjectBuilder]
+[propel-om]             -> ChannelMapBuilder [builder: PHP5MapBuilderBuilder]
+[propel-om]             -> ChannelPeer [builder: PHP5ExtensionPeerBuilder]
+[propel-om]             -> Channel [builder: PHP5ExtensionObjectBuilder]
+[propel-om]     + dispute
+[propel-om]             -> BaseDisputePeer [builder: PHP5PeerBuilder]
+[propel-om]             -> BaseDispute [builder: PHP5ObjectBuilder]
+[propel-om]             -> DisputeMapBuilder [builder: PHP5MapBuilderBuilder]
+[propel-om]             -> DisputePeer [builder: PHP5ExtensionPeerBuilder]
+[propel-om]             -> Dispute [builder: PHP5ExtensionObjectBuilder]
+[propel-om]     + dispute_entry
+[propel-om]             -> BaseDisputeEntryPeer [builder: PHP5PeerBuilder]
+[propel-om]             -> BaseDisputeEntry [builder: PHP5ObjectBuilder]
+[propel-om]             -> DisputeEntryMapBuilder [builder: PHP5MapBuilderBuilde
+r]
+[propel-om]             -> DisputeEntryPeer [builder: PHP5ExtensionPeerBuilder]
+[propel-om]             -> DisputeEntry [builder: PHP5ExtensionObjectBuilder]
+[propel-om]     + event
+[propel-om]             -> BaseEventPeer [builder: PHP5PeerBuilder]
+[propel-om]             -> BaseEvent [builder: PHP5ObjectBuilder]
+[propel-om]             -> EventMapBuilder [builder: PHP5MapBuilderBuilder]
+[propel-om]             -> EventPeer [builder: PHP5ExtensionPeerBuilder]
+[propel-om]             -> Event [builder: PHP5ExtensionObjectBuilder]
+[propel-om]     + institution
+[propel-om]             -> BaseInstitutionPeer [builder: PHP5PeerBuilder]
+[propel-om]             -> BaseInstitution [builder: PHP5ObjectBuilder]
+[propel-om]             -> InstitutionMapBuilder [builder: PHP5MapBuilderBuilder
+]
+[propel-om]             -> InstitutionPeer [builder: PHP5ExtensionPeerBuilder]
+[propel-om]             -> Institution [builder: PHP5ExtensionObjectBuilder]
+[propel-om]     + instructors
+[propel-om]             -> BaseInstructorsPeer [builder: PHP5PeerBuilder]
+[propel-om]             -> BaseInstructors [builder: PHP5ObjectBuilder]
+[propel-om]             -> InstructorsMapBuilder [builder: PHP5MapBuilderBuilder
+]
+[propel-om]             -> InstructorsPeer [builder: PHP5ExtensionPeerBuilder]
+[propel-om]             -> Instructors [builder: PHP5ExtensionObjectBuilder]
+[propel-om]     + project
+[propel-om]             -> BaseProjectPeer [builder: PHP5PeerBuilder]
+[propel-om]             -> BaseProject [builder: PHP5ObjectBuilder]
+[propel-om]             -> ProjectMapBuilder [builder: PHP5MapBuilderBuilder]
+[propel-om]             -> ProjectPeer [builder: PHP5ExtensionPeerBuilder]
+[propel-om]             -> Project [builder: PHP5ExtensionObjectBuilder]
+[propel-om]     + student
+[propel-om]             -> BaseStudentPeer [builder: PHP5PeerBuilder]
+[propel-om]             -> BaseStudent [builder: PHP5ObjectBuilder]
+[propel-om]             -> StudentMapBuilder [builder: PHP5MapBuilderBuilder]
+[propel-om]             -> StudentPeer [builder: PHP5ExtensionPeerBuilder]
+[propel-om]             -> Student [builder: PHP5ExtensionObjectBuilder]
+[propel-om]     + student_x_project
+[propel-om]             -> BaseStudentXProjectPeer [builder: PHP5PeerBuilder]
+[propel-om]             -> BaseStudentXProject [builder: PHP5ObjectBuilder]
+Execution of target "om-template" failed for the following reason: C:\php5\pear\
+data\propel_generator\build-propel.xml:479:1: The 1:1 relationship expressed by
+foreign key student_x_project_FK_2 is defined in both directions; Propel does no
+t currently support this (if you must have both foreign key constraints, conside
+r adding this constraint with a custom SQL file.)
+[phingcall] C:\php5\pear\data\propel_generator\build-propel.xml:479:1: The 1:1 r
+elationship expressed by foreign key student_x_project_FK_2 is defined in both d
+irections; Propel does not currently support this (if you must have both foreign
+ key constraints, consider adding this constraint with a custom SQL file.)
+[phingcall] Calling Buildfile 'C:\php5\pear\data\propel_generator\build-propel.x
+ml' with target 'convert-conf'
+ [property] Loading C:\php5\pear\data\propel_generator\.\build.properties
+ [property] Loading C:\php5\pear\data\propel_generator\.\default.properties
+
+propel > convert-conf:
+
+     [echo] +------------------------------------------+
+     [echo] |                                          |
+     [echo] | Converting runtime config file to an     |
+     [echo] | array dump for improved performance.     |
+     [echo] |                                          |
+     [echo] +------------------------------------------+
+     [echo] Output file: infinitymetrics-conf.php
+     [echo] XMLFile: C:\ppm8-dev\app/runtime-conf.xml
+[propel-convert-conf] Processing: schema.xml
+[propel-convert-conf] Adding class mapping: ChannelMapBuilder => infinitymetrics
+/map/ChannelMapBuilder.php
+[propel-convert-conf] Adding class mapping: ChannelPeer => infinitymetrics/Chann
+elPeer.php
+[propel-convert-conf] Adding class mapping: Channel => infinitymetrics/Channel.p
+hp
+[propel-convert-conf] Adding class mapping: DisputeMapBuilder => infinitymetrics
+/map/DisputeMapBuilder.php
+[propel-convert-conf] Adding class mapping: DisputePeer => infinitymetrics/Dispu
+tePeer.php
+[propel-convert-conf] Adding class mapping: Dispute => infinitymetrics/Dispute.p
+hp
+[propel-convert-conf] Adding class mapping: DisputeEntryMapBuilder => infinityme
+trics/map/DisputeEntryMapBuilder.php
+[propel-convert-conf] Adding class mapping: DisputeEntryPeer => infinitymetrics/
+DisputeEntryPeer.php
+[propel-convert-conf] Adding class mapping: DisputeEntry => infinitymetrics/Disp
+uteEntry.php
+[propel-convert-conf] Adding class mapping: EventMapBuilder => infinitymetrics/m
+ap/EventMapBuilder.php
+[propel-convert-conf] Adding class mapping: EventPeer => infinitymetrics/EventPe
+er.php
+[propel-convert-conf] Adding class mapping: Event => infinitymetrics/Event.php
+[propel-convert-conf] Adding class mapping: InstitutionMapBuilder => infinitymet
+rics/map/InstitutionMapBuilder.php
+[propel-convert-conf] Adding class mapping: InstitutionPeer => infinitymetrics/I
+nstitutionPeer.php
+[propel-convert-conf] Adding class mapping: Institution => infinitymetrics/Insti
+tution.php
+[propel-convert-conf] Adding class mapping: InstructorsMapBuilder => infinitymet
+rics/map/InstructorsMapBuilder.php
+[propel-convert-conf] Adding class mapping: InstructorsPeer => infinitymetrics/I
+nstructorsPeer.php
+[propel-convert-conf] Adding class mapping: Instructors => infinitymetrics/Instr
+uctors.php
+[propel-convert-conf] Adding class mapping: ProjectMapBuilder => infinitymetrics
+/map/ProjectMapBuilder.php
+[propel-convert-conf] Adding class mapping: ProjectPeer => infinitymetrics/Proje
+ctPeer.php
+[propel-convert-conf] Adding class mapping: Project => infinitymetrics/Project.p
+hp
+[propel-convert-conf] Adding class mapping: StudentMapBuilder => infinitymetrics
+/map/StudentMapBuilder.php
+[propel-convert-conf] Adding class mapping: StudentPeer => infinitymetrics/Stude
+ntPeer.php
+[propel-convert-conf] Adding class mapping: Student => infinitymetrics/Student.p
+hp
+[propel-convert-conf] Adding class mapping: StudentXProjectMapBuilder => infinit
+ymetrics/map/StudentXProjectMapBuilder.php
+[propel-convert-conf] Adding class mapping: StudentXProjectPeer => infinitymetri
+cs/StudentXProjectPeer.php
+[propel-convert-conf] Adding class mapping: StudentXProject => infinitymetrics/S
+tudentXProject.php
+[propel-convert-conf] Adding class mapping: UserMapBuilder => infinitymetrics/ma
+p/UserMapBuilder.php
+[propel-convert-conf] Adding class mapping: UserPeer => infinitymetrics/UserPeer
+.php
+[propel-convert-conf] Adding class mapping: User => infinitymetrics/User.php
+[propel-convert-conf] Adding class mapping: WorkpaceXProjectMapBuilder => infini
+tymetrics/map/WorkpaceXProjectMapBuilder.php
+[propel-convert-conf] Adding class mapping: WorkpaceXProjectPeer => infinitymetr
+ics/WorkpaceXProjectPeer.php
+[propel-convert-conf] Adding class mapping: WorkpaceXProject => infinitymetrics/
+WorkpaceXProject.php
+[propel-convert-conf] Adding class mapping: WorkspaceMapBuilder => infinitymetri
+cs/map/WorkspaceMapBuilder.php
+[propel-convert-conf] Adding class mapping: WorkspacePeer => infinitymetrics/Wor
+kspacePeer.php
+[propel-convert-conf] Adding class mapping: Workspace => infinitymetrics/Workspa
+ce.php
+[propel-convert-conf] Adding class mapping: WorkspaceShareMapBuilder => infinity
+metrics/map/WorkspaceShareMapBuilder.php
+[propel-convert-conf] Adding class mapping: WorkspaceSharePeer => infinitymetric
+s/WorkspaceSharePeer.php
+[propel-convert-conf] Adding class mapping: WorkspaceShare => infinitymetrics/Wo
+rkspaceShare.php
+[propel-convert-conf] Creating PHP runtime conf file: C:\ppm8-dev\app\conf\infin
+itymetrics-conf.php
+[propel-convert-conf] Creating PHP classmap runtime file: C:\ppm8-dev\app\conf\i
+nfinitymetrics-classmap.php
+
+BUILD FINISHED
+
+Total time: 41.5925 seconds
