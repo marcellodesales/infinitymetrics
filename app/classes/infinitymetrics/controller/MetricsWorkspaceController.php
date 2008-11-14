@@ -1,7 +1,8 @@
 <?php
 
-require_once('infinitymetrics/orm/classes/infinitymetrics/Workspace.php');
 require_once('propel/Propel.php');
+
+Propel::init("infinitymetrics/orm/conf/infinitymetrics-conf.php");
 
 /**
  * Description of MetricsWorkspaceController
@@ -12,7 +13,15 @@ class MetricsWorkspaceController
 {    
     public function createWorkspace($user_id, $title, $description) {
         $errors = array();
-        
+
+        $user = UserPeer::retrieveByPK($user_id);
+
+        if ($user == NULL) {
+            throw new Exception('The user_id does not exist');
+        }
+        if ($user->getType() != 'INSTRUCTOR') {
+            throw new Exception('The user_id does not correspond to an Instructor');
+        }
         if ($user_id == '') {
             $errors['user_id'] = new Exception('The user_id is empty');
         }
