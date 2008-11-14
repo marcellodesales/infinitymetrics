@@ -17,23 +17,28 @@ class ReportTest extends PHPUnit_Framework_TestCase {
     }
 
     public function testBuilder() {
-        $project = new Project();
+        $description = "Test Description";
+        $name = "Test Name";
         $eventChannels = array_fill(0, 10, new EventChannel());
 
-        $this->report->builder($project, $eventChannels);
+        $this->report->builder($name, $description, $eventChannels);
 
-        $this->assertEquals($project, $this->report->getProject(), "Project is not equal");
+        $this->assertEquals($description, $this->report->getDescription(), "Description is not equal");
+        $this->assertEquals($name, $this->report->getName(), "Name is not equal");
         $this->assertEquals($eventChannels, $this->report->getEventChannels(), "Event list is not equal");
     }
 
     public function testGetsSets() {
-        $project = new Project();
-        $this->report->setProject($project);
+        $description = "Descr";
+        $this->report->setDescription($description);
+        $this->assertEquals($description, $this->report->getDescription(), "Description is not equal");
+
+        $name = "Name";
+        $this->report->setName($name);
+        $this->assertEquals($name, $this->report->getName(), "Name is not equal");
 
         $eventChannels = array_fill(0, 10, new EventChannel());
         $this->report->setEventChannels($eventChannels);
-
-        $this->assertEquals($project, $this->report->getProject(), "Project is not equal");
         $this->assertEquals($eventChannels, $this->report->getEventChannels(), "Event list is not equal");
     }
 

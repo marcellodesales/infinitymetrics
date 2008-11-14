@@ -18,7 +18,7 @@ class EventTest extends PHPUnit_Framework_TestCase {
    }
 
    public function builderTest() {
-       $user = new User("Andres");
+       $user = new User("Andres", "Ardila", "aardila");
        $date = new DateTime("2008-11-08");
 
        $this->event->builder($user, $date);
@@ -29,7 +29,7 @@ class EventTest extends PHPUnit_Framework_TestCase {
 
    public function testGetsSets() {
 
-       $user = new User("Marilyne");
+       $user = new User("Marilyne", "Mendolla", "mmendoll");
        $this->event->setUser($user);
        $this->assertEquals($user, $this->event->getUser(), "User is not equal");
 

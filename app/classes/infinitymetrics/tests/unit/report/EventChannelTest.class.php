@@ -18,9 +18,6 @@ class EventChannelTest extends PHPUnit_Framework_TestCase {
     }
     
     public function testBuilder() {
-        $description = "Test Channel Description";
-        $name = "Test Channel name";
-        
         $events = array();
         for ($i = 0; $i < 10; $i++) {
             array_push($events, new Event());
@@ -29,23 +26,13 @@ class EventChannelTest extends PHPUnit_Framework_TestCase {
         $category = new EventCategory();
         $category->commit();
         
-        $this->eventChannel->builder($description, $name, $events, $category);
+        $this->eventChannel->builder($events, $category);
         
-        $this->assertEquals($description, $this->eventChannel->getDescription(), "Description is not equal");
-        $this->assertEquals($name, $this->eventChannel->getName(), "Name is not equal");
         $this->assertEquals($events, $this->eventChannel->getEvents(), "Events is not equal");
         $this->assertEquals($category, $this->eventChannel->getCategory(), "Category is not equal");
     }
 
     public function testGetsSets() {
-        $description = "Descr";
-        $this->eventChannel->setDescription($description);
-        $this->assertEquals($description, $this->eventChannel->getDescription(), "Description is not equal");
-
-        $name = "Name";
-        $this->eventChannel->setName($name);
-        $this->assertEquals($name, $this->eventChannel->getName(), "Name is not equal");
-
         $events = array();
         for ($i = 0; $i < 20; $i++) {
             array_push($events, new Event());
