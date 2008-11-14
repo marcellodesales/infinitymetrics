@@ -2,6 +2,7 @@
 
 require_once('PHPUnit/Framework.php');
 require_once('infinitymetrics/controller/MetricsWorkspaceController.php');
+require_once('infinitymetrics/model/InfinityMetricsException.class.php');
 
 /**
  * Description of UC100Test
@@ -21,7 +22,9 @@ class UC100Test extends PHPUnit_Framework_TestCase
         $criteria = new Criteria();
         $criteria->add(UserPeer::JN_USERNAME, self::USERNAME);
 
-        $this->user = UserPeer::doSelect($criteria);
+         $users = UserPeer::doSelect($criteria);
+
+         $this->user = $users[0];
 
         if ($this->user == NULL )
         {
@@ -32,8 +35,12 @@ class UC100Test extends PHPUnit_Framework_TestCase
             $this->user->setLastName('Instructor');
             $this->user->setEmail('johnc@institution.edu');
             $this->user->setType('INSTRUCTOR');
-
             $this->user->save();
+
+            $instructor = new Instructors();
+            $instructor->setPrimaryKey($this->user->getPrimaryKey());
+            $instructor->setInstitutionId(1);
+            $instructor->save();
         }
     }
 
@@ -46,6 +53,10 @@ class UC100Test extends PHPUnit_Framework_TestCase
                 $this->user->getUserId(), $title, $description
             );
             $this->assertNotNull($this->ws);
+            $this->assertEquals(
+                WorkspacePeer::retrieveByPK( $this->ws->getPrimaryKey() ),
+                $this->ws
+            );
             $this->assertTrue($this->ws instanceof Workspace);
         }
         catch (Exception $e) {
