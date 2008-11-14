@@ -56,5 +56,9 @@ class Project
     public function setStudents(array $students) {
         $this->students = $students;
     }
+
+    public function addStudent(Student $student) {
+        $this->students[] = $student;
+    }
 }
 ?>
