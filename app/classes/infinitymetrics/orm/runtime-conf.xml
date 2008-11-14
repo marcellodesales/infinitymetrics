@@ -14,7 +14,7 @@
    <datasource id="infinitymetricsm201"> <!-- this ID must match <database name=""> in schema.xml -->
     <adapter>mysql</adapter> <!-- sqlite, mysql, myssql, oracle, or pgsql -->
     <connection>
-     <dsn>mysql://root:1234@localhost/infinitymetricsm201</dsn> <!-- the PDO connection DSN for database -->
+     <dsn>mysql:host=localhost;dbname=infinitymetricsm201</dsn> <!-- the PDO connection DSN for database -->
 	 <user>root</user>
 	 <password>1234</password>
     </connection>

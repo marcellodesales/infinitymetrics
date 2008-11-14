@@ -11,7 +11,7 @@ return array_merge_recursive(array (
         'adapter' => 'mysql',
         'connection' => 
         array (
-          'dsn' => 'mysql://root:1234@localhost/infinitymetricsm201',
+          'dsn' => 'mysql:host=localhost;dbname=infinitymetricsm201',
           'user' => 'root',
           'password' => '1234',
         ),

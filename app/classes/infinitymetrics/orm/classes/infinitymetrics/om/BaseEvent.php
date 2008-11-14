@@ -38,7 +38,7 @@ abstract class BaseEvent extends BaseObject  implements Persistent {
 
 	/**
 	 * The value for the date field.
-	 * Note: this column has a database default value of: '2008-11-13 15:48:18'
+	 * Note: this column has a database default value of: '2008-11-14 01:53:43'
 	 * @var        string
 	 */
 	protected $date;
@@ -85,7 +85,7 @@ abstract class BaseEvent extends BaseObject  implements Persistent {
 	 */
 	public function applyDefaultValues()
 	{
-		$this->date = '2008-11-13 15:48:18';
+		$this->date = '2008-11-14 01:53:43';
 	}
 
 	/**
@@ -263,7 +263,7 @@ abstract class BaseEvent extends BaseObject  implements Persistent {
 			$newNorm = ($dt !== null) ? $dt->format('Y-m-d H:i:s') : null;
 
 			if ( ($currNorm !== $newNorm) // normalized values don't match 
-					|| ($dt->format('Y-m-d H:i:s') === '2008-11-13 15:48:18') // or the entered value matches the default
+					|| ($dt->format('Y-m-d H:i:s') === '2008-11-14 01:53:43') // or the entered value matches the default
 					)
 			{
 				$this->date = ($dt ? $dt->format('Y-m-d H:i:s') : null);
@@ -289,7 +289,7 @@ abstract class BaseEvent extends BaseObject  implements Persistent {
 				return false;
 			}
 
-			if ($this->date !== '2008-11-13 15:48:18') {
+			if ($this->date !== '2008-11-14 01:53:43') {
 				return false;
 			}
 
