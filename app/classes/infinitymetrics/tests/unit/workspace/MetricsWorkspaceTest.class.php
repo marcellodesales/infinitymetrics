@@ -24,29 +24,34 @@ class MetricsWorkspaceTest extends PHPUnit_Framework_TestCase {
     }
 
     public function testBuilder() {
-        $instructorName = "uName";
-        $instructor = new Instructor($instructorName);
+        //$instructorName = "uName";
+        //$instructor = new Instructor($instructorName);
+
         $project = new Project();
-
-        $projectName = "pName";
-        $project->setName($projectName);
+        $name = "pName";
+        $project->setName($name);
+        $summary = "pSummary";
+        $project->setSummary($summary);
         $projects = array($project);
+        $this->ws->addProject($project);
 
-        $wsDesc = "WS Descr";
-        $wsTitle = "WS Title";
-        $this->ws->builder($instructor, $wsDesc, $wsTitle, $projects);
+        $description = "WS Descr";
+        $this->ws->setDescription($description);
+        $title = "WS Title";
+        $this->ws->setTitle($title);
+        //$this->ws->builder($instructor, $description, $title, $projects);
 
-        $this->assertEquals($instructorName, $this->ws->getCreator()->getName(), "Name incorrect");
-        $this->assertEquals($wsDesc, $this->ws->getDescription(), "Description incorrect");
-        $this->assertEquals($wsTitle, $this->ws->getTitle(), "Title incorrect");
+        //$this->assertEquals($instructorName, $this->ws->getCreator()->getName(), "Name incorrect");
+        $this->assertEquals($description, $this->ws->getDescription(), "Description incorrect");
+        $this->assertEquals($title, $this->ws->getTitle(), "Title incorrect");
         $this->assertEquals($projects, $this->ws->getProjects(), "Projects are not equal");
     }
 
     public function testGetsSets() {
         unset($instructor);
-        $instructor = new Instructor("John");
-        $this->ws->setCreator($instructor);
-        $this->assertEquals($instructor, $this->ws->getCreator(), "Creator not equal");
+        //$instructor = new Instructor("John");
+        //$this->ws->setCreator($instructor);
+        //$this->assertEquals($instructor, $this->ws->getCreator(), "Creator not equal");
 
         $description = "Metrics Tracker in PHP";
         $this->ws->setDescription($description);

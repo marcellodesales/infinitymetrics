@@ -20,23 +20,24 @@ class ProjectTest extends PHPUnit_Framework_TestCase {
     }
 
     public function testProjectBuilder() {
-        $studentName = "sName";
-        $leader = new Student($studentName);
-
         $name = "pName";
+        $this->project->setName($name);
         $summary = "pSummary";
-        $this->project->builder($name, $leader, $summary);
+        $this->project->setSummary($summary);
+        //$leader = new Student();
+        //$students = array(new Student(), new Student(), new Student());
+        //$this->project->builder($name, $summary, $leader, $students);
 
-        $this->assertEquals($leader, $this->project->getLeader(), "Leader not equal");
         $this->assertEquals($name, $this->project->getName(), "Project name is incorrect");
         $this->assertEquals($summary, $this->project->getSummary(), "Summary is incorrect");
+        //$this->assertEquals($leader, $this->project->getLeader(), "Leader not equal");
+        //$this->assertEquals($students, $this->project->getStudents(), "Leader not equal");
     }
 
     public function testGetsSets() {
-        unset($leader);
-        $leader = new Student("John");
-        $this->project->setLeader($leader);
-        $this->assertEquals($leader, $this->project->getLeader(), "Leader not equal");
+        //$leader = new Student("John");
+        //$this->project->setLeader($leader);
+        //$this->assertEquals($leader, $this->project->getLeader(), "Leader not equal");
 
         $name = "PPM-8";
         $this->project->setName($name);
@@ -45,6 +46,10 @@ class ProjectTest extends PHPUnit_Framework_TestCase {
         $summary = "Group 8 - Infinity Metrics";
         $this->project->setSummary($summary);
         $this->assertEquals($summary, $this->project->getSummary(), "Summary is incorrect");
+
+        $students = array(new Student(), new Student(), new Student());
+        $this->project->setStudents($students);
+        $this->assertEquals($students, $this->project->getStudents());
     }
 }
 ?>
