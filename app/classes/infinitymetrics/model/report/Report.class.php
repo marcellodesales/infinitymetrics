@@ -32,6 +32,18 @@ require_once('infinitymetrics/model/report/EventChannel.class.php');
 class Report
 {
     /**
+     * The Description of the EventChannel
+     * @var <string>  $description
+     */
+    private $description;
+
+    /**
+     * The Name of the EventChannel
+     * @var <string> $name
+     */
+    private $name;
+
+    /**
      * The list of EventChannels contained in the Report
      * @var <array_of_EventChannels>
      */
@@ -49,8 +61,26 @@ class Report
      * Builds the state of the Report
      * @param <array_of_EventChannels> $eventChannels
      */
-    public function builder(array $eventChannels) {
+    public function builder($name, $description, array $eventChannels) {
+        $this->name = $name;
+        $this->description = $description;
         $this->eventChannels = $eventChannels;
+    }
+
+    /**
+     * Gets the Description
+     * @return <string>
+     */
+    public function getDescription() {
+        return $this->description;
+    }
+
+    /**
+     * Gets the Name
+     * @return <string>
+     */
+    public function getName() {
+        return $this->name;
     }
 
     /**
@@ -118,6 +148,22 @@ class Report
         }
 
         return $filteredChannelList;
+    }
+
+    /**
+     * Sets the EventChannel's Description
+     * @param <string> $description
+     */
+    public function setDescription($description) {
+        $this->description = $description;
+    }
+
+    /**
+     * Sets the Name
+     * @param <string> $name
+     */
+    public function setName($name) {
+        $this->name = $name;
     }
 
     /**

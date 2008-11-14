@@ -32,18 +32,6 @@ require_once('infinitymetrics/model/report/EventCategory.class.php');
 class EventChannel
 {
     /**
-     * The Description of the EventChannel
-     * @var <string>  $description
-     */
-    private $description;
-
-    /**
-     * The Name of the EventChannel
-     * @var <string> $name
-     */
-    private $name;
-
-    /**
      * A collection of Events
      * @var <array_of_Events> $events
      */
@@ -70,13 +58,7 @@ class EventChannel
      * @param <array_of_Events> $events
      * @param <EventCategory> $category 
      */
-    public function builder($description,
-                            $name,
-                            array $events,
-                            EventCategory $category)
-    {
-        $this->description = $description;
-        $this->name = $name;
+    public function builder(array $events, EventCategory $category) {
         $this->events = $events;
         $this->category = $category;
     }
@@ -87,22 +69,6 @@ class EventChannel
      */
     public function getCategory() {
         return $this->category;
-    }
-
-    /**
-     * Gets the Description
-     * @return <string> 
-     */
-    public function getDescription() {
-        return $this->description;
-    }
-
-    /**
-     * Gets the Name
-     * @return <string> 
-     */
-    public function getName() {
-        return $this->name;
     }
 
     /**
@@ -160,22 +126,6 @@ class EventChannel
      */
     public function setCategory(EventCategory $category) {
         $this->category = $category;
-    }
-
-    /**
-     * Sets the EventChannel's Description
-     * @param <string> $description 
-     */
-    public function setDescription($description) {
-        $this->description = $description;
-    }
-
-    /**
-     * Sets the Name
-     * @param <string> $name 
-     */
-    public function setName($name) {
-        $this->name = $name;
     }
 
     /**
