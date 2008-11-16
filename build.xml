@@ -17,6 +17,11 @@
 	  <exec command="propel-gen ${im.home}/propel" dir="." passthru="true" />		
     </target>
 
+    <target name="propel-creole">
+        <echo msg="Generating XML schema with Propel Creole" />
+	  <exec command="propel-gen ${im.home}/propel creole" dir="." passthru="true" />		
+    </target>
+
     <target name="apply-patches">
 	<echo msg="Applying patches (just overriding)" />
 	<copy todir="." overwrite="true">
@@ -27,6 +32,7 @@
     </target>
 	
     <target name="build" depends="prepare">
+	<phingcall target="propel-creole" />
 	<phingcall target="propel-gen" />
 	<phingcall target="apply-patches" />
     </target>
