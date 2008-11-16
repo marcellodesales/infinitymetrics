@@ -20,6 +20,7 @@
  */
 require_once 'PHPUnit/Framework.php';
 require_once 'infinitymetrics/model/user/User.class.php';
+
 /**
  * Tests for the User class.
  *
@@ -33,13 +34,22 @@ class UserTest extends PHPUnit_Framework_TestCase {
 
     protected function setUp() {
         parent::setUp();
-        $this->user = new User("Marcello", "de Sales", self::USERNAME);
+        $this->user = new User();
+        $this->user->setFirstName("Marcello");
+        $this->user->setLastName("de Sales");
+        $this->user->setEmail("marcello.sales@gmail.com");
+        $this->user->setJnUsername(self::USERNAME);
+        $this->user->setJnPassword("blabalbal");
+        $this->user->setType("STUDENT");
     }
 
     public function testUserCreation() {
         $this->assertEquals("Marcello", $this->user->getFirstName(), "The value of the name is in incorrect");
         $this->assertEquals("de Sales", $this->user->getLastName(), "The user's last name is in incorrect state");
-        $this->assertEquals(self::USERNAME, $this->user->getUsername(), "The user's username is in incorrect state");
+        $this->assertEquals("marcello.sales@gmail.com", $this->user->getEmail(), "The user's email is in incorrect state");
+        $this->assertEquals("blabalbal", $this->user->getJnPassword(), "The user's password is in incorrect state");
+        $this->assertEquals(self::USERNAME, $this->user->getJnUsername(), "The user's username is in incorrect state");
+        $this->assertEquals("STUDENT", $this->user->getType(), "The user's type is in incorrect state");
     }
 
     public function testUserUpdate() {
@@ -48,7 +58,19 @@ class UserTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals("Gurdeep", $this->user->getFirstName(), "The value of the name is in incorrect");
         $this->assertEquals("Singh", $this->user->getLastName(), "The value of the name is in incorrect");
     }
-    
+
+   public function testUserComparison() {
+
+        $a = new User();
+        $a->setJnUsername("marcellosales");
+        $b = $this->user;
+        $this->assertTrue($b === $this->user);
+        $this->assertTrue($b !== $a);
+        $this->assertTrue($a->equals($this->user));
+        $this->assertTrue($b->equals($a));
+        $this->assertTrue($a instanceof User);
+        $this->assertTrue($a instanceof User);
+   }
     protected function tearDown() {
         $this->user = null;
     }

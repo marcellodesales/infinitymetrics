@@ -19,6 +19,8 @@
  * For more information please see <http://ppm-8.dev.java.net>.
  */
 
+require_once 'infinitymetrics/orm/PersistentUser.php';
+
 /**
  * Basic user class for the metrics workspace. User has username, password from 
  * Java.net.
@@ -26,56 +28,23 @@
  * @author Marcello de Sales <marcello.sales@gmail.com>
  * @version $Id$
  */
-class User {
+class User extends PersistentUser {
 
-    /**
-     * It's the first name of the user.
-     * @var string the reference to the name
-     */
-    private $firstName;
-    /**
-     * It's the user's last name.
-     * @var string the instance of th last name
-     */
-    private $lastName;
-        /**
-     * It's the name of the user.
-     * @var RssItem instance
-     */
-    private $username;
-    /**
-     * Constructs a new user with a name {@link $rssItem}
-     * @var firstName this is the first name.
-     * @var firstName this is the first name.
-     * @var firstName this is the first name.
-     */
-    public function  __construct($firstName, $lastName, $username) {
-        $this->firstName = $firstName;
-        $this->lastName = $lastName;
-        $this->username = $username;
+    public function  __construct() {
     }
 
-    /**
-     * Returns the value of the name
-     */
-    public function getFirstName() {
-        return $this->firstName;
+    public static function compare($a, $b) {
+        print "calling the compare method";
+        if ($a->getJnUsername() < $b->getJnUsername()) return -1;
+        else if($a->getJnUsername() == $b->getJnUsername()) return 0;
+        else return 1;
     }
-
-    public function getLastName() {
-        return $this->lastName;
-    }
-
-    public function getUsername() {
-        return $this->username;
-    }
-
-    public function setFirstName($newFirstName) {
-        $this->firstName = $newFirstName;
-    }
-
-    public function setLastName($newLastName) {
-        $this->lastName = $newLastName;
+    public function equals($other) {
+        if ($other instanceof User) {
+            return $this->getJnUsername() == $other->getJnUsername();
+        } else {
+            return false;
+        }
     }
 }
 ?>
