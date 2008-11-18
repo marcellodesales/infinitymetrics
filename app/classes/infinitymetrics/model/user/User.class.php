@@ -30,15 +30,24 @@ require_once 'infinitymetrics/orm/PersistentUser.php';
  */
 class User extends PersistentUser {
 
-    public function  __construct() {
-    }
-
+    /**
+     * Compare method is called whenever the user instance is being sorted
+     * in a list. All classes that participate on sorting should implement
+     * this method.
+     * @param User $a is the first User instance
+     * @param User $b is the second User instance
+     * @return int the comparison value for the user.
+     */
     public static function compare($a, $b) {
-        print "calling the compare method";
         if ($a->getJnUsername() < $b->getJnUsername()) return -1;
         else if($a->getJnUsername() == $b->getJnUsername()) return 0;
         else return 1;
     }
+    /**
+     * Compares 2 instances of the User class by comparing the Java.net username.
+     * @param User $other is the other user to be compared
+     * @return boolean if the given user "other" is the same as the current instance.
+     */
     public function equals($other) {
         if ($other instanceof User) {
             return $this->getJnUsername() == $other->getJnUsername();
