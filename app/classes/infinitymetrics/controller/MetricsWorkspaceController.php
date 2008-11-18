@@ -2,7 +2,7 @@
 
 require_once('propel/Propel.php');
 
-Propel::init("infinitymetrics/orm/conf/infinitymetrics-conf.php");
+Propel::init("infinitymetrics/orm/config/om-conf.php");
 
 /**
  * Description of MetricsWorkspaceController
@@ -23,16 +23,16 @@ class MetricsWorkspaceController
             throw new Exception('The description is empty');
         }
         else {
-            $user = UserPeer::retrieveByPK($user_id);
+            $user = PersistentUserPeer::retrieveByPK($user_id);
 
             if ($user == NULL) {
                 throw new Exception('The user_id does not exist');
             }
-            if ($user->getType() != 'INSTRUCTOR') {
+            if ($user->getType() != 'I') {
                 throw new Exception('The user_id does not correspond to an Instructor');
             }
 
-            $ws = new Workspace();
+            $ws = new PersistentWorkspace();
             $ws->setUserId($user_id);
             $ws->setTitle($title);
             $ws->setDescription($description);
@@ -48,41 +48,47 @@ class MetricsWorkspaceController
         if ($workspace_id == '' || $workspace_id == NULL) {
             throw new Exception('The workspace_id is empty');
         }
-        else if ($newState == '' || $newState == NULL) {
+        if ($newState == '' || $newState == NULL) {
             throw new Exception('The new state is empty');
         }
-        else if ( array_search($newState, $validStates) === FALSE ) {
+        if ( array_search($newState, $validStates) === FALSE ) {
             throw new Exception('The new state does not match any allowed states');
         }
-        else {
-            $ws = WorkspacePeer::retrieveByPK($workspace_id);
 
-            if ($ws == NULL) {
-                throw new Exception('The workspace_id does not exist');
-            }
-            $ws->setState($newState);
-            $ws->save();
+        $ws = PersistentWorkspacePeer::retrieveByPK($workspace_id);
 
-            return $ws;
+        if ($ws == NULL) {
+            throw new Exception('The workspace_id does not exist');
         }
+
+        $ws->setState($newState);
+        $ws->save();
+
+        return $ws;
     }
 
     public function retrieveWorkspaceCollection($user_id) {
-        if ($user_id == '') {
+        if ($user_id == '' || $user_id == NULL) {
             throw new Exception('The user_id is empty');
         }
         else {
+            $user = PersistentUserPeer::retrieveByPK($user_id);
+
+            if ($user == NULL) {
+                throw new Exception('The user_id does not exist');
+            }
+
             $workspaces = array( 'OWN' => array(), 'SHARED' => array() );
 
-            $workspaces['OWN'] = WorkspacePeer::retrieveByPK($user_id);
+            $workspaces['OWN'] = PersistentWorkspacePeer::retrieveByPK($user_id);
 
             $wsShareCriteria = new Criteria();
             $wsShareCriteria->add(WorkspaceSharePeer::user_id, $user_id);
 
-            $workspaceShares = WorkspaceSharePeer::doSelect($wsShareCriteria);
+            $workspaceShares = PersistentWorkspaceSharePeer::doSelect($wsShareCriteria);
 
             foreach ($workspaceShares as $wss) {
-                $ws = WorkspacePeer::retrieveByPK( $wss->getWorkspaceId() );
+                $ws = PersistentWorkspacePeer::retrieveByPK( $wss->getWorkspaceId() );
 
                 array_push($workspaces['OWN'], $ws);
             }
@@ -92,55 +98,52 @@ class MetricsWorkspaceController
     }
     
     public function retrieveWorkspace($workspace_id) {
-        if ($workspace_id == '') {
+        if ($workspace_id == '' || $workspace_id == NULL) {
             throw new Exception('The workpsace_id is empty');
         }
         else {
-            return ( WorkspacePeer::retrieveByPK($workspace_id) );
+            return ( PersistentWorkspacePeer::retrieveByPK($workspace_id) );
         }
         
     }
     
-    public function shareWorkspace($workspace_id, $user_id) {
-        $errors = array();
-
+    public function shareWorkspace($workspace_id, $userIdWithWhomToShareWorkspace) {
         if ($workspace_id == '') {
-            $errors['workspace_id'] = 'The workspace_id is empty';
+            throw new Exception('The workspace_id is empty');
         }
-        if ($user_id == '') {
-            $errors['user_id'] = new Exception('The user_id is empty');
+        if ($userIdWithWhomToShareWorkspace == '') {
+            throw new Exception('The user_id is empty');
         }
 
-        if (count($errors)) {
-            throw new Exception('The parameters are invalid', $errors);
-        }
-        else {
-            $wss = new WorkspaceShare();
-            $wss->setWorkspaceId($workspace_id);
+        $wss = new WorkspaceShare();
 
-            $user = UserPeer::retrieveByPK($user_id);
-            $user->addWorkspaceShare($wss);
+        if ($wss == NULL) {
+            throw new Exception('The workspace_id does not exist');
         }
+
+        $wss->setWorkspaceId($workspace_id);
+
+        $user = PersistentUserPeer::retrieveByPK($userIdWithWhomToShareWorkspace);
+
+        if ($user == NULL){
+            throw new Exception('The user_id does not exist');
+        }
+
+        $user->addWorkspaceShare($wss);
     }
     
     public function updateWorkspaceProfile($workspace_id, $newTitle, $newDescription) {
-        $errors = array();
-
-        if ($workspace_id == '') {
-            $errors['workspace_id'] = 'The workspace_id is empty';
+        if ($workspace_id == '' || $workspace_id == NULL) {
+            throw new Exception('The workspace_id is empty');
         }
-        if ($newTitle == '') {
-            $errors['newTitle'] = 'The new title is empty';
+        else if ($newTitle == '' || $newTitle == NULL) {
+            throw new Exception('The new title is empty');
         }
-        if ($newDescription == '') {
-            $errors['newDescription'] = 'The new description is empty';
-        }
-
-        if (count($errors)) {
-            throw new Exception('The parameters are invalid', $errors);
+        else if ($newDescription == '' || $newDescription == NULL) {
+            throw new Exception('The new description is empty');
         }
         else {
-            $ws = WorkspacePeer::retrieveByPK($workspace_id);
+            $ws = PersistentWorkspacePeer::retrieveByPK($workspace_id);
 
             if ($ws == NULL) {
                 throw new Exception('Did not find a Workspace by that ID');
@@ -149,6 +152,8 @@ class MetricsWorkspaceController
                 $ws->setTitle($newTitle);
                 $ws->setDescription($newDescription);
                 $ws->save();
+
+                return $ws;
             }
         }
     }
