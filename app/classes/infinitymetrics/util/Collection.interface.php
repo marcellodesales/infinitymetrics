@@ -17,7 +17,7 @@ interface Collection {
      * Adds all elements from a given collection to the current collection
      * @param Collection $collection the collection of items to add
      */
-    public function addAll($collection);
+    public function addAll(Collection $collection);
     /**
      * Removes an existing item from the list
      * @param object $elementToRemove is the element ot be removed from the
