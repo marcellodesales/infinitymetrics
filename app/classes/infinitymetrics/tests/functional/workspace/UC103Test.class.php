@@ -13,14 +13,14 @@ class UC103Test extends PHPUnit_Framework_TestCase
 {
     private $ws;
 
-    const WS_ID = 4;
+    const WS_ID = 2;
     const TITLE = "Updated Title";
     const DESCRIPTION = "Updated Description";
 
     public function setUp() {
         parent::setUp();
 
-        $this->ws = WorkspacePeer::retrieveByPK(self::WS_ID);
+        $this->ws = PersistentWorkspacePeer::retrieveByPK(self::WS_ID);
     }
 
     public function testUpdateProfile() {
@@ -30,7 +30,7 @@ class UC103Test extends PHPUnit_Framework_TestCase
             );
 
             $this->assertNotNull($this->ws);
-            $this->assertTrue($this->ws instanceof Workspace);
+            $this->assertTrue($this->ws instanceof PersistentWorkspace);
             $this->assertEquals(self::TITLE, $this->ws->getTitle());
             $this->assertEquals(self::DESCRIPTION, $this->ws->getDescription());
         }

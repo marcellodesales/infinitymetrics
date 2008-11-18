@@ -2,13 +2,13 @@
 
 require_once('PHPUnit/Framework.php');
 require_once('infinitymetrics/controller/MetricsWorkspaceController.php');
-require_once('infinitymetrics/model/InfinityMetricsException.class.php');
 
 /**
- * Description of UC101class
+ * Description of UC105Test
  *
  * @author Andres Ardila
  */
+
 class UC105Test extends PHPUnit_Framework_TestCase
 {
     private $ws;
@@ -18,32 +18,37 @@ class UC105Test extends PHPUnit_Framework_TestCase
     public function setUp() {
         parent::setUp();
 
-        $this->ws = WorkspacePeer::retrieveByPK(self::WORKSPACE_ID);
+        $this->ws = PersistentWorkspacePeer::retrieveByPK(self::WORKSPACE_ID);
     }
 
     public function testChangeWorkspaceState() {
         $newState = 'ACTIVE';
 
-        $this->ws = MetricsWorkspaceController::changeWorkspaceState(
-            $this->ws->getWorkspaceId(), $newState
-        );
-        $this->assertNotNull($this->ws);
-        $this->assertTrue($this->ws instanceof Workspace);
-        $this->assertEquals($newState, $this->ws->getState());
+        try {
+            $this->ws = MetricsWorkspaceController::changeWorkspaceState(
+                $this->ws->getWorkspaceId(), $newState
+            );
+            $this->assertNotNull($this->ws);
+            $this->assertTrue($this->ws instanceof PersistentWorkspace);
+            $this->assertEquals($newState, $this->ws->getState());
+        }
+        catch (Exception $e) {
+            $this->fail('Change Workspace State failed: '.$e->getMessage());
+        }
     }
 
-    public function testInvalidSParams() {
+    public function testExceptionEmptyParams() {
         try {
             $this->ws = MetricsWorkspaceController::changeWorkspaceState('', '');
         }
-        catch (InvalidArgumentException $e) {
+        catch (Exception $e) {
             return;
         }
         
-        $this->fail('Workspace state update failed' . $e);
+        $this->fail('Empty parameters expect an exception');
     }
 
-    public function testInvalidNewState() {
+    public function testExceptionInvalidNewState() {
         $newState = 'invalid_value';
 
         try {
@@ -51,9 +56,24 @@ class UC105Test extends PHPUnit_Framework_TestCase
                 $this->ws->getWorkspaceId(), $newState
             );
         }
-        catch (InvalidArgumentException $e) {
-            $this->fail('Workspace state update failed' . $e);
+        catch (Exception $e) {
+            return;
         }
+
+        $this->fail('Invalid state expects an exception');
+    }
+
+    public function testExceptionInexistentWorkspaceId() {
+        try {
+            $this->ws = MetricsWorkspaceController::changeWorkspaceState(
+                '999999', 'PAUSED'
+            );
+        }
+        catch (Exception $e) {
+            return;
+        }
+
+        $this->fail('Inexistent PK WorkspaceID expects an exception');
     }
 }
 ?>
