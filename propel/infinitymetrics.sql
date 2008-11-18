@@ -86,7 +86,7 @@ CREATE TABLE `user` (
   PRIMARY KEY (`user_id`)
 ) ENGINE = InnoDB;
 
-CREATE TABLE `workpace_x_project` (
+CREATE TABLE `workspace_x_project` (
   `workspace_id`     mediumint(8) UNSIGNED NOT NULL,
   `project_jn_name`  varchar(50) NOT NULL,
   `summary`          varchar(64),
@@ -146,7 +146,7 @@ CREATE UNIQUE INDEX `username`
   (`jn_username`);
 
 CREATE INDEX `idx_fk_workspace_x_project_jn_name`
-  ON `workpace_x_project`
+  ON `workspace_x_project`
   (`project_jn_name`);
 
 CREATE INDEX `idx_fk_worspace_user_id`
@@ -209,14 +209,14 @@ ALTER TABLE `student_x_project`
     ON DELETE CASCADE
     ON UPDATE RESTRICT;
 
-ALTER TABLE `workpace_x_project`
+ALTER TABLE `workspace_x_project`
   ADD CONSTRAINT `idx_fk_workspace_x_project_jn_name`
   FOREIGN KEY (`project_jn_name`)
     REFERENCES `project`(`project_jn_name`)
     ON DELETE CASCADE
     ON UPDATE RESTRICT;
 
-ALTER TABLE `workpace_x_project`
+ALTER TABLE `workspace_x_project`
   ADD CONSTRAINT `idx_fk_workspace_x_workspace_id`
   FOREIGN KEY (`workspace_id`)
     REFERENCES `workspace`(`workspace_id`)
@@ -276,7 +276,7 @@ COMMIT;
 COMMIT;
 
 
-/* Data for table "workpace_x_project" */
+/* Data for table "workspace_x_project" */
 COMMIT;
 
 
