@@ -31,6 +31,13 @@ require_once 'infinitymetrics/orm/PersistentUser.php';
 class User extends PersistentUser {
 
     /**
+     * Constructs a new User with the type as Java.Net user ("J")
+     */
+    public function  __construct() {
+        $this->setType("J");
+    }
+
+    /**
      * Compare method is called whenever the user instance is being sorted
      * in a list. All classes that participate on sorting should implement
      * this method.
