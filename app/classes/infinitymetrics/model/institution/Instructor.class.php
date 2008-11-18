@@ -21,90 +21,17 @@
 require_once 'infinitymetrics/model/user/User.class.php';
 require_once 'infinitymetrics/model/institution/Institution.class.php';
 /**
- * The instructorinfinitymetrics class for the metrics workspace.
+ * The Instructor class for the metrics workspace.
+ *
  * @author Gurdeep Singh <gurdeepsingh03@gmail.com>
+ *
+ * Instructor class with support to Persistence.
  */
 class Instructor extends User {
-
-    /**
-     * This is the institution reference.
-     * @var Institution instance of the institution class.
-     */
-    private $institution;
-    
-    /**
-     * It's the first name of the instructor.
-     * @var string the reference to the name
-     */
-    public $firstName;
-
-    /**
-     * It's the instructor's last name.
-     * @var string the instance of the last name
-     */
-    public $lastName;
-
-    /**
-     * It's the instructor's email address.
-     * @var string the instance of the email.
-     */
-    private $email;
-
-    /**
-     * It's the instructor's Project name.
-     * @var string the instance of th Project name
-     */
-    private $projectName;
-
-    /**
-     * It's the instructor's username.
-     * @var string the instance of th username
-     */
-    //private $userName;
-
-    public function __construct($firstName,$lastName) {
-        parent::__construct($firstName, $lastName);
-       
+         public function  __construct() {
+                    parent::__construct();
+                    $this->setType("I");
     }
 
-    public function getInstitution() {
-       return $this->institution ;
-    }
-    public function setInstitution($institution) {
-        $this->institution = $institution;
-    }
-    public function getEmail(){
-        return $this->email;
-    }
-    public function setEmail($email){
-        $this->email = $email;
-    }
-   public function getProjectName(){
-        return $this->$projectName;
-   }
-   public function setProjectName($projectName){
-         $this->projectName = $projectName;
-   }
-   public function getFirstName() {
-       return $this->firstName ;
-    }
-    public function setFirstName($firstName) {
-        $this->firstName = $firstName ;
-    }
-    public function getLastName() {
-       return $this->lastName ;
-    }
-    public function setLastName($lastName) {
-        $this->lastName = $lastName ;
-    }
-    /*public function getUserName() {
-       return $this->userName ;
-    }
-    public function setUserName($userName) {
-        $this->userName = $userName ;
-    }
-     *
-     */
 }
-   
 ?>
