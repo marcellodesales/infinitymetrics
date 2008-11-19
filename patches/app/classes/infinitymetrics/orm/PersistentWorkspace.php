@@ -31,12 +31,6 @@ class PersistentWorkspace extends PersistentBaseWorkspace {
 		parent::__construct();
 	}
 
-    public function builder($creatorUserId, $description, $title) {
-        $this->description = $description;
-        $this->title = $title;
-        $this->user_id = $creatorUserId;
-    }
-
     public function isShared($workspace_id) {
         if ($workspace_id == '' || $workspace_id == NULL) {
             throw new Exception('workspace_id is empty');
