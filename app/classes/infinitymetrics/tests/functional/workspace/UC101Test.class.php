@@ -4,9 +4,9 @@ require_once('PHPUnit/Framework.php');
 require_once('infinitymetrics/controller/MetricsWorkspaceController.php');
 
 /**
- * Description of UC101Test
+ * Description of UC101Test: View Workspace
  *
- * @author Andres Ardila
+ * @author Marilyne Mendolla and Andres Ardila
  */
 
 class UC101Test extends PHPUnit_Framework_TestCase
@@ -17,6 +17,9 @@ class UC101Test extends PHPUnit_Framework_TestCase
         parent::setUp();
 
 
+
     }
+
+
 }
 ?>

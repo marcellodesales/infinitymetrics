@@ -32,7 +32,20 @@ class UC100Test extends PHPUnit_Framework_TestCase
             $this->user->setLastName('Instructor');
             $this->user->setEmail('johnc@institution.edu');
             $this->user->setType('I');
-            $this->user->setInstitutionId(1);
+
+            $institution = PersistentInstitutionPeer::retrieveByPK(1);
+            if($institution == NULL)
+            {
+                $institution = new PersistentInstitution();
+                $institution->setAbbreviation('FAU');
+                $institution->setCity('Boca Raton');
+                $institution->setCountry('USA');
+                $institution->setName('Florida Atlantic University');
+                $institution->setStateProvince('FL');
+                $institution->save();
+            }
+
+            $this->user->setInstitutionId($institution->getInstitutionId());
             $this->user->save();
         }
     }
