@@ -14,7 +14,7 @@
 abstract class PersistentBaseUserPeer {
 
 	/** the default database name for this class */
-	const DATABASE_NAME = 'infinitymetricsm303';
+	const DATABASE_NAME = 'infinitymetricsm304';
 
 	/** the table name for this class */
 	const TABLE_NAME = 'user';
