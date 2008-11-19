@@ -12,13 +12,29 @@
 	<exec command="phpdoc -d ${im.home}/app/classes -t ${im.home}/app/docs/api" dir="." passthru="true" />
     </target>
 
-    <target name="propel-gen">
-        <echo msg="Generating OOP classes with Propel-gen" />
-	  <exec command="propel-gen ${im.home}/propel" dir="." passthru="true" />		
+    <target name="prepare-propel-gen">
+        <delete>
+          <fileset dir="${im.home}/app/classes/infinitymetrics/orm">
+            <include name="**/*" />
+          </fileset>
+        </delete>
     </target>
 
-    <target name="propel-creole">
-        <echo msg="Generating XML schema with Propel Creole" />
+    <target name="propel-gen" depends="prepare-propel-gen">
+        <echo msg="Generating OOP classes with Propel-gen" />
+        <exec command="propel-gen ${im.home}/propel" dir="." passthru="true" />
+    </target>
+
+    <target name="prepare-creole">
+      <delete>
+          <fileset dir="${im.home}/propel">
+            <include name="**/schema*.xml" />
+          </fileset>
+      </delete>
+    </target>
+
+    <target name="propel-creole" depends="prepare-creole">
+      <echo msg="Generating XML schema with Propel Creole" />
 	  <exec command="propel-gen ${im.home}/propel creole" dir="." passthru="true" />		
     </target>
 
