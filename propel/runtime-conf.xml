@@ -11,10 +11,10 @@
 -->
  <propel>
   <datasources default="infinitymetrics">
-   <datasource id="infinitymetricsm303"> <!-- this ID must match <database name=""> in schema.xml -->
+   <datasource id="infinitymetricsm304"> <!-- this ID must match <database name=""> in schema.xml -->
     <adapter>mysql</adapter> <!-- sqlite, mysql, myssql, oracle, or pgsql -->
     <connection>
-     <dsn>mysql:host=localhost;dbname=infinitymetricsm303</dsn> <!-- the PDO connection DSN for database -->
+     <dsn>mysql:host=localhost;dbname=infinitymetricsm304</dsn> <!-- the PDO connection DSN for database -->
 	 <user>root</user>
 	 <password>1234</password>
     </connection>
