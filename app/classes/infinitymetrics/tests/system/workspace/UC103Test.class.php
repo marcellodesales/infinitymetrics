@@ -1,5 +1,8 @@
 <?php
 
+require_once('propel/Propel.php');
+Propel::init("infinitymetrics/orm/config/om-conf.php");
+
 require_once('PHPUnit/Framework.php');
 require_once('infinitymetrics/controller/MetricsWorkspaceController.php');
 

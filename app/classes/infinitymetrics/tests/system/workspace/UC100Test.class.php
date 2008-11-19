@@ -1,5 +1,8 @@
 <?php
 
+require_once('propel/Propel.php');
+Propel::init("infinitymetrics/orm/config/om-conf.php");
+
 require_once('PHPUnit/Framework.php');
 require_once('infinitymetrics/controller/MetricsWorkspaceController.php');
 
@@ -17,6 +20,7 @@ class UC100Test extends PHPUnit_Framework_TestCase
     const USERNAME = 'johntheteacher';
     const TITLE = 'New Title';
     const DESCRIPTION = 'New Description';
+    const ABBREVIATION = 'FAU';
 
     public function setUp() {
         parent::setUp();
@@ -25,7 +29,7 @@ class UC100Test extends PHPUnit_Framework_TestCase
 
         if ($this->user == NULL )
         {
-            $this->user = new PersistentUser();
+            $this->user = new User();
             $this->user->setJnUsername(self::USERNAME);
             $this->user->setJnPassword('password');
             $this->user->setFirstName('John');
@@ -33,19 +37,26 @@ class UC100Test extends PHPUnit_Framework_TestCase
             $this->user->setEmail('johnc@institution.edu');
             $this->user->setType('I');
 
-            $institution = PersistentInstitutionPeer::retrieveByPK(1);
-            if($institution == NULL)
+            $criteria = new Criteria();
+            $criteria->add(PersistentInstitutionPeer::ABBREVIATION, self::ABBREVIATION);
+
+            $institutions = PersistentInstitutionPeer::doSelect($criteria);
+
+            if($institutions == NULL)
             {
-                $institution = new PersistentInstitution();
-                $institution->setAbbreviation('FAU');
+                $institution = new Institution();
+                $institution->setAbbreviation(self::ABBREVIATION);
                 $institution->setCity('Boca Raton');
                 $institution->setCountry('USA');
                 $institution->setName('Florida Atlantic University');
                 $institution->setStateProvince('FL');
                 $institution->save();
             }
+            else {
+                $institution = $institutions[0];
+            }
 
-            $this->user->setInstitutionId($institution->getInstitutionId());
+            $this->user->setInstitution($institution);
             $this->user->save();
         }
     }
