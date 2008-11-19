@@ -79,18 +79,21 @@ class MetricsWorkspaceController
             }
 
             $workspaces = array( 'OWN' => array(), 'SHARED' => array() );
-
-            $workspaces['OWN'] = PersistentWorkspacePeer::retrieveByPK($user_id);
+            
+            $wsCriteria = new Criteria();
+            $wsCriteria->add(PersistentWorkspacePeer::USER_ID, $user_id);
+            
+            $workspaces['OWN'] = PersistentWorkspacePeer::doSelect($wsCriteria);
 
             $wsShareCriteria = new Criteria();
-            $wsShareCriteria->add(WorkspaceSharePeer::user_id, $user_id);
+            $wsShareCriteria->add(PersistentWorkspaceSharePeer::USER_ID, $user_id);
 
             $workspaceShares = PersistentWorkspaceSharePeer::doSelect($wsShareCriteria);
 
             foreach ($workspaceShares as $wss) {
                 $ws = PersistentWorkspacePeer::retrieveByPK( $wss->getWorkspaceId() );
 
-                array_push($workspaces['OWN'], $ws);
+                array_push($workspaces['SHARED'], $ws);
             }
 
             return $workspaces;
@@ -114,13 +117,11 @@ class MetricsWorkspaceController
         if ($userIdWithWhomToShareWorkspace == '') {
             throw new Exception('The user_id is empty');
         }
-
-        $wss = new WorkspaceShare();
-
-        if ($wss == NULL) {
+        if (PersistentWorkspacePeer::retrieveByPK($workspace_id) == NULL) {
             throw new Exception('The workspace_id does not exist');
         }
 
+        $wss = new PersistentWorkspaceShare();
         $wss->setWorkspaceId($workspace_id);
 
         $user = PersistentUserPeer::retrieveByPK($userIdWithWhomToShareWorkspace);
@@ -129,7 +130,8 @@ class MetricsWorkspaceController
             throw new Exception('The user_id does not exist');
         }
 
-        $user->addWorkspaceShare($wss);
+        $wss->setUserId($user->getUserId());
+        $wss->save();
     }
     
     public function updateWorkspaceProfile($workspace_id, $newTitle, $newDescription) {
