@@ -21,12 +21,15 @@
  * For more information please see <http://ppm-8.dev.java.net>.
  */
 
+require_once 'propel/Propel.php';
+Propel::init('infinitymetrics/orm/config/om-conf.php');
+
 require_once 'infinitymetrics/model/InfinityMetricsException.class.php';
 require_once 'infinitymetrics/model/institution/Student.class.php';
+require_once 'infinitymetrics/model/user/PersonalAgent.class.php';
 require_once 'infinitymetrics/model/institution/Instructor.class.php';
 require_once 'infinitymetrics/model/institution/Institution.class.php';
-require_once 'infinitymetrics/model/user/User.class.php';
-
+require_once 'infinitymetrics/orm/om/PersistentBaseInstitutionPeer.php';
 
 /*
  * @author: Marcello de Sales <ddslkd>
@@ -34,21 +37,31 @@ require_once 'infinitymetrics/model/user/User.class.php';
  */
 final class UserManagementController {
 
-   /** this function implements the registration of Student
+    public static function areUserCredentialsValidOnJN($username, $password) {
+        $user = new User();
+        $user->setJnUsername($username);
+        $user->setJnPassword($password);
+        $agent = new PersonalAgent($user);
+        return $agent->areUserCredentialsValidOnJN();
+    }
+
+   /**
+    * This method implements the registration of Student
     *
-    * @param <type> $username
-    * @param <type> $password
-    * @param <type> $email
-    * @param <type> $firstName
-    * @param <type> $lastName
-    * @param <type> $institution
-    * @param <type> $studentSchoolId
-    * @param <type> $teamLeader
-    * @param <type> $projectName
-    * @return <type>
+    * @param string $username
+    * @param string $password
+    * @param string $email
+    * @param string $firstName
+    * @param string $lastName
+    * @param string $institution
+    * @param string $studentSchoolId
+    * @param string $teamLeader
+    * @param string $projectName
+    * @return string
     */
-    public static function registerStudent($username, $password, $email, $firstName,$lastName, $institution, $studentSchoolId, $teamLeader,
-          $projectName) {
+    public static function registerStudent($username, $password, $email, 
+                          $firstName,$lastName, $studentSchoolId, $teamLeader,
+                          $projectName, $institution) {
 
           $error = array();
           if ($username == "") {
@@ -83,29 +96,40 @@ final class UserManagementController {
             throw new InfinityMetricsException("There are errors in the input", $error);
         }
 
-        $student = new Student($firstName,$lastName);
-        $student->setInstitution($institution);
-
+        $student = new Student();
+        $student->setFirstName($firstName);
+        $student->setLastName($lastName);
+        $student->setEmail($email);
+        $student->setJnUsername($username);
+        $student->setJnPassword($password);
         $student->setStudentId($studentSchoolId);
 
+        try {
+            $inst = PersistentBaseInstitutionPeer::retrieveByAbbreviation($institution);
 
-       //$orm->save($student);
-        //$student->save();
+            $student->setInstitution($inst);
+            $student->save();
 
+        } catch (Exception $e) {
+            $error["save_student"] = $e->getMessage();
+            throw new InfinityMetricsException("An error occurred while saving creating the student account.", $error);
+        }
         return $student;
     }
-/** this function is to implement the registration of Instructor
- *
- * @param <type> $userName
- * @param <type> $password
- * @param <type> $email
- * @param <type> $firstName
- * @param <type> $lastName
- * @param <type> $institution
- * @param <type> $projectName
- * @return <type>
- */
- public static function registerinstructor($userName, $password, $email, $firstName,$lastName,$institution,$projectName) {
+
+
+    /** this function is to implement the registration of Instructor
+     *
+     * @param <type> $userName
+     * @param <type> $password
+     * @param <type> $email
+     * @param <type> $firstName
+     * @param <type> $lastName
+     * @param <type> $institution
+     * @param <type> $projectName
+     * @return <type>
+     */
+     public static function registerinstructor($userName, $password, $email, $firstName,$lastName,$institution,$projectName) {
 
           $error = array();
           if ($userName == "") {
@@ -133,27 +157,16 @@ final class UserManagementController {
         if (count($error) > 0) {
             throw new InfinityMetricsException("There are errors in the input", $error);
         }
-       
+
         $instructor = new Instructor($firstName,$lastName);
         $instructor->setInstitution($institution);
         $instructor->setEmail($email);
         $instructor->setProjectName($projectName);
         $instructor->setUserName($userName);
         $instructor->setPassword($password);
-        
-
         return $instructor;
     }
-
-
 }
-
-
-
-
-
-
-
 ?>
 
 

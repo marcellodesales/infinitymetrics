@@ -78,7 +78,6 @@ class PersonalAgent {
         $this->session = new JNSessionImpl($this->user->getJnUsername(), $this->user->getJnPassword());
         $this->session->makeLogin(JNUrlBuilder::makeUserEditUrl());
     }
-
     /**
      * Verifies if the user has been authenticated on Java.net
      * @return boolean true if the UserEditWSImpl has been created.
@@ -86,11 +85,23 @@ class PersonalAgent {
     private function isUserAuthenticated() {
         return isset($this->userEditWSImpl);
     }
-
+    /**
+     * Starts the UserEditWSImp to enable the UserEdit methods
+     */
     private function startUserEditWSImplInstance() {
         if (!$this->isUserAuthenticated()){
             $this->userEditWSImpl = new JNUserEditImpl($this->session);
         }
+    }
+    /**
+     * @return if the user credentials are valid on Java.net. That is, if the user provided the correct
+     * Username and password for Java.net and can login
+     */
+    public function areUserCredentialsValidOnJN() {
+        if (!$this->isUserAuthenticated()){
+            $this->userEditWSImpl = new JNUserEditImpl($this->session);
+        }
+        return $this->userEditWSImpl->areUserCredentialsValid();
     }
     /**
      * @return string the user's email
