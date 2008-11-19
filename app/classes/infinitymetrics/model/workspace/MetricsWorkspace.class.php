@@ -1,6 +1,6 @@
 <?php
 
-require_once 'infinitymetrics/model/institution/Instructor.class.php';
+require_once 'infinitymetrics/orm/PersistentWorkspace.php';
 require_once 'infinitymetrics/model/workspace/Project.class.php';
 
 /**
@@ -9,56 +9,23 @@ require_once 'infinitymetrics/model/workspace/Project.class.php';
  * @author Andres Ardila
  */
 
-class MetricsWorkspace
+class MetricsWorkspace extends PersistentWorkspace
 {
-    private $creator;
-    private $description;
-    private $title;
-    private $state;
     private $projects;
 
     public function __construct() {
-        $this->state = 'NEW';
+        parent::__construct();
         $this->projects = array();
     }
 
-    public function builder(Instructor $creator, $description, $title, array $projects) {
-        $this->description = $description;
-        $this->title = $title;
-        $this->creator = $creator;
-        $this->projects = $projects;
-    }
-
-    public function getCreator() {
-        return $this->creator;
-    }
-
-    public function getDescription() {
-        return $this->description;
-    }
-    
-    public function getTitle() {
-        return $this->title;
-    }
-
-    public function getState() { 
-        return $this->state;
+    public function builder($creatorUserId, $description, $title) {
+        $this->setDescription($description);
+        $this->setTitle($title);
+        $this->setUserId($creatorUserId);
     }
 
     public function getProjects() {
         return $this->projects;
-    }
-
-    public function setCreator(Instructor $creator) {
-        $this->creator = $creator;
-    }
-
-    public function setDescription($description) {
-        $this->description = $description;
-    }
-
-    public function setTitle($title) {
-        $this->title = $title;
     }
 
     public function setProjects(array $projects) {
