@@ -9,10 +9,10 @@ require_once 'infinitymetrics/model/workspace/MetricsWorkspace.class.php';
  */
 class MetricsWorkspaceController
 {    
-    public function createWorkspace($user_id, $title, $description)
+    public function createWorkspace($jn_username, $title, $description)
     {
-        if ($user_id == '' || $user_id == NULL) {
-            throw new Exception('The user_id is empty');
+        if ($jn_username == '' || $jn_username == NULL) {
+            throw new Exception('The java.net username is empty');
         }
         else if ($title == '' || $title == NULL) {
             throw new Exception('The title is empty');
@@ -21,17 +21,17 @@ class MetricsWorkspaceController
             throw new Exception('The description is empty');
         }
         else {
-            $user = PersistentUserPeer::retrieveByPK($user_id);
+            $user = PersistentUserPeer::retrieveByJNUsername($jn_username);
 
             if ($user == NULL) {
-                throw new Exception('The user_id does not exist');
+                throw new Exception('The java.net username does not exist');
             }
             if ($user->getType() != 'I') {
-                throw new Exception('The user_id does not correspond to an Instructor');
+                throw new Exception('The java.net username does not correspond to an Instructor');
             }
 
             $ws = new PersistentWorkspace();
-            $ws->setUserId($user_id);
+            $ws->setUserId( $user->getUserId() );
             $ws->setTitle($title);
             $ws->setDescription($description);
             $ws->save();
@@ -65,26 +65,26 @@ class MetricsWorkspaceController
         return $ws;
     }
 
-    public function retrieveWorkspaceCollection($user_id) {
-        if ($user_id == '' || $user_id == NULL) {
-            throw new Exception('The user_id is empty');
+    public function retrieveWorkspaceCollection($jn_username) {
+        if ($jn_username == '' || $jn_username == NULL) {
+            throw new Exception('The java.net username is empty');
         }
         else {
-            $user = PersistentUserPeer::retrieveByPK($user_id);
+            $user = PersistentUserPeer::retrieveByJNUsername($jn_username);
 
             if ($user == NULL) {
-                throw new Exception('The user_id does not exist');
+                throw new Exception('The java.net username does not exist');
             }
 
             $workspaces = array( 'OWN' => array(), 'SHARED' => array() );
             
             $wsCriteria = new Criteria();
-            $wsCriteria->add(PersistentWorkspacePeer::USER_ID, $user_id);
+            $wsCriteria->add(PersistentWorkspacePeer::USER_ID, $user->getPrimaryKey());
             
             $workspaces['OWN'] = PersistentWorkspacePeer::doSelect($wsCriteria);
 
             $wsShareCriteria = new Criteria();
-            $wsShareCriteria->add(PersistentWorkspaceSharePeer::USER_ID, $user_id);
+            $wsShareCriteria->add(PersistentWorkspaceSharePeer::USER_ID, $user->getPrimaryKey() );
 
             $workspaceShares = PersistentWorkspaceSharePeer::doSelect($wsShareCriteria);
 
@@ -108,12 +108,12 @@ class MetricsWorkspaceController
         
     }
     
-    public function shareWorkspace($workspace_id, $userIdWithWhomToShareWorkspace) {
+    public function shareWorkspace($workspace_id, $jnUsernameWithWhomToShareWorkspace) {
         if ($workspace_id == '') {
             throw new Exception('The workspace_id is empty');
         }
-        if ($userIdWithWhomToShareWorkspace == '') {
-            throw new Exception('The user_id is empty');
+        if ($jnUsernameWithWhomToShareWorkspace == '') {
+            throw new Exception('The java.net username is empty');
         }
         if (PersistentWorkspacePeer::retrieveByPK($workspace_id) == NULL) {
             throw new Exception('The workspace_id does not exist');
@@ -122,10 +122,10 @@ class MetricsWorkspaceController
         $wss = new PersistentWorkspaceShare();
         $wss->setWorkspaceId($workspace_id);
 
-        $user = PersistentUserPeer::retrieveByPK($userIdWithWhomToShareWorkspace);
+        $user = PersistentUserPeer::retrieveByJNUsername($jnUsernameWithWhomToShareWorkspace);
 
         if ($user == NULL){
-            throw new Exception('The user_id does not exist');
+            throw new Exception('The java.net username does not exist');
         }
 
         $wss->setUserId($user->getUserId());
