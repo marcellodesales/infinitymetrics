@@ -15,27 +15,76 @@ require_once('infinitymetrics/controller/MetricsWorkspaceController.php');
 class UC103Test extends PHPUnit_Framework_TestCase
 {
     private $ws;
+    private $user;
+    private $institution;
 
-    const WS_ID = 2;
-    const TITLE = "Updated Title";
-    const DESCRIPTION = "Updated Description";
+    const USERNAME = 'johntheteacher';
+    const ABBREVIATION = 'FAU';
+    const TITLE = 'New Title';
+    const DESCRIPTION = 'New Description';
+    const NEW_TITLE = "Updated Title";
+    const NEW_DESCRIPTION = "Updated Description";
+
 
     public function setUp() {
         parent::setUp();
 
-        $this->ws = PersistentWorkspacePeer::retrieveByPK(self::WS_ID);
+        $this->user = PersistentUserPeer::retrieveByJNUsername(self::USERNAME);
+
+        if ($this->user == NULL )
+        {
+            $this->user = new User();
+            $this->user->setJnUsername(self::USERNAME);
+            $this->user->setJnPassword('password');
+            $this->user->setFirstName('John');
+            $this->user->setLastName('Instructor');
+            $this->user->setEmail('johnc@institution.edu');
+            $this->user->setType('I');
+
+            $criteria = new Criteria();
+            $criteria->add(PersistentInstitutionPeer::ABBREVIATION, self::ABBREVIATION);
+
+            $institutions = PersistentInstitutionPeer::doSelect($criteria);
+
+            if($institutions == NULL)
+            {
+                $institution = new Institution();
+                $institution->setAbbreviation(self::ABBREVIATION);
+                $institution->setCity('Boca Raton');
+                $institution->setCountry('USA');
+                $institution->setName('Florida Atlantic University');
+                $institution->setStateProvince('FL');
+                $institution->save();
+            }
+            else {
+                $institution = $institutions[0];
+            }
+
+            $this->user->setInstitution($institution);
+            $this->user->save();
+        }
+
+        if ($this->institution == NULL) {
+            $this->institution = $this->user->getInstitution();
+        }
+
+        $this->ws = MetricsWorkspaceController::createWorkspace(
+            $this->user->getUserId(),
+            self::TITLE,
+            self::DESCRIPTION
+        );
     }
 
     public function testUpdateProfile() {
         try {
             $this->ws = MetricsWorkspaceController::UpdateWorkspaceProfile(
-                self::WS_ID, self::TITLE, self::DESCRIPTION
+                $this->ws->getWorkspaceId(), self::NEW_TITLE, self::NEW_DESCRIPTION
             );
 
             $this->assertNotNull($this->ws);
             $this->assertTrue($this->ws instanceof PersistentWorkspace);
-            $this->assertEquals(self::TITLE, $this->ws->getTitle());
-            $this->assertEquals(self::DESCRIPTION, $this->ws->getDescription());
+            $this->assertEquals(self::NEW_TITLE, $this->ws->getTitle());
+            $this->assertEquals(self::NEW_DESCRIPTION, $this->ws->getDescription());
         }
         catch (Exception $e) {
             $this->fail('Exception occurred: '.$e->getMessage());
@@ -56,7 +105,7 @@ class UC103Test extends PHPUnit_Framework_TestCase
     public function testExceptionInexistentWorkspaceId() {
         try {
             $this->ws = MetricsWorkspaceController::UpdateWorkspaceProfile(
-                '999999', self::TITLE, self::DESCRIPTION
+                '999999', self::NEW_TITLE, self::NEW_DESCRIPTION
             );
         }
         catch (Exception $e) {
