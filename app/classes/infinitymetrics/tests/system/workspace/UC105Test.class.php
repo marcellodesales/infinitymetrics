@@ -60,7 +60,7 @@ class UC105Test extends PHPUnit_Framework_TestCase
         }
         else {
             $this->ws = MetricsWorkspaceController::createWorkspace(
-                    $this->user1->getUserId(), $title, $description
+                    $this->user1->getJnUsername(), $title, $description
             );
         }
     }

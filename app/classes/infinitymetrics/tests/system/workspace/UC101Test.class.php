@@ -66,24 +66,20 @@ class UC101Test extends PHPUnit_Framework_TestCase
         }
 
         $this->ws = MetricsWorkspaceController::createWorkspace(
-            $this->user->getUserId(),
+            $this->user->getJnUsername(),
             self::TITLE,
             self::DESCRIPTION
         );
-
     }
 
     public function testViewWorkspace() {
-        $this->assertEquals(PersistentUserPeer::retrieveByJNUsername(
-                self::USERNAME),
-                $this->user
+        $this->assertEquals(
+            PersistentUserPeer::retrieveByJNUsername(self::USERNAME),
+            $this->user
         );
         $this->assertEquals(self::DESCRIPTION, $this->ws->getDescription());
         $this->assertEquals(self::TITLE, $this->ws->getTitle());
         $this->assertEquals('NEW', $this->ws->getState());
     }
-
-
-
 }
 ?>

@@ -81,7 +81,7 @@ class UC104Test extends PHPUnit_Framework_TestCase
         }
         else {
             $this->ws = MetricsWorkspaceController::createWorkspace(
-                    $this->user1->getUserId(), $title, $description
+                    $this->user1->getJnUsername(), $title, $description
             );
         }
     }
@@ -97,7 +97,7 @@ class UC104Test extends PHPUnit_Framework_TestCase
             if ($wss == NULL) {
                 MetricsWorkspaceController::shareWorkspace(
                     $this->ws->getWorkspaceId(),
-                    $this->user2->getUserId()
+                    $this->user2->getJnUsername()
                 );
             }
 
@@ -123,7 +123,7 @@ class UC104Test extends PHPUnit_Framework_TestCase
     public function testExemptionWorkspaceIDEmpty() {
         try {
             MetricsWorkspaceController::shareWorkspace("",
-                $this->user2->getUserId() );
+                $this->user2->getJnUsername() );
         }
         catch (Exception $e) {
             return;
@@ -132,10 +132,9 @@ class UC104Test extends PHPUnit_Framework_TestCase
         $this->fail('Empty params expects an exception');
     }
 
-    public function testExemptionUserIdWithWhomToShareWorkspaceEmpty() {
+    public function testExemptionUserJnUsernameWithWhomToShareWorkspaceEmpty() {
         try {
-            MetricsWorkspaceController::shareWorkspace($this->ws->getWorkspaceId(),
-                "");
+            MetricsWorkspaceController::shareWorkspace($this->ws->getWorkspaceId(), "");
         }
         catch (Exception $e) {
             return;
@@ -147,16 +146,16 @@ class UC104Test extends PHPUnit_Framework_TestCase
     public function testExemptionInexistentWorkspaceId() {
         try {
             MetricsWorkspaceController::shareWorkspace('99999',
-                $this->user2->getUserId() );
+                $this->user2->getJnUsername() );
         }
         catch (Exception $e) {
             return;
         }
 
-        $this->fail('Inexistent UserId expects an exception');
+        $this->fail('Inexistent User_Jn_Username expects an exception');
     }
 
-    public function testExemptionInexistentUserIdWithWhomToShareWorkspaceEmpty() {
+    public function testExemptionInexistentJnUsernameWithWhomToShareWorkspaceEmpty() {
         try {
             MetricsWorkspaceController::shareWorkspace($this->ws->getWorkspaceId(),
                 'asdfgjh' );
@@ -165,7 +164,7 @@ class UC104Test extends PHPUnit_Framework_TestCase
             return;
         }
 
-        $this->fail('Inexistent UserId expects an exception');
+        $this->fail('Inexistent Jn_Username expects an exception');
     }
 }
 

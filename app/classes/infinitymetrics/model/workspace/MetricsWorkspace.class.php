@@ -19,9 +19,9 @@ class MetricsWorkspace extends PersistentWorkspace
     }
 
     public function builder($creatorUserId, $description, $title) {
+        $this->setUserId($creatorUserId);
         $this->setDescription($description);
         $this->setTitle($title);
-        $this->setUserId($creatorUserId);
     }
 
     public function getProjects() {
@@ -33,15 +33,15 @@ class MetricsWorkspace extends PersistentWorkspace
     }
 
     public function makeActive() {
-        $this->state = 'ACTIVE';
+        $this->setState('ACTIVE');
     }
 
     public function makeInactive() {
-        $this->state = 'INACTIVE';
+        $this->setState('INACTIVE');
     }
 
     public function makePaused() {
-        $this->state = 'PAUSED';
+        $this->setState('PAUSED');
     }
 
     public function addProject(Project $project) {

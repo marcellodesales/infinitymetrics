@@ -68,7 +68,7 @@ class UC102Test extends PHPUnit_Framework_TestCase
         
         for ($i = 0; $i < 5; $i++) {
             $ws = MetricsWorkspaceController::createWorkspace(
-                $this->user->getUserId(),
+                $this->user->getJnUsername(),
                 self::DESCRIPTION.$i,
                 self::TITLE.$i
             );
@@ -86,14 +86,14 @@ class UC102Test extends PHPUnit_Framework_TestCase
             $user->save();
 
             $ws = MetricsWorkspaceController::createWorkspace(
-                $user->getUserId(),
+                $user->getJnUsername(),
                 'Shared '.self::DESCRIPTION.$j,
                 'Shared '.self::TITLE.$j
             );
             
             MetricsWorkspaceController::shareWorkspace(
                 $ws->getWorkspaceId(),
-                $this->user->getUserId()
+                $this->user->getJnUsername()
             );
         }
     }
@@ -101,7 +101,7 @@ class UC102Test extends PHPUnit_Framework_TestCase
     public function testRetreiveWorkspaceCollection() {
         try {
             $this->wsCollection = MetricsWorkspaceController::retrieveWorkspaceCollection(
-                $this->user->getUserId() );
+                $this->user->getJnUsername() );
             
             $this->assertNotNull($this->wsCollection);
             $this->assertTrue(is_array($this->wsCollection));

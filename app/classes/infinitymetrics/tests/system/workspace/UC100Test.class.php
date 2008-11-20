@@ -67,7 +67,7 @@ class UC100Test extends PHPUnit_Framework_TestCase
             $description = 'New description';
 
             $this->ws = MetricsWorkspaceController::createWorkspace(
-                $this->user->getUserId(), self::TITLE, self::DESCRIPTION
+                $this->user->getJnUsername(), self::TITLE, self::DESCRIPTION
             );
             $this->assertNotNull($this->ws);
             $this->assertEquals(
