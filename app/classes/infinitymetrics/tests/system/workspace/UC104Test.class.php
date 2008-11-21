@@ -85,6 +85,7 @@ class UC104Test extends PHPUnit_Framework_TestCase
 
     public function testShareWorkspace() {
         try {
+            PersistentWorkspaceSharePeer::doDeleteAll();
             $criteria = new Criteria();
             $criteria->add(PersistentWorkspaceSharePeer::WORKSPACE_ID, $this->ws->getWorkspaceId());
             $criteria->add(PersistentWorkspaceSharePeer::USER_ID, $this->user2->getUserId());
@@ -162,6 +163,21 @@ class UC104Test extends PHPUnit_Framework_TestCase
         }
 
         $this->fail('Inexistent Jn_Username expects an exception');
+    }
+
+    public function testExemptionWorkspaceAlreadyBeingShared() {
+        try {
+            PersistentWorkspaceSharePeer::doDeleteAll();
+            MetricsWorkspaceController::shareWorkspace($this->ws->getWorkspaceId(),
+                $this->user2->getJnUsername() );
+            MetricsWorkspaceController::shareWorkspace($this->ws->getWorkspaceId(),
+                $this->user2->getJnUsername() );
+        }
+        catch (Exception $e) {
+            return;
+        }
+
+        $this->fail('Workspace Already Shared expects an exception');
     }
 }
 
