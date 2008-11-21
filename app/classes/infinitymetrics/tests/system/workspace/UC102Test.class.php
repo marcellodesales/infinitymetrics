@@ -118,10 +118,7 @@ class UC102Test extends PHPUnit_Framework_TestCase
             }
             
             foreach ($this->wsCollection['SHARED'] as $ws) {
-                $this->assertTrue(
-                    $ws->isSharedWithUser(
-                        $ws->getWorkspaceId(), $this->user->getUserId())
-                );
+                $this->assertTrue( $ws->isSharedWithUser($this->user->getUserId()) );
                 $this->assertTrue($ws instanceof PersistentWorkspace);
             }
         }
