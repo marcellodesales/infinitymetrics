@@ -31,47 +31,41 @@ class PersistentWorkspace extends PersistentBaseWorkspace {
 		parent::__construct();
 	}
 
-    public function isShared($workspace_id) {
-        if ($workspace_id == '' || $workspace_id == NULL) {
-            throw new Exception('workspace_id is empty');
-        }
-        else {
-            $ws = PersistentWorkspacePeer::retrieveByPK($workspace_id);
-
-            if ($ws == NULL) {
-                throw new Exception('workspace_id does not exist');
-            }
-            else {
-                $wsShares = $ws->getWorkspaceShares();
-
-                if ($wsShares == NULL) {
-                    return false;
-                }
-                else {
-                    return true;
-                }
-            }
-        }
-    }
-
-    public function isSharedWithUser($workspace_id, $user_id) {
-        if ($workspace_id == '' || $workspace_id == NULL) {
-            throw new Exception('workspace_id is empty');
-        }
-        if ($user_id == '' || $user_id == NULL) {
-            throw new Exception('user_id is empty');
+    public function isShared() {
+        if ($this->workspace_id == '' || $this->workspace_id == NULL) {
+            throw new Exception('workspace is empty');
         }
 
-        $ws = PersistentWorkspacePeer::retrieveByPK($workspace_id);
+        $criteria = new Criteria();
+        $criteria->add(PersistentWorkspaceSharePeer::WORKSPACE_ID, $this->workspace_id);
 
-        if ($ws == NULL) {
-            throw new Exception('workspace_id does not exist');
-        }
-        if ( !$ws->isShared($workspace_id) ) {
+        $wsShares = PersistentWorkspaceSharePeer::doSelect($criteria);
+
+        if ($wsShares == NULL) {
             return false;
         }
         else {
-            $wsShares = $ws->getWorkspaceShares();
+            return true;
+        }
+    }
+
+    public function isSharedWithUser($user_id) {
+        if ($this->workspace_id == '' || $this->workspace_id == NULL) {
+            throw new Exception('workspace is empty');
+        }
+        if ( PersistentUserPeer::retrieveByPK($user_id) == NULL ) {
+            throw new Exception('user does not exist');
+        }
+
+        if ( ! $this->isShared() ) {
+            return false;
+        }
+        else {
+            $criteria = new Criteria();
+            $criteria->add(PersistentWorkspaceSharePeer::WORKSPACE_ID, $this->workspace_id);
+            $criteria->add(PersistentWorkspaceSharePeer::USER_ID, $user_id);
+
+            $wsShares = PersistentWorkspaceSharePeer::doSelect($criteria);
 
             foreach ($wsShares as $wss) {
                 if ($wss->getUserId() == $user_id) {
