@@ -5,6 +5,8 @@ Propel::init("infinitymetrics/orm/config/om-conf.php");
 
 require_once('PHPUnit/Framework.php');
 require_once('infinitymetrics/controller/MetricsWorkspaceController.php');
+require_once('infinitymetrics/model/user/User.class.php');
+require_once('infinitymetrics/model/institution/Institution.class.php');
 
 /**
  * Description of UC103Test
