@@ -13,36 +13,51 @@
 
 <!-- Layout -->
     <div id="page-wrapper"><div id="page-wrapper-content">
-            <div id="header">
-        <div id="go-home">
-          <a href="http://infinitymetrics.local.net/rootcandy/template/edit.html">Go Back to Homepage</a>        </div>
-        <div id="admin-links">
-          <a href="http://infinitymetrics.local.net/template/edit.html" class="user-name">demo</a> |
-          <a href="http://infinitymetrics.local.net/template/edit.html">Logout</a>        </div>
-        <div id="header-title">
-          infinitymetrics test        </div>
-      </div>
-                  <div id="navigation">
-        <ul><li><a href="http://infinitymetrics.local.net/rootcandy/admin">
-                    <img src="edit_files/logo.png" alt="" title="" width="32" height="32" border="0">
-                    <br>Workspace</a></li>
-            <li><a href="http://infinitymetrics.local.net/rootcandy/admin/reports">
-                    <img src="edit_files/admin-reports.png" alt="" title="" width="32" height="32" border="0">
-                    <br>Reports</a></li>
-            <li><a href="http://infinitymetrics.local.net/rootcandy/node/add">
-                    <img src="edit_files/node-add.png" alt="" title="" width="32" height="32" border="0">
-                    <br>Custom Events</a></li>
-            <li id="current"><a href="http://infinitymetrics.local.net/rootcandy/admin/user">
-                    <img src="edit_files/admin-user.png" alt="" title="" width="32" height="32" border="0">
-                    <br>Users</a></li>
-            <li><a href="http://infinitymetrics.local.net/rootcandy/admin/settings">
-                    <img src="edit_files/admin-settings.png" alt="" title="" width="32" height="32" border="0">
-                    <br>Configuration</a></li>
-            <li><a href="http://infinitymetrics.local.net/rootcandy/admin/help">
-                    <img src="edit_files/admin-help.png" alt="" title="" width="32" height="32" border="0">
-                    <br>Help</a></li>
-       </ul>
-      <!img src="/static/images/infinity.png" width="32" height="32" alt="rootcandy test" id="logo">      </div>
+        <div id="header">
+            <div id="go-home">
+                <a href="http://infinitymetrics.local.net/rootcandy/template/edit.html">Go Back to Homepage</a>
+            </div>
+            <div id="admin-links">
+                <a href="http://infinitymetrics.local.net/template/edit.html" class="user-name">demo</a> |
+                <a href="http://infinitymetrics.local.net/template/edit.html">Logout</a>
+            </div>
+            <div id="header-title">
+                infinitymetrics test
+            </div>
+        </div>
+            <div id="navigation">
+                <ul>
+                    <li><a href="http://infinitymetrics.local.net/workspace/workspaceCollection.php">
+                            <img src="edit_files/logo.png" alt="" title="" width="32" height="32" border="0">
+                            <br>Workspace</a>
+                    </li>
+                    <li><a href="http://infinitymetrics.local.net/report/">
+                            <img src="edit_files/admin-reports.png" alt="" title="" width="32" height="32" border="0">
+                            <br>Reports</a>
+                    </li>
+                    <li><a href="http://infinitymetrics.local.net/rootcandy/node/add">
+                            <img src="edit_files/node-add.png" alt="" title="" width="32" height="32" border="0">
+                            <br>Custom Events</a>
+                    </li>
+                    <li id="current"><a href="http://infinitymetrics.local.net/rootcandy/admin/user">
+                            <img src="edit_files/admin-user.png" alt="" title="" width="32" height="32" border="0">
+                            <br>Users</a>
+                    </li>
+                    <li><a href="http://infinitymetrics.local.net/rootcandy/admin/settings">
+                            <img src="edit_files/admin-settings.png" alt="" title="" width="32" height="32" border="0">
+                            <br>Configuration</a>
+                    </li>
+                    <li><a href="http://infinitymetrics.local.net/rootcandy/admin/help">
+                            <img src="edit_files/admin-help.png" alt="" title="" width="32" height="32" border="0">
+                            <br>Help</a>
+                    </li>
+                </ul>
+                <!img src="/static/images/infinity.png" width="32" height="32" alt="rootcandy test" id="logo">
+            </div>
 
-      <div id="breadcrumb" class="alone">
-        <h2 id="title">Home</h2>        <div class="breadcrumb"><a href="http://infinitymetrics.local.net/rootcandy/">Home</a> » <a href="http://infinitymetrics.local.net/rootcandy/node/2">User Profile</a></div>      </div>
+            <div id="breadcrumb" class="alone">
+                <h2 id="title">Home</h2>
+                <div class="breadcrumb">
+                    <a href="http://infinitymetrics.local.net/rootcandy/">Home</a> » <a href="http://infinitymetrics.local.net/rootcandy/node/2">User Profile</a>
+                </div>
+            </div>
