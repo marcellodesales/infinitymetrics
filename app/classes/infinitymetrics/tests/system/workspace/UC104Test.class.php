@@ -21,13 +21,10 @@ class UC104Test extends PHPUnit_Framework_TestCase
 
     const USERNAME1 = 'mmendoll';
     const USERNAME2 = 'aardila';
-    //const TITLE = 'New Title';
-    //const DESCRIPTION = 'New Description';
+    const TITLE = 'New Title';
+    const DESCRIPTION = 'New Description';
 
     public function setUp() {
-        $title = 'new title';
-        $description = 'new description';
-
         parent::setUp();
 
         $this->user1 = PersistentUserPeer::retrieveByJNUsername(self::USERNAME1);
@@ -81,7 +78,7 @@ class UC104Test extends PHPUnit_Framework_TestCase
         }
         else {
             $this->ws = MetricsWorkspaceController::createWorkspace(
-                    $this->user1->getJnUsername(), $title, $description
+                    $this->user1->getJnUsername(), self::TITLE, self::DESCRIPTION
             );
         }
     }

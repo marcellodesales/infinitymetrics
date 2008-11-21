@@ -69,8 +69,8 @@ class UC102Test extends PHPUnit_Framework_TestCase
         for ($i = 0; $i < 5; $i++) {
             $ws = MetricsWorkspaceController::createWorkspace(
                 $this->user->getJnUsername(),
-                self::DESCRIPTION.$i,
-                self::TITLE.$i
+                self::TITLE.$i,
+                self::DESCRIPTION.$i
             );
         }
 
@@ -87,8 +87,8 @@ class UC102Test extends PHPUnit_Framework_TestCase
 
             $ws = MetricsWorkspaceController::createWorkspace(
                 $user->getJnUsername(),
-                'Shared '.self::DESCRIPTION.$j,
-                'Shared '.self::TITLE.$j
+                'Shared '.self::TITLE.$j,
+                'Shared '.self::DESCRIPTION.$j
             );
             
             MetricsWorkspaceController::shareWorkspace(
