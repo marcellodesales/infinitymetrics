@@ -29,7 +29,6 @@ require_once 'infinitymetrics/model/institution/Student.class.php';
 require_once 'infinitymetrics/model/user/PersonalAgent.class.php';
 require_once 'infinitymetrics/model/institution/Instructor.class.php';
 require_once 'infinitymetrics/model/institution/Institution.class.php';
-require_once 'infinitymetrics/orm/om/PersistentBaseInstitutionPeer.php';
 
 /*
  * @author: Marcello de Sales <ddslkd>
@@ -37,14 +36,39 @@ require_once 'infinitymetrics/orm/om/PersistentBaseInstitutionPeer.php';
  */
 final class UserManagementController {
 
+    /**
+     * @param <type> $username is the java.net username of the user
+     * @param <type> $password is the java.net passworld of the user
+     * @return boolean whether the user has passed the correct credentials or not.
+     */
     public static function areUserCredentialsValidOnJN($username, $password) {
+        $agent = UserManagementController::makeAgentForUserCredentials($username, $password);
+        return $agent->areUserCredentialsValidOnJN();
+    }
+    /**
+     * Builds a new PersonalAgent for a given credentials.
+     * @param string $username is the username of the user on Java.net
+     * @param string $password is the password of the user on Java.net
+     * @return PersonalAgent is the agent to be used on the website.
+     */
+    public static function makeAgentForUserCredentials($username, $password) {
         $user = new User();
         $user->setJnUsername($username);
         $user->setJnPassword($password);
         $agent = new PersonalAgent($user);
-        return $agent->areUserCredentialsValidOnJN();
+        return $agent;
     }
-
+    /**
+     * Authenticate the user on Java.net using the username and password.
+     * @param string $username is the username of the user on Java.net
+     * @param string $password is the password of the user on Java.net
+     * @return PersonalAgent the agent representation. It can be used to retrieve information about the user's
+     * profile such as email address, full-name, if it's successfully logged-in, etc.
+     */
+    public static function authenticateJNUser($username, $password) {
+        $agent = UserManagementController::makeAgentForUserCredentials($username, $password);
+        return $agent;
+    }
    /**
     * This method implements the registration of Student
     *
@@ -53,70 +77,73 @@ final class UserManagementController {
     * @param string $email
     * @param string $firstName
     * @param string $lastName
-    * @param string $institution
     * @param string $studentSchoolId
-    * @param string $teamLeader
     * @param string $projectName
-    * @return string
+    * @return string $institutionAbbreviation
     */
     public static function registerStudent($username, $password, $email, 
-                          $firstName,$lastName, $studentSchoolId, $teamLeader,
-                          $projectName, $institution) {
-
-          $error = array();
-          if ($username == "") {
-              $error["username"] = "The username is empty";
-          }
-          if ($password == "") {
-              $error["password"] = "The password is empty";
-          }
-          if ($firstName == "") {
-              $error["firstName"] = "The firstName is empty";
-          }
-          if ($lastName == "") {
-              $error["lastName"] = "The lastName is empty";
-          }
-          if ($email == "") {
-              $error["email"] = "The email is empty";
-          }
-          if ($studentSchoolId == "") {
-              $error["studentSchoolId"] = "The student school Id is empty";
-          }
-          if ($projectName == "") {
-              $error["projectName"] = "The projectName is empty";
-          }
-          if ($institution == "") {
-              $error["institution"] = "The institution is empty";
-          }
-          if ($teamLeader == "") {
-              $error["teamleader"] = "The teamLeader is empty";
-          }
+                          $firstName,$lastName, $studentSchoolId, $projectName, 
+                          $institutionAbbreviation, $isLeader) {
+        $error = array();
+        if (!isset($username) || $username == "") {
+            $error["username"] = "The username is empty";
+        }
+        if (!isset($password) || $password == "") {
+            $error["password"] = "The password is empty";
+        }
+        if (!isset($firstName) || $firstName == "") {
+            $error["firstName"] = "The firstName is empty";
+        }
+        if (!isset($lastName) || $lastName == "") {
+            $error["lastName"] = "The lastName is empty";
+        }
+        if (!isset($email) || $email == "") {
+            $error["email"] = "The email is empty";
+        }
+        if (!isset($studentSchoolId) || $studentSchoolId == "") {
+            $error["studentSchoolId"] = "The student school Id is empty";
+        }
+        if (!isset($projectName) || $projectName == "") {
+            $error["projectName"] = "The java.net project name is empty";
+        }
+        if (!isset($institutionAbbreviation) || $institutionAbbreviation == "") {
+            $error["institution"] = "The institution is empty";
+        }
+        if (!isset($isLeader)) {
+            $error["isLeader"] = "The information if the the student is a leader is not given";
+        }
 
         if (count($error) > 0) {
             throw new InfinityMetricsException("There are errors in the input", $error);
         }
-
-        $student = new Student();
-        $student->setFirstName($firstName);
-        $student->setLastName($lastName);
-        $student->setEmail($email);
-        $student->setJnUsername($username);
-        $student->setJnPassword($password);
-        $student->setStudentId($studentSchoolId);
-
+        
         try {
-            $inst = PersistentBaseInstitutionPeer::retrieveByAbbreviation($institution);
+            $inst = PersistentBaseInstitutionPeer::retrieveByAbbreviation($institutionAbbreviation);
+            $proj = PersistentBaseProjectPeer::retrieveByPK($projectName);
 
+            $student = new Student();
+            $student->setFirstName($firstName);
+            $student->setLastName($lastName);
+            $student->setEmail($email);
+            $student->setJnUsername($username);
+            $student->setJnPassword($password);
             $student->setInstitution($inst);
             $student->save();
+
+            $studProj = new PersistentStudentXProject();
+            $studProj->setStudentschoolid($studentSchoolId);
+            $studProj->setIsLeader($isLeader);
+            $studProj->setProject($proj);
+            $studProj->setUser($student);
+            $studProj->save();
 
         } catch (Exception $e) {
             $error["save_student"] = $e->getMessage();
             throw new InfinityMetricsException("An error occurred while saving creating the student account.", $error);
         }
+
         return $student;
     }
-
 
     /** this function is to implement the registration of Instructor
      *

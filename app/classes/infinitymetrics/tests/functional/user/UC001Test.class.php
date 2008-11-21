@@ -18,25 +18,46 @@
  * and is licensed under the Berkeley Software Distribution (BSD).
  * For more information please see <http://ppm-8.dev.java.net>.
  */
+
+require_once 'propel/Propel.php';
+Propel::init('infinitymetrics/orm/config/om-conf.php');
+
 require_once 'PHPUnit/Framework.php';
 require_once 'infinitymetrics/controller/UserManagementController.class.php';
 /**
  * Tests for the Use Case UC001 - UC001: A Student registers into the system.
  *
+ * Another assumption for the system tests for the user is tha the authentication will happen in another moment of
+ * the execution. In this way, the PRE-CONDITION for these scenarios is tha the user has been authenticated over
+ * Java.net already.
+ *
  * @author Marcello de Sales <marcello.sales@gmail.com>
  */
 class UC001Test extends PHPUnit_Framework_TestCase {
 
-    private $student;
-
-    const USERNAME = "marcellosales";
-    const PASSWORD = "password";
+    private $institution;
+    private $project;
 
     /**
      * Setting up is run ALWAYS BEFORE the execution of a test method.
      */
     protected function setUp() {
         parent::setUp();
+        PersistentInstitutionPeer::doDeleteAll();
+        PersistentProjectPeer::doDeleteAll();
+
+        $this->institution = new Institution();
+        $this->institution->setName('San Francisco State University');
+        $this->institution->setAbbreviation("SFSU");
+        $this->institution->setCity('San Francisco');
+        $this->institution->setStateProvince('CA');
+        $this->institution->setCountry('USA');
+        $this->institution->save();
+
+        $this->project = new PersistentProject();
+        $this->project->setProjectJnName("ppm-8");
+        $this->project->setSummary("Infinity Metrics");
+        $this->project->save();
     }
     /**
      * The test of a successful registration when a student doesn't exist and
@@ -44,12 +65,33 @@ class UC001Test extends PHPUnit_Framework_TestCase {
      */
     public function testSuccessfulStudentRegistration() {
         try {
+            //Saving the student leader
             $createdStudent = UserManagementController::registerStudent(
-                self::USERNAME, self::PASSWORD, self::EMAIL, self::FIRSTNAME,
-                self::LASTNAME, self::INSTITUTION, self::STUDENT_ID,
-                self::TEAM_LEADER, self::PROJECT_NAME);
+                                    "username2", "password", "email@gmail.com", "firstNameLeader",
+                                    "lastNameLeader", "909663916", $this->project->getProjectJnName(),
+                                    $this->institution->getAbbreviation(), true);
             $this->assertNotNull($createdStudent, "The registered student is null");
             $this->assertTrue($createdStudent instanceof Student, "The registered student is null");
+
+            $stXProjec = PersistentStudentXProjectPeer::retrieveByPK($createdStudent->getUserId(),
+                                                                     $this->project->getProjectJnName());
+            $this->assertNotNull($stXProjec, "The relationship between student and project is null");
+            
+        } catch (InfinityMetricsException $ime){
+            $this->fail("The successful login scenario failed: " . $ime);
+        }
+
+        try {
+            //Saving the student leader        
+            $createdStudent = UserManagementController::registerStudent(
+                                    "username", "password", "email2@gmail.com", "firstNameNOTLeader",
+                                    "lastName", "909663916", $this->project->getProjectJnName(),
+                                    $this->institution->getAbbreviation(), false);
+            $this->assertNotNull($createdStudent, "The registered student is null");
+            $this->assertTrue($createdStudent instanceof Student, "The registered student is not an instance of Student");
+
+            $stXProjec = PersistentStudentXProjectPeer::retrieveByPK($createdStudent->getUserId(), $this->project->getProjectJnName());
+            $this->assertNotNull($stXProjec, "The relationship between student and project is null");
 
         } catch (InfinityMetricsException $ime){
             $this->fail("The successful login scenario failed: " . $ime);
@@ -62,9 +104,9 @@ class UC001Test extends PHPUnit_Framework_TestCase {
     public function testMissingFieldsStudentRegistration() {
         try {
             $missingNames = UserManagementController::registerStudent(
-                "", "", self::EMAIL, self::FIRSTNAME,
-                self::LASTNAME, self::INSTITUTION, self::STUDENT_ID,
-                self::TEAM_LEADER, self::PROJECT_NAME);
+                                    "username2", "password", "email@gmail.com", "",
+                                    "", "909663916", $this->project->getProjectJnName(),
+                                    $this->institution->getAbbreviation(), true);
 
             $this->fail("The exceptional login scenario failed with missing name");
         } catch (InfinityMetricsException $ime) {
@@ -77,9 +119,9 @@ class UC001Test extends PHPUnit_Framework_TestCase {
 
         try {
             $missingEmailandOthers = UserManagementController::registerStudent(
-                "", "", "", self::FIRSTNAME,
-                self::LASTNAME, self::INSTITUTION, self::STUDENT_ID,
-                self::TEAM_LEADER, self::PROJECT_NAME);
+                                    "", "", "", "ssss",
+                                    "sssss", "909663916", $this->project->getProjectJnName(),
+                                    $this->institution->getAbbreviation(), true);
 
             $this->fail("The exceptional login scenario failed with missing
                             username, password email");
@@ -94,17 +136,17 @@ class UC001Test extends PHPUnit_Framework_TestCase {
 
         try {
             $createdStudent = UserManagementController::registerStudent(
-                "", "", self::EMAIL, self::FIRSTNAME,
-                self::LASTNAME, self::INSTITUTION, self::STUDENT_ID,
-                "", "");
+                                    "username2", "password", "email@gmail.com", "333",
+                                    "34", "909663916", "",
+                                    $this->institution->getAbbreviation(), 0);
 
             $this->fail("The exceptional registration scenario failed for
                     missing project name, team leader and other fields");
         } catch (InfinityMetricsException $ime) {
             //$error["fieldName"] = "error message"
             $errorFields = $ime->getErrorList();
+            print_r($errorFields);
             $this->assertNotNull($errorFields);
-            $this->assertNotNull($errorFields["teamLeader"]);
             $this->assertNotNull($errorFields["projectName"]);
         }
     }
@@ -114,21 +156,32 @@ class UC001Test extends PHPUnit_Framework_TestCase {
      */
     public function testRegisterExistingStudentRegistration() {
         try {
+            //Saving the student leader
             $createdStudent = UserManagementController::registerStudent(
-                self::USERNAME, self::PASSWORD, self::EMAIL, self::FIRSTNAME,
-                self::LASTNAME, self::INSTITUTION, self::STUDENT_ID,
-                self::TEAM_LEADER, self::PROJECT_NAME);
+                                    "username2", "password", "email@gmail.com", "firstNameLeader",
+                                    "lastNameLeader", "909663916", $this->project->getProjectJnName(),
+                                    $this->institution->getAbbreviation(), true);
+
+            //Saving the student leader
+            $createdStudent = UserManagementController::registerStudent(
+                                    "username2", "password", "email@gmail.com", "firstNameLeader",
+                                    "lastNameLeader", "909663916", $this->project->getProjectJnName(),
+                                    $this->institution->getAbbreviation(), true);
+
             $this->fail("The exceptional registration failed for existing student");
         } catch (InfinityMetricsException $ime) {
             //$error["fieldName"] = "error message"
             $errorFields = $ime->getErrorList();
             $this->assertNotNull($errorFields);
-            $this->assertNotNull($errorFields["userExists"]);
+            $this->assertNotNull($errorFields["save_student"]);
         }
     }
 
     protected function tearDown() {
-        $this->user = null;
+        PersistentStudentXProjectPeer::doDeleteAll();
+        PersistentUserPeer::doDeleteAll();
+        PersistentInstitutionPeer::doDeleteAll();
+        PersistentProjectPeer::doDeleteAll();
     }
 }
 ?>
