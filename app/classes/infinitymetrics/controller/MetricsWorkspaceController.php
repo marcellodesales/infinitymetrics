@@ -125,7 +125,12 @@ class MetricsWorkspaceController
             throw new Exception('The java.net username does not exist');
         }
 
-        if ( PersistentWorkspace::isSharedWithUser($workspace_id, $jnUsernameWithWhomToShareWorkspace) )
+        $ws = PersistentWorkspacePeer::retrieveByPK($workspace_id);
+
+        if ($ws == NULL) {
+            throw new Exception('There is no workspace by that id');
+        }
+        if ( $ws->isSharedWithUser($user->getUserId()) )
         {
             throw new Exception('The workspace is already being shared');
         }
