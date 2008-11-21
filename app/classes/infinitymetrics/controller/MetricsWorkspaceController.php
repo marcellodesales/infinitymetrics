@@ -119,17 +119,21 @@ class MetricsWorkspaceController
             throw new Exception('The workspace_id does not exist');
         }
 
-        $wss = new PersistentWorkspaceShare();
-        $wss->setWorkspaceId($workspace_id);
-
         $user = PersistentUserPeer::retrieveByJNUsername($jnUsernameWithWhomToShareWorkspace);
 
         if ($user == NULL){
             throw new Exception('The java.net username does not exist');
         }
 
+        if ( PersistentWorkspace::isSharedWithUser($workspace_id, $jnUsernameWithWhomToShareWorkspace) )
+        {
+            throw new Exception('The workspace is already being shared');
+        }
+        $wss = new PersistentWorkspaceShare();
+        $wss->setWorkspaceId($workspace_id);
         $wss->setUserId($user->getUserId());
         $wss->save();
+        return;
     }
     
     public function updateWorkspaceProfile($workspace_id, $newTitle, $newDescription) {
