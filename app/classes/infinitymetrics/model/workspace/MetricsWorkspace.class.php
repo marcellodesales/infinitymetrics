@@ -25,11 +25,14 @@ class MetricsWorkspace extends PersistentWorkspace
     }
 
     public function getProjects() {
-        return $this->projects;
+        $critera = new Criteria();
+        $criteria->add(PersistentWorkpaceXProjectPeer::WORKSPACE_ID, $this->workspace_id);
+        
+        return $this->getWorkspaceXProjectsJoinProject($critera);
     }
 
     public function setProjects(array $projects) {
-        $this->projects = $projects;
+        //to be implemented
     }
 
     public function makeActive() {
@@ -45,7 +48,7 @@ class MetricsWorkspace extends PersistentWorkspace
     }
 
     public function addProject(Project $project) {
-        $this->projects[] = $project;
+        //to be implemented
     }
 }
 
