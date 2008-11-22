@@ -1,5 +1,5 @@
 <?php
-    include 'header-no-left-nav.php';
+    include '../template/header-no-left-nav.php';
 ?>
 
 
@@ -108,8 +108,10 @@ for ($j = 0; $j < 5; $j++) {
             </div>
             <div id="content">
 
+                <BR>
                 <h1>Current Workspaces</h1>
-                <BR><BR>
+                <BR>
+                
 
                 <div class="t"><div class="b"><div class="l"><div class="r"><div class="bl"><div class="br"><div class="tl"><div class="tr">
                     <div class="content-in">
@@ -123,7 +125,7 @@ for ($j = 0; $j < 5; $j++) {
                             echo "<ul>\n";
                             foreach($workspaces['OWN'] as $ws)
                             {
-                                echo "<li><a href=\"$path?workspace_id=".$ws->getWorkspaceId()."\">".$ws->getTitle()."</a></li>\n";
+                                echo "<li><a href=\"$path?type=own&workspace_id=".$ws->getWorkspaceId()."\">".$ws->getTitle()."</a></li>\n";
                             }
                             echo "</ul>\n";
                             
@@ -131,7 +133,7 @@ for ($j = 0; $j < 5; $j++) {
                             echo "<ul>\n";
                             foreach($workspaces['SHARED'] as $ws)
                             {
-                                echo "<li><a href=\"$path?workspace_id=".$ws->getWorkspaceId()."\">".$ws->getTitle()."</a></li>\n";
+                                echo "<li><a href=\"$path?type=shared&workspace_id=".$ws->getWorkspaceId()."\">".$ws->getTitle()."</a></li>\n";
                             }
                             echo "</ul>\n";
                         
@@ -151,5 +153,5 @@ for ($j = 0; $j < 5; $j++) {
         <BR>
       </div>
 <?php
-    include 'footer.php';
+    include '../template/footer.php';
 ?>

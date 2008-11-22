@@ -1,5 +1,4 @@
 <?php
-    print_r ($_POST);
     $showForm = true;
 
     if (isset($_POST['workspace_id']) && isset($_POST['jn_username_to_share_with']))
@@ -77,12 +76,15 @@
 
         }
     }//endif POST/GET vars are set
+    elseif (!isset($_POST['shareWS'])) {
+        $invalidArrivalPathFlag = true;
+    }
 
 ?>
 
 
 <?php
-    include 'header-no-left-nav.php';
+    include '../template/header-no-left-nav.php';
 ?>
     <div id="content-wrap">
         <div id="inside">
@@ -110,7 +112,10 @@
                 <div class="t"><div class="b"><div class="l"><div class="r"><div class="bl"><div class="br"><div class="tl"><div class="tr">
                     <div class="content-in">
                     <?php
-                        if ($showForm)
+                        if (isset($invalidArrivalPathFlag) && $invalidArrivalPathFlag) {
+                            echo 'Please go back to the <a href="workspaceCollection.php">Workspace Collection</a> to select a workspace to be shared.';
+                        }
+                        elseif ($showForm)
                         {
                             echo "<h3>Share Workspace</h3>
                         <form action=\"{$_SERVER['PHP_SELF']}\" accept-charset=\"UTF-8\" method=\"post\" id=\"node-form\">
@@ -121,7 +126,7 @@
                             <br /><br />
                             <input name=\"clear\" id=\"edit-delete\" value=\"Clear\" class=\"form-submit\" type=\"reset\">
                             <input name=\"submit\" id=\"edit-submit\" value=\"Submit\" class=\"form-submit\" type=\"submit\">
-                            <input name=\"workspace_id\" id=\"workspace_id\" value=\"{$_POST['workspace_id']}\" type=\"text\">
+                            <input name=\"workspace_id\" id=\"workspace_id\" value=\"{$_POST['workspace_id']}\" type=\"hidden\">
                         </form>";
                         }
                         else {
@@ -141,5 +146,5 @@
         
       </div>
 <?php
-    include 'footer.php';
+    include '../template/footer.php';
 ?>

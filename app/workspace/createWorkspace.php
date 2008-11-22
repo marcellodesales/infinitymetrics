@@ -71,7 +71,7 @@
 
 
 <?php
-    include 'header-no-left-nav.php';
+    include '../template/header-no-left-nav.php';
 ?>
     <div id="content-wrap">
         <div id="inside">
@@ -122,5 +122,5 @@
         <BR>
       </div>
 <?php
-    include 'footer.php';
+    include '../template/footer.php';
 ?>
