@@ -32,14 +32,15 @@
 ?>
 
 <?php
-    include '../template/header-no-left-nav.php';
+    include 'header-no-left-nav.php';
 ?>
     <div id="content-wrap">
         <div id="inside">
             <div id="sidebar-right">
                 <div id="block-user-3" class="block block-user">
                     <br />
-                    
+                    <h2>Sharing Information</h2>
+
                     <?php
                     
                         if ( isset($_GET['type']) && 
@@ -48,8 +49,6 @@
                         {
                             $wsShares = $ws->getWorkspaceShares();
                             
-                            echo "<h2>Sharing Information</h2>\n";
-
                             if ($wsShares == NULL) {
                                 echo "The workspace is not currently shared with any other user";
                             }
@@ -64,6 +63,10 @@
                                 echo "</ul>\n";
                                 echo "</div>\n</div>\n";
                             }
+                        }
+                        elseif (isset($_GET['type']) && $_GET['type'] == 'shared') {
+                            echo "This workspace is currently being shared with you by <b>".
+                                 $ws->getUser()->getJnUsername()."</b>\n";
                         }
                     ?>
                     
@@ -143,5 +146,5 @@
         <BR>
       </div>
 <?php
-    include '../template/footer.php';
+    include 'footer.php';
 ?>

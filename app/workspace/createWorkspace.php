@@ -58,7 +58,7 @@
             }
 
             if ($ws != NULL) {
-                header( 'Location: viewWorkspace.php?trackback=new&workspace_id='.$ws->getWorkspaceId() );
+                header( 'Location: viewWorkspace.php?trackback=new&type=own&workspace_id='.$ws->getWorkspaceId() );
             }
         }//endif POST vars are not empty strings
         else
@@ -71,7 +71,7 @@
 
 
 <?php
-    include '../template/header-no-left-nav.php';
+    include 'header-no-left-nav.php';
 ?>
     <div id="content-wrap">
         <div id="inside">
@@ -131,5 +131,5 @@
         <BR>
       </div>
 <?php
-    include '../template/footer.php';
+    include 'footer.php';
 ?>

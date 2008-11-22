@@ -130,7 +130,17 @@ if ($user->getWorkspaces() == NULL) {
                 <div class="t"><div class="b"><div class="l"><div class="r"><div class="bl"><div class="br"><div class="tl"><div class="tr">
                     <div class="content-in">
                         <?php
-                        
+
+                            function getStateColor($state) {
+                                switch ($state)
+                                {
+                                    case ('NEW'):       return "Blue"; break;
+                                    case ('ACTIVE'):    return "Green"; break;
+                                    case ('PAUSED'):    return "Orange"; break;
+                                    case ('INACTIVE'):  return "Red"; break;
+                                    default:            return NULL; break;
+                                }
+                            }
                             $wsCollection = MetricsWorkspaceController::retrieveWorkspaceCollection($user->getJnUsername());
 
                             $path = "viewWorkspace.php";
@@ -139,13 +149,7 @@ if ($user->getWorkspaces() == NULL) {
                             echo "<ul>\n";
                             foreach($wsCollection['OWN'] as $ws)
                             {
-                                switch ($ws->getState())
-                                {
-                                    case ('NEW'):       $color = "Blue"; break;
-                                    case ('ACTIVE'):    $color = "Green"; break;
-                                    case ('PAUSED'):    $color = "Orange"; break;
-                                    case ('INACTIVE'):  $color = "Red"; break;
-                                }
+                                $color = getStateColor($ws->getState());
                                 echo "<li>\n";
                                 echo "<a href=\"$path?type=own&workspace_id=".$ws->getWorkspaceId()."\">".$ws->getTitle()."</a>";
                                 echo " <small><b><span style=\"color:$color\">".$ws->getState()."</span></b></small>";
@@ -157,13 +161,7 @@ if ($user->getWorkspaces() == NULL) {
                             echo "<ul>\n";
                             foreach($wsCollection['SHARED'] as $ws)
                             {
-                                switch ($ws->getState())
-                                {
-                                    case ('NEW'):       $color = "Blue"; break;
-                                    case ('ACTIVE'):    $color = "Green"; break;
-                                    case ('PAUSED'):    $color = "Orange"; break;
-                                    case ('INACTIVE'):  $color = "Red"; break;
-                                }
+                                $color = getStateColor($ws->getState());
                                 echo "<li>\n";
                                 echo "<a href=\"$path?type=shared&workspace_id=".$ws->getWorkspaceId()."\">".$ws->getTitle()."</a>";
                                 echo " <small><b><span style=\"color:$color\">".$ws->getState()."</span></b></small>";
@@ -187,5 +185,5 @@ if ($user->getWorkspaces() == NULL) {
         <BR>
       </div>
 <?php
-    include '../template/footer.php';
+    include 'footer.php';
 ?>

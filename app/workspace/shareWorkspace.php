@@ -84,7 +84,7 @@
 
 
 <?php
-    include '../template/header-no-left-nav.php';
+    include 'header-no-left-nav.php';
 ?>
     <div id="content-wrap">
         <div id="inside">
@@ -146,5 +146,5 @@
         
       </div>
 <?php
-    include '../template/footer.php';
+    include 'footer.php';
 ?>
