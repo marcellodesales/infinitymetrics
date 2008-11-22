@@ -1,28 +1,34 @@
 <?php
 
-    require_once('propel/Propel.php');
-    Propel::init("infinitymetrics/orm/config/om-conf.php");
+    if (isset($_GET['workspace_id']))
+    {
+        require_once('propel/Propel.php');
+        Propel::init("infinitymetrics/orm/config/om-conf.php");
 
-    require_once('PHPUnit/Framework.php');
-    require_once('infinitymetrics/controller/MetricsWorkspaceController.php');
+        require_once('PHPUnit/Framework.php');
+        require_once('infinitymetrics/controller/MetricsWorkspaceController.php');
 
-    $ws = PersistentWorkspacePeer::retrieveByPK($_GET['workspace_id']);
+        $ws = PersistentWorkspacePeer::retrieveByPK($_GET['workspace_id']);
 
-    $criteria = new Criteria();
-    $criteria->add(PersistentWorkspaceXProjectPeer::WORKSPACE_ID, $_GET['workspace_id']);
+        $criteria = new Criteria();
+        $criteria->add(PersistentWorkspaceXProjectPeer::WORKSPACE_ID, $_GET['workspace_id']);
 
-    PersistentProjectPeer::doDelete($criteria);
+        PersistentProjectPeer::doDelete($criteria);
 
-    for ($i = 0; $i < 5; $i++) {
-        $project = new PersistentProject();
-        $project->setProjectJnName("ppm-".rand());
-        $project->setSummary("Project $i summary");
-        $wxp = new PersistentWorkspaceXProject();
-        $wxp->setWorkspace($ws);
-        $wxp->setProject($project);
-        $wxp->save();
+        for ($i = 0; $i < 5; $i++) {
+            $project = new PersistentProject();
+            $project->setProjectJnName("ppm-".rand());
+            $project->setSummary("Project $i summary");
+            $wxp = new PersistentWorkspaceXProject();
+            $wxp->setWorkspace($ws);
+            $wxp->setProject($project);
+            $wxp->save();
+        }
     }
-
+    else {
+        header('Location: workspaceCollection.php');
+    }
+ 
 ?>
 
 <?php
@@ -32,6 +38,7 @@
         <div id="inside">
             <div id="sidebar-right">
                 <div id="block-user-3" class="block block-user">
+                    <br />
                     <h2>Who's doing metrics</h2>
 
                     <div class="content">
@@ -47,17 +54,19 @@
                 </div>
             </div>
             <div id="content">
+                <br />
                 <div class="t"><div class="b"><div class="l"><div class="r"><div class="bl"><div class="br"><div class="tl"><div class="tr">
                     <div class="content-in">
                         <?php
 
                             if (isset($_GET['trackback']))
                             {
-                                echo '<table><tr><td>';
-                                echo '<img src="icons/i24/status/status-ok.png" /></td>';
-                                echo "<td><h3>Congratulations!</h3>";
-                                echo "<p>Your Workspace has been created successfully</p></td></tr></table>";
-                                echo '<br />';
+                                echo "<div style=\"margin: 20px; padding-left: 15px; border-style: solid; border-width: thin; border-color= #F0F0F0\">\n";
+                                echo "<table><tr>\n";
+                                echo "<td valign=\"center\"><img src=\"/template/icons/i24/status/status-ok.png\" /></td>\n";
+                                echo "<td valign=\"center\"><h4>Your Workspace has been created successfully</p></h4></td>\n";
+                                echo "</tr></table>\n";
+                                echo "</div>";
                             }
 
                             if (isset($_GET['workspace_id']))
@@ -65,8 +74,9 @@
                                 $ws = MetricsWorkspaceController::retrieveWorkspace($_GET['workspace_id']);
 
                                 echo "<h2>Workspace Information</h2>\n";
-                                echo "<h4>Title:</h4>".$ws->getTitle()."<br />\n";
-                                echo "<h4>Description:</h4>".$ws->getDescription()."<br />\n";
+                                echo "<table style=\"width: 60%\">";
+                                echo "<tr><td><strong>Title:</strong></td><td>".$ws->getTitle()."</td></tr>\n";
+                                echo "<tr><td><strong>Description:</strong></td><td>".$ws->getDescription()."</td></tr>\n";
                                 switch ($ws->getState())
                                 {
                                     case ('NEW'):       $color = "Blue"; break;
@@ -74,7 +84,8 @@
                                     case ('PAUSED'):    $color = "Orange"; break;
                                     case ('INACTIVE'):  $color = "Red"; break;
                                 }
-                                echo "<h4>State:</h4><span style=\"font-weight: bold; color:$color\">".$ws->getState()."</span><br />\n";
+                                echo "<tr><td><strong>State:</strong></td><td><span style=\"font-weight: bold; color:$color\">".$ws->getState()."</span></td></tr>\n";
+                                echo "</table>\n";
                                 echo "<h3>Projects currently in this Workspace</h3>\n";
                                 echo "<ul>";
 

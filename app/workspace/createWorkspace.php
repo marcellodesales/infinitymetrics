@@ -77,6 +77,7 @@
         <div id="inside">
             <div id="sidebar-right">
                 <div id="block-user-3" class="block block-user">
+                    <br />
                     <h2>Who's doing metrics</h2>
 
                     <div class="content">
@@ -92,27 +93,35 @@
                 </div>
             </div>
             <div id="content">
-                <!--
-                <h1>Current Workspaces</h1>
-                <BR><BR>
-                -->
+                
+                <br />
+                
                 <div class="t"><div class="b"><div class="l"><div class="r"><div class="bl"><div class="br"><div class="tl"><div class="tr">
                     <div class="content-in">
+                        <h3>Create New Workspace</h3>
                         <form action="<?php echo $_SERVER['PHP_SELF'] ?>" accept-charset="UTF-8" method="post" id="node-form">
-                            <label>Title:
-                                <input type="text" name="wsTitle">
-                            </label>
-                            <br />
-                            <label>Description:
-                                <input type="text" name="wsDescription">
-                            </label>
-                            <br />
-                            <label>Parent java.net Project:
-                                <input type="text" name="parentJnProject">
-                            </label>
-                            <br /><br />
-                            <input name="submit" id="edit-delete" value="Clear" class="form-submit" type="reset">
-                            <input name="submit" id="edit-submit" value="Submit" class="form-submit" type="submit">
+                            <fieldset style="padding:15px; margin:10px; border-color:silver">
+                                <table style="width: 85%">
+                                    <tr>
+                                        <td>Title:</td>
+                                        <td><input type="text" name="wsTitle" size="35"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Description:</td>
+                                        <td><input type="text" name="wsDescription" size="35"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Parent java.net Project:</td>
+                                        <td><input type="text" name="parentJnProject" size="35"></td>
+                                    </tr>
+                                </table>
+                                
+                                <br />
+                                <div style="text-align:center">
+                                <input name="submit" id="edit-delete" value="Clear" class="form-submit" type="reset" align="right">
+                                <input name="submit" id="edit-submit" value="Submit" class="form-submit" type="submit">
+                                </div>
+                            </fieldset>
                         </form>
                     </div>
                     <br class="clear">
