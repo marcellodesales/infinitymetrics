@@ -26,6 +26,7 @@ Propel::init('infinitymetrics/orm/config/om-conf.php');
 
 require_once 'infinitymetrics/model/InfinityMetricsException.class.php';
 require_once 'infinitymetrics/model/institution/Student.class.php';
+require_once 'infinitymetrics/model/user/User.class.php';
 require_once 'infinitymetrics/model/user/PersonalAgent.class.php';
 require_once 'infinitymetrics/model/institution/Instructor.class.php';
 require_once 'infinitymetrics/model/institution/Institution.class.php';
@@ -156,46 +157,86 @@ final class UserManagementController {
      * @param <type> $projectName
      * @return <type>
      */
-     public static function registerinstructor($userName, $password, $email, $firstName,$lastName,$institution,$projectName) {
+     public static function registerInstructor($username, $password, $email, $firstName,$lastName,
+                                                     $institutionAbbreviation,$projectName) {
 
           $error = array();
-          if ($userName == "") {
-              $error["userName"] = "The username is empty";
-          }
-          if ($password == "") {
-              $error["password"] = "The password is empty";
-          }
-          if ($firstName == "") {
-              $error["firstName"] = "The firstName is empty";
-          }
-          if ($lastName == "") {
-              $error["lastName"] = "The lastName is empty";
-          }
-          if ($projectName == "") {
-              $error["projectName"] = "The projectName is empty";
-          }
-          if ($institution == "") {
-              $error["institution"] = "The institution is empty";
-          }
-          if ($email == "") {
-              $error["email"] = "The email is empty";
-          }
+        if (!isset($username) || $username == "") {
+            $error["username"] = "The username is empty";
+        }
+        if (!isset($password) || $password == "") {
+            $error["password"] = "The password is empty";
+        }
+        if (!isset($firstName) || $firstName == "") {
+            $error["firstName"] = "The firstName is empty";
+        }
+        if (!isset($lastName) || $lastName == "") {
+            $error["lastName"] = "The lastName is empty";
+        }
+        if (!isset($email) || $email == "") {
+            $error["email"] = "The email is empty";
+        }
+
+        if (!isset($projectName) || $projectName == "") {
+            $error["projectName"] = "The java.net project name is empty";
+        }
+        if (!isset($institutionAbbreviation) || $institutionAbbreviation == "") {
+            $error["institution"] = "The institution is empty";
+        }
+
 
         if (count($error) > 0) {
             throw new InfinityMetricsException("There are errors in the input", $error);
         }
 
-        $instructor = new Instructor($firstName,$lastName);
-        $instructor->setInstitution($institution);
-        $instructor->setEmail($email);
-        $instructor->setProjectName($projectName);
-        $instructor->setUserName($userName);
-        $instructor->setPassword($password);
+        try {
+            $inst = PersistentBaseInstitutionPeer::doSelectOne($institutionAbbreviation);
+            $proj = PersistentBaseProjectPeer::retrieveByPK($projectName);
+
+            $instructor = new Instructor();
+            $instructor->setFirstName($firstName);
+            $instructor->setLastName($lastName);
+            $instructor->setEmail($email);
+            $instructor->setJnUsername($username);
+            $instructor->setJnPassword($password);
+            $instructor->setInstitution($inst);
+            $instructor->save();
+
+            $instProj = new PersistentWorkpaceXProject();
+            $instProj->setProject($proj);
+            $instProj->save();
+            
+        } catch (Exception $e) {
+            $error["save_instructor"] = $e->getMessage();
+            throw new InfinityMetricsException("An error occurred while saving creating the instructor account.", $error);
+        }
+
         return $instructor;
     }
+
+  
+    public static function viewAccount($userName,$password){
+         $user = new User();
+        $link= mysql_connect('localhost','root','1234');
+         $db = mysql_select_db('infinitymetricsm303',$link);
+         if (!$db) {
+           die ('Can\'t use infinitymetricsm303 : ' . mysql_error());
+          }
+          else {
+         $sql = "SELECT * FROM user WHERE jn_username = $userName AND jn_password = $password";
+         if($result = mysql_query($sql)){
+           if($view = mysql_fetch_row($result))
+            echo($view);
+           else
+           echo 'SQL ERROR -----'.mysql_eror() ;
+           }
+           mysql_close();
+           
+           }
+          
+        
+    }
+
+    
 }
 ?>
-
-
-
-
