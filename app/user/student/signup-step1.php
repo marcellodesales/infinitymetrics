@@ -1,6 +1,39 @@
 <?php
     include 'infinitymetrics-bootstrap.php';
 
+#----------------------------->>>>>>>>>>>>> Controller Usage for UC404 ----------------------------->>>>>>>>>>>>>>>
+
+    if (isset($_POST["username"]) && isset($_POST["password"])) {
+
+        require_once 'infinitymetrics/controller/UserManagementController.class.php';
+        require_once 'infinitymetrics/model/InfinityMetricsException.class.php';
+
+        try {
+            $existentUser = PersistentUserPeer::retrieveByJNUsername($_POST["username"]);
+            if (isset($existentUser) && $existentUser->getJnUsername() == $_POST["username"]) {
+                $_SESSION["signupError"] = "User ".$_POST["username"]." already registered at Infinity Metrics";
+            } else {
+
+                $userAgent = UserManagementController::authenticateJNUser($_POST["username"], $_POST["password"]);
+
+                if ($userAgent->areUserCredentialsValidOnJN()) {
+
+                    $userAgentAuthenticated["email"] = $userAgent->getAuthenticatedEmail();
+                    $userAgentAuthenticated["projects"] = $userAgent->getAuthenticatedProjectsMembershipList();
+                    $userAgentAuthenticated["jnUsername"] = $userAgent->getUser()->getJnUsername();
+                    $userAgentAuthenticated["jnPassword"] = $userAgent->getUser()->getJnPassword();
+                    $_SESSION["userAgentAuthenticated"] = $userAgentAuthenticated;
+
+                    header('Location: /user/student/signup-step2.php');
+                } else {
+                    $_SESSION["signupError"] = "Authentication failed with Java.net";
+                }
+            }
+        } catch (InfinityMetricsException $ime) {
+            $_SESSION["signupError"] = $ime;
+        }
+    }
+
 #----------------------------->>>>>>>>>>>>> Variables Initialization ------------------->>>>>>>>>>>>>>>
 
     $subUseCase = "Student Registration";
@@ -18,36 +51,9 @@
     #leftMenu[n]["item"] - the item of the menu
     #leftMenu[n]["tip"] - the tooltip of the URL
     $leftMenu = array();
-    array_push($leftMenu, array("active"=>"menu-27 first active", "url"=>"/user/student/signup-step1.php", "item"=>"Java.net Authentication", "tip"=>"Manage your site's book outlines."));
-    array_push($leftMenu, array("active"=>"menu-27", "url"=>"/user/student/signup-step2.php", "item"=>"Update Profile", "tip"=>"Update and review your profile info"));
-    array_push($leftMenu, array("active"=>"menu-27", "url"=>"/user/student/signup-step3.php", "item"=>"Confirm Registration", "tip"=>"Confirm you profile"));
-
-#----------------------------->>>>>>>>>>>>> Controller Usage for UC404 ----------------------------->>>>>>>>>>>>>>>
-
-    if (isset($_POST["username"]) && isset($_POST["username"])) {
-
-        require_once 'infinitymetrics/controller/UserManagementController.class.php';
-        require_once 'infinitymetrics/model/InfinityMetricsException.class.php';
-
-        try {
-            $userAgent = UserManagementController::authenticateJNUser($_POST["username"], $_POST["password"]);
-
-            if ($userAgent->areUserCredentialsValidOnJN()) {
-
-                $userAgentAuthenticated["email"] = $userAgent->getAuthenticatedEmail();
-                $userAgentAuthenticated["projects"] = $userAgent->getAuthenticatedProjectsMembershipList();
-                $userAgentAuthenticated["jnUsername"] = $userAgent->getJnUsername();
-                $_SESSION["userAgentAuthenticated"] = $userAgentAuthenticated;
-
-                header('Location: /user/student/signup-step2.php');
-            } else {
-                $_SESSION["signupError"] = "Authentication failed with Java.net";
-            }
-        } catch (InfinityMetricsException $ime) {
-            $errors = $ime->getErrorList();
-        }
-    }
-##----------------------------->>>>>>>>>>> End implementation of the Use case -------------------------->>>>>>>>>>
+    array_push($leftMenu, array("active"=>"menu-27 first active", "url"=>"/user/student/signup-step1.php", "item"=>"1. Java.net Authentication", "tip"=>"Manage your site's book outlines."));
+    array_push($leftMenu, array("active"=>"menu-27", "url"=>"/user/student/signup-step2.php", "item"=>"2. Update Profile", "tip"=>"Update and review your profile info"));
+    array_push($leftMenu, array("active"=>"menu-27", "url"=>"/user/student/signup-step3.php", "item"=>"3. Confirm Registration", "tip"=>"Confirm you profile"));
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -59,7 +65,7 @@
 <?php include 'user-signup-header-adds.php' ?>
 
 </head>
-<body class="<?php echo $enableLeftNav ? $leftNavClass : $NoLeftNavClass; ?>" onload="init();">
+<body class="<?php echo $enableLeftNav ? $leftNavClass : $NoLeftNavClass; ?>">
 
 <?php  include_once 'top-navigation.php';  ?>
 
@@ -108,8 +114,9 @@
 
       		<form id="signupform" autocomplete="off" method="post" action="<?php echo $PHP_SELF ?>">
 <?php
-        if (isset($_SESSION["signupError"])) {
-             echo "<strong><font color=\"red\">".$_SESSION["signupError"]."</font></strong><BR>";
+        if (isset($_SESSION["signupError"]) && $_SESSION["signupError"] != "") {
+             echo "<div class=\"messages error\">".$_SESSION["signupError"]."</div>";
+             $_SESSION["signupError"] = "";
              unset($_SESSION["signupError"]);
         }
 ?>

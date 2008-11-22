@@ -84,21 +84,20 @@ final class UserManagementController {
         $agent = new PersonalAgent($user);
         return $agent;
     }
-   /**
-    * This method implements the registration of Student UC001
-    *
-    * @param string $username the java.net username
-    * @param string $password the java.net password
-    * @param string $email the user's email
-    * @param string $firstName the user's first name
-    * @param string $lastName the user's last name
-    * @param string $studentSchoolId the student's school identification
-    * @param string $projectName the user's project name
-    * @return string $institutionAbbreviation the institution abbreviation
-    * @return boolean $isLeader defines if the student is a leader of the given $projectName.
-    */
-    public static function registerStudent($username, $password, $email, 
-                          $firstName,$lastName, $studentSchoolId, $projectName, 
+    /**
+     *  Validates the registration input form.
+     * @param <type> $username
+     * @param <type> $password
+     * @param <type> $email
+     * @param <type> $firstName
+     * @param <type> $lastName
+     * @param <type> $studentSchoolId
+     * @param <type> $projectName
+     * @param <type> $institutionAbbreviation
+     * @param <type> $isLeader 
+     */
+    public static function validateStudentRegistrationForm($username, $password, $email,
+                          $firstName,$lastName, $studentSchoolId, $projectName,
                           $institutionAbbreviation, $isLeader) {
         $error = array();
         if (!isset($username) || $username == "") {
@@ -132,10 +131,27 @@ final class UserManagementController {
         if (count($error) > 0) {
             throw new InfinityMetricsException("There are errors in the input", $error);
         }
-        
+    }
+   /**
+    * This method implements the registration of Student UC001
+    *
+    * @param string $username the java.net username
+    * @param string $password the java.net password
+    * @param string $email the user's email
+    * @param string $firstName the user's first name
+    * @param string $lastName the user's last name
+    * @param string $studentSchoolId the student's school identification
+    * @param string $projectName the user's project name
+    * @return string $institutionAbbreviation the institution abbreviation
+    * @return boolean $isLeader defines if the student is a leader of the given $projectName.
+    */
+    public static function registerStudent($username, $password, $email,
+                          $firstName,$lastName, $studentSchoolId, $projectName,
+                          $institutionAbbreviation, $isLeader) {
         try {
-            $inst = PersistentBaseInstitutionPeer::retrieveByAbbreviation($institutionAbbreviation);
-            $proj = PersistentBaseProjectPeer::retrieveByPK($projectName);
+            UserManagementController::validateStudentRegistrationForm($username, $password, $email, $firstName, $lastName, $studentSchoolId, $projectName, $institutionAbbreviation, $isLeader);
+            $inst = PersistentInstitutionPeer::retrieveByAbbreviation($institutionAbbreviation);
+            $proj = PersistentProjectPeer::retrieveByPK($projectName);
 
             $student = new Student();
             $student->setFirstName($firstName);
@@ -153,12 +169,11 @@ final class UserManagementController {
             $studProj->setUser($student);
             $studProj->save();
 
-        } catch (Exception $e) {
-            $error["save_student"] = $e->getMessage();
-            throw new InfinityMetricsException("An error occurred while saving creating the student account.", $error);
-        }
+            return $student;
 
-        return $student;
+        } catch (Exception $e) {
+            throw $e;
+        }
     }
 
     /**
@@ -175,7 +190,6 @@ final class UserManagementController {
      */
      public static function registerInstructor($username, $password, $email, $firstName,$lastName,
                                                      $institutionAbbreviation,$projectName) {
-
           $error = array();
         if (!isset($username) || $username == "") {
             $error["username"] = "The username is empty";
@@ -200,13 +214,12 @@ final class UserManagementController {
             $error["institution"] = "The institution is empty";
         }
 
-
         if (count($error) > 0) {
             throw new InfinityMetricsException("There are errors in the input", $error);
         }
 
         try {
-            $inst = PersistentBaseInstitutionPeer::doSelectOne($institutionAbbreviation);
+            $inst = PersistentBaseInstitutionPeer::retrieveByAbbreviation($institutionAbbreviation);
             $proj = PersistentBaseProjectPeer::retrieveByPK($projectName);
 
             $instructor = new Instructor();

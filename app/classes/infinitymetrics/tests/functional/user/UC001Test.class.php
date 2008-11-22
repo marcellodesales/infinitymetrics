@@ -169,11 +169,8 @@ class UC001Test extends PHPUnit_Framework_TestCase {
                                     $this->institution->getAbbreviation(), true);
 
             $this->fail("The exceptional registration failed for existing student");
-        } catch (InfinityMetricsException $ime) {
-            //$error["fieldName"] = "error message"
-            $errorFields = $ime->getErrorList();
-            $this->assertNotNull($errorFields);
-            $this->assertNotNull($errorFields["save_student"]);
+        } catch (Exception $ime) {
+            $this->assertNotNull($ime);
         }
     }
 

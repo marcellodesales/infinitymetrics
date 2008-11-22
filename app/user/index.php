@@ -41,6 +41,13 @@
 
 <div>
 <div class="node-form">
+<?php
+        if (isset($_SESSION["successMessage"]) && $_SESSION["successMessage"] != "") {
+             echo "<div class=\"messages ok\">".$_SESSION["successMessage"]."</div>";
+             $_SESSION["successMessage"] = "";
+             unset($_SESSION["successMessage"]);
+        }
+?>
 <table align="center">
 <tr><td width="33%" align="center">
 <input name="op" id="edit-submit" value="Register as Student" class="form-submit" type="button" onclick="document.location='/user/student/signup-step1.php'">
