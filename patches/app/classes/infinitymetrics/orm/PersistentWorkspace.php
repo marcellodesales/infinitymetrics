@@ -1,6 +1,8 @@
 <?php
 
 require 'infinitymetrics/orm/om/PersistentBaseWorkspace.php';
+require 'infinitymetrics/orm/PersistentWorkspaceXProject.php';
+require 'infinitymetrics/orm/PersistentWorkspaceXProjectPeer.php';
 
 
 /**
@@ -47,6 +49,13 @@ class PersistentWorkspace extends PersistentBaseWorkspace {
         else {
             return true;
         }
+    }
+
+    public function getProjects() {
+        $criteria = new Criteria();
+        $criteria->add(PersistentWorkspaceXProjectPeer::WORKSPACE_ID, $this->workspace_id);
+    
+        return $this->getWorkspaceXProjectsJoinProject($criteria);
     }
 
     public function isSharedWithUser($user_id) {
