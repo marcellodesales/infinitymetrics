@@ -2,7 +2,8 @@
 require_once 'propel/Propel.php';
 Propel::init('infinitymetrics/orm/config/om-conf.php');
 
-require_once 'infinitymetrics/model/institution/Instructor.class.php';
+$leftNavClass = "sidebars admin-reports-dblog admin-reports admin tableHeader-processed";
+$NoLeftNavClass = "sidebar-right node-2-edit node-2 node";
 
 function isUserLoggedIn() {
     return array_key_exists("user", $_SESSION);

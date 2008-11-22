@@ -71,6 +71,12 @@ class PersonalAgent {
         return $this->user;
     }
     /**
+     * @return String returns the Java.net username.
+     */
+    public function getJnUsername() {
+        return $this->user->getJnUsername();
+    }
+    /**
      * @return void makes the login with Java.net and keeps the session open
      * to the user.
      */

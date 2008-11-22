@@ -21,5 +21,3 @@
     if (Drupal.jsEnabled) { $(document).ready(function() { $('#edit-book-pick-book').css('display', 'none'); }); }
     //--><!]]>
     </script>
-
-  </head>

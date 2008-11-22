@@ -36,29 +36,6 @@ require_once 'infinitymetrics/model/institution/Institution.class.php';
  * @author: Gurdeep Singh <gurdeepsingh03@gmail.com>
  */
 final class UserManagementController {
-
-    /**
-     * @param <type> $username is the java.net username of the user
-     * @param <type> $password is the java.net passworld of the user
-     * @return boolean whether the user has passed the correct credentials or not.
-     */
-    public static function areUserCredentialsValidOnJN($username, $password) {
-        $agent = UserManagementController::makeAgentForUserCredentials($username, $password);
-        return $agent->areUserCredentialsValidOnJN();
-    }
-    /**
-     * Builds a new PersonalAgent for a given credentials.
-     * @param string $username is the username of the user on Java.net
-     * @param string $password is the password of the user on Java.net
-     * @return PersonalAgent is the agent to be used on the website.
-     */
-    public static function makeAgentForUserCredentials($username, $password) {
-        $user = new User();
-        $user->setJnUsername($username);
-        $user->setJnPassword($password);
-        $agent = new PersonalAgent($user);
-        return $agent;
-    }
     /**
      * Authenticate the user on Java.net using the username and password.
      * @param string $username is the username of the user on Java.net
@@ -67,20 +44,58 @@ final class UserManagementController {
      * profile such as email address, full-name, if it's successfully logged-in, etc.
      */
     public static function authenticateJNUser($username, $password) {
+        $error = array();
+        if (!isset($username) || $username == "") {
+            $error["username"] = "The username is empty";
+        }
+        if (!isset($password) || $password == "") {
+            $error["password"] = "The password is empty";
+        }
+        if (count($error) > 0) {
+            throw new InfinityMetricsException("There are errors in the input", $error);
+        }
         $agent = UserManagementController::makeAgentForUserCredentials($username, $password);
         return $agent;
     }
+    /**
+     * @param <type> $username is the java.net username of the user
+     * @param <type> $password is the java.net passworld of the user
+     * @return boolean whether the user has passed the correct credentials or not.
+     */
+    public static function areUserCredentialsValidOnJN($username, $password) {
+        $agent = null;
+        try {
+            $agent = UserManagementController::authenticateJNUser($username, $password);
+        } catch (InfinityMetricsException $ime) {
+            throw $ime;
+        }
+        return $agent->areUserCredentialsValidOnJN();
+    }
+    /**
+     * Builds a new PersonalAgent for a given credentials.
+     * @param string $username is the username of the user on Java.net
+     * @param string $password is the password of the user on Java.net
+     * @return PersonalAgent is the agent to be used on the website.
+     */
+    private static function makeAgentForUserCredentials($username, $password) {
+        $user = new User();
+        $user->setJnUsername($username);
+        $user->setJnPassword($password);
+        $agent = new PersonalAgent($user);
+        return $agent;
+    }
    /**
-    * This method implements the registration of Student
+    * This method implements the registration of Student UC001
     *
-    * @param string $username
-    * @param string $password
-    * @param string $email
-    * @param string $firstName
-    * @param string $lastName
-    * @param string $studentSchoolId
-    * @param string $projectName
-    * @return string $institutionAbbreviation
+    * @param string $username the java.net username
+    * @param string $password the java.net password
+    * @param string $email the user's email
+    * @param string $firstName the user's first name
+    * @param string $lastName the user's last name
+    * @param string $studentSchoolId the student's school identification
+    * @param string $projectName the user's project name
+    * @return string $institutionAbbreviation the institution abbreviation
+    * @return boolean $isLeader defines if the student is a leader of the given $projectName.
     */
     public static function registerStudent($username, $password, $email, 
                           $firstName,$lastName, $studentSchoolId, $projectName, 
@@ -146,7 +161,8 @@ final class UserManagementController {
         return $student;
     }
 
-    /** this function is to implement the registration of Instructor
+    /**
+     * This function is to implement the registration of Instructor
      *
      * @param <type> $userName
      * @param <type> $password
@@ -214,29 +230,41 @@ final class UserManagementController {
         return $instructor;
     }
 
-  
-    public static function viewAccount($userName,$password){
-         $user = new User();
-        $link= mysql_connect('localhost','root','1234');
-         $db = mysql_select_db('infinitymetricsm303',$link);
-         if (!$db) {
-           die ('Can\'t use infinitymetricsm303 : ' . mysql_error());
-          }
-          else {
-         $sql = "SELECT * FROM user WHERE jn_username = $userName AND jn_password = $password";
-         if($result = mysql_query($sql)){
-           if($view = mysql_fetch_row($result))
-            echo($view);
-           else
-           echo 'SQL ERROR -----'.mysql_eror() ;
-           }
-           mysql_close();
-           
-           }
-          
-        
+    /**
+     * this function is to implement the registration of Instructor
+     *
+     * @param <type> $userName
+     * @param <type> $password
+     * @param <type> $email
+     * @param <type> $firstName
+     * @param <type> $lastName
+     * @param <type> $institution
+     * @param <type> $projectName
+     * @return <type>
+     */
+     public static function login($userName, $password) {
+
+          $error = array();
+        if (!isset($username) || $username == "") {
+            $error["username"] = "The username is empty";
+        }
+        if (!isset($password) || $password == "") {
+            $error["password"] = "The password is empty";
+        }
+
+        if (count($error) > 0) {
+            throw new InfinityMetricsException("There are errors in the input", $error);
+        }
+
+        $c = new Criteria();
+        $c->add(PersistentUserPeer::JN_USERNAME, $userName);
+        $c->add(PersistentUserPeer::JN_PASSWORD, $password);
+        return PersistentUserPeer::doSelect($c);
     }
 
-    
+    public static function viewAccount($username) {
+        $c = new Criteria();
+        $c->add(PersistentUserPeer::JN_USERNAME, $username);
+        return PersistentUserPeer::doSelect($c);
+    }
 }
-?>

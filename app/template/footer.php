@@ -7,4 +7,4 @@
         </div>
 
     <!-- /layout -->
-    <div id="legal-notice"><a href="https://ppm-8.dev.java.net" target="_blank">Infinity Metrics Team</a></div>  </body></html>
+    <div id="legal-notice"> © 2008 <a href="https://ppm-8.dev.java.net" target="_blank">Infinity Metrics Team</a></div>  </body></html>
