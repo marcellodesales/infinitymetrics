@@ -12,11 +12,12 @@
         <div id="inside">
           <div id="sidebar-right">
             <div id="block-user-3" class="block block-user">
-              <h2>All users are welcomed</h2>
-
               <div class="content" align="center">
-
+                <br />
+                <h2>All users are welcomed</h2>
+                <br />
                 <img src="/template/images/techglobe2.jpg">
+
 
               </div>
             </div>
