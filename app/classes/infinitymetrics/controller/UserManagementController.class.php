@@ -1,4 +1,3 @@
-
 <?php
 /**
  * $Id: UserManagementController.class.php 202 2008-11-10 12:01:40Z Gurdeep Singh $
@@ -94,7 +93,7 @@ final class UserManagementController {
      * @param <type> $studentSchoolId
      * @param <type> $projectName
      * @param <type> $institutionAbbreviation
-     * @param <type> $isLeader 
+     * @param <type> $isLeader
      */
     public static function validateStudentRegistrationForm($username, $password, $email,
                           $firstName,$lastName, $studentSchoolId, $projectName,
@@ -153,7 +152,7 @@ final class UserManagementController {
             $inst = PersistentInstitutionPeer::retrieveByAbbreviation($institutionAbbreviation);
             $proj = PersistentProjectPeer::retrieveByPK($projectName);
 
-            $student = new Student();
+            $student = new Instructor();
             $student->setFirstName($firstName);
             $student->setLastName($lastName);
             $student->setEmail($email);
@@ -176,21 +175,10 @@ final class UserManagementController {
         }
     }
 
-    /**
-     * This function is to implement the registration of Instructor
-     *
-     * @param <type> $userName
-     * @param <type> $password
-     * @param <type> $email
-     * @param <type> $firstName
-     * @param <type> $lastName
-     * @param <type> $institution
-     * @param <type> $projectName
-     * @return <type>
-     */
-     public static function registerInstructor($username, $password, $email, $firstName,$lastName,
-                                                     $institutionAbbreviation,$projectName) {
-          $error = array();
+
+public static function validateInstructorRegistrationForm($username, $password, $email,
+                          $firstName,$lastName,$projectName,$institutionAbbreviation) {
+        $error = array();
         if (!isset($username) || $username == "") {
             $error["username"] = "The username is empty";
         }
@@ -206,21 +194,40 @@ final class UserManagementController {
         if (!isset($email) || $email == "") {
             $error["email"] = "The email is empty";
         }
-
+        if (!isset($studentSchoolId) || $studentSchoolId == "") {
+            $error["studentSchoolId"] = "The student school Id is empty";
+        }
         if (!isset($projectName) || $projectName == "") {
             $error["projectName"] = "The java.net project name is empty";
         }
         if (!isset($institutionAbbreviation) || $institutionAbbreviation == "") {
             $error["institution"] = "The institution is empty";
         }
+        if (!isset($isLeader)) {
+            $error["isLeader"] = "The information if the the student is a leader is not given";
+        }
 
         if (count($error) > 0) {
             throw new InfinityMetricsException("There are errors in the input", $error);
         }
-
+    }
+   /**
+    * This method implements the registration of Instructor UC002
+    *
+    * @param string $username the java.net username
+    * @param string $password the java.net password
+    * @param string $email the user's email
+    * @param string $firstName the user's first name
+    * @param string $lastName the user's last name
+    * @param string $projectName the user's project name
+    * @return string $institutionAbbreviation the institution abbreviation
+    */
+    public static function registerInstructor($username, $password, $email,
+                          $firstName,$lastName,$projectName,$institutionAbbreviation) {
         try {
-            $inst = PersistentBaseInstitutionPeer::retrieveByAbbreviation($institutionAbbreviation);
-            $proj = PersistentBaseProjectPeer::retrieveByPK($projectName);
+            UserManagementController::validateInstructorRegistrationForm($username, $password, $email, $firstName, $lastName,$projectName, $institutionAbbreviation);
+            $inst = PersistentInstitutionPeer::retrieveByAbbreviation($institutionAbbreviation);
+            $proj = PersistentProjectPeer::retrieveByPK($projectName);
 
             $instructor = new Instructor();
             $instructor->setFirstName($firstName);
@@ -234,27 +241,15 @@ final class UserManagementController {
             $instProj = new PersistentWorkpaceXProject();
             $instProj->setProject($proj);
             $instProj->save();
-            
-        } catch (Exception $e) {
-            $error["save_instructor"] = $e->getMessage();
-            throw new InfinityMetricsException("An error occurred while saving creating the instructor account.", $error);
-        }
 
-        return $instructor;
+            return $instructor;
+
+        } catch (Exception $e) {
+            throw $e;
+        }
     }
 
-    /**
-     * this function is to implement the registration of Instructor
-     *
-     * @param <type> $userName
-     * @param <type> $password
-     * @param <type> $email
-     * @param <type> $firstName
-     * @param <type> $lastName
-     * @param <type> $institution
-     * @param <type> $projectName
-     * @return <type>
-     */
+   
      public static function login($userName, $password) {
 
           $error = array();
@@ -281,3 +276,5 @@ final class UserManagementController {
         return PersistentUserPeer::doSelect($c);
     }
 }
+
+?>
