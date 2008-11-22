@@ -1,5 +1,5 @@
 <?php
-    include '../template/header-no-left-nav.php';
+    include 'header-no-left-nav.php';
 ?>
 
 
@@ -15,8 +15,6 @@ require_once('infinitymetrics/model/user/User.class.php');
 $jnUsername = 'johntheteacher';
 $title = "New Title ";
 $description = "New Description ";
-
-PersistentWorkspacePeer::doDeleteAll();
 
 $user = PersistentUserPeer::retrieveByJNUsername($jnUsername);
 
@@ -57,49 +55,51 @@ if (!isset($institution)) {
     $institution = $user->getInstitution();
 }
 
-for ($i = 0; $i < 5; $i++) {
-    $ws = MetricsWorkspaceController::createWorkspace(
-        $user->getJnUsername(),
-        $title.$i,
-        $description.$i
-    );
+if ($user->getWorkspaces() == NULL) {
+    for ($i = 0; $i < 5; $i++) {
+        $ws = MetricsWorkspaceController::createWorkspace(
+            $user->getJnUsername(),
+            $title.$i,
+            $description.$i
+        );
 
-    if ($i == 0 || $i == 1) {
-        $ws->setState('ACTIVE');
+        if ($i == 0 || $i == 1) {
+            $ws->setState('ACTIVE');
+        }
+        elseif ($i == 2) {
+            $ws->setState('PAUSED');
+        }
+        $ws->save();
     }
-    elseif ($i == 2) {
-        $ws->setState('PAUSED');
+
+    for ($j = 0; $j < 5; $j++) {
+        $sharingUser = new User();
+        $sharingUser->setJnUsername('JNusername'.rand());
+        $sharingUser->setJnPassword('password');
+        $sharingUser->setFirstName('TestFName'.$j);
+        $sharingUser->setLastName('TestLName'.$j);
+        $sharingUser->setEmail('user'.$j.'@domain.edu');
+        $sharingUser->setType('I');
+        $sharingUser->setInstitution($institution);
+        $sharingUser->save();
+
+        $ws = MetricsWorkspaceController::createWorkspace(
+            $sharingUser->getJnUsername(),
+            'Shared '.$title.$j,
+            'Shared '.$description.$j
+        );
+
+        MetricsWorkspaceController::shareWorkspace(
+            $ws->getWorkspaceId(),
+            $user->getJnUsername()
+        );
+
+        if ($j < 4) {
+            $ws->setState('ACTIVE');
+        }
+
+        $ws->save();
     }
-    $ws->save();
-}
-
-for ($j = 0; $j < 5; $j++) {
-    $sharingUser = new User();
-    $sharingUser->setJnUsername('JNusername'.rand());
-    $sharingUser->setJnPassword('password');
-    $sharingUser->setFirstName('TestFName'.$j);
-    $sharingUser->setLastName('TestLName'.$j);
-    $sharingUser->setEmail('user'.$j.'@domain.edu');
-    $sharingUser->setType('I');
-    $sharingUser->setInstitution($institution);
-    $sharingUser->save();
-
-    $ws = MetricsWorkspaceController::createWorkspace(
-        $sharingUser->getJnUsername(),
-        'Shared '.$title.$j,
-        'Shared '.$description.$j
-    );
-
-    MetricsWorkspaceController::shareWorkspace(
-        $ws->getWorkspaceId(),
-        $user->getJnUsername()
-    );
-
-    if ($j < 4) {
-        $ws->setState('ACTIVE');
-    }
-    
-    $ws->save();
 }
 ?>
     <div id="content-wrap">
@@ -131,13 +131,13 @@ for ($j = 0; $j < 5; $j++) {
                     <div class="content-in">
                         <?php
                         
-                            $workspaces = MetricsWorkspaceController::retrieveWorkspaceCollection($user->getJnUsername());
+                            $wsCollection = MetricsWorkspaceController::retrieveWorkspaceCollection($user->getJnUsername());
 
                             $path = "viewWorkspace.php";
 
                             echo "<h3>My Workspaces</h3>\n";
                             echo "<ul>\n";
-                            foreach($workspaces['OWN'] as $ws)
+                            foreach($wsCollection['OWN'] as $ws)
                             {
                                 switch ($ws->getState())
                                 {
@@ -148,14 +148,14 @@ for ($j = 0; $j < 5; $j++) {
                                 }
                                 echo "<li>\n";
                                 echo "<a href=\"$path?type=own&workspace_id=".$ws->getWorkspaceId()."\">".$ws->getTitle()."</a>";
-                                echo " <span style=\"color:$color\">".$ws->getState()."</span>";
+                                echo " <small><b><span style=\"color:$color\">".$ws->getState()."</span></b></small>";
                                 echo "</li>\n";
                             }
                             echo "</ul>\n";
                             
                             echo "<h3>Workspaces shared with me</h3>";
                             echo "<ul>\n";
-                            foreach($workspaces['SHARED'] as $ws)
+                            foreach($wsCollection['SHARED'] as $ws)
                             {
                                 switch ($ws->getState())
                                 {
@@ -166,7 +166,7 @@ for ($j = 0; $j < 5; $j++) {
                                 }
                                 echo "<li>\n";
                                 echo "<a href=\"$path?type=shared&workspace_id=".$ws->getWorkspaceId()."\">".$ws->getTitle()."</a>";
-                                echo " <span style=\"color:$color\">".$ws->getState()."</span>";
+                                echo " <small><b><span style=\"color:$color\">".$ws->getState()."</span></b></small>";
                                 echo "</li>\n";
                             }
                             echo "</ul>\n";

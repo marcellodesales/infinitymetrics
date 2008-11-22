@@ -10,19 +10,19 @@
 
         $ws = PersistentWorkspacePeer::retrieveByPK($_GET['workspace_id']);
 
-        $criteria = new Criteria();
-        $criteria->add(PersistentWorkspaceXProjectPeer::WORKSPACE_ID, $_GET['workspace_id']);
+        $projects = $ws->getProjects();
 
-        PersistentProjectPeer::doDelete($criteria);
-
-        for ($i = 0; $i < 5; $i++) {
-            $project = new PersistentProject();
-            $project->setProjectJnName("ppm-".rand());
-            $project->setSummary("Project $i summary");
-            $wxp = new PersistentWorkspaceXProject();
-            $wxp->setWorkspace($ws);
-            $wxp->setProject($project);
-            $wxp->save();
+        if ($projects == NULL)
+        {
+            for ($i = 0; $i < 5; $i++) {
+                $project = new PersistentProject();
+                $project->setProjectJnName("ppm-".rand());
+                $project->setSummary("Project $i summary");
+                $wxp = new PersistentWorkspaceXProject();
+                $wxp->setWorkspace($ws);
+                $wxp->setProject($project);
+                $wxp->save();
+            }
         }
     }
     else {
@@ -39,18 +39,34 @@
             <div id="sidebar-right">
                 <div id="block-user-3" class="block block-user">
                     <br />
-                    <h2>Who's doing metrics</h2>
+                    
+                    <?php
+                    
+                        if ( isset($_GET['type']) && 
+                                isset($_GET['workspace_id']) &&
+                                    $_GET['type'] == 'own')
+                        {
+                            $wsShares = $ws->getWorkspaceShares();
+                            
+                            echo "<h2>Sharing Information</h2>\n";
 
-                    <div class="content">
-                    There are currently <em>2 users</em> and <em>0 guests</em> online.
-                        <div class="item-list">
-                            <h3>Online users</h3>
-                            <ul>
-                                <li class="first">demo</li>
-                                <li class="last">demo</li>
-                            </ul>
-                        </div>
-                    </div>
+                            if ($wsShares == NULL) {
+                                echo "The workspace is not currently shared with any other user";
+                            }
+                            else {
+                                echo "<div class=\"content\">\n";
+                                echo "<div class=\"item-list\">\n";
+                                echo "Currently sharing this Workspace with:\n";
+                                echo "<ul>\n";
+                                foreach ($wsShares as $wss) {
+                                    echo "<li>".$wss->getUser()->getJnUsername()."</li>\n";
+                                }
+                                echo "</ul>\n";
+                                echo "</div>\n</div>\n";
+                            }
+                        }
+                    ?>
+                    
                 </div>
             </div>
             <div id="content">
@@ -71,19 +87,22 @@
 
                             if (isset($_GET['workspace_id']))
                             {
-                                $ws = MetricsWorkspaceController::retrieveWorkspace($_GET['workspace_id']);
-
+                                function getStateColor($state) {
+                                    switch ($state)
+                                    {
+                                        case ('NEW'):       return "Blue"; break;
+                                        case ('ACTIVE'):    return "Green"; break;
+                                        case ('PAUSED'):    return "Orange"; break;
+                                        case ('INACTIVE'):  return "Red"; break;
+                                        default:            return NULL; break;
+                                    }
+                                }
+                                
                                 echo "<h2>Workspace Information</h2>\n";
                                 echo "<table style=\"width: 60%\">";
                                 echo "<tr><td><strong>Title:</strong></td><td>".$ws->getTitle()."</td></tr>\n";
                                 echo "<tr><td><strong>Description:</strong></td><td>".$ws->getDescription()."</td></tr>\n";
-                                switch ($ws->getState())
-                                {
-                                    case ('NEW'):       $color = "Blue"; break;
-                                    case ('ACTIVE'):    $color = "Green"; break;
-                                    case ('PAUSED'):    $color = "Orange"; break;
-                                    case ('INACTIVE'):  $color = "Red"; break;
-                                }
+                                $color = getStateColor($ws->getState());
                                 echo "<tr><td><strong>State:</strong></td><td><span style=\"font-weight: bold; color:$color\">".$ws->getState()."</span></td></tr>\n";
                                 echo "</table>\n";
                                 echo "<h3>Projects currently in this Workspace</h3>\n";

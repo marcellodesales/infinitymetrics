@@ -11,7 +11,7 @@
             require_once ('infinitymetrics/controller/MetricsWorkspaceController.php');
             require_once ('infinitymetrics/model/user/User.class.php');
 
-            $username1 = 'mmendoll';
+            $username1 = 'johntheteacher';
             $username2 = $_POST['jn_username_to_share_with'];
 
             $user1 = PersistentUserPeer::retrieveByJNUsername($username1);
@@ -119,10 +119,10 @@
                         {
                             echo "<h3>Share Workspace</h3>
                         <form action=\"{$_SERVER['PHP_SELF']}\" accept-charset=\"UTF-8\" method=\"post\" id=\"node-form\">
-                            <label>java.net Username to share this Workspace with:
-                                <br />
-                                <input type=\"text\" name=\"jn_username_to_share_with\">
-                            </label>
+                            Please enter the Java.net username of the person with whom you wish to share this Workspace:
+                                <br /><br />
+                                <input type=\"text\" name=\"jn_username_to_share_with\" size=\"35\">
+                            
                             <br /><br />
                             <input name=\"clear\" id=\"edit-delete\" value=\"Clear\" class=\"form-submit\" type=\"reset\">
                             <input name=\"submit\" id=\"edit-submit\" value=\"Submit\" class=\"form-submit\" type=\"submit\">
@@ -131,8 +131,8 @@
                         }
                         else {
                             echo "<h3>The Workspace was successfully shared with {$_POST['jn_username_to_share_with']}</h3>";
-                            echo "
-                                <form action=\"viewWorkspace.php?workspace_id={$_POST['workspace_id']}\" accept-charset=\"UTF-8\" method=\"post\" id=\"node-form\">
+                            echo "<br />
+                                <form action=\"viewWorkspace.php?type=own&workspace_id={$_POST['workspace_id']}\" accept-charset=\"UTF-8\" method=\"post\" id=\"node-form\">
                                     <input name=\"submit\" id=\"edit-submit\" value=\"Go back to Workspace\" class=\"form-submit\" type=\"submit\">
                                 </form>";
                         }
