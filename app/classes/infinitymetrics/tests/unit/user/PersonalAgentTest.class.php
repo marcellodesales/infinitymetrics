@@ -41,7 +41,7 @@ class PersonalAgentTest extends PHPUnit_Framework_TestCase {
     private $agent;
     
     const USERNAME = "marcellosales";
-    const PASSWORD = "utn29oad";
+    const PASSWORD = "utn@9oad";
 
     protected function setUp() {
         parent::setUp();

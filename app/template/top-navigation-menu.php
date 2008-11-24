@@ -10,37 +10,37 @@
                 !contains($_SERVER["REQUEST_URI"], "user") && !contains($_SERVER["REQUEST_URI"], "workspace")
                 ? "<li id=\"current\">" : "<li>";
 ?>
-                        <?php echo $liHome; ?><a href="/">
-                                <img src="/template/edit_files/home.png" alt="" title="" width="32" height="32" border="0">
+                        <?php echo $liHome; ?><a href="<?php echo $home_address ?>">
+                                <img src="<?php echo $home_address ?>/template/edit_files/home.png" alt="" title="" width="32" height="32" border="0">
                                 <br>Home</a>
                         </li>
 <?php
 if (isUserLoggedIn()) {
 ?>
-                        <?php echo $liWorkspace; ?><a href="/workspace/workspaceCollection.php">
-                                <img src="/template/edit_files/logo.png" alt="" title="" width="32" height="32" border="0">
+                        <?php echo $liWorkspace; ?><a href="<?php echo $home_address ?>/workspace/workspaceCollection.php">
+                                <img src="<?php echo $home_address; ?>/template/edit_files/logo.png" alt="" title="" width="32" height="32" border="0">
                                 <br>Workspace</a>
                         </li>
-                        <?php echo $liReports; ?><a href="/report">
-                                <img src="/template/edit_files/admin-reports.png" alt="" title="" width="32" height="32" border="0">
+                        <?php echo $liReports; ?><a href="<?php echo $home_address ?>/report">
+                                <img src="<?php echo $home_address; ?>/template/edit_files/admin-reports.png" alt="" title="" width="32" height="32" border="0">
                                 <br>Reports</a>
                         </li>
-                        <?php echo $liCeTracker; ?><a href="/cetracker">
-                                <img src="/template/edit_files/node-add.png" alt="" title="" width="32" height="32" border="0">
+                        <?php echo $liCeTracker; ?><a href="<?php echo $home_address; ?>/cetracker">
+                                <img src="<?php echo $home_address; ?>/template/edit_files/node-add.png" alt="" title="" width="32" height="32" border="0">
                                 <br>Custom Events</a>
                         </li>
 <?php } ?>
-                        <?php echo $liUser; ?><a href="/user">
-                                <img src="/template/edit_files/admin-user.png" alt="" title="" width="32" height="32" border="0">
+                        <?php echo $liUser; ?><a href="<?php echo $home_address ?>/user">
+                                <img src="<?php echo $home_address; ?>/template/edit_files/admin-user.png" alt="" title="" width="32" height="32" border="0">
                                 <br>Users</a>
                         </li>
 <?php if (isUserLoggedIn()) { ?>
-                        <?php echo $liConfig ?><a href="/config">
-                                <img src="/template/edit_files/admin-settings.png" alt="" title="" width="32" height="32" border="0">
+                        <?php echo $liConfig ?><a href="<?php echo $home_address ?>/config">
+                                <img src="<?php echo $home_address; ?>/template/edit_files/admin-settings.png" alt="" title="" width="32" height="32" border="0">
                                 <br>Configuration</a>
                         </li>
 <?php } ?>
-                        <?php echo $liHelp ?><a href="/help">
-                                <img src="/template/edit_files/admin-help.png" alt="" title="" width="32" height="32" border="0">
+                        <?php echo $liHelp ?><a href="<?php echo $home_address ?>/help">
+                                <img src="<?php echo $home_address; ?>/template/edit_files/admin-help.png" alt="" title="" width="32" height="32" border="0">
                                 <br>Help</a>
                         </li>

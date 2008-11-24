@@ -13,16 +13,20 @@
   min-height: 37px !important;
 }
 
+.messages.ok {
+  background-image: url(/~group8/template/icons/i24/status/status-ok.png) !important;
+}
+
 .messages.status {
-  background-image: url(icons/i24/status/status-info.png) !important;
+  background-image: url(/~group8/template/icons/i24/status/status-info.png) !important;
 }
 
 .messages.error {
-  background-image: url(icons/i24/status/status-error.png) !important;
+  background-image: url(/~group8/template/icons/i24/status/status-error.png) !important;
 }
 
 .messages.warning {
-  background-image: url(icons/i24/status/status-warning.png) !important;
+  background-image: url(/~group8/template/icons/i24/status/status-warning.png) !important;
 }
 
 /**

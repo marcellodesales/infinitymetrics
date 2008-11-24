@@ -1,5 +1,5 @@
 <?php
-    include 'infinitymetrics-bootstrap.php';
+    include '../../template/infinitymetrics-bootstrap.php';
 
 #----------------------------->>>>>>>>>>>>> Controller Usage for UC404 ----------------------------->>>>>>>>>>>>>>>
 
@@ -24,13 +24,13 @@
                     $userAgentAuthenticated["jnPassword"] = $userAgent->getUser()->getJnPassword();
                     $_SESSION["userAgentAuthenticated"] = $userAgentAuthenticated;
 
-                    header('Location: /user/student/signup-step2.php');
+                    header('Location: signup-step2.php');
                 } else {
                     $_SESSION["signupError"] = "Authentication failed with Java.net";
                 }
             }
-        } catch (InfinityMetricsException $ime) {
-            $_SESSION["signupError"] = $ime;
+        } catch (Exception $e) {
+            $_SESSION["signupError"] = $e;
         }
     }
 
@@ -43,7 +43,7 @@
     $breakscrum = array(
                         "/" => "Home",
                         "/user" => "Users Registration",
-                        "/user/student/signup-step1.php" => "Student Registration"
+                        "signup-step1.php" => "Student Registration"
                   );
                   
     #leftMenu[n]["active"] - If the menu item is active or not
@@ -51,9 +51,9 @@
     #leftMenu[n]["item"] - the item of the menu
     #leftMenu[n]["tip"] - the tooltip of the URL
     $leftMenu = array();
-    array_push($leftMenu, array("active"=>"menu-27 first active", "url"=>"/user/student/signup-step1.php", "item"=>"1. Java.net Authentication", "tip"=>"Manage your site's book outlines."));
-    array_push($leftMenu, array("active"=>"menu-27", "url"=>"/user/student/signup-step2.php", "item"=>"2. Update Profile", "tip"=>"Update and review your profile info"));
-    array_push($leftMenu, array("active"=>"menu-27", "url"=>"/user/student/signup-step3.php", "item"=>"3. Confirm Registration", "tip"=>"Confirm you profile"));
+    array_push($leftMenu, array("active"=>"menu-27 first active", "url"=>"signup-step1.php", "item"=>"1. Java.net Authentication", "tip"=>"Manage your site's book outlines."));
+    array_push($leftMenu, array("active"=>"menu-27", "url"=>"signup-step2.php", "item"=>"2. Update Profile", "tip"=>"Update and review your profile info"));
+    array_push($leftMenu, array("active"=>"menu-27", "url"=>"signup-step3.php", "item"=>"3. Confirm Registration", "tip"=>"Confirm you profile"));
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -67,7 +67,7 @@
 </head>
 <body class="<?php echo $enableLeftNav ? $leftNavClass : $NoLeftNavClass; ?>">
 
-<?php  include_once 'top-navigation.php';  ?>
+<?php  include 'top-navigation.php';  ?>
 
                   <div id="breadcrumb" class="alone">
                     <h2 id="title">Home</h2>
@@ -100,7 +100,7 @@
                           <div id="block-user-3" class="block block-user">
                               <h2>All users are welcomed</h2>
                               <div class="content" align="center">
-                                <img src="/template/images/techglobe2.jpg">
+                                <img src="../../template/images/techglobe2.jpg">
                               </div>
                           </div>
                         </div>
@@ -153,6 +153,5 @@
         </div>
 
           </div>
-          <script src="Remember%20The%20Milk%20-%20Signup_files/ga.js"></script>
 
 <?php include 'footer.php';   ?>

@@ -1,5 +1,5 @@
 <?php
-    include 'infinitymetrics-bootstrap.php';
+    include '../../template/infinitymetrics-bootstrap.php';
 
     if (!isset($_SESSION["userAgentAuthenticated"])) {
         $_SESSION["signupError"] = "Please authenticate on Java.net!";
@@ -37,7 +37,7 @@
 
                 $_SESSION["regStudent"] = $regStudent;
 
-                header('Location: /user/student/signup-step3.php');
+                header('Location: signup-step3.php');
 
             } catch (InfinityMetricsException $ime) {
                 $_SESSION["signupError"] = $ime;
@@ -55,12 +55,12 @@
     $breakscrum = array(
                         "/" => "Home",
                         "/user" => "Users Registration",
-                        "/user/student/signup-step1.php" => "Student Registration"
+                        "signup-step1.php" => "Student Registration"
                   );
     $leftMenu = array();
-    array_push($leftMenu, array("active"=>"menu-27", "url"=>"/user/student/signup-step1.php", "item"=>"1. Java.net Authentication", "tip"=>"Manage your site's book outlines."));
-    array_push($leftMenu, array("active"=>"menu-27 first active", "url"=>"/user/student/signup-step2.php", "item"=>"2. Update Profile", "tip"=>"Update and review your profile info"));
-    array_push($leftMenu, array("active"=>"menu-27", "url"=>"/user/student/signup-step3.php", "item"=>"3. Confirm Registration", "tip"=>"Confirm you profile"));
+    array_push($leftMenu, array("active"=>"menu-27", "url"=>"signup-step1.php", "item"=>"1. Java.net Authentication", "tip"=>"Manage your site's book outlines."));
+    array_push($leftMenu, array("active"=>"menu-27 first active", "url"=>"signup-step2.php", "item"=>"2. Update Profile", "tip"=>"Update and review your profile info"));
+    array_push($leftMenu, array("active"=>"menu-27", "url"=>"signup-step3.php", "item"=>"3. Confirm Registration", "tip"=>"Confirm you profile"));
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -107,7 +107,7 @@
                           <div id="block-user-3" class="block block-user">
                               <h2>All users are welcomed</h2>
                               <div class="content" align="center">
-                                <img src="/template/images/techglobe2.jpg">
+                                <img src="../../template/images/techglobe2.jpg">
                               </div>
                           </div>
                         </div>
@@ -151,7 +151,7 @@
 	  			<td class="status"><span id="institutionStatus"></span></td>
 	  		  </tr>
       		  <tr>
-	  			<td class="label"><label id="lschoolId" for="schoolId">Student School Identification</label></td>
+	  			<td class="label"><label id="lschoolId" for="schoolId">Student School Identification #</label></td>
 	  			<td class="field"><input style="background-color: rgb(255, 255, 160);" id="schoolId" name="schoolId" class="textfield" value="" maxlength="30" type="text"></td>
 	  			<td class="status"><span id="schoolIdStatus"></span></td>
 	  		  </tr>
@@ -220,5 +220,4 @@
         </div>
 
           </div>
-          <script src="Remember%20The%20Milk%20-%20Signup_files/ga.js"></script>
 <?php    include 'footer.php';   ?>

@@ -1,4 +1,11 @@
 <?php
+
+ini_set('include_path', ini_get('include_path') . PATH_SEPARATOR . '/home/group8/pear/PEAR');
+ini_set('include_path', ini_get('include_path') . PATH_SEPARATOR . '/home/group8/infinitymetrics/app/classes');
+ini_set('include_path', ini_get('include_path') . PATH_SEPARATOR . '/home/group8/infinitymetrics/app/template');
+
+$home_address = "http://hci.cs.sfsu.edu/~group8/nightly";
+
 require_once 'propel/Propel.php';
 Propel::init('infinitymetrics/orm/config/om-conf.php');
 

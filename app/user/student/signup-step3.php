@@ -1,5 +1,5 @@
 <?php
-    include 'infinitymetrics-bootstrap.php';
+    include '../../template/infinitymetrics-bootstrap.php';
 
     if (!isset($_SESSION["regStudent"])) {
         $_SESSION["signupError"] = "Please authenticate on Java.net!";
@@ -20,7 +20,7 @@
                             $regStudent["lastName"], $regStudent["schoolId"], $regStudent["jnProject"],
                             $regStudent["instAbbrev"], $regStudent["isLeader"]);
                 $_SESSION["successMessage"] = "Your account was created and an email was sent to " . $regStudent["email"];
-                header('Location: /user/');
+                header('Location: ../');
 
         } catch (Exception $ime) {
             $_SESSION["signupError"] = $ime;
@@ -33,12 +33,12 @@
     $breakscrum = array(
                         "/" => "Home",
                         "/user" => "Users Registration",
-                        "/user/student/signup-step1.php" => "Student Registration"
+                        "signup-step1.php" => "Student Registration"
                   );
     $leftMenu = array();
-    array_push($leftMenu, array("active"=>"menu-27", "url"=>"/user/student/signup-step1.php", "item"=>"1. Java.net Authentication", "tip"=>"Manage your site's book outlines."));
-    array_push($leftMenu, array("active"=>"menu-27", "url"=>"/user/student/signup-step2.php", "item"=>"2. Update Profile", "tip"=>"Update and review your profile info"));
-    array_push($leftMenu, array("active"=>"menu-27 first active", "url"=>"/user/student/signup-step3.php", "item"=>"3. Confirm Registration", "tip"=>"Confirm you profile"));
+    array_push($leftMenu, array("active"=>"menu-27", "url"=>"signup-step1.php", "item"=>"1. Java.net Authentication", "tip"=>"Manage your site's book outlines."));
+    array_push($leftMenu, array("active"=>"menu-27", "url"=>"signup-step2.php", "item"=>"2. Update Profile", "tip"=>"Update and review your profile info"));
+    array_push($leftMenu, array("active"=>"menu-27 first active", "url"=>"signup-step3.php", "item"=>"3. Confirm Registration", "tip"=>"Confirm you profile"));
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -85,7 +85,7 @@
                           <div id="block-user-3" class="block block-user">
                               <h2>All users are welcomed</h2>
                               <div class="content" align="center">
-                                <img src="/template/images/techglobe2.jpg">
+                                <img src="../../template/images/techglobe2.jpg">
                               </div>
                           </div>
                         </div>
@@ -175,5 +175,4 @@
         </div>
 
           </div>
-          <script src="Remember%20The%20Milk%20-%20Signup_files/ga.js"></script>
 <?php    include 'footer.php';   ?>

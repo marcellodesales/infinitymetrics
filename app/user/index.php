@@ -1,5 +1,5 @@
 <?php
-    include 'infinitymetrics-bootstrap.php';
+    include '../template/infinitymetrics-bootstrap.php';
 
     $subUseCase = "Users Registration";
     $enableLeftNav = false;
@@ -9,11 +9,11 @@
 <html class="js" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en"><head>
 <title>Infinity Metrics: <?php echo $subUseCase; ?></title>
 
-<?php include 'static-js-css.php';  ?>
+<?php include '../template/static-js-css.php';  ?>
 
 <body class="<?php echo $enableLeftNav ? $leftNavClass : $NoLeftNavClass ;?>">
 
-<?php  include_once 'top-navigation.php';  ?>
+<?php  include '../template/top-navigation.php';  ?>
 
                   <div id="breadcrumb" class="alone">
                     <h2 id="title">Home</h2>
@@ -30,7 +30,7 @@
                           <div id="block-user-3" class="block block-user">
                               <h2>All users are welcomed</h2>
                               <div class="content" align="center">
-                                <img src="/template/images/techglobe2.jpg">
+                                <img src="../template/images/techglobe2.jpg">
 
                               </div>
                           </div>
@@ -50,13 +50,13 @@
 ?>
 <table align="center">
 <tr><td width="33%" align="center">
-<input name="op" id="edit-submit" value="Register as Student" class="form-submit" type="button" onclick="document.location='/user/student/signup-step1.php'">
+<input name="op" id="edit-submit" value="Register as Student" class="form-submit" type="button" onclick="document.location='student/signup-step1.php'">
 </td>
 <td width="33%" align="center">
-<input name="op" id="edit-submit" value="Register as Instructor" class="form-submit" type="button" onclick="document.location='/user/instructor/signup-step1.php'">
+<input name="op" id="edit-submit" value="Register as Instructor" class="form-submit" type="button" onclick="document.location='instructor/signup-step1.php'">
 </td>
 <td width="33%" align="center">
-<input name="op" id="edit-submit" value="Register as Java.net User" class="form-submit" type="button" onclick="document.location='/user/signup-step1.php'">
+<input name="op" id="edit-submit" value="Register as Java.net User" class="form-submit" type="button" onclick="document.location='signup-step1.php'">
 </td>
 </table>
 
@@ -73,4 +73,4 @@
 
           </div>
 
-<?php    include 'footer.php';   ?>
+<?php    include '../template/footer.php';   ?>
