@@ -1,1 +1,1 @@
-∞Metrics: Automatic Collaboration Metrics for Java.net Projects
+&#8734;Metrics: Automatic Collaboration Metrics for Java.net Projects

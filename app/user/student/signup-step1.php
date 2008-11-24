@@ -26,7 +26,7 @@
 
                     header('Location: signup-step2.php');
                 } else {
-                    $_SESSION["signupError"] = "Authentication failed with Java.net";
+                    $_SESSION["signupError"] = "Authentication failed with Java.net for the given credentials.";
                 }
             }
         } catch (Exception $e) {
@@ -136,7 +136,7 @@
                 <td>&nbsp;</td>
                 <td colspan="2">
                     <input id="edit-submit" value="Authenticate in Java.net" class="form-submit" type="submit">
-                    <input id="edit-delete" value="Cancel Registration" class="form-submit" type="button" onclick="document.location='/user/'">
+                    <input id="edit-delete" value="Cancel Registration" class="form-submit" type="button" onclick="document.location='../'">
                 </td>
               </tr>
 	  		  </tbody></table>

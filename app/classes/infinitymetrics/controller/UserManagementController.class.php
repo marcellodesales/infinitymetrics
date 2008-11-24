@@ -167,16 +167,34 @@ final class UserManagementController {
             $studProj->setProject($proj);
             $studProj->setUser($student);
             $studProj->save();
-
+		
+	    $subject = "Welcome to Infinity Metrics";
+ 	    $body = "Hello ".$student->getFirstName().",\n\nWe'd like to welcome to Infinity Metrics... Know that we strive to provide the best experience when you're looking at your team(s) metrics...\n\nYour Java.net login information was saved at Infinity Metrics database to better provide you automated services. Your personal agent will collect your team's data, while you can play golf... However, note that for automatic services need your most updated Java.net information in case you change it.\n\nPlease feel free to contact the 'Infinity Team' at any time at http://ppm-8.dev.java.net.\n\nEnjoy!";	
+	    UserManagementController::sendEmailToUser($student, $subject, $body);
             return $student;
 
         } catch (Exception $e) {
             throw $e;
         }
     }
+    /**
+     * Sends an email to a given User, using it's first name...
+     * @param User $user is the given user. 
+     * @param string $subject is the subject that goes with the email
+     * @param string $body is the body of the email. Note that this is for plain text email, so use "\n" for new line feed/carriege return.
+     */
+    public static function sendEmailToUser(User $user, $subject, $body) {
+	if (!mail($user->getEmail(), $subject, $body)) {
+		 $error = array();
+                 $error["emailServerDown"] = "The Infinity Metrics email server cannot deliever email at this time...";
+        	 throw new InfinityMetricsException("There are errors in the input", $error);
+	}
+    }
 
-
-public static function validateInstructorRegistrationForm($username, $password, $email,
+    /**
+     * Validates the registration form for instructor
+     */
+    public static function validateInstructorRegistrationForm($username, $password, $email,
                           $firstName,$lastName,$projectName,$institutionAbbreviation) {
         $error = array();
         if (!isset($username) || $username == "") {
