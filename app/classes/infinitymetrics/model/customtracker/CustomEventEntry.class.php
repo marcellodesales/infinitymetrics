@@ -1,6 +1,6 @@
 <?php
 /**
- * $Id: CustomEvent.class.php 008 2008-11-12 05:11:55Z PST fisher_brett $
+ * $Id: CustomEventEntry.class.php 008 2008-11-12 05:11:55Z PST fisher_brett $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -19,46 +19,35 @@
  * For more information please see <http://ppm-8.dev.java.net>.
  */
 
-require_once('infinitymetrics/model/customtracker/CustomEventState.class.php');
-require_once 'infinitymetrics/orm/PersistentCustomEvent.php';
+require_once('infinitymetrics/orm/PersistentCustomEventEntry.php');
 
 /**
- * Defines the model for a custom event.
- * A custom event is defined as an event entered in directly by the instructor.
+ * Defines the model for a customEventEntry.
+ * A customEventEntry is defined as new additional text added to a custom event.
  *
  * @author Brett Fisher <fghtikty@gmail.com>
  */
-
-class CustomEvent extends PersistentCustomEvent {
+class CustomEventEntry extends PersistentCustomEventEntry {
 
     /**
-     * Constructs [CustomEvent] with [title] as a parameter.
+     * Constructs [CustomEventEntry] with [notes] as a parameter.
      */
-    public function __construct($newTitle) {
-        /**
-         *The state is automatically set as the default database to (Open)
-         */
-        $this->setTitle($newTitle);
+    public function __construct($newNotes) {
+        $this->setNotes($newNotes);
         $this->setDate(new DateTime("now"));
     }
 
-    public function resolve() {
-        $this->setState("R");
-    }
-
-    public function reopen() {
-        $this->setState("O");
-    }
-    
     /**
-     * Compares 2 instances of the CustomEvent class by comparing the Title.
-     * @param CustomEvent $other is the other custom event to be compared.
-     * @return boolean if the given custom event "other" is the same as the
-     *   current instance.
+     * Compares 2 instances of the CustomEventEntry class by comparing the
+     *   Notes.
+     * @param CustomEventEntry $other is the other custom event entry to be
+     *   compared.
+     * @return boolean if the given custom event entry "other" is the same as
+     *   the current instance.
      */
     public function equals($other) {
-        if ($other instanceof CustomEvent) {
-            return $this->getTitle() == $other->getTitle();
+        if ($other instanceof CustomEventEntry) {
+            return $this->getNotes() == $other->getNotes();
         } else {
             return false;
         }
