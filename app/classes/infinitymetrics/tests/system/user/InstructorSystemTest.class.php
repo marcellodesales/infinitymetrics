@@ -1,4 +1,4 @@
-<?php
+o<?php
 /**
  * $Id: InstructorSystemTest.class.php 202 2008-11-10 21:31:40Z marcellosales $
  *
@@ -61,14 +61,16 @@ class InstructorSystemTest extends PHPUnit_Framework_TestCase {
         $this->instructor->setJnUsername(self::USERNAME);
         $this->instructor->setJnPassword("gur22");
 
+
         $this->institution = new Institution();
         $this->institution->setName("San Francisco State University");
         $this->institution->setAbbreviation(self::INST_ABBREVIATION);
         $this->institution->setCity("San Francisco");
         $this->institution->setStateProvince("California");
         $this->institution->setCountry("United States");
-
+        $this->institution->save();
         $this->instructor->setInstitution($this->institution);
+        $this->instructor->save();
     }
 
     public function testCreationAndRetrival() {
@@ -147,7 +149,7 @@ class InstructorSystemTest extends PHPUnit_Framework_TestCase {
 
     protected function tearDown() {
         echo "Tearing down...";
-        $this->instructor->delete();
+       // $this->instructor->delete();
     }
 }
 ?>

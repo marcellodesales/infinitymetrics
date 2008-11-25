@@ -1,5 +1,5 @@
 <?php
-    include 'infinitymetrics-bootstrap.php';
+    include '../../template/infinitymetrics-bootstrap.php';
 
     if (!isset($_SESSION["userAgentAuthenticated"])) {
         $_SESSION["signupError"] = "Please authenticate on Java.net!";
@@ -17,26 +17,23 @@
 
             try {
                 $firstLastName = explode(" ", $_POST["fullName"]);
-
-                $userAgent = UserManagementController::validateInstructorRegistrationForm(
+                                 $userAgent = UserManagementController::validateInstructorRegistrationForm(
                                  $_SESSION["userAgentAuthenticated"]["jnUsername"],
                                  $_SESSION["userAgentAuthenticated"]["jnPassword"],
                                  $_SESSION["userAgentAuthenticated"]["email"], $firstLastName[0], $firstLastName[1],
-                                  $_POST["jnProject"], $_POST["institutionAbbr"]);
+                                 $_POST["jnProject"], $_POST["institutionAbbr"]);
 
                 $regInstructor["jnUsername"] = $_SESSION["userAgentAuthenticated"]["jnUsername"];
                 $regInstructor["jnPassword"] = $_SESSION["userAgentAuthenticated"]["jnPassword"];
                 $regInstructor["email"] = $_SESSION["userAgentAuthenticated"]["email"];
                 $regInstructor["firstName"] = $firstLastName[0];
                 $regInstructor["lastName"] = $firstLastName[1];
-
                 $regInstructor["jnProject"] = $_POST["jnProject"];
                 $regInstructor["instAbbrev"] = $_POST["institutionAbbr"];
 
-
                 $_SESSION["regInstructor"] = $regInstructor;
 
-                header('Location: /user/instructor/signup-step3.php');
+                header('Location: signup-step3.php');
 
             } catch (InfinityMetricsException $ime) {
                 $_SESSION["signupError"] = $ime;
@@ -48,18 +45,19 @@
 
 #----------------------------->>>>>>>>>>>>> Variables Initialization ------------------->>>>>>>>>>>>>>>
 
-    $subUseCase = "Instructor Registration";
+    $subUseCase = "2. Instructor Profile Update ";
     $enableLeftNav = true;
 
     $breakscrum = array(
-                        "/" => "Home",
-                        "/user" => "Users Registration",
-                        "/user/instructor/signup-step1.php" => "Instructor Registration"
+                       $home_address => "Home",
+                       $home_address."/user" => "Users Registration",
+                       $home_address."user\instructor\signup-step1.php" =>  "1. Java.net Authentication",
+                       $home_address."/user/instructor/signup-step2.php" => "2. Profile Update"
                   );
     $leftMenu = array();
-    array_push($leftMenu, array("active"=>"menu-27", "url"=>"/user/instructor/signup-step1.php", "item"=>"1. Java.net Authentication", "tip"=>"Manage your site's book outlines."));
-    array_push($leftMenu, array("active"=>"menu-27 first active", "url"=>"/user/instructor/signup-step2.php", "item"=>"2. Update Profile", "tip"=>"Update and review your profile info"));
-    array_push($leftMenu, array("active"=>"menu-27", "url"=>"/user/instructor/signup-step3.php", "item"=>"3. Confirm Registration", "tip"=>"Confirm you profile"));
+    array_push($leftMenu, array("active"=>"menu-27", "url"=>"signup-step1.php", "item"=>"1. Java.net Authentication", "tip"=>"Manage your site's book outlines."));
+    array_push($leftMenu, array("active"=>"menu-27 first active", "url"=>"signup-step2.php", "item"=>"2. Update Profile", "tip"=>"Update and review your profile info"));
+    array_push($leftMenu, array("active"=>"menu-27", "url"=>"signup-step3.php", "item"=>"3. Confirm Registration", "tip"=>"Confirm you profile"));
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -106,7 +104,7 @@
                           <div id="block-user-3" class="block block-user">
                               <h2>All users are welcomed</h2>
                               <div class="content" align="center">
-                                <img src="/template/images/techglobe2.jpg">
+                                <img src="../../template/images/techglobe2.jpg">
                               </div>
                           </div>
                         </div>
@@ -149,7 +147,7 @@
                 </td>
 	  			<td class="status"><span id="institutionStatus"></span></td>
 	  		  </tr>
-      		   <tr>
+      		  <tr>
 	  			<td class="label">* <label id="lusername" for="username">Java.net Username</label></td>
 	  			<td class="field"><?php echo $_SESSION["userAgentAuthenticated"]["jnUsername"] ?><input type="hidden" name="username" id="username" value="<?php echo $_SESSION["userAgentAuthenticated"]["jnUsername"] ?>"></td>
 	  			<td class="status"><span id="usernameStatus"></span></td>
@@ -180,7 +178,7 @@
 	  			<td class="label"><label id="lsignupsubmit" for="signupsubmit">&nbsp;</label></td>
 	  			<td class="field" colspan="2">
                     <input name="submit" id="edit-submit" value="Continue" class="form-submit" type="submit">
-                    <input name="tryAnother" id="edit-preview" value="Try another account" class="form-submit" type="button" onclick="document.location='/user/student/signup-step1.php'">
+                    <input name="tryAnother" id="edit-preview" value="Try another account" class="form-submit" type="button" onclick="document.location='/user/instructor/signup-step1.php'">
                     <input name="cancelSignup" id="edit-delete" value="Cancel Signup" class="form-submit" type="button" onclick="document.location='/user/'">
                 </td>
 	  		  </tr>
@@ -208,5 +206,4 @@
         </div>
 
           </div>
-          <script src="Remember%20The%20Milk%20-%20Signup_files/ga.js"></script>
 <?php    include 'footer.php';   ?>

@@ -1,5 +1,5 @@
 <?php
-    include 'infinitymetrics-bootstrap.php';
+    include '../../template/infinitymetrics-bootstrap.php';
 
     if (!isset($_SESSION["regInstructor"])) {
         $_SESSION["signupError"] = "Please authenticate on Java.net!";
@@ -17,10 +17,9 @@
         try {
             $userAgent = UserManagementController::registerInstructor($regInstructor["jnUsername"],
                             $regInstructor["jnPassword"], $regInstructor["email"], $regInstructor["firstName"],
-                            $regInstructor["lastName"], $regInstructor["jnProject"],
-                            $regInstructor["instAbbrev"]);
+                            $regInstructor["lastName"], $regInstructor["jnProject"],$regInstructor["instAbbrev"]);
                 $_SESSION["successMessage"] = "Your account was created and an email was sent to " . $regInstructor["email"];
-                header('Location: /user/');
+                header('Location: ../');
 
         } catch (Exception $ime) {
             $_SESSION["signupError"] = $ime;
@@ -31,14 +30,16 @@
     $enableLeftNav = true;
 
     $breakscrum = array(
-                        "/" => "Home",
-                        "/user" => "Users Registration",
-                        "/user/instructor/signup-step1.php" => "Instructor Registration"
+                        $home_address => "Home",
+                        $home_address."/user" => "Users Registration",
+                        $home_address."/user/instructor/signup-step1.php" => "1. Student Java.net Authentication",
+			$home_address."/user/instructor/signup-step2.php" => "2. Instructor Profile Update",
+			$home_address."/user/instructor/signup-step2.php" => "3. Instructor Profile Confirmation"
                   );
     $leftMenu = array();
-    array_push($leftMenu, array("active"=>"menu-27", "url"=>"/user/instructor/signup-step1.php", "item"=>"1. Java.net Authentication", "tip"=>"Manage your site's book outlines."));
-    array_push($leftMenu, array("active"=>"menu-27", "url"=>"/user/instructor/signup-step2.php", "item"=>"2. Update Profile", "tip"=>"Update and review your profile info"));
-    array_push($leftMenu, array("active"=>"menu-27 first active", "url"=>"/user/instructor/signup-step3.php", "item"=>"3. Confirm Registration", "tip"=>"Confirm you profile"));
+    array_push($leftMenu, array("active"=>"menu-27", "url"=>"signup-step1.php", "item"=>"1. Java.net Authentication", "tip"=>"Manage your site's book outlines."));
+    array_push($leftMenu, array("active"=>"menu-27", "url"=>"signup-step2.php", "item"=>"2. Update Profile", "tip"=>"Update and review your profile info"));
+    array_push($leftMenu, array("active"=>"menu-27 first active", "url"=>"signup-step3.php", "item"=>"3. Confirm Registration", "tip"=>"Confirm you profile"));
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -85,7 +86,7 @@
                           <div id="block-user-3" class="block block-user">
                               <h2>All users are welcomed</h2>
                               <div class="content" align="center">
-                                <img src="/template/images/techglobe2.jpg">
+                                <img src="../../template/images/techglobe2.jpg">
                               </div>
                           </div>
                         </div>
@@ -115,17 +116,17 @@
 	  		  </tr>
       		  <tr>
 	  			<td class="label"><label id="iinstitution" for="institution">Institution</label></td>
-	  			<td class="field"><?php echo $_SESSION["regInstructor"]["instAbbrev"] ?></td>
+	  			<td class="field"><?php echo $_SESSION["reginstructor"]["instAbbrev"] ?></td>
 	  			<td class="status"><span id="institutionStatus"></span></td>
 	  		  </tr>
-      		   <tr>
+      		  <tr>
 	  			<td class="label"><label id="lemail" for="email">Email Address at Java.net</label></td>
 	  			<td class="field"><?php echo $_SESSION["regInstructor"]["email"] ?></td>
 	  			<td class="status"><span id="emailStatus"></span></td>
 	  		  </tr>
 	  		  <tr>
 	  			<td class="label"><label id="lusername" for="username">Java.net Username</label></td>
-	  			<td class="field"><?php echo $_SESSION["regInstructor"]["jnUsername"] ?></td>
+	  			<td class="field"><?php echo $_SESSION["reginstructor"]["jnUsername"] ?></td>
 	  			<td class="status"><span id="usernameStatus"></span></td>
 	  		  </tr>
       		  <tr>
@@ -133,7 +134,7 @@
 	  			<td class="field"><?php echo $_SESSION["regInstructor"]["jnProject"] ?></td>
 	  			<td class="status"><span id="projectStatus"></span></td>
 	  		  </tr>
-      		   <tr>
+      		  <tr>
 	  			<td class="label"><label id="lsignupsubmit" for="signupsubmit">&nbsp;</label></td>
 	  			<td class="field" colspan="2">
                     <input name="submit" id="edit-submit" value="Confirm my Account" class="form-submit" type="submit">
@@ -165,5 +166,4 @@
         </div>
 
           </div>
-          <script src="Remember%20The%20Milk%20-%20Signup_files/ga.js"></script>
 <?php    include 'footer.php';   ?>

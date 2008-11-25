@@ -42,7 +42,7 @@ final class UserManagementController {
      * @return PersonalAgent the agent representation. It can be used to retrieve information about the user's
      * profile such as email address, full-name, if it's successfully logged-in, etc.
      */
-    public static function authenticateJNUser($username, $password) {
+   public static function authenticateJNUser($username, $password) {
         $error = array();
         if (!isset($username) || $username == "") {
             $error["username"] = "The username is empty";
@@ -152,7 +152,7 @@ final class UserManagementController {
             $inst = PersistentInstitutionPeer::retrieveByAbbreviation($institutionAbbreviation);
             $proj = PersistentProjectPeer::retrieveByPK($projectName);
 
-            $student = new Instructor();
+            $student = new Student();
             $student->setFirstName($firstName);
             $student->setLastName($lastName);
             $student->setEmail($email);
@@ -213,19 +213,14 @@ final class UserManagementController {
         if (!isset($email) || $email == "") {
             $error["email"] = "The email is empty";
         }
-        if (!isset($studentSchoolId) || $studentSchoolId == "") {
-            $error["studentSchoolId"] = "The student school Id is empty";
-        }
+        
         if (!isset($projectName) || $projectName == "") {
             $error["projectName"] = "The java.net project name is empty";
         }
         if (!isset($institutionAbbreviation) || $institutionAbbreviation == "") {
             $error["institution"] = "The institution is empty";
         }
-        if (!isset($isLeader)) {
-            $error["isLeader"] = "The information if the the student is a leader is not given";
-        }
-
+       
         if (count($error) > 0) {
             throw new InfinityMetricsException("There are errors in the input", $error);
         }
@@ -261,32 +256,16 @@ final class UserManagementController {
             $instProj->setProject($proj);
             $instProj->save();
 
+
+
+            $subject = "Welcome to Infinity Metrics";
+ 	        $body = "Hello ".$instructor->getFirstName().",\n\nWe'd like to welcome to Infinity Metrics... Know that we strive to provide the best experience when you're looking at your team(s) metrics...\n\nYour Java.net login information was saved at Infinity Metrics database to better provide you automated services. Your personal agent will collect your team's data, while you can play golf... However, note that for automatic services need your most updated Java.net information in case you change it.\n\nPlease feel free to contact the 'Infinity Team' at any time at http://ppm-8.dev.java.net.\n\nEnjoy!";
+	        UserManagementController::sendEmailToUser($instructor, $subject, $body);
             return $instructor;
 
         } catch (Exception $e) {
             throw $e;
         }
-    }
-
-   
-     public static function login($userName, $password) {
-
-          $error = array();
-        if (!isset($username) || $username == "") {
-            $error["username"] = "The username is empty";
-        }
-        if (!isset($password) || $password == "") {
-            $error["password"] = "The password is empty";
-        }
-
-        if (count($error) > 0) {
-            throw new InfinityMetricsException("There are errors in the input", $error);
-        }
-
-        $c = new Criteria();
-        $c->add(PersistentUserPeer::JN_USERNAME, $userName);
-        $c->add(PersistentUserPeer::JN_PASSWORD, $password);
-        return PersistentUserPeer::doSelect($c);
     }
 
     public static function viewAccount($username) {
@@ -295,5 +274,8 @@ final class UserManagementController {
         return PersistentUserPeer::doSelect($c);
     }
 }
+
+
+
 
 ?>
