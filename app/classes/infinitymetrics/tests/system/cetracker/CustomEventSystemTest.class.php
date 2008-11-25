@@ -24,8 +24,8 @@ require_once 'propel/Propel.php';
 Propel::init('infinitymetrics/orm/config/om-conf.php');
 
 require_once 'PHPUnit/Framework.php';
-require_once 'infinitymetrics/model/customtracker/CustomEvent.class.php';
-require_once 'infinitymetrics/model/customtracker/CustomEventEntry.class.php';
+require_once 'infinitymetrics/model/cetracker/CustomEvent.class.php';
+require_once 'infinitymetrics/model/cetracker/CustomEventEntry.class.php';
 require_once 'infinitymetrics/model/workspace/Project.class.php';
 require_once 'infinitymetrics/orm/PersistentCustomEventPeer.php';
 
@@ -45,7 +45,7 @@ class CustomEventSystemTest extends PHPUnit_Framework_TestCase {
     const PROJECT_JN_NAME = "Brett's fanclub.";
 
     private function deleteCustomEventAndProject() {
-        echo "Deleting the custom event for setting up.\n";
+        //echo "Deleting the custom event for setting up.\n";
         $criteria = new Criteria();
         $criteria->add(PersistentCustomEventPeer::TITLE, self::TITLE);
         PersistentCustomEventPeer::doDelete($criteria);
@@ -59,8 +59,8 @@ class CustomEventSystemTest extends PHPUnit_Framework_TestCase {
     protected function setUp() {
         parent::setUp();
         $this->deleteCustomEventAndProject();
-        echo "Setting up new custom event and project.\n";
-        echo "Object only in MEMORY.\n";
+        //echo "Setting up new custom event and project.\n";
+        //echo "Object only in MEMORY.\n";
         $this->customEvent = new CustomEvent(self::TITLE);
         $this->customEvent->setProjectJnName(self::PROJECT_JN_NAME);
         $this->project = new Project();
@@ -69,7 +69,7 @@ class CustomEventSystemTest extends PHPUnit_Framework_TestCase {
     }
 
     public function testCreationAndRetrival() {
-        echo "Objects to be saved on DB.\n";
+        //echo "Objects to be saved on DB.\n";
         $this->project->save();
         $this->customEvent->save();
 
@@ -79,9 +79,9 @@ class CustomEventSystemTest extends PHPUnit_Framework_TestCase {
 
         $results = PersistentCustomEventPeer::doSelectOne($criteria);
 
-        $this->assertNotNull($results);
+        $this->assertNotNull($results, "The results are null from the persistent database");
         $this->assertTrue($this->customEvent->equals($results),
-            "Persistent and transient custom events are different.\n");
+            "Persistent and transient custom events are different.");
     }
 
     public function testCreationWithExistingCustomEvent() {
@@ -89,18 +89,16 @@ class CustomEventSystemTest extends PHPUnit_Framework_TestCase {
 
         try {
             $otherCustomEvent->save();
-            $this->fail("The custom event should not be created with ".
-                "the same title...\n");
+            $this->fail("The custom event should not be created with the same title...");
         } catch (Exception $e) {
-            $this->assertNotNull($e, "The exception is not created.\n");
+            $this->assertNotNull($e, "The exception is not created.");
         }
         try {
             $otherCustomEvent->setTitle("Brett is superb!");
             $otherCustomEvent->save();
-            $this->fail("The custom event should not be created with ".
-                "the same title...\n");
+            $this->fail("The custom event should not be created with the same title...");
         } catch (Exception $e) {
-            $this->assertNotNull($e, "The exception is not created.\n");
+            $this->assertNotNull($e, "The exception is not created.");
         }
     }
 
@@ -130,8 +128,6 @@ class CustomEventSystemTest extends PHPUnit_Framework_TestCase {
                 $i++;
             }
         }
-
-        
     }
 
     public function testCustomEventUpdateWithInvalidData() {
@@ -174,7 +170,7 @@ class CustomEventSystemTest extends PHPUnit_Framework_TestCase {
     }
 
     protected function tearDown() {
-        echo "Tearing down...\n";
+        //echo "Tearing down...\n";
         $this->customEvent->delete();
     }
 }

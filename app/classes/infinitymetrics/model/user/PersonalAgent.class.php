@@ -130,5 +130,14 @@ class PersonalAgent {
         $this->startUserEditWSImplInstance();
         return $this->userEditWSImpl->getUserProjectsMembershipList();
     }
+
+    public function collectRssDataFromProjectMailingList($projectName, $mailingList, Observer $observer) {
+        $url = CollabnetRssChannel::getUrl($projectName, $mailingList);
+        
+        $jRssParser = new JNRssParserSubject($url);
+        $jRssParser->addObserver($observer);
+
+        $jRssParser->collectRss();
+    }
 }
 ?>
