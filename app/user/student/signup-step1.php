@@ -36,14 +36,14 @@
 
 #----------------------------->>>>>>>>>>>>> Variables Initialization ------------------->>>>>>>>>>>>>>>
 
-    $subUseCase = "Student Registration";
+    $subUseCase = "Student Registration: Java.net Authentication";
     $enableLeftNav = true;
 
     #breadscrum[URL] = Title
     $breakscrum = array(
-                        "/" => "Home",
-                        "/user" => "Users Registration",
-                        "signup-step1.php" => "Student Registration"
+                        $home_address => "Home",
+                        $home_address."/user" => "Users Registration",
+                        $home_address."/user/student/signup-step1.php" => "1. Student Java.net Authentication"
                   );
                   
     #leftMenu[n]["active"] - If the menu item is active or not

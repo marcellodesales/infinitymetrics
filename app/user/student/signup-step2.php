@@ -49,13 +49,14 @@
 
 #----------------------------->>>>>>>>>>>>> Variables Initialization ------------------->>>>>>>>>>>>>>>
 
-    $subUseCase = "Student Registration";
+    $subUseCase = "2. Student Profile Update";
     $enableLeftNav = true;
 
     $breakscrum = array(
-                        "/" => "Home",
-                        "/user" => "Users Registration",
-                        "signup-step1.php" => "Student Registration"
+                        $home_address => "Home",
+                        $home_address."/user" => "Users Registration",
+                        $home_address."/user/student/signup-step1.php" => "1. Java.net Authentication",
+			$home_address."/user/student/signup-step2.php" => "2. Profile Update"
                   );
     $leftMenu = array();
     array_push($leftMenu, array("active"=>"menu-27", "url"=>"signup-step1.php", "item"=>"1. Java.net Authentication", "tip"=>"Manage your site's book outlines."));

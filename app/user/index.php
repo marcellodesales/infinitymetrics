@@ -18,8 +18,8 @@
                   <div id="breadcrumb" class="alone">
                     <h2 id="title">Home</h2>
                     <div class="breadcrumb">
-                        <a href="http://infinitymetrics.local.net/">Home</a> »
-                        <a href="http://infinitymetrics.local.net/user/registration.php">Users Registration</a>
+                        <a href="<?php echo $home_address; ?>">Home</a> »
+                        <a href="<?php echo $home_address; ?>/user">Users Registration</a>
                     </div>
                   </div>
 
