@@ -168,8 +168,8 @@ final class UserManagementController {
             $studProj->setUser($student);
             $studProj->save();
 		
-	    $subject = "Welcome to Infinity Metrics";
- 	    $body = "Hello ".$student->getFirstName().",\n\nWe'd like to welcome to Infinity Metrics... Know that we strive to provide the best experience when you're looking at your team(s) metrics...\n\nYour Java.net login information was saved at Infinity Metrics database to better provide you automated services. Your personal agent will collect your team's data, while you can play golf... However, note that for automatic services need your most updated Java.net information in case you change it.\n\nPlease feel free to contact the 'Infinity Team' at any time at http://ppm-8.dev.java.net.\n\nEnjoy!";	
+	    $subject = "Welcome to Infinity Metrics 'nightly build'";
+ 	    $body = "Hello ".$student->getFirstName().",\n\nWe'd like to welcome you to Infinity Metrics... We strive to provide you the best experience when analyzing your team(s) performance through the Infinity Metrics...\n\nYour Java.net login information was saved at Infinity Metrics database to better provide you automated services. Your Personal Agent will collect your team(s)'s data, while you play golf or go to a barbecue... However, note that your Personal Agent always needs your current Java.net login information in case you change it.\n\nPlease feel free to contact the 'Infinity Team' at any time at users@ppm8.dev.java.net.\n\nEnjoy!\n\nInfinity Metrics: Automatic Collaboration Metrics for java.net Projects\nhttp://ppm8.dev.java.net\nMailing Lists: https://ppm-8.dev.java.net/servlets/ProjectMailingListList";	
 	    UserManagementController::sendEmailToUser($student, $subject, $body);
             return $student;
 
@@ -184,7 +184,8 @@ final class UserManagementController {
      * @param string $body is the body of the email. Note that this is for plain text email, so use "\n" for new line feed/carriege return.
      */
     public static function sendEmailToUser(User $user, $subject, $body) {
-	if (!mail($user->getEmail(), $subject, $body)) {
+	$headers = "From: noreply@infinitymetrics.net\r\nReply-To: dev@ppm-8.dev.java.net";
+	if (!mail($user->getEmail(), $subject, $body, $headers)) {
 		 $error = array();
                  $error["emailServerDown"] = "The Infinity Metrics email server cannot deliever email at this time...";
         	 throw new InfinityMetricsException("There are errors in the input", $error);
