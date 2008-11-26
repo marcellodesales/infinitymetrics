@@ -130,10 +130,29 @@ class PersonalAgent {
         $this->startUserEditWSImplInstance();
         return $this->userEditWSImpl->getUserProjectsMembershipList();
     }
-
+    /**
+     * Collects the RSS Data feed from the given MAILING LIST for a given observer to process.
+     * @param string $projectName is the java.net project name.
+     * @param string $mailingList is the mailing list name id used in the URLs of the RSS feeds. (dev, users, issues)
+     * @param Observer $observer is an instance of an observer interested in the Rss data.
+     */
     public function collectRssDataFromProjectMailingList($projectName, $mailingList, Observer $observer) {
-        $url = CollabnetRssChannel::getUrl($projectName, $mailingList);
+        $url = CollabnetRssChannel::makeMailingListUrl($projectName, $mailingList);
         
+        $jRssParser = new JNRssParserSubject($url);
+        $jRssParser->addObserver($observer);
+
+        $jRssParser->collectRss();
+    }
+    /**
+     * Collects the RSS Data feed from the given Discussion Forum for a given observer to process.
+     * @param string $projectName is the java.net project name.
+     * @param int $forumId is the forum id used in the URLs of the RSS feeds. 2342, etc.
+     * @param Observer $observer is an instance of an observer interested in the Rss data.
+     */
+    public function collectRssDataFromProjectForum($projectName, $forumId, Observer $observer) {
+        $url = CollabnetRssChannel::makeDiscussionForumtUrl($projectName, $forumId);
+
         $jRssParser = new JNRssParserSubject($url);
         $jRssParser->addObserver($observer);
 

@@ -19,7 +19,7 @@
  * For more information please see <http://ppm-8.dev.java.net>.
  */
  
-require_once('RssItem.class.php');
+require_once('infinitymetrics/util/javanet/rssparser/RssItem.class.php');
 require_once('infinitymetrics/util/go4pattenrs/creational/AbstractBuilder.class.php');
 
 /**
@@ -176,9 +176,22 @@ class RssItemBuilder extends AbstractBuilder {
         if ($this->creator == NULL || $this->creator == "") {
             throw new Exception("Creator not provided to the rss item");
         }
-        $this->rssItem->setCreatorEmail($this->author == $this->creator ? "" : $this->extractUsernameFromEmail($this->author));
+        $onlyUsername = !strpos(" ",$this->author) ? true : false;
+        $containsEmail = strpos("@",$this->author) ? true : false;
+        if ($onlyUsername && !$containsEmail) {
+            //If the real name is given, add the flag to the user.
+            $this->rssItem->setAuthorUsername($this->author);
+        } else
+        if ($containsEmail) {
+            //although creator and creator are always the same, we will be saving
+            //the email address... 
+            $this->rssItem->setCreatorEmail($this->creator);
+            $this->rssItem->setAuthorUsername($this->extractUsernameFromEmail($this->author));
+        } else
+        if (!$onlyUsername) {
+            $this->rssItem->setRealName($this->author);
+        }
 
-        $this->rssItem->setAuthorUsername($this->extractUsernameFromEmail($this->author));
         if ($this->pubDate == NULL || $this->pubDate == "") {
             throw new Exception("Publication date not provided to the rss item");
         }
