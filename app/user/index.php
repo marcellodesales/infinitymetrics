@@ -1,13 +1,14 @@
 <?php
     include '../template/infinitymetrics-bootstrap.php';
 
+    $subUseCase1 = "Users Login";
     $subUseCase = "Users Registration";
     $enableLeftNav = false;
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html class="js" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en"><head>
-<title>Infinity Metrics: <?php echo $subUseCase; ?></title>
+<title>Infinity Metrics: <?php echo $subUsecase1;echo $subUseCase; ?></title>
 
 <?php include '../template/static-js-css.php';  ?>
 
@@ -19,6 +20,7 @@
                     <h2 id="title">Home</h2>
                     <div class="breadcrumb">
                         <a href="<?php echo $home_address; ?>">Home</a> »
+                        <a href="<php echo $home_address; ?>/user">Users Login</a>
                         <a href="<?php echo $home_address; ?>/user">Users Registration</a>
                     </div>
                   </div>
@@ -49,6 +51,9 @@
         }
 ?>
 <table align="center">
+<tr><td width="33%" align="left">
+<input name="op" id="edit-submit" value="Login" class="form-submit" type="button" onclick="document.location='login.php'">
+</td>
 <tr><td width="33%" align="center">
 <input name="op" id="edit-submit" value="Register as Student" class="form-submit" type="button" onclick="document.location='student/signup-step1.php'">
 </td>
