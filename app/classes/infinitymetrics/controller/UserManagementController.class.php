@@ -267,12 +267,37 @@ final class UserManagementController {
             throw $e;
         }
     }
+    /** this is the function to implement the login functionality for User
+ *
+ * @param <type> $userName
+ * @param <type> $password
+ * @return <type>
+ */
 
-    public static function viewAccount($username) {
-        $c = new Criteria();
-        $c->add(PersistentUserPeer::JN_USERNAME, $username);
-        return PersistentUserPeer::doSelect($c);
+     public static function login($userName, $password) {
+
+          $error = array();
+        if (!isset($userName) || $userName == "") {
+            $error["username"] = "The username is empty";
+        }
+        if (!isset($password) || $password == "") {
+            $error["password"] = "The password is empty";
+        }
+
+        if (count($error) > 0) {
+            throw new InfinityMetricsException("There are errors in the input", $error);
+        }
+
+         
+       $c = new Criteria();
+       $c->add(PersistentUserPeer::JN_USERNAME, $userName);
+       $c->add(PersistentUserPeer::JN_PASSWORD, $password);
+
+       return PersistentUserPeer::doSelect($c);
     }
+
+
+   
 }
 
 
