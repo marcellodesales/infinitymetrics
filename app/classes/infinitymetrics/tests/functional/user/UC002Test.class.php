@@ -24,6 +24,7 @@ Propel::init('infinitymetrics/orm/config/om-conf.php');
 
 require_once 'PHPUnit/Framework.php';
 require_once 'infinitymetrics/controller/UserManagementController.class.php';
+require_once 'infinitymetrics/model/user/UserTypeEnum.class.php';
 /**
  * Tests for the Use Case UC002 : A Instructor registers into the system.
  *
@@ -35,17 +36,29 @@ require_once 'infinitymetrics/controller/UserManagementController.class.php';
  */
 class UC002Test extends PHPUnit_Framework_TestCase {
 
+    const USERNAME = "Gurdeep";
+    const PASSWORD = "password";
+    const EMAIL = "gurdeepsingh03@gmail.com";
+    const FIRSTNAME = "Gurdeep";
+    const LASTNAME = "Singh";
+    
     private $institution;
     private $project;
+    private $userTypeEnum;
+
+    public function  __construct() {
+        $this->userTypeEnum = UserTypeEnum::getInstance();
+    }
 
     /**
      * Setting up is run ALWAYS BEFORE the execution of a test method.
      */
     protected function setUp() {
         parent::setUp();
-        //PersistentInstitutionPeer::doDeleteAll();
-        //PersistentProjectPeer::doDeleteAll();
-
+        PersistentInstitutionPeer::doDeleteAll();
+        PersistentProjectPeer::doDeleteAll();
+        PersistentUserPeer::doDeleteAll();
+        
         $this->institution = new Institution();
         $this->institution->setName('Punjabi University');
         $this->institution->setAbbreviation("PU");
@@ -67,17 +80,14 @@ class UC002Test extends PHPUnit_Framework_TestCase {
         try {
             //Saving the Instructor
             $createdInstructor = UserManagementController::registerInstructor(
-                                    "username1", "password", "email@gmail.com", "Gurdeep",
-                                    "Singh","PU","ppm111");
+                self::USERNAME, self::PASSWORD, self::EMAIL, self::FIRSTNAME,
+                self::LASTNAME, $this->project->getProjectJnName(), $this->institution->getAbbreviation());
             $this->assertNotNull($createdInstructor, "The registered instructor is null");
-            $this->assertTrue($createdInstructor instanceof Instructor, "The registered instructor is null");
-
-           
+            $this->assertEquals($this->userTypeEnum->INSTRUCTOR, $createdInstructor->getType(), "The registered user is not
+                                                                                           an instance of isntructor");
         } catch (InfinityMetricsException $ime){
             $this->fail("The successful login scenario failed: " . $ime);
         }
-
-        
     }
     /**
      * The test of an exceptional registration where the instructor doesn't enter
@@ -85,26 +95,24 @@ class UC002Test extends PHPUnit_Framework_TestCase {
      */
     public function testMissingFieldsStudentRegistration() {
         try {
-            $missingNames = UserManagementController::registerInstructor(
-                                    "username2", "password", "email@gmail.com", "",
-                                    "",$this->institution->getAbbreviation(),$this->project->getProjectJnName());
-
+            $missingNames = UserManagementController::registerInstructor("", "", self::EMAIL, self::FIRSTNAME,
+                self::LASTNAME, $this->project->getProjectJnName(), $this->institution->getAbbreviation());
             $this->fail("The exceptional login scenario failed with missing name");
+            
         } catch (InfinityMetricsException $ime) {
             //$error["fieldName"] = "error message"
             $errorFields = $ime->getErrorList();
             $this->assertNotNull($errorFields);
-            $this->assertNotNull($errorFields["firstName"]);
-            $this->assertNotNull($errorFields["lastName"]);
+            $this->assertNotNull($errorFields["username"]);
+            $this->assertNotNull($errorFields["password"]);
         }
 
         try {
-            $missingEmailandOthers = UserManagementController::registerInstructor(
-                                    "", "", "", "ssss",
-                                    "sssss",$this->institution->getAbbreviation(),$this->project->getProjectJnName());
-
-            $this->fail("The exceptional login scenario failed with missing
-                            username, password email");
+            $missingEmailandOthers = UserManagementController::registerInstructor("", "", "", self::FIRSTNAME,
+                                                                    self::LASTNAME, $this->project->getProjectJnName(),
+                                                                    $this->institution->getAbbreviation());
+            $this->fail("The exceptional login scenario failed with missing username, password email");
+            
         } catch (InfinityMetricsException $ime) {
             //$error["fieldName"] = "error message"
             $errorFields = $ime->getErrorList();
@@ -114,7 +122,21 @@ class UC002Test extends PHPUnit_Framework_TestCase {
             $this->assertNotNull($errorFields["email"]);
         }
 
-        
+        try {
+            $createdInstructor = UserManagementController::registerInstructor(
+                "", "", self::EMAIL, self::FIRSTNAME,
+                self::LASTNAME, "", $this->institution->getAbbreviation());
+
+            $this->fail("The exceptional registration scenario failed for
+                    missing project name, and other fields");
+        } catch (InfinityMetricsException $ime) {
+            //$error["fieldName"] = "error message"
+            $errorFields = $ime->getErrorList();
+            $this->assertNotNull($errorFields);
+            $this->assertNotNull($errorFields["username"]);
+            $this->assertNotNull($errorFields["password"]);
+            $this->assertNotNull($errorFields["projectName"]);
+        }
     }
     /**
      * The test an exceptional registration where the instructor enteres an
@@ -122,30 +144,26 @@ class UC002Test extends PHPUnit_Framework_TestCase {
      */
     public function testRegisterExistingInstructorRegistration() {
         try {
-            //Saving the instructor
-            $createdinstructor = UserManagementController::registerInstructor(
-                                    "username2", "password", "email@gmail.com", "firstName",
-                                    "lastName",$this->institution->getAbbreviation(), $this->project->getProjectJnName());
-
-            //Saving the instructor
-            $createdinstructor = UserManagementController::registerInstructor(
-                                    "username2", "password", "email@gmail.com", "firstName",
-                                    "lastName",$this->institution->getAbbreviation(),$this->project->getProjectJnName());
-
-            $this->fail("The exceptional registration failed for existing student");
-        } catch (InfinityMetricsException $ime) {
-            //$error["fieldName"] = "error message"
-            $errorFields = $ime->getErrorList();
-            $this->assertNotNull($errorFields);
-            $this->assertNotNull($errorFields["save_instructor"]);
+            //registering the instructor
+            $createdInstructor = UserManagementController::registerInstructor(
+                self::USERNAME, self::PASSWORD, self::EMAIL, self::FIRSTNAME,
+                self::LASTNAME, $this->project->getProjectJnName(), $this->institution->getAbbreviation());
+            
+            //registering the instructor once again. This time it throws an exception
+            $createdInstructor = UserManagementController::registerInstructor(
+                self::USERNAME, self::PASSWORD, self::EMAIL, self::FIRSTNAME,
+                self::LASTNAME, $this->project->getProjectJnName(), $this->institution->getAbbreviation());
+            
+            $this->fail("The exceptional registration failed for existing instructor");
+        } catch (Exception $e) {
+            $this->assertNotNull($e);
         }
     }
 
     protected function tearDown() {
-       PersistentWorkspacePeer::doDeleteAll();
-       PersistentUserPeer::doDeleteAll();
-       PersistentInstitutionPeer::doDeleteAll();
-       PersistentProjectPeer::doDeleteAll();
+        PersistentUserPeer::doDeleteAll();
+        PersistentInstitutionPeer::doDeleteAll();
+        PersistentProjectPeer::doDeleteAll();
     }
 }
 ?>
