@@ -166,8 +166,8 @@ final class UserManagementController {
                     Collaboration Metrics for java.net Projects\nhttp://ppm8.dev.java.net\nMailing Lists:
                     https://ppm-8.dev.java.net/servlets/ProjectMailingListList";
             
-            SendEmail::sendTextEmail("noreply@infinitymetrics.net", "dev@". $projectName . self::DOMAIN,
-                                                                                $student->getEmail(), $subject, $body);
+            //SendEmail::sendTextEmail("noreply@infinitymetrics.net", "dev@". $projectName . self::DOMAIN,
+              //                                                                  $student->getEmail(), $subject, $body);
             return $student;
 
         } catch (Exception $e) {
@@ -204,8 +204,7 @@ final class UserManagementController {
         if (!isset($email) || $email == "") {
             $error["email"] = "The email is empty";
         }
-        
-        if (!isset($projectName) || $projectName == "") {
+        if (!isset($parentProjectName) || $parentProjectName == "") {
             $error["projectName"] = "The java.net project name is empty";
         }
         if (!isset($institutionAbbreviation) || $institutionAbbreviation == "") {
@@ -229,8 +228,8 @@ final class UserManagementController {
     * @param string $institutionAbbreviation the institution abbreviation
     * @return Instructor representing the instructor instance for the given form
     */
-    public static function registerInstructor($username, $password, $email,
-                          $firstName,$lastName,$projectName,$institutionAbbreviation) {
+    public static function registerInstructor($username, $password, $email, $firstName, $lastName, $projectName,
+                                                $institutionAbbreviation) {
         try {
             UserManagementController::validateInstructorRegistrationForm($username, $password, $email, $firstName, $lastName,$projectName, $institutionAbbreviation);
             $inst = PersistentInstitutionPeer::retrieveByAbbreviation($institutionAbbreviation);
@@ -244,26 +243,26 @@ final class UserManagementController {
             $instructor->setJnPassword($password);
             $instructor->setInstitutionId($inst->getInstitutionId());
             $instructor->save();
-
-            $instProj = new PersistentWorkpaceXProject();
-            $instProj->setProject($proj);
-            $instProj->save();
-
-
-
+            
             $subject = "Welcome to Infinity Metrics";
- 	        $body = "Hello ".$instructor->getFirstName().",\n\nWe'd like to welcome to Infinity Metrics... Know that we strive to provide the best experience when you're looking at your team(s) metrics...\n\nYour Java.net login information was saved at Infinity Metrics database to better provide you automated services. Your personal agent will collect your team's data, while you can play golf... However, note that for automatic services need your most updated Java.net information in case you change it.\n\nPlease feel free to contact the 'Infinity Team' at any time at http://ppm-8.dev.java.net.\n\nEnjoy!";
-	        UserManagementController::sendEmailToUser($instructor, $subject, $body);
+ 	        $body = "Hello ".$instructor->getFirstName().",\n\nWe'd like to welcome to Infinity Metrics... Know that 
+                     we strive to provide the best experience when you're looking at your team(s) metrics...\n\nYour
+                     Java.net login information was saved at Infinity Metrics database to better provide you automated
+                     services. Your personal agent will collect your team's data, while you can play golf... However,
+                     note that for automatic services need your most updated Java.net information in case you change
+                     it.\n\nPlease feel free to contact the 'Infinity Team' at any time at http://ppm-8.dev.java.net.
+                     \n\nEnjoy!";
+	        //UserManagementController::sendEmailToUser($instructor, $subject, $body);
             return $instructor;
 
         } catch (Exception $e) {
+            //echo $e;
             throw $e;
         }
-        return $instructor;
     }
 
     /**
-     * Makes the user login
+     * Makes the user login for a given user
      * @param string $userName is the java.net username from a user
      * @param string $password is the java.net password for the a user
      * @return PersistentUser instance. 
@@ -283,11 +282,11 @@ final class UserManagementController {
         }
 
          
-       $c = new Criteria();
-       $c->add(PersistentUserPeer::JN_USERNAME, $userName);
-       $c->add(PersistentUserPeer::JN_PASSWORD, $password);
+        $c = new Criteria();
+        $c->add(PersistentUserPeer::JN_USERNAME, $userName);
+        $c->add(PersistentUserPeer::JN_PASSWORD, $password);
 
-       return PersistentUserPeer::doSelect($c);
+        return PersistentUserPeer::doSelect($c);
     }
 
     /**
