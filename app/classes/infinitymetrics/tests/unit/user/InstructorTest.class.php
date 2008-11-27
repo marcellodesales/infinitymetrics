@@ -18,6 +18,9 @@
  * and is licensed under the Berkeley Software Distribution (BSD).
  * For more information please see <http://ppm-8.dev.java.net>.
  */
+require_once 'propel/Propel.php';
+Propel::init('infinitymetrics/orm/config/om-conf.php');
+
 require_once 'PHPUnit/Framework.php';
 require_once 'infinitymetrics/model/institution/Instructor.class.php';
 /**
@@ -27,41 +30,35 @@ require_once 'infinitymetrics/model/institution/Instructor.class.php';
  */
 class InstructorTest extends PHPUnit_Framework_TestCase {
 
-    private $instructor;
-
     const FIRSTNAME = "Gurdeep";
     const LASTNAME = "Singh";
     const USERNAME = "gurdeep22";
-
+    
+    private $instructor;
 
     protected function setUp() {
         parent::setUp();
-        $this->instructor = new Instructor(self::FIRSTNAME,self::LASTNAME);
-       
-     }
-    public function testInstructorCreation() {
-      
-        $this->instructor->setInstitution("SFSU");
-        $this->instructor->setUserName(self::USERNAME);
+        $this->instructor = new Instructor();
+        $this->instructor->setFirstName(self::FIRSTNAME);
+        $this->instructor->setLastName(self::LASTNAME);
+        $this->instructor->setEmail("gurdeep22@gmail.com");
+        $this->instructor->setJnUsername(self::USERNAME);
+        $this->instructor->setJnPassword("blabalbal");
+    }
 
-        $this->assertEquals(self::FIRSTNAME,$this->instructor->getFirstName(), "The value of the first name is incorrect");
-        $this->assertEquals(self::LASTNAME,$this->instructor->getLastName(), "The value of the Last name is incorrect");
-        $this->assertEquals("SFSU", $this->instructor->getInstitution(), "The value of the institution is incorrect");
-        $this->assertEquals(self::USERNAME, $this->instructor->getUserName(), "The instructor's username is in incorrect state");
-
+    public function testUserComparison() {
+        $a = new Instructor();
+        $a->setJnUsername("marcellosales");
+        $b = $this->instructor;
+        $this->assertEquals(UserTypeEnum::getInstance()->INSTRUCTOR, $this->instructor->getType());
+        $this->assertTrue($b === $this->instructor);
+        $this->assertTrue($b !== $a);
+        $this->assertFalse($a->equals($this->instructor));
+        $this->assertFalse($b->equals($a));
+        $this->assertTrue($a instanceof User);
+        $this->assertTrue($a instanceof User);
     }
     
-    public function testInstructorUpdate() {
-        $this->instructor->setFirstName("Gurpreet");
-        $this->instructor->setLastName("Sandhu");
-        $this->instructor->setInstitution("FAU");
-        $this->assertEquals("Gurpreet", $this->instructor->getFirstName(), "The value of the first name is in incorrect");
-        $this->assertEquals("Sandhu", $this->instructor->getLastName(), "The value of the last name is in incorrect");
-        $this->assertEquals("FAU", $this->instructor->getInstitution(), "The value of the institution is incorrect");
-        
-    }
-
-
     protected function tearDown() {
         $this->instructor = null;
     }

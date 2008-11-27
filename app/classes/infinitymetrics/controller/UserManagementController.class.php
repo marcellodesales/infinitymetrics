@@ -79,7 +79,7 @@ final class UserManagementController {
      * @param boolean $isLeader
      */
     public static function validateStudentRegistrationForm($username, $password, $email,
-                          $firstName,$lastName, $studentSchoolId, $projectName,
+                          $firstName, $lastName, $studentSchoolId, $projectName,
                           $institutionAbbreviation, $isLeader) {
         $error = array();
         if (!isset($username) || $username == "") {
@@ -136,8 +136,21 @@ final class UserManagementController {
         try {
             UserManagementController::validateStudentRegistrationForm($username, $password, $email, $firstName,
                                         $lastName, $studentSchoolId, $projectName, $institutionAbbreviation, $isLeader);
+
             $inst = PersistentInstitutionPeer::retrieveByAbbreviation($institutionAbbreviation);
+            if ($inst == null) {
+                $errors = array();
+                $errors["institutionNotFound"] = "The institution referred by " . $institutionAbbreviation .
+                                                  " doesn't exist";
+                throw new InfinityMetricsException("Can't register Student", $errors);
+            }
+
             $proj = PersistentProjectPeer::retrieveByPK($projectName);
+            if ($proj == null) {
+                $errors = array();
+                $errors["projectNotFound"] = "The project referred by " . $projectName . " doesn't exist";
+                throw new InfinityMetricsException("Can't register Student", $errors);
+            }
 
             $student = new Student();
             $student->setFirstName($firstName);
@@ -145,15 +158,19 @@ final class UserManagementController {
             $student->setEmail($email);
             $student->setJnUsername($username);
             $student->setJnPassword($password);
-            $student->setInstitutionId($inst->getInstitutionId());
             $student->save();
 
-            $studProj = new PersistentStudentXProject();
-            $studProj->setStudentschoolid($studentSchoolId);
-            $studProj->setIsLeader($isLeader);
-            $studProj->setProject($proj);
-            $studProj->setUser($student);
-            $studProj->save();
+            $studentInstitution = new PersistentUserXInstitution();
+            $studentInstitution->setInstitution($inst);
+            $studentInstitution->setUser($student);
+            $studentInstitution->setIdentification($studentSchoolId);
+            $studentInstitution->save();
+
+            $userProject = new PersistentUserXProject();
+            $userProject->setUser($student);
+            $userProject->setProject($proj);
+            $userProject->setIsOwner($isLeader);
+            $userProject->save();
 		
             $subject = "Welcome to Infinity Metrics 'nightly build'";
             $body = "Hello ".$student->getFirstName().",\n\nWe'd like to welcome you to Infinity Metrics... We strive 
@@ -280,8 +297,7 @@ final class UserManagementController {
         if (count($error) > 0) {
             throw new InfinityMetricsException("There are errors in the input", $error);
         }
-
-         
+        
         $c = new Criteria();
         $c->add(PersistentUserPeer::JN_USERNAME, $userName);
         $c->add(PersistentUserPeer::JN_PASSWORD, $password);

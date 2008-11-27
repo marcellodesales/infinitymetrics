@@ -27,6 +27,8 @@ require_once 'infinitymetrics/model/institution/Instructor.class.php';
 require_once 'infinitymetrics/model/institution/Institution.class.php';
 require_once 'infinitymetrics/orm/PersistentUserPeer.php';
 require_once 'infinitymetrics/orm/PersistentInstitutionPeer.php';
+require_once 'infinitymetrics/orm/PersistentUserXInstitutionPeer.php';
+
 /**
  * Tests for the Instructor class.
  *
@@ -34,23 +36,22 @@ require_once 'infinitymetrics/orm/PersistentInstitutionPeer.php';
  */
 class InstructorSystemTest extends PHPUnit_Framework_TestCase {
 
-    private $instructor;
-    private $institution;
-
     const USERNAME = "gurdeep22";
     const INST_ABBREVIATION = "SFSU";
 
+    private $instructor;
+    private $institution;
+    private $studentInstitution;
+
+    public function  __construct() {
+        $this->userEnum = UserTypeEnum::getInstance();
+    }
+
     private function deleteUser() {
         //echo "Deleting the user and institution for setting up";
-        $crit = new Criteria();
-        $crit->add(PersistentUserPeer::JN_USERNAME, self::USERNAME);
-        PersistentUserPeer::doDelete($crit);
-
-        $crit->add(PersistentUserPeer::JN_USERNAME, "otherusername");
-        PersistentUserPeer::doDelete($crit);
-
-        $crit->add(PersistentInstitutionPeer::ABBREVIATION, self::INST_ABBREVIATION);
-        PersistentUserPeer::doDelete($crit);
+        PersistentUserPeer::doDeleteAll();
+        PersistentInstitutionPeer::doDeleteAll();
+        PersistentUserXInstitutionPeer::doDeleteAll();
     }
 
     protected function setUp() {
@@ -64,7 +65,6 @@ class InstructorSystemTest extends PHPUnit_Framework_TestCase {
         $this->instructor->setJnUsername(self::USERNAME);
         $this->instructor->setJnPassword("gur22");
 
-
         $this->institution = new Institution();
         $this->institution->setName("San Francisco State University");
         $this->institution->setAbbreviation(self::INST_ABBREVIATION);
@@ -72,16 +72,25 @@ class InstructorSystemTest extends PHPUnit_Framework_TestCase {
         $this->institution->setStateProvince("California");
         $this->institution->setCountry("United States");
         $this->institution->save();
-        $this->instructor->setInstitutionId($this->institution->getInstitutionId());
-        $this->instructor->save();
+
+        $this->instructorInstitution = new PersistentUserXInstitution();
+        $this->instructorInstitution->setInstitution($this->institution);
+        $this->instructorInstitution->setUser($this->instructor);
+        $this->instructorInstitution->setIdentification("");
+        $this->instructorInstitution->save();
     }
 
     public function testCreationAndRetrival() {
         //echo "Object to be saved on DB\n";
         $this->instructor->save();
         $userDb = PersistentUserPeer::retrieveByEmail("gurdeepsingh03@gmail.com");
-        $this->assertNotNull($userDb);
-        $this->assertTrue($this->instructor->equals($userDb), "Persistent and transient instructor are different");
+        $this->assertNotNull($userDb, "The instructor should be retrieved from the persistence layer");
+        $this->assertTrue($this->instructor->equals($userDb), "Persistent and transient instructors are different");
+        $this->assertEquals($this->instructor->getJnUsername(), $userDb->getJnUsername(), "Persistent and transient instructors are different");
+        $this->assertEquals($this->userEnum->INSTRUCTOR, $this->instructor->getType(), "Instructor type value was saved incorrectly");
+        $this->assertTrue($this->instructor->isInstructor(), "The isInstructor() is not returning the correct type");
+        $this->assertFalse($this->instructor->isRegularJnUser(), "The isRegularJnUser() is not returning the correct type");
+        $this->assertFalse($this->instructor->isStudent(), "The isStudent() is not returning the correct type");
     }
 
     public function testCreationWithExistingUser() {
@@ -94,7 +103,6 @@ class InstructorSystemTest extends PHPUnit_Framework_TestCase {
             $otheruser->setEmail("gurdeep@gmail.com");
             $otheruser->setJnUsername(self::USERNAME);
             $otheruser->setJnPassword("blabalbal");
-            $otheruser->setInstitutionId($this->institution->getInstitutionId());
 
             $otheruser->save();
             $this->fail("The user should not be created with the same username...");
@@ -107,7 +115,6 @@ class InstructorSystemTest extends PHPUnit_Framework_TestCase {
             $otheruser->setEmail("gurdeep@gmail.com");//same email
             $otheruser->setJnUsername("otherusername");
             $otheruser->setJnPassword("blabalbal");
-            $otheruser->setInstitutionId($this->institution->getInstitutionId());
 
             $otheruser->save();
             $this->fail("The user should not be created with the same email address...");
@@ -128,7 +135,6 @@ class InstructorSystemTest extends PHPUnit_Framework_TestCase {
             $otheruser->setEmail($otherEmail);
             $otheruser->setJnUsername($otherUsername);
             $otheruser->setJnPassword("blabalbal");
-            $otheruser->setInstitutionId($this->institution->getInstitutionId());
             $otheruser->save();
             //Saves ok
             $userDb = PersistentUserPeer::retrieveByEmail($otherEmail);

@@ -1,6 +1,7 @@
 <?php
 
 require_once 'infinitymetrics/model/workspace/MetricsWorkspace.class.php';
+require_once 'infinitymetrics/model/user/UserTypeEnum.class.php';
 
 /**
  * Description of MetricsWorkspaceController
@@ -8,35 +9,42 @@ require_once 'infinitymetrics/model/workspace/MetricsWorkspace.class.php';
  * @author Andres Ardila
  */
 class MetricsWorkspaceController
-{    
-    public function createWorkspace($jn_username, $title, $description)
+{
+    public function createWorkspace($userId, $title, $description)
     {
-        if ($jn_username == '' || $jn_username == NULL) {
-            throw new Exception('The java.net username is empty');
+        $error = array();
+        if (!isset($userId) || $userId == "") {
+            $error["userId"] = "The username identification is empty";
         }
-        else if ($title == '' || $title == NULL) {
-            throw new Exception('The title is empty');
+        if (!isset($title) || $title == "") {
+            $error["title"] = "The title is empty";
         }
-        else if ($description == '' || $description == NULL) {
-            throw new Exception('The description is empty');
+        if (!isset($description) || $description == "") {
+            $error["description"] = "The description is empty";
         }
-        else {
-            $user = PersistentUserPeer::retrieveByJNUsername($jn_username);
+        
+        if (count($error) > 0) {
+            throw new InfinityMetricsException("There are errors in the input", $error);
+        }
+        
+        $user = PersistentUserPeer::retrieveByPK($userId);
+        if ($user == null) {
+            throw new InfinityMetricsException("The user is not a project owner");
+        } else
+        if ($user->getType() != UserTypeEnum::getInstance()->INSTRUCTOR) {
 
-            if ($user == NULL) {
-                throw new Exception('The java.net username does not exist');
-            }
-            if ($user->getType() != 'I') {
-                throw new Exception('The java.net username does not correspond to an Instructor');
-            }
+        }
 
+        try {
             $ws = new PersistentWorkspace();
             $ws->setUserId( $user->getUserId() );
             $ws->setTitle($title);
             $ws->setDescription($description);
             $ws->save();
-
             return $ws;
+            
+        } catch (Exception $e) {
+            throw $e;
         }
     }
 

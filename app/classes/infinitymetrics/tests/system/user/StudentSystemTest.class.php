@@ -28,6 +28,8 @@ require_once 'infinitymetrics/model/institution/Student.class.php';
 require_once 'infinitymetrics/model/institution/Institution.class.php';
 require_once 'infinitymetrics/orm/PersistentUserPeer.php';
 require_once 'infinitymetrics/orm/PersistentInstitutionPeer.php';
+require_once 'infinitymetrics/orm/PersistentUserXInstitution.php';
+require_once 'infinitymetrics/orm/PersistentUserXInstitutionPeer.php';
 /**
  * Tests for the Persistence layer for the Student class.
  *
@@ -41,6 +43,7 @@ class StudentSystemTest extends PHPUnit_Framework_TestCase {
     private $student;
     private $institution;
     private $userEnum;
+    private $studentInstitution;
 
     public function  __construct() {
         $this->userEnum = UserTypeEnum::getInstance();
@@ -48,12 +51,9 @@ class StudentSystemTest extends PHPUnit_Framework_TestCase {
 
     private function deleteEverything() {
         //echo "Deleting the user and institution for setting up";
-        $crit = new Criteria();
-        $crit->add(PersistentUserPeer::JN_USERNAME, self::USERNAME);
-        PersistentUserPeer::doDelete($crit);
-
-        $crit->add(PersistentInstitutionPeer::ABBREVIATION, self::INST_ABBREVIATION);
-        PersistentInstitutionPeer::doDelete($crit);
+        PersistentUserPeer::doDeleteAll();
+        PersistentInstitutionPeer::doDeleteAll();
+        PersistentUserXInstitutionPeer::doDeleteAll();
     }
 
     protected function setUp() {
@@ -73,19 +73,23 @@ class StudentSystemTest extends PHPUnit_Framework_TestCase {
         $this->institution->setCity("San Francisco");
         $this->institution->setStateProvince("California");
         $this->institution->setCountry("United States");
+        $this->institution->save();
 
-        $this->student->setInstitutionId($this->institution->getInstitutionId());
+        $this->studentInstitution = new PersistentUserXInstitution();
+        $this->studentInstitution->setInstitution($this->institution);
+        $this->studentInstitution->setUser($this->student);
+        $this->studentInstitution->setIdentification("909663916");
+        $this->studentInstitution->save();
     }
 
     public function testCreationAndRetrival() {
         //echo "Object to be saved on DB\n";
         $this->student->save();
         $userDb = PersistentUserPeer::retrieveByEmail("marcello.sales@gmail.com");
-        $this->assertNotNull($userDb);
-        $this->assertTrue($this->student->equals($userDb), "Persistent and transient students are different");
+        $this->assertNotNull($userDb, "The student should be retrieved from the persistence layer");
+        $this->assertEquals($this->student->getJnUsername(), $userDb->getJnUsername(), "Persistent and transient students are different");
         $this->assertEquals($this->userEnum->STUDENT, $this->student->getType(), "Student type value was saved incorrectly");
         $this->assertTrue($this->student->isStudent(), "The isStudent() is not returning the correct type");
-
     }
 
     public function testCreationWithExistingUser() {
@@ -96,7 +100,6 @@ class StudentSystemTest extends PHPUnit_Framework_TestCase {
             $otheruser->setEmail("marcello.sales@gmail.com");
             $otheruser->setJnUsername(self::USERNAME);
             $otheruser->setJnPassword("blabalbal");
-            $otheruser->setInstitutionId($this->institution->getInstitutionId());
 
             $otheruser->save();
             $this->fail("The user should not be created with the same username...");
@@ -109,7 +112,6 @@ class StudentSystemTest extends PHPUnit_Framework_TestCase {
             $otheruser->setEmail("marcello.sales@gmail.com");//same username
             $otheruser->setJnUsername("otherusername");
             $otheruser->setJnPassword("blabalbal");
-            $otheruser->setInstitutionId($this->institution->getInstitutionId());
 
             $otheruser->save();
             $this->fail("The user should not be created with the same email address...");
@@ -130,7 +132,6 @@ class StudentSystemTest extends PHPUnit_Framework_TestCase {
             $otheruser->setEmail($otherEmail);
             $otheruser->setJnUsername($otherUsername);
             $otheruser->setJnPassword("blabalbal");
-            $otheruser->setInstitutionId($this->institution->getInstitutionId());
             $otheruser->save();
             //Saves ok
             $userDb = PersistentUserPeer::retrieveByEmail($otherEmail);

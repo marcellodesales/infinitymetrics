@@ -67,7 +67,7 @@ class UserSystemTest extends PHPUnit_Framework_TestCase {
     }
 
     public function testCreationAndRetrival() {
-        echo "Object to be saved on DB\n";
+//        echo "Object to be saved on DB\n";
         $this->user->save();
         $userDb = PersistentUserPeer::retrieveByEmail("marcello.sales@gmail.com");
         $this->assertNotNull($userDb, "Persistent user is null");
@@ -119,7 +119,7 @@ class UserSystemTest extends PHPUnit_Framework_TestCase {
             $otheruser->save();
             //Saves ok
             $userDb = PersistentUserPeer::retrieveByEmail($otherEmail);
-            $this->assertNotNull($userDb);
+            $this->assertNotNull($userDb, "The persistent object is null");
             $this->assertTrue($otheruser->equals($userDb), "Persistent and transient users are different");
 
             $otheruser->setJnUsername(self::USERNAME);

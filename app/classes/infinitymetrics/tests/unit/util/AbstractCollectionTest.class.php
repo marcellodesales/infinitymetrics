@@ -7,7 +7,7 @@ require_once 'infinitymetrics/util/AbstractCollection.class.php';
  *
  * @author Marcello de Sales (marcello.sales@gmail.com)
  */
-class AbstractClassTest extends PHPUnit_Framework_TestCase {
+class AbstractCollectionTest extends PHPUnit_Framework_TestCase {
 
     private $subject;
 

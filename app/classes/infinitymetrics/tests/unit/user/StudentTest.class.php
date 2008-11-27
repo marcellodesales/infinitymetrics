@@ -18,15 +18,17 @@
  * and is licensed under the Berkeley Software Distribution (BSD).
  * For more information please see <http://ppm-8.dev.java.net>.
  */
-require_once 'PHPUnit/Framework.php';
-require_once 'infinitymetrics/model/user/User.class.php';
+require_once 'propel/Propel.php';
+Propel::init('infinitymetrics/orm/config/om-conf.php');
 
+require_once 'PHPUnit/Framework.php';
+require_once 'infinitymetrics/model/institution/Student.class.php';
 /**
  * Tests for the User class.
  *
  * @author Marcello de Sales <marcello.sales@gmail.com>
  */
-class UserTest extends PHPUnit_Framework_TestCase {
+class StudentTest extends PHPUnit_Framework_TestCase {
 
     private $user;
     
@@ -40,47 +42,22 @@ class UserTest extends PHPUnit_Framework_TestCase {
         $this->user->setEmail("marcello.sales@gmail.com");
         $this->user->setJnUsername(self::USERNAME);
         $this->user->setJnPassword("blabalbal");
-        $this->user->setType("STUDENT");
     }
 
-    public function testUserCreation() {
+    public function testUserComparison() {
 
-        $institution = new Institution();
-        $institution->setAbbreviation("SFSU");
-        $institution->setName("San Francisco State University");
-        $institution->setCity("San Francisco");
-        $institution->setStateProvince("California");
-
-        $this->student = new Student();
-        $this->student->setInstitution($institution);
-
-        $this->assertEquals("Marcello", $this->user->getFirstName(), "The value of the name is in incorrect");
-        $this->assertEquals("de Sales", $this->user->getLastName(), "The user's last name is in incorrect state");
-        $this->assertEquals("marcello.sales@gmail.com", $this->user->getEmail(), "The user's email is in incorrect state");
-        $this->assertEquals("blabalbal", $this->user->getJnPassword(), "The user's password is in incorrect state");
-        $this->assertEquals(self::USERNAME, $this->user->getJnUsername(), "The user's username is in incorrect state");
-        $this->assertEquals("STUDENT", $this->user->getType(), "The user's type is in incorrect state");
-    }
-
-    public function testUserUpdate() {
-        $this->user->setFirstName("Gurdeep");
-        $this->user->setLastName("Singh");
-        $this->assertEquals("Gurdeep", $this->user->getFirstName(), "The value of the name is in incorrect");
-        $this->assertEquals("Singh", $this->user->getLastName(), "The value of the name is in incorrect");
-    }
-
-   public function testUserComparison() {
-
-        $a = new User();
+        $a = new Student();
         $a->setJnUsername("marcellosales");
         $b = $this->user;
+        $this->assertEquals(UserTypeEnum::getInstance()->STUDENT, $this->user->getType());
         $this->assertTrue($b === $this->user);
         $this->assertTrue($b !== $a);
         $this->assertTrue($a->equals($this->user));
         $this->assertTrue($b->equals($a));
         $this->assertTrue($a instanceof User);
         $this->assertTrue($a instanceof User);
-   }
+    }
+
     protected function tearDown() {
         $this->user = null;
     }
