@@ -19,7 +19,7 @@
  * For more information please see <http://ppm-8.dev.java.net>.
  */
 
-include_once('Observable.class.php');
+include_once('infinitymetrics/util/go4pattenrs/behavorial/observer/Observable.class.php');
 
 /**
  * ObservableSubject is an abstract class part of the implementation of the 
