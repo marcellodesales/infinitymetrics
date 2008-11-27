@@ -29,20 +29,24 @@ require_once 'infinitymetrics/model/user/User.class.php';
 require_once 'infinitymetrics/model/user/PersonalAgent.class.php';
 require_once 'infinitymetrics/model/institution/Instructor.class.php';
 require_once 'infinitymetrics/model/institution/Institution.class.php';
+require_once 'infinitymetrics/controller/PersonalAgentController.class.php';
+require_once 'infinitymetrics/util/SendEmail.class.php';
 
 /*
- * @author: Marcello de Sales <ddslkd>
+ * @author: Marcello de Sales <marcello.sales@gmail.com>
  * @author: Gurdeep Singh <gurdeepsingh03@gmail.com>
  */
 final class UserManagementController {
+
+    const DOMAIN = "dev.java.net";
+    
     /**
-     * Authenticate the user on Java.net using the username and password.
-     * @param string $username is the username of the user on Java.net
-     * @param string $password is the password of the user on Java.net
-     * @return PersonalAgent the agent representation. It can be used to retrieve information about the user's
-     * profile such as email address, full-name, if it's successfully logged-in, etc.
+     * @param string $username is the java.net username of the user
+     * @param string $password is the java.net passworld of the user
+     * @return boolean whether the user has passed the correct credentials or not.
      */
-   public static function authenticateJNUser($username, $password) {
+    public static function areUserCredentialsValidOnJN($username, $password) {
+        $agent = null;
         $error = array();
         if (!isset($username) || $username == "") {
             $error["username"] = "The username is empty";
@@ -50,50 +54,29 @@ final class UserManagementController {
         if (!isset($password) || $password == "") {
             $error["password"] = "The password is empty";
         }
+
         if (count($error) > 0) {
             throw new InfinityMetricsException("There are errors in the input", $error);
         }
-        $agent = UserManagementController::makeAgentForUserCredentials($username, $password);
-        return $agent;
-    }
-    /**
-     * @param <type> $username is the java.net username of the user
-     * @param <type> $password is the java.net passworld of the user
-     * @return boolean whether the user has passed the correct credentials or not.
-     */
-    public static function areUserCredentialsValidOnJN($username, $password) {
-        $agent = null;
+        
         try {
-            $agent = UserManagementController::authenticateJNUser($username, $password);
+            $agent = PersonalAgentController::authenticateJNUser($username, $password);
         } catch (InfinityMetricsException $ime) {
             throw $ime;
         }
         return $agent->areUserCredentialsValidOnJN();
     }
     /**
-     * Builds a new PersonalAgent for a given credentials.
-     * @param string $username is the username of the user on Java.net
-     * @param string $password is the password of the user on Java.net
-     * @return PersonalAgent is the agent to be used on the website.
-     */
-    private static function makeAgentForUserCredentials($username, $password) {
-        $user = new User();
-        $user->setJnUsername($username);
-        $user->setJnPassword($password);
-        $agent = new PersonalAgent($user);
-        return $agent;
-    }
-    /**
      *  Validates the registration input form.
-     * @param <type> $username
-     * @param <type> $password
-     * @param <type> $email
-     * @param <type> $firstName
-     * @param <type> $lastName
-     * @param <type> $studentSchoolId
-     * @param <type> $projectName
-     * @param <type> $institutionAbbreviation
-     * @param <type> $isLeader
+     * @param string $username
+     * @param string $password
+     * @param string $email
+     * @param string $firstName
+     * @param string $lastName
+     * @param string $studentSchoolId
+     * @param string $projectName
+     * @param string $institutionAbbreviation
+     * @param boolean $isLeader
      */
     public static function validateStudentRegistrationForm($username, $password, $email,
                           $firstName,$lastName, $studentSchoolId, $projectName,
@@ -141,14 +124,18 @@ final class UserManagementController {
     * @param string $lastName the user's last name
     * @param string $studentSchoolId the student's school identification
     * @param string $projectName the user's project name
-    * @return string $institutionAbbreviation the institution abbreviation
-    * @return boolean $isLeader defines if the student is a leader of the given $projectName.
+    * @param string $institutionAbbreviation the institution abbreviation
+    * @param boolean $isLeader defines if the student is a leader of the given $projectName.
+    * @return Student the instance of the student for the given input. It also relates the studnet to the
+    * instance of project and the institution identified by the abbreviation.
+    * @throws InfinityMetricsException, PropelException, Exception depending on what goes wrong.
     */
     public static function registerStudent($username, $password, $email,
                           $firstName,$lastName, $studentSchoolId, $projectName,
                           $institutionAbbreviation, $isLeader) {
         try {
-            UserManagementController::validateStudentRegistrationForm($username, $password, $email, $firstName, $lastName, $studentSchoolId, $projectName, $institutionAbbreviation, $isLeader);
+            UserManagementController::validateStudentRegistrationForm($username, $password, $email, $firstName,
+                                        $lastName, $studentSchoolId, $projectName, $institutionAbbreviation, $isLeader);
             $inst = PersistentInstitutionPeer::retrieveByAbbreviation($institutionAbbreviation);
             $proj = PersistentProjectPeer::retrieveByPK($projectName);
 
@@ -158,7 +145,7 @@ final class UserManagementController {
             $student->setEmail($email);
             $student->setJnUsername($username);
             $student->setJnPassword($password);
-            $student->setInstitution($inst);
+            $student->setInstitutionId($inst->getInstitutionId());
             $student->save();
 
             $studProj = new PersistentStudentXProject();
@@ -168,9 +155,19 @@ final class UserManagementController {
             $studProj->setUser($student);
             $studProj->save();
 		
-	    $subject = "Welcome to Infinity Metrics 'nightly build'";
- 	    $body = "Hello ".$student->getFirstName().",\n\nWe'd like to welcome you to Infinity Metrics... We strive to provide you the best experience when analyzing your team(s) performance through the Infinity Metrics...\n\nYour Java.net login information was saved at Infinity Metrics database to better provide you automated services. Your Personal Agent will collect your team(s)'s data, while you play golf or go to a barbecue... However, note that your Personal Agent always needs your current Java.net login information in case you change it.\n\nPlease feel free to contact the 'Infinity Team' at any time at users@ppm8.dev.java.net.\n\nEnjoy!\n\nInfinity Metrics: Automatic Collaboration Metrics for java.net Projects\nhttp://ppm8.dev.java.net\nMailing Lists: https://ppm-8.dev.java.net/servlets/ProjectMailingListList";	
-	    UserManagementController::sendEmailToUser($student, $subject, $body);
+            $subject = "Welcome to Infinity Metrics 'nightly build'";
+            $body = "Hello ".$student->getFirstName().",\n\nWe'd like to welcome you to Infinity Metrics... We strive 
+                    to provide you the best experience when analyzing your team(s) performance through the Infinity
+                    Metrics...\n\nYour Java.net login information was saved at Infinity Metrics database to better
+                    provide you automated services. Your Personal Agent will collect your team(s)'s data, while you
+                    play golf or go to a barbecue... However, note that your Personal Agent always needs your current
+                    Java.net login information in case you change it.\n\nPlease feel free to contact the 'Infinity
+                    Team' at any time at users@ppm8.dev.java.net.\n\nEnjoy!\n\nInfinity Metrics: Automatic
+                    Collaboration Metrics for java.net Projects\nhttp://ppm8.dev.java.net\nMailing Lists:
+                    https://ppm-8.dev.java.net/servlets/ProjectMailingListList";
+            
+            SendEmail::sendTextEmail("noreply@infinitymetrics.net", "dev@". $projectName . self::DOMAIN,
+                                                                                $student->getEmail(), $subject, $body);
             return $student;
 
         } catch (Exception $e) {
@@ -178,25 +175,19 @@ final class UserManagementController {
         }
     }
     /**
-     * Sends an email to a given User, using it's first name...
-     * @param User $user is the given user. 
-     * @param string $subject is the subject that goes with the email
-     * @param string $body is the body of the email. Note that this is for plain text email, so use "\n" for new line feed/carriege return.
-     */
-    public static function sendEmailToUser(User $user, $subject, $body) {
-	$headers = "From: noreply@infinitymetrics.net\r\nReply-To: dev@ppm-8.dev.java.net";
-	if (!mail($user->getEmail(), $subject, $body, $headers)) {
-		 $error = array();
-                 $error["emailServerDown"] = "The Infinity Metrics email server cannot deliever email at this time...";
-        	 throw new InfinityMetricsException("There are errors in the input", $error);
-	}
-    }
-
-    /**
-     * Validates the registration form for instructor
+     * Validates the Instructor's regirstration form.
+     * @param string $username
+     * @param string $password
+     * @param string $email
+     * @param string $firstName
+     * @param string $lastName
+     * @param string $projectName
+     * @param string $institutionAbbreviation
+     * @return whether the form is valid or not.
+     * @throws InfinityMetricsException if the form contains errors.
      */
     public static function validateInstructorRegistrationForm($username, $password, $email,
-                          $firstName,$lastName,$projectName,$institutionAbbreviation) {
+                          $firstName, $lastName, $parentProjectName, $institutionAbbreviation) {
         $error = array();
         if (!isset($username) || $username == "") {
             $error["username"] = "The username is empty";
@@ -224,6 +215,7 @@ final class UserManagementController {
         if (count($error) > 0) {
             throw new InfinityMetricsException("There are errors in the input", $error);
         }
+        return true;
     }
    /**
     * This method implements the registration of Instructor UC002
@@ -234,7 +226,8 @@ final class UserManagementController {
     * @param string $firstName the user's first name
     * @param string $lastName the user's last name
     * @param string $projectName the user's project name
-    * @return string $institutionAbbreviation the institution abbreviation
+    * @param string $institutionAbbreviation the institution abbreviation
+    * @return Instructor representing the instructor instance for the given form
     */
     public static function registerInstructor($username, $password, $email,
                           $firstName,$lastName,$projectName,$institutionAbbreviation) {
@@ -249,7 +242,7 @@ final class UserManagementController {
             $instructor->setEmail($email);
             $instructor->setJnUsername($username);
             $instructor->setJnPassword($password);
-            $instructor->setInstitution($inst);
+            $instructor->setInstitutionId($inst->getInstitutionId());
             $instructor->save();
 
             $instProj = new PersistentWorkpaceXProject();
@@ -266,6 +259,7 @@ final class UserManagementController {
         } catch (Exception $e) {
             throw $e;
         }
+        return $instructor;
     }
     /** this is the function to implement the login functionality for User
  *
@@ -274,9 +268,14 @@ final class UserManagementController {
  * @return <type>
  */
 
-     public static function login($userName, $password) {
-
-          $error = array();
+    /**
+     * Makes the user login
+     * @param string $userName is the java.net username from a user
+     * @param string $password is the java.net password for the a user
+     * @return PersistentUser instance. 
+     */
+    public static function login($userName, $password) {
+        $error = array();
         if (!isset($userName) || $userName == "") {
             $error["username"] = "The username is empty";
         }
@@ -295,12 +294,5 @@ final class UserManagementController {
 
        return PersistentUserPeer::doSelect($c);
     }
-
-
-   
 }
-
-
-
-
 ?>

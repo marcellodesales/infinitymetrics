@@ -24,6 +24,7 @@ Propel::init('infinitymetrics/orm/config/om-conf.php');
 
 require_once 'PHPUnit/Framework.php';
 require_once 'infinitymetrics/controller/UserManagementController.class.php';
+require_once 'infinitymetrics/model/user/UserTypeEnum.class.php';
 /**
  * Tests for the Use Case UC001 - UC001: A Student registers into the system.
  *
@@ -37,6 +38,11 @@ class UC001Test extends PHPUnit_Framework_TestCase {
 
     private $institution;
     private $project;
+    private $userTypeEnum;
+
+    public function  __construct() {
+        $this->userTypeEnum = UserTypeEnum::getInstance();
+    }
 
     /**
      * Setting up is run ALWAYS BEFORE the execution of a test method.
@@ -71,8 +77,8 @@ class UC001Test extends PHPUnit_Framework_TestCase {
                                     "lastNameLeader", "909663916", $this->project->getProjectJnName(),
                                     $this->institution->getAbbreviation(), true);
             $this->assertNotNull($createdStudent, "The registered student is null");
-            $this->assertTrue($createdStudent instanceof Student, "The registered student is null");
-
+            $this->assertEquals($this->userTypeEnum->STUDENT, $createdStudent->getType(), "The registered user is not
+                                                                                               an instance of Student");
             $stXProjec = PersistentStudentXProjectPeer::retrieveByPK($createdStudent->getUserId(),
                                                                      $this->project->getProjectJnName());
             $this->assertNotNull($stXProjec, "The relationship between student and project is null");
@@ -88,9 +94,10 @@ class UC001Test extends PHPUnit_Framework_TestCase {
                                     "lastName", "909663916", $this->project->getProjectJnName(),
                                     $this->institution->getAbbreviation(), false);
             $this->assertNotNull($createdStudent, "The registered student is null");
-            $this->assertTrue($createdStudent instanceof Student, "The registered student is not an instance of Student");
-
-            $stXProjec = PersistentStudentXProjectPeer::retrieveByPK($createdStudent->getUserId(), $this->project->getProjectJnName());
+            $this->assertEquals($this->userTypeEnum->STUDENT, $createdStudent->getType(), "The registered user is not
+                                                                                               an instance of Student");
+            $stXProjec = PersistentStudentXProjectPeer::retrieveByPK($createdStudent->getUserId(),
+                                                                     $this->project->getProjectJnName());
             $this->assertNotNull($stXProjec, "The relationship between student and project is null");
 
         } catch (InfinityMetricsException $ime){
@@ -145,7 +152,6 @@ class UC001Test extends PHPUnit_Framework_TestCase {
         } catch (InfinityMetricsException $ime) {
             //$error["fieldName"] = "error message"
             $errorFields = $ime->getErrorList();
-            print_r($errorFields);
             $this->assertNotNull($errorFields);
             $this->assertNotNull($errorFields["projectName"]);
         }
@@ -154,7 +160,7 @@ class UC001Test extends PHPUnit_Framework_TestCase {
      * The test an exceptional registration where the student enteres an
      * existing username.
      */
-    public function testRegisterExistingStudentRegistration() {
+    public function testRegisterExistingStudentLeaderRegistration() {
         try {
             //Saving the student leader
             $createdStudent = UserManagementController::registerStudent(

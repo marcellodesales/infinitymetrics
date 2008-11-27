@@ -20,18 +20,26 @@
  */
 require_once 'infinitymetrics/model/user/User.class.php';
 require_once 'infinitymetrics/model/institution/Institution.class.php';
+require_once 'infinitymetrics/model/user/UserTypeEnum.class.php';
 /**
  * The Instructor class for the metrics workspace.
  *
  * @author Gurdeep Singh <gurdeepsingh03@gmail.com>
+ * @author Marcello de Sales <marcello.sales@gmail.com>
  *
  * Instructor class with support to Persistence.
+ *
+ * Call to the method isInstructor(), inherited from User, must return true
+
  */
 class Instructor extends User {
-         public function  __construct() {
-                    parent::__construct();
-                    $this->setType("I");
+    /**
+     * Constructs a new Istructor with type "INSTRUCTOR"
+     */
+    public function  __construct() {
+        parent::__construct();
+        $type = UserTypeEnum::getInstance();
+        $this->setType($type->INSTRUCTOR);
     }
-
 }
 ?>

@@ -19,7 +19,6 @@
  * For more information please see <http://ppm-8.dev.java.net>.
  */
 require_once("infinitymetrics/model/user/agent/reasoning/RssToDatabaseObserver.class.php");
-require_once("infinitymetrics/model/user/agent/reasoning/RssToScreenObserver.class.php");
 
 require_once("infinitymetrics/util/go4pattenrs/behavorial/observer/ObservableSubject.class.php");
 require_once("infinitymetrics/util/javanet/rssparser/CollabnetRssChannel.class.php");

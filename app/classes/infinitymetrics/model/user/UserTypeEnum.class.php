@@ -38,7 +38,8 @@ class UserTypeEnum extends Enum {
     }
 
     /**
-     * @return UserTypeEnum the single instance of this enum.
+     * @return UserTypeEnum the single instance of this enum with following constants:
+     * STUDENT, INSTRUCTOR, JAVANET
      */
     public static function getInstance() {
          if (self::$singleton == null) {

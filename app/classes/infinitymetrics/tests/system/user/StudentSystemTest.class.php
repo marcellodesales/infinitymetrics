@@ -23,37 +23,43 @@ require_once 'propel/Propel.php';
 Propel::init('infinitymetrics/orm/config/om-conf.php');
 
 require_once 'PHPUnit/Framework.php';
+require_once 'infinitymetrics/model/user/UserTypeEnum.class.php';
 require_once 'infinitymetrics/model/institution/Student.class.php';
 require_once 'infinitymetrics/model/institution/Institution.class.php';
 require_once 'infinitymetrics/orm/PersistentUserPeer.php';
 require_once 'infinitymetrics/orm/PersistentInstitutionPeer.php';
 /**
- * Tests for the User class.
+ * Tests for the Persistence layer for the Student class.
  *
  * @author Marcello de Sales <marcello.sales@gmail.com>
  */
 class StudentSystemTest extends PHPUnit_Framework_TestCase {
-
-    private $student;
-    private $institution;
-
+    
     const USERNAME = "marcellosales";
     const INST_ABBREVIATION = "SFSU";
 
-    private function deleteUser() {
-        echo "Deleting the user and institution for setting up";
+    private $student;
+    private $institution;
+    private $userEnum;
+
+    public function  __construct() {
+        $this->userEnum = UserTypeEnum::getInstance();
+    }
+
+    private function deleteEverything() {
+        //echo "Deleting the user and institution for setting up";
         $crit = new Criteria();
         $crit->add(PersistentUserPeer::JN_USERNAME, self::USERNAME);
         PersistentUserPeer::doDelete($crit);
 
         $crit->add(PersistentInstitutionPeer::ABBREVIATION, self::INST_ABBREVIATION);
-        PersistentUserPeer::doDelete($crit);
+        PersistentInstitutionPeer::doDelete($crit);
     }
 
     protected function setUp() {
         parent::setUp();
-        $this->deleteUser();
-        echo "Setting up new student\nObject only in MEMORY\n";
+        $this->deleteEverything();
+        //echo "Setting up new student\nObject only in MEMORY\n";
         $this->student = new Student();
         $this->student->setFirstName("Marcello");
         $this->student->setLastName("de Sales");
@@ -68,15 +74,18 @@ class StudentSystemTest extends PHPUnit_Framework_TestCase {
         $this->institution->setStateProvince("California");
         $this->institution->setCountry("United States");
 
-        $this->student->setInstitution($this->institution);
+        $this->student->setInstitutionId($this->institution->getInstitutionId());
     }
 
     public function testCreationAndRetrival() {
-        echo "Object to be saved on DB\n";
+        //echo "Object to be saved on DB\n";
         $this->student->save();
         $userDb = PersistentUserPeer::retrieveByEmail("marcello.sales@gmail.com");
         $this->assertNotNull($userDb);
         $this->assertTrue($this->student->equals($userDb), "Persistent and transient students are different");
+        $this->assertEquals($this->userEnum->STUDENT, $this->student->getType(), "Student type value was saved incorrectly");
+        $this->assertTrue($this->student->isStudent(), "The isStudent() is not returning the correct type");
+
     }
 
     public function testCreationWithExistingUser() {
@@ -87,7 +96,7 @@ class StudentSystemTest extends PHPUnit_Framework_TestCase {
             $otheruser->setEmail("marcello.sales@gmail.com");
             $otheruser->setJnUsername(self::USERNAME);
             $otheruser->setJnPassword("blabalbal");
-            $otheruser->setInstitution($this->institution);
+            $otheruser->setInstitutionId($this->institution->getInstitutionId());
 
             $otheruser->save();
             $this->fail("The user should not be created with the same username...");
@@ -100,7 +109,7 @@ class StudentSystemTest extends PHPUnit_Framework_TestCase {
             $otheruser->setEmail("marcello.sales@gmail.com");//same username
             $otheruser->setJnUsername("otherusername");
             $otheruser->setJnPassword("blabalbal");
-            $otheruser->setInstitution($this->institution);
+            $otheruser->setInstitutionId($this->institution->getInstitutionId());
 
             $otheruser->save();
             $this->fail("The user should not be created with the same email address...");
@@ -121,7 +130,7 @@ class StudentSystemTest extends PHPUnit_Framework_TestCase {
             $otheruser->setEmail($otherEmail);
             $otheruser->setJnUsername($otherUsername);
             $otheruser->setJnPassword("blabalbal");
-            $otheruser->setInstitution($this->institution);
+            $otheruser->setInstitutionId($this->institution->getInstitutionId());
             $otheruser->save();
             //Saves ok
             $userDb = PersistentUserPeer::retrieveByEmail($otherEmail);
@@ -130,7 +139,7 @@ class StudentSystemTest extends PHPUnit_Framework_TestCase {
 
             $otheruser->setJnUsername(self::USERNAME);
             $otheruser->save();
-            $this->fail("The otheruser should not be created with the same username as another user ".self::USERNAME);
+            $this->fail("The student should not be created with the same username as another user ".self::USERNAME);
         } catch (Exception $e) {
             $this->assertNotNull($e, "The exception is not created");
         }
@@ -140,12 +149,12 @@ class StudentSystemTest extends PHPUnit_Framework_TestCase {
         PersistentUserPeer::doDelete($crit);
 
         $userDb = PersistentUserPeer::retrieveByJNUsername($otherUsername);
-        $this->assertNull($userDb, "The user ".$userDb." should not have been deleted from the database");
+        $this->assertNull($userDb, "The student ".$userDb." should not have been deleted from the database");
     }
 
     protected function tearDown() {
-        echo "Tearing down...";
-        $this->student->delete();
+        //echo "Tearing down...";
+        $this->deleteEverything();
     }
 }
 ?>
