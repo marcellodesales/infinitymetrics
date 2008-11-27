@@ -1,7 +1,7 @@
 <?php
 /**
- * $Id: UserManagementController.class.php 202 2008-11-10 12:01:40Z Gurdeep Singh $
- * ,Marcello Sales $
+ * $Id: UserManagementController.class.php 202 2008-11-10 12:01:40Z
+ * Gurdeep Singh, Marcello de Sales $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -39,7 +39,7 @@ require_once 'infinitymetrics/util/SendEmail.class.php';
 final class UserManagementController {
 
     const DOMAIN = "dev.java.net";
-    
+
     /**
      * @param string $username is the java.net username of the user
      * @param string $password is the java.net passworld of the user
@@ -58,7 +58,7 @@ final class UserManagementController {
         if (count($error) > 0) {
             throw new InfinityMetricsException("There are errors in the input", $error);
         }
-        
+
         try {
             $agent = PersonalAgentController::authenticateJNUser($username, $password);
         } catch (InfinityMetricsException $ime) {
@@ -171,9 +171,9 @@ final class UserManagementController {
             $userProject->setProject($proj);
             $userProject->setIsOwner($isLeader);
             $userProject->save();
-		
+
             $subject = "Welcome to Infinity Metrics 'nightly build'";
-            $body = "Hello ".$student->getFirstName().",\n\nWe'd like to welcome you to Infinity Metrics... We strive 
+            $body = "Hello ".$student->getFirstName().",\n\nWe'd like to welcome you to Infinity Metrics... We strive
                     to provide you the best experience when analyzing your team(s) performance through the Infinity
                     Metrics...\n\nYour Java.net login information was saved at Infinity Metrics database to better
                     provide you automated services. Your Personal Agent will collect your team(s)'s data, while you
@@ -227,7 +227,7 @@ final class UserManagementController {
         if (!isset($institutionAbbreviation) || $institutionAbbreviation == "") {
             $error["institution"] = "The institution is empty";
         }
-       
+
         if (count($error) > 0) {
             throw new InfinityMetricsException("There are errors in the input", $error);
         }
@@ -282,14 +282,15 @@ final class UserManagementController {
      * Makes the user login for a given user
      * @param string $userName is the java.net username from a user
      * @param string $password is the java.net password for the a user
-     * @return PersistentUser instance. 
+     * @return PersistentUser instance.
      */
     public static function login($userName, $password) {
 
         $error = array();
-        if (!isset($userName) || $userName == "") {
+        if (!isset($userName) || $userName == "")  {
             $error["username"] = "The username is empty";
         }
+
         if (!isset($password) || $password == "") {
             $error["password"] = "The password is empty";
         }
@@ -297,7 +298,7 @@ final class UserManagementController {
         if (count($error) > 0) {
             throw new InfinityMetricsException("There are errors in the input", $error);
         }
-        
+
         $c = new Criteria();
         $c->add(PersistentUserPeer::JN_USERNAME, $userName);
         $c->add(PersistentUserPeer::JN_PASSWORD, $password);
