@@ -1,8 +1,8 @@
 <?php
 
-require 'infinitymetrics/orm/om/PersistentBaseWorkspace.php';
-require 'infinitymetrics/orm/PersistentWorkspaceXProject.php';
-require 'infinitymetrics/orm/PersistentWorkspaceXProjectPeer.php';
+require_once 'infinitymetrics/orm/om/PersistentBaseWorkspace.php';
+require_once 'infinitymetrics/orm/PersistentProjectPeer.php';
+require_once 'infinitymetrics/orm/PersistentWorkspaceSharePeer.php';
 
 
 /**
@@ -34,54 +34,38 @@ class PersistentWorkspace extends PersistentBaseWorkspace {
 	}
 
     public function isShared() {
-        if ($this->workspace_id == '' || $this->workspace_id == NULL) {
-            throw new Exception('workspace is empty');
-        }
-
         $criteria = new Criteria();
-        $criteria->add(PersistentWorkspaceSharePeer::WORKSPACE_ID, $this->workspace_id);
-
-        $wsShares = PersistentWorkspaceSharePeer::doSelect($criteria);
-
-        if ($wsShares == NULL) {
-            return false;
-        }
-        else {
-            return true;
-        }
+        $criteria->add(PersistentWorkspaceSharePeer::WORKSPACE_ID, $this->getWorkspaceId());
+        $numberShares = PersistentWorkspaceSharePeer::doCount($criteria);
+        return $numberShares > 0;
     }
 
     public function getProjects() {
         $criteria = new Criteria();
-        $criteria->add(PersistentWorkspaceXProjectPeer::WORKSPACE_ID, $this->workspace_id);
-    
-        return $this->getWorkspaceXProjectsJoinProject($criteria);
+        $criteria->add(PersistentProjectPeer::PROJECT_JN_NAME, $this->getProjectJnName());
+        $project = PersistentProjectPeer::doSelect($criteria);
+        $p = new PersistentProject();
+        if ($project->getParentProjectJnName() == "") {
+            //project is a parent project on Java.net, as ppm is parent of ppm-1, ppm-2, ppm-3, etc.
+            $criteria->clear();
+            $criteria->add(PersistentProjectPeer::PARENT_PROJECT_JN_NAME, $this->getProjectJnName());
+            return PersistentProjectPeer::doSelect($criteria);
+        } else {
+            //this project has a parent. That means, the workspace is for a user, who is NOT a team member.
+            return $project;
+        }
     }
 
     public function isSharedWithUser($user_id) {
-        if ($this->workspace_id == '' || $this->workspace_id == NULL) {
-            throw new Exception('workspace is empty');
-        }
-        if ( PersistentUserPeer::retrieveByPK($user_id) == NULL ) {
-            throw new Exception('user does not exist');
-        }
-
         if ( ! $this->isShared() ) {
             return false;
-        }
-        else {
+        } else {
             $criteria = new Criteria();
-            $criteria->add(PersistentWorkspaceSharePeer::WORKSPACE_ID, $this->workspace_id);
+            $criteria->add(PersistentWorkspaceSharePeer::WORKSPACE_ID, $this->getWorkspaceId());
             $criteria->add(PersistentWorkspaceSharePeer::USER_ID, $user_id);
-
-            $wsShares = PersistentWorkspaceSharePeer::doSelect($criteria);
-
-            foreach ($wsShares as $wss) {
-                if ($wss->getUserId() == $user_id) {
-                    return true;
-                }
-            }
-            return false;
+            //just count the number of shares. This is the case to be just 1 (a workspace can be shared with one
+            //user just once.
+            return PersistentWorkspaceSharePeer::doCount($criteria) == 0;
         }
     }
 
