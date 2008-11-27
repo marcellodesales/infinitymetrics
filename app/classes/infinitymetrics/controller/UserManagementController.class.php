@@ -261,12 +261,6 @@ final class UserManagementController {
         }
         return $instructor;
     }
-    /** this is the function to implement the login functionality for User
- *
- * @param <type> $userName
- * @param <type> $password
- * @return <type>
- */
 
     /**
      * Makes the user login
@@ -275,6 +269,7 @@ final class UserManagementController {
      * @return PersistentUser instance. 
      */
     public static function login($userName, $password) {
+
         $error = array();
         if (!isset($userName) || $userName == "") {
             $error["username"] = "The username is empty";
@@ -293,6 +288,16 @@ final class UserManagementController {
        $c->add(PersistentUserPeer::JN_PASSWORD, $password);
 
        return PersistentUserPeer::doSelect($c);
+    }
+
+    /**
+     * @param string $username is the username of the user
+     * @return PersistentUser is the instance of the user.
+     */
+    public static function viewAccount($username) {
+        $c = new Criteria();
+        $c->add(PersistentUserPeer::JN_USERNAME, $username);
+        return PersistentUserPeer::doSelect($c);
     }
 }
 ?>
