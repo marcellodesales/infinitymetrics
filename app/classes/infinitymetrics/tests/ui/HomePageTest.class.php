@@ -1,6 +1,6 @@
 <?php
 /**
- * $Id: AllUserSystemTests.class.php 202 2008-11-10 21:31:40Z marcellosales $
+ * $Id: AllUtilityLibraryUnitTests.class.php 202 2008-11-23 03:31:40Z marcellosales $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -18,25 +18,24 @@
  * and is licensed under the Berkeley Software Distribution (BSD).
  * For more information please see <http://ppm-8.dev.java.net>.
  */
-require_once 'PHPUnit/Framework.php';
-require_once 'infinitymetrics/tests/system/user/StudentSystemTest.class.php';
-require_once 'infinitymetrics/tests/system/user/InstructorSystemTest.class.php';
-require_once 'infinitymetrics/tests/system/user/UserSystemTest.class.php';
+require_once 'PHPUnit/Extensions/SeleniumTestCase.php';
 /**
- * All System Tests for the User component. It includes system tests for users, students, instructors.
+ * Storyboard / User Inteface Tests for the Home page.
  *
- * @author Marcello de Sales <marcello.sales@gmail.com>
+ * @author Marcello de Sales
  */
-class AllUserComponentSystemTests {
-    
-    public static function suite() {
-        $suite = new PHPUnit_Framework_TestSuite('PHPUnit Framework');
+class HomePageTest extends PHPUnit_Extensions_SeleniumTestCase {
 
-        $suite->addTestSuite('UserSystemTest');
-        $suite->addTestSuite('StudentSystemTest');
-        $suite->addTestSuite('InstructorSystemTest');
+    protected function setUp() {
+        $this->setBrowser('*chrome');
+        $this->setBrowserUrl('http://infinitymetrics.local.net/');
+        echo "Setting up browser and default URL";
+    }
 
-        return $suite;
+    public function testTitle() {
+        echo "Verifying title";
+        $this->open('http://infinitymetrics.local.net/');
+        $this->assertTitleEquals('∞Metrics: Automatic Collaboration Metrics for Java.net Projects');
     }
 }
 ?>

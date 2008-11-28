@@ -1,6 +1,6 @@
 <?php
 /**
- * $Id: AllUserSystemTests.class.php 202 2008-11-10 21:31:40Z marcellosales $
+ * $Id: AllUserFunctionalTests.class.php 202 2008-11-10 21:31:40Z marcellosales $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -19,23 +19,25 @@
  * For more information please see <http://ppm-8.dev.java.net>.
  */
 require_once 'PHPUnit/Framework.php';
-require_once 'infinitymetrics/tests/system/user/StudentSystemTest.class.php';
-require_once 'infinitymetrics/tests/system/user/InstructorSystemTest.class.php';
-require_once 'infinitymetrics/tests/system/user/UserSystemTest.class.php';
+require_once 'infinitymetrics/tests/functional/user/UC001Test.class.php';
+require_once 'infinitymetrics/tests/functional/user/UC002Test.class.php';
+require_once 'infinitymetrics/tests/functional/user/UC003Test.class.php';
+require_once 'infinitymetrics/tests/functional/user/UC004Test.class.php';
 /**
- * All System Tests for the User component. It includes system tests for users, students, instructors.
+ * All Functional Tests for the User Component.
  *
  * @author Marcello de Sales <marcello.sales@gmail.com>
  */
-class AllUserComponentSystemTests {
+class AllUserComponentFunctionalTests {
     
     public static function suite() {
         $suite = new PHPUnit_Framework_TestSuite('PHPUnit Framework');
 
-        $suite->addTestSuite('UserSystemTest');
-        $suite->addTestSuite('StudentSystemTest');
-        $suite->addTestSuite('InstructorSystemTest');
-
+        $suite->addTestSuite('UC001Test');
+        $suite->addTestSuite('UC002Test');
+        $suite->addTestSuite('UC003Test');
+        $suite->addTestSuite('UC004Test');
+        
         return $suite;
     }
 }

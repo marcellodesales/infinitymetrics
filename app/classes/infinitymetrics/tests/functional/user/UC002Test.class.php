@@ -41,6 +41,7 @@ class UC002Test extends PHPUnit_Framework_TestCase {
     const EMAIL = "gurdeepsingh03@gmail.com";
     const FIRSTNAME = "Gurdeep";
     const LASTNAME = "Singh";
+    const SCHOOL_IDENTIFICATION = "TEACHER101";
     
     private $institution;
     private $project;
@@ -50,14 +51,19 @@ class UC002Test extends PHPUnit_Framework_TestCase {
         $this->userTypeEnum = UserTypeEnum::getInstance();
     }
 
+    private function cleanUpAll() {
+        PersistentUserXProjectPeer::doDeleteAll();
+        PersistentUserPeer::doDeleteAll();
+        PersistentInstitutionPeer::doDeleteAll();
+        PersistentProjectPeer::doDeleteAll();
+    }
+
     /**
      * Setting up is run ALWAYS BEFORE the execution of a test method.
      */
     protected function setUp() {
         parent::setUp();
-        PersistentInstitutionPeer::doDeleteAll();
-        PersistentProjectPeer::doDeleteAll();
-        PersistentUserPeer::doDeleteAll();
+        $this->cleanUpAll();
         
         $this->institution = new Institution();
         $this->institution->setName('Punjabi University');
@@ -79,12 +85,33 @@ class UC002Test extends PHPUnit_Framework_TestCase {
     public function testSuccessfulInstructorRegistration() {
         try {
             //Saving the Instructor
-            $createdInstructor = UserManagementController::registerInstructor(
-                self::USERNAME, self::PASSWORD, self::EMAIL, self::FIRSTNAME,
-                self::LASTNAME, $this->project->getProjectJnName(), $this->institution->getAbbreviation());
-            $this->assertNotNull($createdInstructor, "The registered instructor is null");
-            $this->assertEquals($this->userTypeEnum->INSTRUCTOR, $createdInstructor->getType(), "The registered user is not
-                                                                                           an instance of isntructor");
+            $createdInstructor = UserManagementController::registerInstructor(self::USERNAME, self::PASSWORD, 
+                self::EMAIL, self::FIRSTNAME, self::LASTNAME, $this->project->getProjectJnName(), true,
+                $this->institution->getAbbreviation(), self::SCHOOL_IDENTIFICATION);
+
+            $this->assertNotNull($createdInstructor, "The registered student is null");
+            $this->assertEquals($this->userTypeEnum->INSTRUCTOR, $createdInstructor->getType(), "The registered user is
+                                                                                       not an instance of Instructor");
+            $instructorInstitution = PersistentUserXInstitutionPeer::retrieveByPk($createdInstructor->getUserId(),
+                                                                               $this->institution->getInstitutionId());
+            $this->assertNotNull($instructorInstitution, "The user x institution relation was not created for
+                                                                                                      the instructor");
+            $this->assertEquals(self::SCHOOL_IDENTIFICATION, $instructorInstitution->getIdentification(), 
+                                                           "The instructor school identification should NOT be given");
+            $this->assertEquals($createdInstructor->getUserId(), $instructorInstitution->getUserId(), "The user id is
+                                                                                     incorrect on user x institution");
+            $this->assertEquals($this->institution->getInstitutionId(), $instructorInstitution->getInstitutionId(),
+                                                               "The institution id is incorrect on user x institution");
+
+            $stXProjec = PersistentUserXProjectPeer::retrieveByPK($createdInstructor->getJnUsername(),
+                                                                                   $this->project->getProjectJnName());
+            $this->assertNotNull($stXProjec, "The relationship between instructor and project was not created");
+            $this->assertEquals($this->project->getProjectJnName(), $stXProjec->getProjectJnName(), "The project name
+                                                                   is incorrect on user x project for the instructor");
+            $this->assertEquals($createdInstructor->getJnUsername(), $stXProjec->getJnUsername(), "The java.net 
+                                                           usernameis incorrect on user x project for the instructor");
+            $this->assertTrue($stXProjec->getIsOwner() == 1, "The instructor is a leader, and therefore, a project owner.");
+
         } catch (InfinityMetricsException $ime){
             $this->fail("The successful login scenario failed: " . $ime);
         }
@@ -95,8 +122,9 @@ class UC002Test extends PHPUnit_Framework_TestCase {
      */
     public function testMissingFieldsStudentRegistration() {
         try {
-            $missingNames = UserManagementController::registerInstructor("", "", self::EMAIL, self::FIRSTNAME,
-                self::LASTNAME, $this->project->getProjectJnName(), $this->institution->getAbbreviation());
+            $createdInstructor = UserManagementController::registerInstructor("", "",
+                self::EMAIL, self::FIRSTNAME, self::LASTNAME, $this->project->getProjectJnName(), true,
+                $this->institution->getAbbreviation(), "");
             $this->fail("The exceptional login scenario failed with missing name");
             
         } catch (InfinityMetricsException $ime) {
@@ -105,27 +133,28 @@ class UC002Test extends PHPUnit_Framework_TestCase {
             $this->assertNotNull($errorFields);
             $this->assertNotNull($errorFields["username"]);
             $this->assertNotNull($errorFields["password"]);
+            $this->assertNotNull($errorFields["institutionIdentification"]);
         }
 
         try {
-            $missingEmailandOthers = UserManagementController::registerInstructor("", "", "", self::FIRSTNAME,
-                                                                    self::LASTNAME, $this->project->getProjectJnName(),
-                                                                    $this->institution->getAbbreviation());
+            $missingEmailandOthers = UserManagementController::registerInstructor(self::USERNAME, self::PASSWORD,
+                self::EMAIL, self::FIRSTNAME, self::LASTNAME, "", "", "", self::SCHOOL_IDENTIFICATION);
+            
             $this->fail("The exceptional login scenario failed with missing username, password email");
             
         } catch (InfinityMetricsException $ime) {
             //$error["fieldName"] = "error message"
             $errorFields = $ime->getErrorList();
             $this->assertNotNull($errorFields);
-            $this->assertNotNull($errorFields["username"]);
-            $this->assertNotNull($errorFields["password"]);
-            $this->assertNotNull($errorFields["email"]);
+            $this->assertNotNull($errorFields["projectName"]);
+            $this->assertNotNull($errorFields["isOwner"]);
+            $this->assertNotNull($errorFields["institutionAbbreviation"]);
         }
 
         try {
-            $createdInstructor = UserManagementController::registerInstructor(
-                "", "", self::EMAIL, self::FIRSTNAME,
-                self::LASTNAME, "", $this->institution->getAbbreviation());
+            $createdInstructor = UserManagementController::registerInstructor(self::USERNAME, self::PASSWORD,
+                self::EMAIL, "", "", $this->project->getProjectJnName(), true,
+                $this->institution->getAbbreviation(), self::SCHOOL_IDENTIFICATION);
 
             $this->fail("The exceptional registration scenario failed for
                     missing project name, and other fields");
@@ -133,9 +162,8 @@ class UC002Test extends PHPUnit_Framework_TestCase {
             //$error["fieldName"] = "error message"
             $errorFields = $ime->getErrorList();
             $this->assertNotNull($errorFields);
-            $this->assertNotNull($errorFields["username"]);
-            $this->assertNotNull($errorFields["password"]);
-            $this->assertNotNull($errorFields["projectName"]);
+            $this->assertNotNull($errorFields["firstName"]);
+            $this->assertNotNull($errorFields["lastName"]);
         }
     }
     /**
@@ -145,14 +173,14 @@ class UC002Test extends PHPUnit_Framework_TestCase {
     public function testRegisterExistingInstructorRegistration() {
         try {
             //registering the instructor
-            $createdInstructor = UserManagementController::registerInstructor(
-                self::USERNAME, self::PASSWORD, self::EMAIL, self::FIRSTNAME,
-                self::LASTNAME, $this->project->getProjectJnName(), $this->institution->getAbbreviation());
+            $createdInstructor = UserManagementController::registerInstructor(self::USERNAME, self::PASSWORD,
+                self::EMAIL, self::FIRSTNAME, self::LASTNAME, $this->project->getProjectJnName(), true,
+                $this->institution->getAbbreviation(), self::SCHOOL_IDENTIFICATION);
             
             //registering the instructor once again. This time it throws an exception
-            $createdInstructor = UserManagementController::registerInstructor(
-                self::USERNAME, self::PASSWORD, self::EMAIL, self::FIRSTNAME,
-                self::LASTNAME, $this->project->getProjectJnName(), $this->institution->getAbbreviation());
+            $createdInstructor = UserManagementController::registerInstructor(self::USERNAME, self::PASSWORD,
+                self::EMAIL, self::FIRSTNAME, self::LASTNAME, $this->project->getProjectJnName(), true,
+                $this->institution->getAbbreviation(), self::SCHOOL_IDENTIFICATION);
             
             $this->fail("The exceptional registration failed for existing instructor");
         } catch (Exception $e) {
@@ -161,9 +189,7 @@ class UC002Test extends PHPUnit_Framework_TestCase {
     }
 
     protected function tearDown() {
-        PersistentUserPeer::doDeleteAll();
-        PersistentInstitutionPeer::doDeleteAll();
-        PersistentProjectPeer::doDeleteAll();
+        $this->cleanUpAll();
     }
 }
 ?>

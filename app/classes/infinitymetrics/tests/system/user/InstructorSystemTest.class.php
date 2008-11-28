@@ -18,7 +18,6 @@ o<?php
  * and is licensed under the Berkeley Software Distribution (BSD).
  * For more information please see <http://ppm-8.dev.java.net>.
  */
-
 require_once 'propel/Propel.php';
 Propel::init('infinitymetrics/orm/config/om-conf.php');
 
@@ -28,7 +27,6 @@ require_once 'infinitymetrics/model/institution/Institution.class.php';
 require_once 'infinitymetrics/orm/PersistentUserPeer.php';
 require_once 'infinitymetrics/orm/PersistentInstitutionPeer.php';
 require_once 'infinitymetrics/orm/PersistentUserXInstitutionPeer.php';
-
 /**
  * Tests for the Instructor class.
  *

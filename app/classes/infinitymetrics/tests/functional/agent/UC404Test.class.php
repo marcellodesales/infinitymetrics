@@ -81,7 +81,7 @@ class UC404Test extends PHPUnit_Framework_TestCase {
     public function testWrongFieldsAuthentication() {
         try {
             $areCreditialsNOTOk = UserManagementController::areUserCredentialsValidOnJN(
-                                        self::PASSWORD_MISSING, self::PASSWORD_MISSING);
+                                        self::USERNAME_INCORRECT, self::PASSWORD_INCORRECT);
             $this->assertFalse($areCreditialsNOTOk, "The incorrect credentials should be invalid");
 
         } catch (InfinityMetricsException $ime){

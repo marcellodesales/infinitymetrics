@@ -1,6 +1,6 @@
 <?php
 /**
- * $Id: UserSystemTest.class.php 202 2008-11-10 21:31:40Z marcellosales $
+ * $Id: StudentSystemTest.class.php 202 2008-11-10 21:31:40Z marcellosales $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -18,7 +18,6 @@
  * and is licensed under the Berkeley Software Distribution (BSD).
  * For more information please see <http://ppm-8.dev.java.net>.
  */
-
 require_once 'propel/Propel.php';
 Propel::init('infinitymetrics/orm/config/om-conf.php');
 

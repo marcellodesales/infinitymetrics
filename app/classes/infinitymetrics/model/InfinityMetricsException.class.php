@@ -8,6 +8,8 @@ class InfinityMetricsException extends Exception {
     public function  __construct($message, $errorList) {
         parent::__construct($message, self::INFINITY_METRICS_ERROR_CODE);
         $this->errorList = $errorList;
+        $this->message = "InfinityMetricsException (".$this->code."): " . $this->message . " - " .
+                                                                                   implode(" ", $this->getErrorList());
     }
 
     /*
@@ -23,7 +25,8 @@ class InfinityMetricsException extends Exception {
     }
     
     public function  __toString() {
-        return "InfinityMetricsException (".$this->code."): " . $this->message . " - " . implode(" ", $this->getErrorList());
+        return "InfinityMetricsException (".$this->code."): " . $this->message . " - " .
+                                                                                   implode(" ", $this->getErrorList());
     }
 }
 ?>

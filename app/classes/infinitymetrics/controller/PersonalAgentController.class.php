@@ -100,16 +100,4 @@ final class PersonalAgentController {
 
     }
 }
-//
-//$user = new User();
-//$user->setJnUsername("marcellosales");
-//$user->setJnPassword("utn@9oad");
-//$projectName = "ppm-8";
-//$mailingList = "dev";
-//
-//$mailingList = "3306";
-//
-//PersonalAgentController::collectRssData($user, $projectName, $mailingList);
-
-
 ?>

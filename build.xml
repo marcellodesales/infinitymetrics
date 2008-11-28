@@ -1,15 +1,16 @@
 <?xml version="1.0"?>
+<project name="InfinityMetrics" default="prepare" basedir=".">
 
-<project name="FooBar" default="prepare" basedir=".">
-
+    <tstamp/>
     <property file="build.properties" />
+    <property file="propel/build.properties" />
 
     <target name="prepare">
         <echo msg="Phing is working then..." />
     </target>
 
     <target name="docs-gen" depends="prepare">
-	<exec command="phpdoc -d ${im.home}/app/classes -t ${im.home}/app/docs/api" dir="." passthru="true" />
+    	<exec command="phpdoc -d ${im.home}/app/classes -t ${im.home}/app/docs/api" dir="." passthru="true" />
     </target>
 
     <target name="prepare-propel-gen">
@@ -34,23 +35,76 @@
     </target>
 
     <target name="propel-creole" depends="prepare-creole">
-      <echo msg="Generating XML schema with Propel Creole" />
-	  <exec command="propel-gen ${im.home}/propel creole" dir="." passthru="true" />		
+        <echo msg="Generating XML schema with Propel Creole" />
+        <exec command="propel-gen ${im.home}/propel creole" dir="." passthru="true" />
     </target>
 
     <target name="apply-patches">
-	<echo msg="Applying patches (just overriding)" />
-	<copy todir="." overwrite="true">
-		<fileset dir="patches">
-			<include name="**/*" />
-		</fileset>
-	</copy>
+        <echo msg="Applying patches (just overriding)" />
+        <copy todir="." overwrite="true">
+            <fileset dir="patches">
+                <include name="**/*" />
+            </fileset>
+        </copy>
     </target>
 	
     <target name="build" depends="prepare">
-	<phingcall target="propel-creole" />
-	<phingcall target="propel-gen" />
-	<phingcall target="apply-patches" />
+        <phingcall target="propel-creole" />
+        <phingcall target="propel-gen" />
+        <phingcall target="apply-patches" />
+    </target>
+
+    <target name="phptests">
+        <!-- load the dbdeploy task -->
+        <exec command="ls -l" dir="/home" />
+    </target>
+
+    <target name="prepare-tests-report">
+        <delete>
+          <fileset dir="${im.home}/report/">
+            <include name="**/*" />
+          </fileset>
+        </delete>
+        <mkdir dir="${im.home}/report/" />
+        <mkdir dir="${im.home}/report/graphviz/" />
+        <mkdir dir="${im.home}/report/agile/" />
+        <mkdir dir="${im.home}/report/raw/" />
+        <mkdir dir="${im.home}/report/test-coverage" />
+    </target>
+    
+    <target name="tests-report" depends="prepare-tests-report">
+        <!-- Please install the Graphviz www.graphviz.org application and add it's bin dir into the PATH -->
+        <exec command="phpunit
+                --log-xml ${im.home}/report/raw/report.xml
+                --log-graphviz ${im.home}/report/graphviz/InfinityMetrics.dot
+                --report ${im.home}/report/test-coverage
+                --testdox-html ${im.home}/report/agile/index.html
+                --verbose
+                ${im.home}/app/classes/infinitymetrics/tests/AllTestSuites.class" dir="${im.home}/" />
+
+        <exec command="dot -T png -o InfinityMetrics.png InfinityMetrics.dot" dir="${im.home}/report/graphviz/" />
+    </target>
+
+    <target name="migrate" description="Database Migrations">
+
+        <!-- load the dbdeploy task -->
+        <taskdef name="dbdeploy" classname="phing.tasks.ext.dbdeploy.DbDeployTask"/>
+
+        <!-- these two filenames will contain the generated SQL to do the deploy and roll it back-->
+        <property name="build.dbdeploy.deployfile" value="${im.home}/migration/deploy-${DSTAMP}${TSTAMP}.sql" />
+        <property name="build.dbdeploy.undofile" value="${im.home}/migration/undo-${DSTAMP}${TSTAMP}.sql" />
+
+        <!-- generate the deployment scripts -->
+        <dbdeploy
+             url="mysql:host=${db.host};dbname=${db.name}"
+             userid="${db.user}"
+             password="${db.pass}"
+             dir="${im.home}/migration/deltas"
+             outputfile="${build.dbdeploy.deployfile}"
+             undooutputfile="${build.dbdeploy.undofile}" />
+
+        <!-- execute the SQL - Use mysql command line to avoid trouble with large files or many statements and PDO -->
+        <exec command="mysql -h${db.host} -u${db.user} -p${db.pass} ${db.name} &lt; ${build.dbdeploy.deployfile}" />
     </target>
 
 </project>

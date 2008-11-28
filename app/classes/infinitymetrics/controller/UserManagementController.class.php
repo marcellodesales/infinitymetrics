@@ -1,7 +1,7 @@
 <?php
 /**
  * $Id: UserManagementController.class.php 202 2008-11-10 12:01:40Z
- * Gurdeep Singh, Marcello de Sales $
+ * Gurdeep Singh, Marcello de Sales
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -78,7 +78,7 @@ final class UserManagementController {
      * @param string $institutionAbbreviation
      * @param boolean $isLeader
      */
-    public static function validateStudentRegistrationForm($username, $password, $email,
+    private static function validateStudentRegistrationForm($username, $password, $email,
                           $firstName, $lastName, $studentSchoolId, $projectName,
                           $institutionAbbreviation, $isLeader) {
         $error = array();
@@ -160,17 +160,7 @@ final class UserManagementController {
             $student->setJnPassword($password);
             $student->save();
 
-            $studentInstitution = new PersistentUserXInstitution();
-            $studentInstitution->setInstitution($inst);
-            $studentInstitution->setUser($student);
-            $studentInstitution->setIdentification($studentSchoolId);
-            $studentInstitution->save();
-
-            $userProject = new PersistentUserXProject();
-            $userProject->setUser($student);
-            $userProject->setProject($proj);
-            $userProject->setIsOwner($isLeader);
-            $userProject->save();
+            self::makeInstitutionUserRelations($student, $inst, $studentSchoolId, $proj, $isLeader);
 
             $subject = "Welcome to Infinity Metrics 'nightly build'";
             $body = "Hello ".$student->getFirstName().",\n\nWe'd like to welcome you to Infinity Metrics... We strive
@@ -191,20 +181,41 @@ final class UserManagementController {
             throw $e;
         }
     }
+
+    private static function makeInstitutionUserRelations(PersistentUser $newUser, PersistentInstitution
+                                                         $existingInstitution, $institutionIdentification,
+                                                         PersistentProject $existingProject, $isProjectOwner) {
+        try {
+            $studentInstitution = new PersistentUserXInstitution();
+            $studentInstitution->setInstitution($existingInstitution);
+            $studentInstitution->setUser($newUser);
+            $studentInstitution->setIdentification($institutionIdentification);
+            $studentInstitution->save();
+
+            $userProject = new PersistentUserXProject();
+            $userProject->setUser($newUser);
+            $userProject->setProject($existingProject);
+            $userProject->setIsOwner($isProjectOwner);
+            $userProject->save();
+
+        } catch (Exception $e) {
+            $errors = array();
+            $errors["institutionRelations"] = $e->getMessage();
+            throw new InfinityMetricsException("Error saving user's institution relations", $errors);
+        }
+    }
     /**
-     * Validates the Instructor's regirstration form.
+     *  Validates the registration input form.
      * @param string $username
      * @param string $password
      * @param string $email
      * @param string $firstName
      * @param string $lastName
      * @param string $projectName
-     * @param string $institutionAbbreviation
-     * @return whether the form is valid or not.
-     * @throws InfinityMetricsException if the form contains errors.
+     * @param boolean $isProjectOwner
      */
-    public static function validateInstructorRegistrationForm($username, $password, $email,
-                          $firstName, $lastName, $parentProjectName, $institutionAbbreviation) {
+    private static function validateUserRegistrationForm($username, $password, $email, $firstName, $lastName,
+                                                            $projectName, $isProjectOwner) {
         $error = array();
         if (!isset($username) || $username == "") {
             $error["username"] = "The username is empty";
@@ -221,11 +232,115 @@ final class UserManagementController {
         if (!isset($email) || $email == "") {
             $error["email"] = "The email is empty";
         }
-        if (!isset($parentProjectName) || $parentProjectName == "") {
+        if (!isset($projectName) || $projectName == "") {
             $error["projectName"] = "The java.net project name is empty";
         }
+        if (!isset($isProjectOwner)) {
+            $error["isLeader"] = "The information if the the student is a leader is not given";
+        }
+
+        if (count($error) > 0) {
+            throw new InfinityMetricsException("There are errors in the input", $error);
+        }
+    }
+   /**
+    * This method implements the registration for User 
+    *
+    * @param string $username the java.net username
+    * @param string $password the java.net password
+    * @param string $email the user's email
+    * @param string $firstName the user's first name
+    * @param string $lastName the user's last name
+    * @param string $projectName the user's project name
+    * @param boolean $isLeader defines if the student is a leader of the given $projectName.
+    * @return User the instance of the user for the given input. It also relates the studnet to the
+    * instance of project and the institution identified by the abbreviation.
+    * @throws InfinityMetricsException, PropelException, Exception depending on what goes wrong.
+    */
+    public static function registerUser($username, $password, $email, $firstName, $lastName, $projectName,
+                                                                                                    $isProjectOwner) {
+        try {
+            UserManagementController::validateUserRegistrationForm($username, $password, $email, $firstName,
+                                                                      $lastName, $projectName, $isProjectOwner);
+
+            $proj = MetricsWorkspaceController::retrieveProject($projectName);
+
+            $user = new User();
+            $user->setFirstName($firstName);
+            $user->setLastName($lastName);
+            $user->setEmail($email);
+            $user->setJnUsername($username);
+            $user->setJnPassword($password);
+            $user->save();
+
+            $userProject = new PersistentUserXProject();
+            $userProject->setUser($user);
+            $userProject->setProjectJnName($proj->getProjectJnName());
+            $userProject->setIsOwner($isProjectOwner);
+            $userProject->save();
+
+            $subject = "Welcome to Infinity Metrics 'nightly build'";
+            $body = "Hello ".$user->getFirstName().",\n\nWe'd like to welcome you to Infinity Metrics... We strive
+                    to provide you the best experience when analyzing your team(s) performance through the Infinity
+                    Metrics...\n\nYour Java.net login information was saved at Infinity Metrics database to better
+                    provide you automated services. Your Personal Agent will collect your team(s)'s data, while you
+                    play golf or go to a barbecue... However, note that your Personal Agent always needs your current
+                    Java.net login information in case you change it.\n\nPlease feel free to contact the 'Infinity
+                    Team' at any time at users@ppm8.dev.java.net.\n\nEnjoy!\n\nInfinity Metrics: Automatic
+                    Collaboration Metrics for java.net Projects\nhttp://ppm8.dev.java.net\nMailing Lists:
+                    https://ppm-8.dev.java.net/servlets/ProjectMailingListList";
+
+            //SendEmail::sendTextEmail("noreply@infinitymetrics.net", "dev@". $projectName . self::DOMAIN,
+              //                                                                  $student->getEmail(), $subject, $body);
+            return $user;
+
+        } catch (Exception $e) {
+            $errors = array();
+            $errors["userRegistration"] = $e->getMessage();
+            throw new InfinityMetricsException("Error registering the user", $errors);
+        }
+    }
+    /**
+     * Validates the Instructor's regirstration form.
+     * @param string $username
+     * @param string $password
+     * @param string $email
+     * @param string $firstName
+     * @param string $lastName
+     * @param string $projectName
+     * @param string $institutionAbbreviation
+     * @return whether the form is valid or not.
+     * @throws InfinityMetricsException if the form contains errors.
+     */
+    public static function validateInstructorRegistrationForm($username, $password, $email, $firstName,
+                                   $lastName, $projectName, $isOwner, $institutionAbbreviation, $institutionIdent) {
+        $error = array();
+        if (!isset($username) || $username == "") {
+            $error["username"] = "The username is empty";
+        }
+        if (!isset($password) || $password == "") {
+            $error["password"] = "The password is empty";
+        }
+        if (!isset($email) || $email == "") {
+            $error["email"] = "The email is empty";
+        }
+        if (!isset($firstName) || $firstName == "") {
+            $error["firstName"] = "The firstName is empty";
+        }
+        if (!isset($lastName) || $lastName == "") {
+            $error["lastName"] = "The lastName is empty";
+        }
+        if (!isset($projectName) || $projectName == "") {
+            $error["projectName"] = "The project name is empty";
+        }
+        if (!isset($isOwner) || $isOwner == "") {
+            $error["isOwner"] = "The definition of isOwner is empty";
+        }
         if (!isset($institutionAbbreviation) || $institutionAbbreviation == "") {
-            $error["institution"] = "The institution is empty";
+            $error["institutionAbbreviation"] = "The institution abbreviation is empty";
+        }
+        if (!isset($institutionIdent) || $institutionIdent == "") {
+            $error["institutionIdentification"] = "The institution identification is empty";
         }
 
         if (count($error) > 0) {
@@ -246,9 +361,11 @@ final class UserManagementController {
     * @return Instructor representing the instructor instance for the given form
     */
     public static function registerInstructor($username, $password, $email, $firstName, $lastName, $projectName,
-                                                $institutionAbbreviation) {
+                                                $isOwner, $institutionAbbreviation, $schoolIdentification) {
         try {
-            UserManagementController::validateInstructorRegistrationForm($username, $password, $email, $firstName, $lastName,$projectName, $institutionAbbreviation);
+            UserManagementController::validateInstructorRegistrationForm($username, $password, $email, $firstName,
+                                   $lastName, $projectName, $isOwner, $institutionAbbreviation, $schoolIdentification);
+
             $inst = PersistentInstitutionPeer::retrieveByAbbreviation($institutionAbbreviation);
             $proj = PersistentProjectPeer::retrieveByPK($projectName);
 
@@ -258,8 +375,9 @@ final class UserManagementController {
             $instructor->setEmail($email);
             $instructor->setJnUsername($username);
             $instructor->setJnPassword($password);
-            $instructor->setInstitutionId($inst->getInstitutionId());
             $instructor->save();
+
+            self::makeInstitutionUserRelations($instructor, $inst, $schoolIdentification, $proj, $isOwner);
             
             $subject = "Welcome to Infinity Metrics";
  	        $body = "Hello ".$instructor->getFirstName().",\n\nWe'd like to welcome to Infinity Metrics... Know that 
@@ -273,7 +391,6 @@ final class UserManagementController {
             return $instructor;
 
         } catch (Exception $e) {
-            //echo $e;
             throw $e;
         }
     }
@@ -304,6 +421,28 @@ final class UserManagementController {
         $c->add(PersistentUserPeer::JN_PASSWORD, $password);
 
         return PersistentUserPeer::doSelect($c);
+    }
+
+   /**
+     * This method implements part of the UC004 to retrieve User
+     * @param string $user_id is the workspace identification or any other and other possible persistence problems.
+     * @throws InfinityMetricsException if the given user_id is empty. Also if it refers to a non-existing user.
+     * @return PersistentUser the instance of the user for the given user_id
+     */
+    public static function retrieveUser($user_id) {
+        if (!isset($user_id)|| $user_id == "") {
+            $errors = array();
+            $errors["user_id"] = "The user id must be provided";
+            throw new InfinityMetricsException("Can't retrieve user", $errors);
+        }
+
+        $user = PersistentUserPeer::retrieveByPK($user_id);
+        if ($user == NULL) {
+            $errors = array();
+            $errors["userNotFound"] = "The user referred by " . $user_id . " doesn't exist";
+            throw new InfinityMetricsException("Can't retrieve user", $errors);
+        }
+        return $user;
     }
 
     /**

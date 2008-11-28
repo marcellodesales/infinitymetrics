@@ -75,7 +75,7 @@ class User extends PersistentUser {
      * @return boolean verifies if the instance is an instructor
      */
     public function isInstructor() {
-        return $this->getType() == $this->typeEnum->STUDENT;
+        return $this->getType() == $this->typeEnum->INSTRUCTOR;
     }
     /**
      * @return boolean verifies if a regular Java.net user

@@ -1,6 +1,6 @@
 <?php
 /**
- * $Id: AllUserSystemTests.class.php 202 2008-11-10 21:31:40Z marcellosales $
+ * $Id: AllWorkspaceFunctionalTests.class.php 202 2008-11-10 21:31:40Z marcellosales $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -19,22 +19,28 @@
  * For more information please see <http://ppm-8.dev.java.net>.
  */
 require_once 'PHPUnit/Framework.php';
-require_once 'infinitymetrics/tests/system/user/StudentSystemTest.class.php';
-require_once 'infinitymetrics/tests/system/user/InstructorSystemTest.class.php';
-require_once 'infinitymetrics/tests/system/user/UserSystemTest.class.php';
+require_once 'infinitymetrics/tests/functional/workspace/UC100Test.class.php';
+require_once 'infinitymetrics/tests/functional/workspace/UC101Test.class.php';
+require_once 'infinitymetrics/tests/functional/workspace/UC102Test.class.php';
+require_once 'infinitymetrics/tests/functional/workspace/UC103Test.class.php';
+require_once 'infinitymetrics/tests/functional/workspace/UC104Test.class.php';
+require_once 'infinitymetrics/tests/functional/workspace/UC105Test.class.php';
 /**
- * All System Tests for the User component. It includes system tests for users, students, instructors.
+ * All Functional Tests for the Metrics Workspace component.
  *
  * @author Marcello de Sales <marcello.sales@gmail.com>
  */
-class AllUserComponentSystemTests {
+class AllWorkspaceComponentFunctionalTests {
     
     public static function suite() {
         $suite = new PHPUnit_Framework_TestSuite('PHPUnit Framework');
 
-        $suite->addTestSuite('UserSystemTest');
-        $suite->addTestSuite('StudentSystemTest');
-        $suite->addTestSuite('InstructorSystemTest');
+        $suite->addTestSuite('UC100Test');
+        $suite->addTestSuite('UC101Test');
+        $suite->addTestSuite('UC102Test');
+        $suite->addTestSuite('UC103Test');
+        $suite->addTestSuite('UC104Test');
+        $suite->addTestSuite('UC105Test');
 
         return $suite;
     }

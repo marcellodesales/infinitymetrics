@@ -44,14 +44,20 @@ class UC001Test extends PHPUnit_Framework_TestCase {
         $this->userTypeEnum = UserTypeEnum::getInstance();
     }
 
+    private function cleanUpAll() {
+        PersistentUserXProjectPeer::doDeleteAll();
+        PersistentUserPeer::doDeleteAll();
+        PersistentInstitutionPeer::doDeleteAll();
+        PersistentProjectPeer::doDeleteAll();
+    }
+
     /**
      * Setting up is run ALWAYS BEFORE the execution of a test method.
      */
     protected function setUp() {
         parent::setUp();
-        PersistentInstitutionPeer::doDeleteAll();
-        PersistentProjectPeer::doDeleteAll();
-
+        $this->cleanUpAll();
+        
         $this->institution = new Institution();
         $this->institution->setName('San Francisco State University');
         $this->institution->setAbbreviation("SFSU");
@@ -79,26 +85,59 @@ class UC001Test extends PHPUnit_Framework_TestCase {
             $this->assertNotNull($createdStudent, "The registered student is null");
             $this->assertEquals($this->userTypeEnum->STUDENT, $createdStudent->getType(), "The registered user is not
                                                                                                an instance of Student");
-            $stXProjec = PersistentStudentXProjectPeer::retrieveByPK($createdStudent->getUserId(),
-                                                                     $this->project->getProjectJnName());
-            $this->assertNotNull($stXProjec, "The relationship between student and project is null");
-            
+
+            $studentInstitution = PersistentUserXInstitutionPeer::retrieveByPk($createdStudent->getUserId(),
+                                                                               $this->institution->getInstitutionId());
+            $this->assertNotNull($studentInstitution, "The user x institution relation was not created for the student.");
+            $this->assertEquals("909663916", $studentInstitution->getIdentification(), "The student school 
+                                                                                         identification is incorrect");
+            $this->assertEquals($createdStudent->getUserId(), $studentInstitution->getUserId(), "The user id is 
+                                                                   incorrect on user x institution for the student");
+            $this->assertEquals($this->institution->getInstitutionId(), $studentInstitution->getInstitutionId(), 
+                                              "The institution id is incorrect on user x institution for the student");
+
+            $stXProjec = PersistentUserXProjectPeer::retrieveByPK($createdStudent->getJnUsername(),
+                                                                                   $this->project->getProjectJnName());
+            $this->assertNotNull($stXProjec, "The relationship between student and project was not created");
+            $this->assertEquals($this->project->getProjectJnName(), $stXProjec->getProjectJnName(), "The project name 
+                                                                                      is incorrect on user x project");
+            $this->assertEquals($createdStudent->getJnUsername(), $stXProjec->getJnUsername(), "The java.net 
+                                                                 username is incorrect on user x project for student");
+            $this->assertTrue($stXProjec->getIsOwner() == 1, "The student is a leader, and therefore, a project owner.");
+
         } catch (InfinityMetricsException $ime){
             $this->fail("The successful login scenario failed: " . $ime);
         }
 
         try {
-            //Saving the student leader        
+            //Saving a regular student 
             $createdStudent = UserManagementController::registerStudent(
                                     "username", "password", "email2@gmail.com", "firstNameNOTLeader",
-                                    "lastName", "909663916", $this->project->getProjectJnName(),
+                                    "lastName", "888888888", $this->project->getProjectJnName(),
                                     $this->institution->getAbbreviation(), false);
             $this->assertNotNull($createdStudent, "The registered student is null");
             $this->assertEquals($this->userTypeEnum->STUDENT, $createdStudent->getType(), "The registered user is not
                                                                                                an instance of Student");
-            $stXProjec = PersistentStudentXProjectPeer::retrieveByPK($createdStudent->getUserId(),
-                                                                     $this->project->getProjectJnName());
-            $this->assertNotNull($stXProjec, "The relationship between student and project is null");
+
+            $studentInstitution = PersistentUserXInstitutionPeer::retrieveByPk($createdStudent->getUserId(),
+                                                                               $this->institution->getInstitutionId());
+            $this->assertNotNull($studentInstitution, "The student x institution relation was not created.");
+            $this->assertEquals("888888888", $studentInstitution->getIdentification(), "The student school
+                                                                                         identification is incorrect");
+            $this->assertEquals($createdStudent->getUserId(), $studentInstitution->getUserId(), "The user id is
+                                                                                     incorrect on user x institution");
+            $this->assertEquals($this->institution->getInstitutionId(), $studentInstitution->getInstitutionId(),
+                                                               "The institution id is incorrect on user x institution");
+
+            $stXProjec = PersistentUserXProjectPeer::retrieveByPK($createdStudent->getJnUsername(),
+                                                                                   $this->project->getProjectJnName());
+            $this->assertNotNull($stXProjec, "The relationship between student and project was not created");
+            $this->assertEquals($this->project->getProjectJnName(), $stXProjec->getProjectJnName(), "The project name
+                                                                                      is incorrect on user x project");
+            $this->assertEquals($createdStudent->getJnUsername(), $stXProjec->getJnUsername(), "The user id is incorrect
+                                                                                                   on user x project");
+            $this->assertTrue($stXProjec->getIsOwner() == 0, "The student is NOT a leader, and therefore, NOT a project
+                                                                                                              owner.");
 
         } catch (InfinityMetricsException $ime){
             $this->fail("The successful login scenario failed: " . $ime);
@@ -168,7 +207,7 @@ class UC001Test extends PHPUnit_Framework_TestCase {
                                     "lastNameLeader", "909663916", $this->project->getProjectJnName(),
                                     $this->institution->getAbbreviation(), true);
 
-            //Saving the student leader
+            //Saving the student leader once again... this time it throws the exception
             $createdStudent = UserManagementController::registerStudent(
                                     "username2", "password", "email@gmail.com", "firstNameLeader",
                                     "lastNameLeader", "909663916", $this->project->getProjectJnName(),
@@ -181,10 +220,7 @@ class UC001Test extends PHPUnit_Framework_TestCase {
     }
 
     protected function tearDown() {
-        PersistentStudentXProjectPeer::doDeleteAll();
-        PersistentUserPeer::doDeleteAll();
-        PersistentInstitutionPeer::doDeleteAll();
-        PersistentProjectPeer::doDeleteAll();
+        $this->cleanUpAll();
     }
 }
 ?>

@@ -1,6 +1,6 @@
 <?php
 /**
- * $Id: AllUserSystemTests.class.php 202 2008-11-10 21:31:40Z marcellosales $
+ * $Id: AllPersonalAgentFunctionalTests.class.php 202 2008-11-10 21:31:40Z marcellosales $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -19,22 +19,18 @@
  * For more information please see <http://ppm-8.dev.java.net>.
  */
 require_once 'PHPUnit/Framework.php';
-require_once 'infinitymetrics/tests/system/user/StudentSystemTest.class.php';
-require_once 'infinitymetrics/tests/system/user/InstructorSystemTest.class.php';
-require_once 'infinitymetrics/tests/system/user/UserSystemTest.class.php';
+require_once 'infinitymetrics/tests/functional/agent/UC404Test.class.php';
 /**
- * All System Tests for the User component. It includes system tests for users, students, instructors.
+ * All Functional tests for the Personal Agent component.
  *
  * @author Marcello de Sales <marcello.sales@gmail.com>
  */
-class AllUserComponentSystemTests {
+class AllPersonalAgentComponentFunctionalTests {
     
     public static function suite() {
         $suite = new PHPUnit_Framework_TestSuite('PHPUnit Framework');
 
-        $suite->addTestSuite('UserSystemTest');
-        $suite->addTestSuite('StudentSystemTest');
-        $suite->addTestSuite('InstructorSystemTest');
+        $suite->addTestSuite('UC404Test');
 
         return $suite;
     }

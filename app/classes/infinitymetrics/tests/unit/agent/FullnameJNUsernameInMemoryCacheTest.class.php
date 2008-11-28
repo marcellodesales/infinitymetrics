@@ -23,12 +23,8 @@ Propel::init('infinitymetrics/orm/config/om-conf.php');
 
 require_once 'PHPUnit/Framework.php';
 require_once 'infinitymetrics/model/user/agent/reasoning/FullnameJNUsernameInMemoryCache.class.php';
-require_once 'infinitymetrics/model/institution/Student.class.php';
-require_once 'infinitymetrics/orm/PersistentUserPeer.php';
-require_once 'infinitymetrics/orm/PersistentInstitutionPeer.php';
-require_once 'infinitymetrics/orm/PersistentChannelPeer.php';
-require_once 'infinitymetrics/orm/PersistentProjectPeer.php';
-require_once 'infinitymetrics/orm/PersistentUserXInstitution.php';
+require_once 'infinitymetrics/controller/UserManagementController.class.php';
+require_once 'infinitymetrics/controller/MetricsWorkspaceController.php';
 /**
  * Tests for the Personal Agent class.
  *
@@ -45,44 +41,33 @@ class FullnameJNUsernameInMemoryCacheTest extends PHPUnit_Framework_TestCase {
     const CHANNEL_ID = "users";
 
     private $user;
+    private $project;
 
-    private function deleteEverything() {
-        //echo "Deleting the user and institution for setting up";
-        $crit = new Criteria();
-        $crit->add(PersistentUserPeer::JN_USERNAME, self::EXISTING_USERNAME);
-        PersistentUserPeer::doDelete($crit);
-
-        $crit->add(PersistentProjectPeer::PROJECT_JN_NAME, self::PROJECT_NAME);
-        PersistentProjectPeer::doDelete($crit);
-
-        $crit->add(PersistentChannelPeer::CHANNEL_ID, self::CHANNEL_ID);
-        PersistentChannelPeer::doDelete($crit);
+    private function cleanUpAll() {
+        PersistentUserXProjectPeer::doDeleteAll();
+        PersistentUserPeer::doDeleteAll();
+        PersistentProjectPeer::doDeleteAll();
+        PersistentChannelPeer::doDeleteAll();
     }
 
     protected function setUp() {
         parent::setUp();
-        $project = PersistentProjectPeer::retrieveByPK(self::PROJECT_NAME);
-        if (!isset($project)) {
-            //creates a new project in case it doesn't exist... It should never happen
-            //but to make sure we have data on the server.
-            $project = new PersistentProject();
-            $project->setProjectJnName(self::PROJECT_NAME);
-            $project->setSummary("Agent created this project for the RSS feeds...");
-            $project->save();
-        }
-        $this->user = new User();
-        $this->user->setFirstName(self::EXISTING_FIRST_NAME);
-        $this->user->setLastName(self::EXISTING_LAST_NAME);
-        $this->user->setEmail("marcello.sales@gmail.com");
-        $this->user->setJnUsername(self::EXISTING_USERNAME);
-        $this->user->setJnPassword("password");
-        $this->user->save();
+        $this->cleanUpAll();
+        
+        $this->project = new PersistentProject();
+        $this->project->setProjectJnName("ppm-8");
+        $this->project->setSummary("Project paticipation Metrics");
+        $this->project->save();
 
-        $channel = PersistentChannelPeer::retrieveByPK(self::CHANNEL_ID, $project->getProjectJnName());
+        $this->user = UserManagementController::registerUser(self::EXISTING_USERNAME, "pass",
+                                       "marcello.sales@gmail.com", self::EXISTING_FIRST_NAME, self::EXISTING_LAST_NAME,
+                                       $this->project->getProjectJnName(), true);
+
+        $channel = PersistentChannelPeer::retrieveByPK(self::CHANNEL_ID, $this->project->getProjectJnName());
         if (!isset($channel)) {
             $channel = new PersistentChannel();
             $channel->setChannelId(self::CHANNEL_ID);
-            $channel->setProjectJnName($project->getProjectJnName());
+            $channel->setProjectJnName($this->project->getProjectJnName());
             $channel->setCategory("MAILING_LIST");
             $channel->setTitle("This is the users mailing list");
             $channel->save();
@@ -134,7 +119,7 @@ class FullnameJNUsernameInMemoryCacheTest extends PHPUnit_Framework_TestCase {
     }
     
     protected function tearDown() {
-        $this->deleteEverything();
+        $this->cleanUpAll();
     }
 }
 ?>
