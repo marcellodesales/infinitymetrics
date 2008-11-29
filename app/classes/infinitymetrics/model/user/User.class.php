@@ -65,23 +65,5 @@ class User extends PersistentUser {
             return false;
         }
     }
-    /**
-     * @return boolean verifies if the instance is a student
-     */
-    public function isStudent() {
-        return $this->getType() == $this->typeEnum->STUDENT;
-    }
-    /**
-     * @return boolean verifies if the instance is an instructor
-     */
-    public function isInstructor() {
-        return $this->getType() == $this->typeEnum->INSTRUCTOR;
-    }
-    /**
-     * @return boolean verifies if a regular Java.net user
-     */
-    public function isRegularJnUser() {
-        return $this->getType() == $this->typeEnum->JAVANET;
-    }
 }
 ?>

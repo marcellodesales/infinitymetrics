@@ -4,7 +4,7 @@ ini_set('include_path', ini_get('include_path') . PATH_SEPARATOR . '/home/group8
 ini_set('include_path', ini_get('include_path') . PATH_SEPARATOR . '/home/group8/infinitymetrics/app/classes');
 ini_set('include_path', ini_get('include_path') . PATH_SEPARATOR . '/home/group8/infinitymetrics/app/template');
 
-$home_address = "http://hci.cs.sfsu.edu/~group8/nightly";
+$_SERVER["home_address"] = "http://infinitymetrics.local.net";
 
 require_once 'propel/Propel.php';
 Propel::init('infinitymetrics/orm/config/om-conf.php');
@@ -13,7 +13,9 @@ $leftNavClass = "sidebars admin-reports-dblog admin-reports admin tableHeader-pr
 $NoLeftNavClass = "sidebar-right node-2-edit node-2 node";
 
 function isUserLoggedIn() {
-    return array_key_exists("user", $_SESSION);
+    //return array_key_exists("user", $_SESSION);
+    //NEEDS TO BE UNCOMMENTTED IN DEPLOYMENT ENVIRONMENT...
+    return true;
 }
 
 function contains($content, $str, $ignorecase=true){
@@ -31,8 +33,13 @@ function isUserInReservedAreas() {
 
 session_start();
 if (isUserLoggedIn()) {
-   $user = $_SESSION["user"];
-   $isUserInstructor = $user instanceof Instructor;
+   //$user = $_SESSION["user"];
+   //TODO: NEEDS to verify if the user is the owner of ANY project associated with ANY workspace
+   //That means this user is a java.net project owner and will have a workspace, or this user is
+   //an instructor. Both types of users have workspaces.
+   //$user->hasWorkspace() should be the method created on the PersistenUser class 
+   //(TO BE PATCHED with the correct implementation).
+   //$userHasWorkspace = $user->isInstructor();
 }
 
 if (isUserInReservedAreas() && !isUserLoggedIn()) {
