@@ -198,6 +198,8 @@ final class UserManagementController {
             $userProject->setIsOwner($isProjectOwner);
             $userProject->save();
 
+            //TODO: collect the names of all children project if you are project owner
+
         } catch (Exception $e) {
             $errors = array();
             $errors["institutionRelations"] = $e->getMessage();
@@ -278,6 +280,8 @@ final class UserManagementController {
             $userProject->setProjectJnName($proj->getProjectJnName());
             $userProject->setIsOwner($isProjectOwner);
             $userProject->save();
+
+            //TODO: Metrics workspace collect the names of all children project if you are IS PROJECt OWNER owner
 
             $subject = "Welcome to Infinity Metrics 'nightly build'";
             $body = "Hello ".$user->getFirstName().",\n\nWe'd like to welcome you to Infinity Metrics... We strive
@@ -396,7 +400,7 @@ final class UserManagementController {
     }
 
     /**
-     * Makes the user login for a given user
+     * Makes the user login for a given user. This is the implementation of UC003
      * @param string $userName is the java.net username from a user
      * @param string $password is the java.net password for the a user
      * @return PersistentUser instance.
@@ -407,20 +411,28 @@ final class UserManagementController {
         if (!isset($userName) || $userName == "")  {
             $error["username"] = "The username is empty";
         }
-
         if (!isset($password) || $password == "") {
             $error["password"] = "The password is empty";
         }
-
         if (count($error) > 0) {
             throw new InfinityMetricsException("There are errors in the input", $error);
         }
 
         $c = new Criteria();
         $c->add(PersistentUserPeer::JN_USERNAME, $userName);
+        $user = PersistentUserPeer::doSelect($c);
+        if ($user == null) {
+            $error["usernameIncorrect"] = "The user '".$userName."' is not registered";
+            throw new InfinityMetricsException("Login failed", $error);
+        }
+        
         $c->add(PersistentUserPeer::JN_PASSWORD, $password);
-
-        return PersistentUserPeer::doSelect($c);
+        $user = PersistentUserPeer::doSelect($c);
+        if ($user == null) {
+            $error["passwordDoesnMatch"] = "The password for the '".$userName."' doesn't match";
+            throw new InfinityMetricsException("Login fail", $error);
+        }
+        return $user;
     }
 
    /**
