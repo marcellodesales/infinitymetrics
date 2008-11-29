@@ -446,13 +446,23 @@ final class UserManagementController {
     }
 
     /**
-     * @param string $username is the username of the user
-     * @return PersistentUser is the instance of the user.
+     *
+     * @param <type> $user_id is the id of the user.
+     * @return <type> PersistentUser is the instance of the user.
      */
-    public static function viewAccount($username) {
+    public static function viewProfile($user_id){
+         $errors = array();
+         if (!isset($user_id)|| $user_id == "") {
+            $errors["user_id"] = "The user id must be provided";
+            throw new InfinityMetricsException("Can't retrieve user", $errors);
+        }
         $c = new Criteria();
-        $c->add(PersistentUserPeer::JN_USERNAME, $username);
-        return PersistentUserPeer::doSelect($c);
+        $c->add(PersistentUserPeer::USER_ID,$user_id);
+        $profile = PersistentUserPeer::doSelect($c);
+        return $profile;
+        
     }
+
+   
 }
 ?>
