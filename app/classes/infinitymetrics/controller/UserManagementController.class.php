@@ -78,7 +78,7 @@ final class UserManagementController {
      * @param string $institutionAbbreviation
      * @param boolean $isLeader
      */
-    private static function validateStudentRegistrationForm($username, $password, $email,
+    public static function validateStudentRegistrationForm($username, $password, $email,
                           $firstName, $lastName, $studentSchoolId, $projectName,
                           $institutionAbbreviation, $isLeader) {
         $error = array();
