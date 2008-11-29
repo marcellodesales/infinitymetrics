@@ -124,7 +124,7 @@ CREATE TABLE `workspace` (
   `user_id`          int(10) UNSIGNED NOT NULL,
   `state`            enum ('NEW','ACTIVE','PAUSED','INACTIVE') NOT NULL DEFAULT 'NEW',
   `title`            varchar(64) NOT NULL,
-  `description`      varchar(255)
+  `description`      varchar(255),
   PRIMARY KEY (`workspace_id`)
 ) ENGINE = InnoDB;
 
