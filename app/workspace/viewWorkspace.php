@@ -2,6 +2,8 @@
 
     if (isset($_GET['workspace_id']))
     {
+        include 'header-no-left-nav.php';
+
         require_once('propel/Propel.php');
         Propel::init("infinitymetrics/orm/config/om-conf.php");
 
@@ -11,28 +13,11 @@
         $ws = PersistentWorkspacePeer::retrieveByPK($_GET['workspace_id']);
 
         $projects = $ws->getProjects();
-
-        if ($projects == NULL)
-        {
-            for ($i = 0; $i < 5; $i++) {
-                $project = new PersistentProject();
-                $project->setProjectJnName("ppm-".rand());
-                $project->setSummary("Project $i summary");
-                $wxp = new PersistentWorkspaceXProject();
-                $wxp->setWorkspace($ws);
-                $wxp->setProject($project);
-                $wxp->save();
-            }
-        }
     }
     else {
         header('Location: workspaceCollection.php');
     }
  
-?>
-
-<?php
-    include 'header-no-left-nav.php';
 ?>
     <div id="content-wrap">
         <div id="inside">
@@ -120,11 +105,13 @@
                             }
                         ?>
                         <br /><br />
-                        <form action="updateWorkspace.php" accept-charset="UTF-8" method="post" id="node-form">
-                            <div class="node-form">
-                                <input name="updateWS" id="edit-submit" value="Change Workspace Information" class="form-submit" type="submit">
-                            </div>
-                        </form>
+                        <div style = "float: right;">
+                            <form action="updateWorkspace.php" accept-charset="UTF-8" method="post" id="node-form">
+                                <div class="node-form">
+                                    <input name="updateWS" id="edit-submit" value="Change Workspace Information" class="form-submit" type="submit">
+                                </div>
+                            </form>
+                        </div>
                         <?php
                         
                             if (isset($_GET['type']) && $_GET['type'] != 'shared')
@@ -145,6 +132,4 @@
         </div>
         <BR>
       </div>
-<?php
-    include 'footer.php';
-?>
+<?php include 'footer.php';   ?>
