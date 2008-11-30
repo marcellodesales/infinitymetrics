@@ -485,7 +485,145 @@ final class UserManagementController {
         
     }
 
-    
+    /**
+     * retrieveUserByUserName retrieve user by username .
+     * @param <type> $username
+     * @return <type>
+     */
+    public static function retrieveUserByUserName($username) {
+        if (!isset($username)|| $username == "") {
+            $errors = array();
+            $errors["username"] = "The user id must be provided";
+            throw new InfinityMetricsException("Can't retrieve user", $errors);
+        }
+
+        $user = PersistentUserPeer::retrieveByJNUsername($username);
+        if ($user == NULL) {
+            $errors = array();
+            $errors["userNotFound"] = "The user referred by " . $username . " doesn't exist";
+            throw new InfinityMetricsException("Can't retrieve user", $errors);
+        }
+        return $user;
+    }
+
+    /** This is the implemention of UC005
+     * this function validates the values .
+     *
+     * @param <type> $username is the exixting username
+     * @param <type> $newPassword new password of instructor to be updated
+     * @param <type> $newEmail  new Email of instructor to be updated
+     * @param <type> $newFirstName new first name of instructor to be updated
+     * @param <type> $newLastName  new last name of instructor to be updated
+     * @param <type> $newProjectName  new project of instructor to be updated
+     * @param <type> $new_isOwner  new value of ownership of instructor to be updated
+     * @param <type> $newInstitutionAbbreviation  new institution of instructor to be updated
+     * @param <type> $newInstitutionIdent  new School identification of instructor to be updated
+     * @return <type>
+     */
+ public static function validateInstructorprofileUpdate($username, $newPassword, $newEmail, $newFirstName,
+                                   $newLastName, $newProjectName, $new_isOwner, $newInstitutionAbbreviation, $newInstitutionIdent) {
+        $error = array();
+        if (!isset($username) || $username == "") {
+            $error["username"] = "The username is empty";
+        }
+        if (!isset($newPassword) || $newPassword == "") {
+            $error["newPassword"] = "The password is empty";
+        }
+        if (!isset($newEmail) || $newEmail == "") {
+            $error["newEmail"] = "The email is empty";
+        }
+        if (!isset($newFirstName) || $newFirstName == "") {
+            $error["newFirstName"] = "The firstName is empty";
+        }
+        if (!isset($newLastName) || $newLastName == "") {
+            $error["newLastName"] = "The lastName is empty";
+        }
+        if (!isset($newProjectName) || $newProjectName == "") {
+            $error["newProjectName"] = "The project name is empty";
+        }
+        if (!isset($new_isOwner) || $new_isOwner == "") {
+            $error["new_isOwner"] = "The definition of isOwner is empty";
+        }
+        if (!isset($newInstitutionAbbreviation) || $newInstitutionAbbreviation == "") {
+            $error["newInstitutionAbbreviation"] = "The institution abbreviation is empty";
+        }
+        if (!isset($newInstitutionIdent) || $newInstitutionIdent == "") {
+            $error["newInstitutionIdentification"] = "The institution identification is empty";
+        }
+
+        if (count($error) > 0) {
+            throw new InfinityMetricsException("There are errors in the input", $error);
+        }
+        return true;
+    }
+
+    /** Implemention of UC005
+     * this function saves the updated values into system.
+     * 
+     * @param <type> $username is the exixting username
+     * @param <type> $newPassword new password of instructor to be updated
+     * @param <type> $newEmail  new Email of instructor to be updated
+     * @param <type> $newFirstName new first name of instructor to be updated
+     * @param <type> $newLastName  new last name of instructor to be updated
+     * @param <type> $newProjectName  new project of instructor to be updated
+     * @param <type> $new_isOwner  new value of ownership of instructor to be updated
+     * @param <type> $newInstitutionAbbreviation  new institution of instructor to be updated
+     * @param <type> $newInstitutionIdent  new School identification of instructor to be updated
+     *
+     */
+
+     public static function updateInstructorProfile($username, $newPassword, $newEmail, $newFirstName, $newLastName, $newProjectName,
+                                                $new_isOwner, $newInstitutionAbbreviation, $newInstitutionIdent) {
+
+         self::validateInstructorprofileUpdate($username, $newPassword, $newEmail, $newFirstName, $newLastName,
+                $newProjectName, $new_isOwner, $newInstitutionAbbreviation, $newInstitutionIdent);
+
+         $newInstructor = self::retrieveUserByUserName($username);
+          if($newInstructor == null){
+              $errors = array();
+              $errors["userNotFound"]= " the user reffered by " . $username. "doesn't exist";
+              throw new InfinityMetricsException("can't update profile",$errors);
+          }
+
+            $inst = PersistentInstitutionPeer::retrieveByAbbreviation($newInstitutionAbbreviation);
+            if ($inst == null) {
+                $errors = array();
+                $errors["institutionNotFound"] = "The institution referred by " . $newInstitutionAbbreviation .
+                                                  " doesn't exist";
+                throw new InfinityMetricsException("Can't update Profile", $errors);
+            }
+
+            $proj = PersistentProjectPeer::retrieveByPK($newProjectName);
+            if ($proj == null) {
+                $errors = array();
+                $errors["projectNotFound"] = "The project referred by " . $newProjectName . " doesn't exist";
+                throw new InfinityMetricsException("Can't update Student", $errors);
+            }
+
+        try{
+            $newInstructor->setFirstName($newFirstName);
+            $newInstructor->setLastName($newLastName);
+            $newInstructor->setEmail($newEmail);
+            $newInstructor->setJnPassword($newPassword);
+            $newInstructor->save();
+
+            self::makeInstitutionUserRelations($newInstructor, $inst, $newInstitutionIdent, $proj, $new_isOwner);
+
+            $subject = "Infinity Metrics : Your Profile has been updated";
+ 	        $body = "Hello ".$newInstructor->getFirstName().",\n\nThis is the confirmation Email . Your Profile Information
+                     has been successfully updated.\n\nPlease feel free to contact the 'Infinity Team' at any time at http://ppm-8.dev.java.net.
+                     \n\nEnjoy!";
+	        //SendEmail::sendTextEmail("noreply@infinitymetrics.net", "dev@". $projectName . self::DOMAIN,
+              //                                                                  $newInstructor->getEmail(), $subject, $body);
+            return $newInstructor;
+
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
+
+
+
    
 }
 ?>
