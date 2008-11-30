@@ -622,6 +622,126 @@ final class UserManagementController {
         }
     }
 
+    /** Implementation of UC006
+     * This function validates the values entered .
+     * @param <type> $username   is existing username .
+     * @param <type> $newPassword is new value of password to be updated.
+     * @param <type> $newEmail   is new Email to be updated.
+     * @param <type> $newFirstName is new first name to be updated.
+     * @param <type> $newLastName  is new last name to be updated.
+     * @param <type> $newStudentSchoolId  new  schood Id  to be updated.
+     * @param <type> $newProjectName  new project name to be updated.
+     * @param <type> $newInstitutionAbbreviation  new Institution to be updated.
+     * @param <type> $new_isLeader
+     */
+    public static function validateStudentProfileUpdate($username, $newPassword, $newEmail,
+                          $newFirstName, $newLastName, $newStudentSchoolId, $newProjectName,
+                          $newInstitutionAbbreviation, $new_isLeader) {
+        $error = array();
+        if (!isset($username) || $username == "") {
+            $error["username"] = "The username is empty";
+        }
+        if (!isset($newPassword) || $newPassword == "") {
+            $error["newPassword"] = "The password is empty";
+        }
+        if (!isset($newFirstName) || $newFirstName == "") {
+            $error["newFirstName"] = "The firstName is empty";
+        }
+        if (!isset($newLastName) || $newLastName == "") {
+            $error["newLastName"] = "The lastName is empty";
+        }
+        if (!isset($newEmail) || $newEmail == "") {
+            $error["newEmail"] = "The email is empty";
+        }
+        if (!isset($newStudentSchoolId) || $newStudentSchoolId == "") {
+            $error["newStudentSchoolId"] = "The student school Id is empty";
+        }
+        if (!isset($newProjectName) || $newProjectName == "") {
+            $error["newProjectName"] = "The java.net project name is empty";
+        }
+        if (!isset($newInstitutionAbbreviation) || $newInstitutionAbbreviation == "") {
+            $error["newInstitution"] = "The institution is empty";
+        }
+        if (!isset($new_isLeader) || $new_isLeader == "") {
+            $error["new_isLeader"] = "The information if the the student is a leader is not given";
+        }
+
+        if (count($error) > 0) {
+            throw new InfinityMetricsException("Can't Update Student Profile", $error);
+        }
+    }
+     /**
+      Implementation of UC006
+     * This function updates the values entered in the system .
+     * @param <type> $username   is existing username .
+     * @param <type> $newPassword is new value of password to be updated.
+     * @param <type> $newEmail   is new Email to be updated.
+     * @param <type> $newFirstName is new first name to be updated.
+     * @param <type> $newLastName  is new last name to be updated.
+     * @param <type> $newStudentSchoolId  new  schood Id  to be updated.
+     * @param <type> $newProjectName  new project name to be updated.
+     * @param <type> $newInstitutionAbbreviation  new Institution to be updated.
+     * @param <type> $new_isLeader
+      */
+    public static function updateStudentProfile($username, $newPassword, $newEmail,
+                          $newFirstName, $newLastName, $newStudentSchoolId, $newProjectName,
+                          $newInstitutionAbbreviation, $new_isLeader){
+
+        self::validateStudentProfileUpdate($username, $newPassword, $newEmail, $newFirstName, $newLastName,
+                                   $newStudentSchoolId, $newProjectName, $newInstitutionAbbreviation, $new_isLeader);
+
+        $newStudent = self::retrieveUserByUserName($username);
+           if($newStudent == null){
+              $errors = array();
+              $errors["userNotFound"]= " the user reffered by " . $username. "doesn't exist";
+              throw new InfinityMetricsException("can't update profile",$errors);
+          }
+
+
+
+         $inst = PersistentInstitutionPeer::retrieveByAbbreviation($newInstitutionAbbreviation);
+            if ($inst == null) {
+                $errors = array();
+                $errors["institutionNotFound"] = "The institution referred by " . $newInstitutionAbbreviation .
+                                                  " doesn't exist";
+                throw new InfinityMetricsException("Can't update Profile", $errors);
+            }
+
+            $proj = PersistentProjectPeer::retrieveByPK($newProjectName);
+            if ($proj == null) {
+                $errors = array();
+                $errors["projectNotFound"] = "The project referred by " . $newProjectName . " doesn't exist";
+                throw new InfinityMetricsException("Can't update Student", $errors);
+            }
+
+        try {
+            $newStudent->setJnPassword($newPassword);
+            $newStudent->setEmail($newEmail);
+            $newStudent->setFirstName($newFirstName);
+            $newStudent->setLastName($newLastName);
+            $newStudent->save();
+
+            self::makeInstitutionUserRelations($newStudent, $inst, $newStudentSchoolId, $proj, $new_isLeader);
+
+            $subject = "Welcome to Infinity Metrics 'nightly build'";
+            $body = "Hello ".$newStudent->getFirstName().",\n\nThis is the confirmation Email. Your profile information
+                     at Infinity Metricshas been sucessfuly updated.\n\nPlease feel free to contact the 'Infinity
+                    Team' at any time at users@ppm8.dev.java.net.\n\nEnjoy!\n\nInfinity Metrics: Automatic
+                    Collaboration Metrics for java.net Projects\nhttp://ppm8.dev.java.net\nMailing Lists:
+                    https://ppm-8.dev.java.net/servlets/ProjectMailingListList";
+
+            //SendEmail::sendTextEmail("noreply@infinitymetrics.net", "dev@". $projectName . self::DOMAIN,
+              //                                                                  $newStudent->getEmail(), $subject, $body);
+            return $newStudent;
+
+
+
+        } catch (Exception $e) {
+            throw $e;
+        }
+         }
+
+
 
 
    
