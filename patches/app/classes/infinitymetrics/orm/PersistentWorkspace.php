@@ -41,13 +41,11 @@ class PersistentWorkspace extends PersistentBaseWorkspace {
     }
 
     public function getProjects() {
-        $criteria = new Criteria();
-        $criteria->add(PersistentProjectPeer::PROJECT_JN_NAME, $this->getProjectJnName());
-        $project = PersistentProjectPeer::doSelect($criteria);
-        $p = new PersistentProject();
+        $project = PersistentProjectPeer::retrieveByPK($this->getProjectJnName());
+        
         if ($project->getParentProjectJnName() == "") {
             //project is a parent project on Java.net, as ppm is parent of ppm-1, ppm-2, ppm-3, etc.
-            $criteria->clear();
+            $criteria = new Criteria();
             $criteria->add(PersistentProjectPeer::PARENT_PROJECT_JN_NAME, $this->getProjectJnName());
             return PersistentProjectPeer::doSelect($criteria);
         } else {
