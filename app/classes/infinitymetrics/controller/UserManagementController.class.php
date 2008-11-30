@@ -31,6 +31,7 @@ require_once 'infinitymetrics/model/institution/Instructor.class.php';
 require_once 'infinitymetrics/model/institution/Institution.class.php';
 require_once 'infinitymetrics/controller/PersonalAgentController.class.php';
 require_once 'infinitymetrics/util/SendEmail.class.php';
+require_once 'infinitymetrics/controller/MetricsWorkspaceController.php';
 
 /*
  * @author: Marcello de Sales <marcello.sales@gmail.com>
@@ -265,7 +266,7 @@ final class UserManagementController {
             UserManagementController::validateUserRegistrationForm($username, $password, $email, $firstName,
                                                                       $lastName, $projectName, $isProjectOwner);
 
-            $proj = MetricsWorkspaceController::retrieveProject($projectName);
+            $proj = PersistentProjectPeer::retrieveByPK($projectName);
 
             $user = new User();
             $user->setFirstName($firstName);
@@ -408,6 +409,7 @@ final class UserManagementController {
     public static function login($userName, $password) {
 
         $error = array();
+        
         if (!isset($userName) || $userName == "")  {
             $error["username"] = "The username is empty";
         }
@@ -456,6 +458,8 @@ final class UserManagementController {
         }
         return $user;
     }
+    
+   
 
     /**
      *
@@ -475,6 +479,7 @@ final class UserManagementController {
         
     }
 
+    
    
 }
 ?>

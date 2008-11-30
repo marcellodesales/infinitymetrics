@@ -42,9 +42,18 @@ class UC003Test extends PHPUnit_Framework_TestCase {
     private $instructor;
     private $institution;
     private $userTypeEnum;
+    private $project;
    
     public function  __construct() {
         $this->userTypeEnum = UserTypeEnum::getInstance();
+    }
+
+    private function cleanUpAll() {
+        PersistentUserXProjectPeer::doDeleteAll();
+        PersistentUserXInstitutionPeer::doDeleteAll();
+        PersistentUserPeer::doDeleteAll();
+        PersistentInstitutionPeer::doDeleteAll();
+        PersistentProjectPeer::doDeleteAll();
     }
 
     /**
@@ -52,10 +61,7 @@ class UC003Test extends PHPUnit_Framework_TestCase {
      */
     protected function setUp() {
         parent::setUp();
-        //detele all users;
-        //delete all institutions;
-        PersistentInstitutionPeer::doDeleteAll();
-        PersistentUserPeer::doDeleteAll();
+        $this->cleanUpAll();
       
         
         $this->institution = new Institution();
@@ -66,7 +72,12 @@ class UC003Test extends PHPUnit_Framework_TestCase {
         $this->institution->setCountry('USA');
         $this->institution->save();
 
-        $this->javaNetUser = new User();
+        $this->project = new PersistentProject();
+        $this->project->setProjectJnName("ppm111");
+        $this->project->setSummary("Project paticipation Metrics");
+        $this->project->save();
+
+       /* $this->javaNetUser = new User();
         $this->javaNetUser->setJnUsername("preet");
         $this->javaNetUser->setJnPassword("1234");
         $this->javaNetUser->setFirstName("Preet");
@@ -92,7 +103,18 @@ class UC003Test extends PHPUnit_Framework_TestCase {
         $this->instructor->setLastName("Sales");
         $this->instructor->setType("INSTRUCTOR");
         $this->instructor->save();
-     
+     */
+
+        $this->javaNetUser = UserManagementController::registerUser("preet","password","preet@gmail.com","Preet",
+                                                    "Kaur",$this->project->getProjectJnName(),true);
+
+        $this->student = UserManagementController::registerStudent("gurdeep22","password","gurdeepsingh03@gmail.com","Gurdeep",
+                                                             "Singh","90912345",$this->project->getProjectJnName(),
+                                                            $this->institution->getAbbreviation(),false );
+
+        $this->instructor = UserManagementController::registerInstructor("marcello", "password","marcellosales@gmail.com",
+                                               "Marcello","sales",$this->project->getProjectJnName(),true,
+                                                       $this->institution->getAbbreviation(),"Teacher101" );
     
     }
     /**
@@ -147,11 +169,25 @@ class UC003Test extends PHPUnit_Framework_TestCase {
      */
     public function testWrongFieldsJNUserLogin() {
         try {
-            $invalidLoggedJNUser = UserManagementController::login("wrongUsername", "wrongPassword");
+            $invalidLoggedJNUser = UserManagementController::login("wrongUsername",$this->javaNetUser->getJnPassword());
             $this->fail("The exceptional login scenario failed with wrong fields");
            // $this->assertNull($invalidLoggedJNUser, "The incorrect javaNetUser's username\password");
-        } catch (Exception $e) {
-            $this->assertNotNull($e);
+        } catch (InfinityMetricsException $ime) {
+
+            $errorFields = $ime->getErrorList();
+            $this->assertNotNull($errorFields);
+            $this->assertNotNull($errorFields["usernameIncorrect"]);
+        }
+
+        try {
+            $invalidLoggedJNUser = UserManagementController::login($this->javaNetUser->getJnUsername(),"wrongpassword");
+            $this->fail("The exceptional login scenario failed with wrong fields");
+           // $this->assertNull($invalidLoggedJNUser, "The incorrect javaNetUser's username\password");
+        } catch (InfinityMetricsException $ime) {
+
+            $errorFields = $ime->getErrorList();
+            $this->assertNotNull($errorFields);
+            $this->assertNotNull($errorFields["passwordDoesnMatch"]);
         }
     }
 
@@ -161,11 +197,26 @@ class UC003Test extends PHPUnit_Framework_TestCase {
      */
      public function testWrongFieldsStudentLogin() {
         try {
-            $invalidLoggedStudent = UserManagementController::login("wrongUsername", "wrongPassword");
+            $invalidLoggedStudent = UserManagementController::login("wrongUsername",$this->student->getJnPassword());
             $this->fail("The exceptional login scenario failed with wrong fields");
-        }catch (Exception $e) {
-            $this->assertNotNull($e);
+        }catch (InfinityMetricsException $ime) {
+
+            $errorFields = $ime->getErrorList();
+            $this->assertNotNull($errorFields);
+            $this->assertNotNull($errorFields["usernameIncorrect"]);
+            
         }
+         try {
+            $invalidLoggedJNUser = UserManagementController::login($this->student->getJnUsername(),"wrongpassword");
+            $this->fail("The exceptional login scenario failed with wrong fields");
+           // $this->assertNull($invalidLoggedJNUser, "The incorrect javaNetUser's username\password");
+        } catch (InfinityMetricsException $ime) {
+
+            $errorFields = $ime->getErrorList();
+            $this->assertNotNull($errorFields);
+            $this->assertNotNull($errorFields["passwordDoesnMatch"]);
+        }
+
     }
 
      /**
@@ -174,10 +225,25 @@ class UC003Test extends PHPUnit_Framework_TestCase {
      */
      public function testWrongFieldsInstructorLogin() {
         try {
-            $invalidLoggedInstructor = UserManagementController::login("wrongUsername", "wrongPassword");
+            $invalidLoggedInstructor = UserManagementController::login("wrongUsername",$this->instructor->getJnPassword());
             $this->fail("The exceptional login scenario failed with wrong fields");
-        } catch (Exception $e) {
-            $this->assertNotNull($e);
+        } catch (InfinityMetricsException $ime) {
+
+            $errorFields = $ime->getErrorList();
+            $this->assertNotNull($errorFields);
+            $this->assertNotNull($errorFields["usernameIncorrect"]);
+           
+        }
+
+         try {
+            $invalidLoggedJNUser = UserManagementController::login($this->instructor->getJnUsername(),"wrongpassword");
+            $this->fail("The exceptional login scenario failed with wrong fields");
+           // $this->assertNull($invalidLoggedJNUser, "The incorrect javaNetUser's username\password");
+        } catch (InfinityMetricsException $ime) {
+
+            $errorFields = $ime->getErrorList();
+            $this->assertNotNull($errorFields);
+            $this->assertNotNull($errorFields["passwordDoesnMatch"]);
         }
     }
     /**
@@ -187,22 +253,32 @@ class UC003Test extends PHPUnit_Framework_TestCase {
         try {
             $missingFieldJNUserLogin = UserManagementController::login("",$this->javaNetUser->getJnPassword());
             $this->fail("The exceptional javaNetUser login scenario failed with missing username");
-        } catch (Exception $e) {
-            $this->assertNotNull($e);
+        } catch (InfinityMetricsException $ime) {
+
+            $errorFields = $ime->getErrorList();
+            $this->assertNotNull($errorFields);
+            $this->assertNotNull($errorFields["username"]);
         }
 
          try {
              $missingFieldJNUserLogin = UserManagementController::login($this->javaNetUser->getJnUsername(),"");
             $this->fail("The exceptional javaNetUser login scenario failed with missing password");
-        } catch (Exception $e) {
-            $this->assertNotNull($e);
+        } catch (InfinityMetricsException $ime) {
+
+            $errorFields = $ime->getErrorList();
+            $this->assertNotNull($errorFields);
+            $this->assertNotNull($errorFields["password"]);
         }
 
         try {
             $missingFieldJNUserLogin = UserManagementController::login("","");
             $this->fail("The exceptional javaNetUser login scenario failed with missing fields");
-        } catch (Exception $e) {
-            $this->assertNotNull($e);
+        }catch (InfinityMetricsException $ime) {
+
+            $errorFields = $ime->getErrorList();
+            $this->assertNotNull($errorFields);
+            $this->assertNotNull($errorFields["username"]);
+            $this->assertNotNull($errorFields["password"]);
         }
     }
     
@@ -213,20 +289,32 @@ class UC003Test extends PHPUnit_Framework_TestCase {
         try {
             $missingFieldStudentLogin = UserManagementController::login($this->student->getJnUsername(),"");
              $this->fail("The exceptional studentlogin scenario failed with missing passwords");
-        } catch (Exception $e) {
-            $this->assertNotNull($e);
+        } catch (InfinityMetricsException $ime) {
+
+            $errorFields = $ime->getErrorList();
+            $this->assertNotNull($errorFields);
+            $this->assertNotNull($errorFields["password"]);
+
         }
          try {
              $missingFieldStudentLogin = UserManagementController::login("",$this->student->getJnPassword());
              $this->fail("The exceptional student login scenario failed with missing username");
-        } catch (Exception $e) {
-            $this->assertNotNull($e);
+        } catch (InfinityMetricsException $ime) {
+
+            $errorFields = $ime->getErrorList();
+            $this->assertNotNull($errorFields);
+            $this->assertNotNull($errorFields["username"]);
+
         }
         try {
             $missingFieldStudentLogin = UserManagementController::login("","");
              $this->fail("The exceptional Student login scenario failed with missing fields");
-        } catch (Exception $e) {
-            $this->assertNotNull($e);
+        } catch (InfinityMetricsException $ime) {
+
+            $errorFields = $ime->getErrorList();
+            $this->assertNotNull($errorFields);
+            $this->assertNotNull($errorFields["username"]);
+            $this->assertNotNull($errorFields["password"]);
         }
     }
     
@@ -237,32 +325,41 @@ class UC003Test extends PHPUnit_Framework_TestCase {
         try {
             $missingFieldInstructorLogin = UserManagementController::login($this->instructor->getJnUsername(),"");
              $this->fail("The exceptional instructor login scenario failed with missing password");
-        } catch (Exception $e) {
-            $this->assertNotNull($e);
+        } catch (InfinityMetricsException $ime) {
+
+            $errorFields = $ime->getErrorList();
+            $this->assertNotNull($errorFields);
+            $this->assertNotNull($errorFields["password"]);
         }
 
         try {
             $missingFieldInstructorLogin = UserManagementController::login("",$this->instructor->getJnPassword());
              $this->fail("The exceptional Instructor login scenario failed with missing username");
-        } catch (Exception $e) {
-            $this->assertNotNull($e);
+        } catch (InfinityMetricsException $ime) {
+
+            $errorFields = $ime->getErrorList();
+            $this->assertNotNull($errorFields);
+            $this->assertNotNull($errorFields["username"]);
+
         }
 
         try {
             $missingFieldInstructorLogin = UserManagementController::login("","");
              $this->fail("The exceptional Instructor login scenario failed with missing fields");
-        } catch (Exception $e) {
-            $this->assertNotNull($e);
+        } catch (InfinityMetricsException $ime) {
+
+            $errorFields = $ime->getErrorList();
+            $this->assertNotNull($errorFields);
+            $this->assertNotNull($errorFields["username"]);
+            $this->assertNotNull($errorFields["password"]);
+        
         }
     }
 
     
 
     protected function tearDown() {
-        echo 'Tearing down';
-        PersistentUserPeer::doDeleteAll();
-        PersistentInstitutionPeer::doDeleteAll();
-        $this->user = null;
+        $this->cleanUpAll();
     }
 }
 
