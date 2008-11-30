@@ -472,9 +472,15 @@ final class UserManagementController {
             $errors["user_id"] = "The user id must be provided";
             throw new InfinityMetricsException("Can't retrieve user", $errors);
         }
+
         $c = new Criteria();
         $c->add(PersistentUserPeer::USER_ID,$user_id);
         $profile = PersistentUserPeer::doSelect($c);
+        if ($profile == NULL) {
+            $errors = array();
+            $errors["userNotFound"] = "The user referred by " . $user_id . " doesn't exist";
+            throw new InfinityMetricsException("Can't retrieve user", $errors);
+        }
         return $profile;
         
     }
