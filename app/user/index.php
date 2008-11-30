@@ -19,9 +19,9 @@
                   <div id="breadcrumb" class="alone">
                     <h2 id="title">Home</h2>
                     <div class="breadcrumb">
-                        <a href="<?php echo $home_address; ?>">Home</a> »
-                        <a href="<php echo $home_address; ?>/user">Users Login</a>
-                        <a href="<?php echo $home_address; ?>/user">Users Registration</a>
+                        <a href="<?php echo $_SERVER["home_address"]; ?>">Home</a> »
+                        <a href="<php echo $home_address; ?>/user">Users Login</a> »»
+                        <a href="<?php echo $_SERVER["home_address"]; ?>/user">Users Registration</a>
                     </div>
                   </div>
 
@@ -30,9 +30,13 @@
 
                         <div id="sidebar-right">
                           <div id="block-user-3" class="block block-user">
+                          <tr><td width="33%" align="left">
+                                  <input name="op" id="edit-submit" value="Login" class="form-submit" type="button" onclick="document.location='login.php'">
+                                   </td>
                               <h2>All users are welcomed</h2>
                               <div class="content" align="center">
                                 <img src="../template/images/techglobe2.jpg">
+                                
 
                               </div>
                           </div>
@@ -51,9 +55,6 @@
         }
 ?>
 <table align="center">
-<tr><td width="33%" align="left">
-<input name="op" id="edit-submit" value="Login" class="form-submit" type="button" onclick="document.location='login.php'">
-</td>
 <tr><td width="33%" align="center">
 <input name="op" id="edit-submit" value="Register as Student" class="form-submit" type="button" onclick="document.location='student/signup-step1.php'">
 </td>
