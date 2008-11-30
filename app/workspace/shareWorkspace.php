@@ -5,63 +5,25 @@
     {
         if ($_POST['jn_username_to_share_with'] != '')
         {
+            include 'header-no-left-nav.php';
             require_once('propel/Propel.php');
             Propel::init("infinitymetrics/orm/config/om-conf.php");
 
             require_once ('infinitymetrics/controller/MetricsWorkspaceController.php');
             require_once ('infinitymetrics/model/user/User.class.php');
 
-            $username1 = 'johntheteacher';
+            //using user from session as created in infinitymetrics-bootstrap.php
+            //function isUserLoggedIn() is commented out in infinitymetrics-bootstrap.php
+            //assuming SESSION will return user object $user
+
             $username2 = $_POST['jn_username_to_share_with'];
 
-            $user1 = PersistentUserPeer::retrieveByJNUsername($username1);
-
-            if ($user1 == NULL )
-            {
-                $user1 = new User();
-                $user1->setJnUsername($username1);
-                $user1->setJnPassword('password');
-                $user1->setFirstName('marilyne');
-                $user1->setLastName('mendolla');
-                $user1->setEmail('mmendoll@institution.edu');
-                $user1->setType('I');
-
-                $institution = PersistentInstitutionPeer::retrieveByPK(1);
-
-                if($institution == NULL)
-                {
-                    $institution = new PersistentInstitution();
-                    $institution->setAbbreviation('FAU');
-                    $institution->setCity('Boca Raton');
-                    $institution->setCountry('USA');
-                    $institution->setName('Florida Atlantic University');
-                    $institution->setStateProvince('FL');
-                    $institution->save();
-                }
-                $user1->setInstitution($institution);
-                $user1->save();
-            }//endif ($user1 == NULL)
-
             $user2 = PersistentUserPeer::retrieveByJNUsername($username2);
-
-            if ($user2 == NULL )
-            {
-                $user2 = new PersistentUser();
-                $user2->setJnUsername($username2);
-                $user2->setJnPassword('password');
-                $user2->setFirstName('Sharing User fname');
-                $user2->setLastName('Sharing user lname');
-                $user2->setEmail('sharing_user@institution.edu');
-                $user2->setType('I');
-
-                $user2->setInstitution($user1->getInstitution());
-                $user2->save();
-            }
 
             try {
                 $ws = MetricsWorkspaceController::shareWorkspace(
                         $_POST['workspace_id'],
-                        $username2
+                        $user2->getUserId()
                 );
             }
             catch (Exception $e) {
@@ -82,10 +44,6 @@
 
 ?>
 
-
-<?php
-    include 'header-no-left-nav.php';
-?>
     <div id="content-wrap">
         <div id="inside">
             <div id="sidebar-right">
