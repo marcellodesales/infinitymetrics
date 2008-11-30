@@ -1,8 +1,10 @@
 <?php
 
-    if (isset($_POST['wsTitle']) && isset($_POST['wsDescription']))
+    include 'header-no-left-nav.php';
+
+    if (isset($_POST['projectName']) && isset($_POST['wsTitle']) && isset($_POST['wsDescription']))
     {
-        if ($_POST['wsTitle'] != '' && $_POST['wsDescription'] != '')
+        if ($_POST['projectName'] != '' && $_POST['wsTitle'] != '' && $_POST['wsDescription'] != '')
         {
             require_once('propel/Propel.php');
             Propel::init("infinitymetrics/orm/config/om-conf.php");
@@ -10,45 +12,14 @@
             require_once ('infinitymetrics/controller/MetricsWorkspaceController.php');
             require_once ('infinitymetrics/model/user/User.class.php');
 
-            $jnUsername = 'johntheteacher';
+            //using user from session as created in infinitymetrics-bootstrap.php
+            //function isUserLoggedIn() is commented out in infinitymetrics-bootstrap.php
+            //assuming SESSION will return user object=> $user
 
-            $user = PersistentUserPeer::retrieveByJNUsername($jnUsername);
-
-            if ($user == NULL )
-            {
-                $user = new User();
-                $user->setJnUsername($jnUsername);
-                $user->setJnPassword('password');
-                $user->setFirstName('John');
-                $user->setLastName('Instructor');
-                $user->setEmail('johnc@institution.edu');
-                $user->setType('I');
-
-                $criteria = new Criteria();
-                $criteria->add(PersistentInstitutionPeer::ABBREVIATION, 'FAU');
-
-                $institutions = PersistentInstitutionPeer::doSelect($criteria);
-
-                if($institutions == NULL)
-                {
-                    $institution = new Institution();
-                    $institution->setAbbreviation('FAU');
-                    $institution->setCity('Boca Raton');
-                    $institution->setCountry('USA');
-                    $institution->setName('Florida Atlantic University');
-                    $institution->setStateProvince('FL');
-                    $institution->save();
-                }
-                else {
-                    $institution = $institutions[0];
-                }
-
-                $user->setInstitution($institution);
-                $user->save();
-            }//endif ($user == NULL)
             try {
                 $ws = MetricsWorkspaceController::createWorkspace(
                         $user->getJnUsername(),
+                        $_POST['projectName'],
                         $_POST['wsTitle'],
                         $_POST['wsDescription']
                 );
@@ -69,10 +40,6 @@
 
 ?>
 
-
-<?php
-    include 'header-no-left-nav.php';
-?>
     <div id="content-wrap">
         <div id="inside">
             <div id="sidebar-right">
@@ -130,6 +97,4 @@
         </div>
         <BR>
       </div>
-<?php
-    include 'footer.php';
-?>
+<?php include 'footer.php';   ?>
