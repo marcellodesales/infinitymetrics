@@ -10,6 +10,37 @@
 
     try {
         $wsCollection = MetricsWorkspaceController::retrieveWorkspaceCollection($user->getUserId());
+
+        if (count($wsCollection['OWN']) == 0)
+        {
+            $_SESSION['noOwnWorkspaces'] = "No Workspaces found";
+        }
+
+        $criteria = new Criteria();
+        $criteria->add(PersistentUserXProjectPeer::JN_USERNAME, $user->getJnUsername());
+        $criteria->add(PersistentUserXProjectPeer::IS_OWNER, 1);
+
+            // THIS QUERY NEEDS TO BE REFACTORED TO EXCLUDE THOSE USER-PROJECT PAIRS THAT ALREADY EXIST IN THE WORKSPACE TABLE
+            // I TRIED WITH SUBQUERIES AND 'NOT IN', BUT I COULDN'T FIGURE IT OUT BECAUSE THERE IS A  MISMATCH OF JN_USERNAME IN THE uXP TABLE AND USER_ID IN THE WORKSPACE TABLE
+
+        $uXps = PersistentUserXProjectPeer::doSelect($criteria);
+        
+        foreach ($uXps as $uXp)
+        {
+            $criteria->clear();
+            $criteria->add(PersistentWorkspacePeer::USER_ID, $user->getUserId());
+            $criteria->add(PersistentWorkspacePeer::PROJECT_JN_NAME, $uXp->getProjectJnName());
+
+            if (PersistentWorkspacePeer::doCount($criteria) == 0)
+            {
+                $_SESSION['available_user_x_projects'][] = $uXp;
+            }
+        }
+
+        if (count($wsCollection['OWN']) == 0)
+        {
+            $_SESSION['noSharedWorkspaces'] = "No Shared Workspaces found";
+        }
     }
     catch (Exception $e) {
         $_SESSION['retrieveWSCollectionError'] = 'Unable to retrieve the Collection of Workspaces';
@@ -98,29 +129,67 @@
                                             }
                                         }
                                         echo "<h2>Current Workspaces</h2><br />";
+                                        echo "<div style=\"float: left\">";
                                         echo "<h3>My Workspaces</h3>\n";
-                                        echo "<ul>\n";
-                                        foreach($wsCollection['OWN'] as $ws)
+                                        if (isset($_SESSION['noOwnWorkspaces']))
                                         {
-                                            $color = getStateLabelColor($ws->getState());
-                                            echo "<li>\n";
-                                            echo "<a href=\"viewWorkspace.php?type=own&amp;workspace_id=".$ws->getWorkspaceId()."\">".$ws->getTitle()."</a>";
-                                            echo " <small><b><span style=\"color:$color\">".$ws->getState()."</span></b></small>";
-                                            echo "</li>\n";
+                                            echo "<span style=\"color: gray\">".$_SESSION['noOwnWorkspaces']."</span><br /><br />\n";
+                                            $_SESSION['noOwnWorkspaces'] = '';
+                                            unset($_SESSION['noOwnWorkspaces']);
                                         }
-                                        echo "</ul>\n";
+                                        else {
+                                            echo "<ul>\n";
+                                            foreach($wsCollection['OWN'] as $ws)
+                                            {
+                                                $color = getStateLabelColor($ws->getState());
+                                                echo "<li>\n";
+                                                echo "<a href=\"viewWorkspace.php?type=own&amp;workspace_id=".$ws->getWorkspaceId()."\">".$ws->getTitle()."</a>";
+                                                echo " <small><b><span style=\"color:$color\">".$ws->getState()."</span></b></small>";
+                                                echo "</li>\n";
+                                            }
+                                            echo "</ul>\n";
+                                        }
 
                                         echo "<h3>Workspaces shared with me</h3>\n";
-                                        echo "<ul>\n";
-                                        foreach($wsCollection['SHARED'] as $ws)
+
+                                        if (isset($_SESSION['noSharedWorkspaces']))
                                         {
-                                            $color = getStateLabelColor($ws->getState());
-                                            echo "<li>\n";
-                                            echo "<a href=\"$path?type=shared&amp;workspace_id=".$ws->getWorkspaceId()."\">".$ws->getTitle()."</a>";
-                                            echo " <small><b><span style=\"color:$color\">".$ws->getState()."</span></b></small>";
-                                            echo "</li>\n";
+                                            echo "<span style=\"color: gray\">".$_SESSION['noSharedWorkspaces']."</span><br /><br />\n";
+                                            $_SESSION['noSharedWorkspaces'] = '';
+                                            unset($_SESSION['noSharedWorkspaces']);
                                         }
-                                        echo "</ul>\n";
+                                        else {
+                                            echo "<ul>\n";
+                                            foreach($wsCollection['SHARED'] as $ws)
+                                            {
+                                                $color = getStateLabelColor($ws->getState());
+                                                echo "<li>\n";
+                                                echo "<a href=\"$path?type=shared&amp;workspace_id=".$ws->getWorkspaceId()."\">".$ws->getTitle()."</a>";
+                                                echo " <small><b><span style=\"color:$color\">".$ws->getState()."</span></b></small>";
+                                                echo "</li>\n";
+                                            }
+                                            echo "</ul>\n";
+                                        }
+                                        echo "</div>";
+                                        echo "<div style=\"float: right; width: 30%; border: thin groove silver; padding: 15px\">";
+
+                                        if(isset($_SESSION['available_projects']))
+                                        {
+                                            echo "<p>It seems you have the following Projects for which no Workpsace exists:</p>";
+                                            echo "<ul>";
+                                            foreach ($_SESSION['available_user_x_projects'] as $uXp)
+                                            {
+                                                echo "<li>".$uXp->getProjectJnName()."</li>";
+                                            }
+                                            echo "</ul>";
+                                            echo "</div";
+
+                                            $_SESSION['available_user_x_projects'] = '';
+                                            unset($_SESSION['available_user_x_projects']);
+                                        }
+
+                                        echo '<div style="clear: both"></div>';
+
                                     }
                                 ?>
 
