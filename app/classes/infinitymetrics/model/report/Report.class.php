@@ -19,7 +19,7 @@
  * For more information please see <http://ppm-8.dev.java.net>.
  */
 
-require_once('infinitymetrics/model/report/EventChannel.class.php');
+require_once('infinitymetrics/controller/MetricsWorkspaceController.class.php');
 
 /**
  * Defines the Model for a Report.
@@ -49,6 +49,10 @@ class Report
      */
     private $metrics;
 
+    /**
+     * A list of valid Event Categories
+     * @var <array>
+     */
     private $validEventCategories = array('COMMIT', 'DOCUMENTATION', 'FORUM', 'ISSUE', 'MAILING_LIST');
 
     /**
@@ -83,6 +87,18 @@ class Report
      */
     public function getName() {
         return $this->name;
+    }
+
+    /**
+     * Returns the array of ValidEventCategories
+     * @return <array>
+     */
+    public function getEventCategories() {
+        return $this->validEventCategories;
+    }
+
+    public function getWorkspaceCollectionMetrics($user_id) {
+        
     }
 
     public function getReportMetrics($PersistentObject, $AuxiliaryPersistentObject = NULL) {
