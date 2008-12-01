@@ -4,7 +4,7 @@ require_once('propel/Propel.php');
 Propel::init("infinitymetrics/orm/config/om-conf.php");
 
 require_once('PHPUnit/Framework.php');
-require_once('infinitymetrics/controller/MetricsWorkspaceController.php');
+require_once('infinitymetrics/controller/MetricsWorkspaceController.class.php');
 require_once('infinitymetrics/controller/UserManagementController.class.php');
 require_once('infinitymetrics/model/institution/Instructor.class.php');
 

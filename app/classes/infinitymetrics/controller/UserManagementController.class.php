@@ -31,7 +31,7 @@ require_once 'infinitymetrics/model/institution/Instructor.class.php';
 require_once 'infinitymetrics/model/institution/Institution.class.php';
 require_once 'infinitymetrics/controller/PersonalAgentController.class.php';
 require_once 'infinitymetrics/util/SendEmail.class.php';
-require_once 'infinitymetrics/controller/MetricsWorkspaceController.php';
+require_once 'infinitymetrics/controller/MetricsWorkspaceController.class.php';
 
 /*
  * @author: Marcello de Sales <marcello.sales@gmail.com>
