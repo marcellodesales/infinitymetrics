@@ -13,6 +13,8 @@ require_once 'infinitymetrics/model/InfinityMetricsException.class.php';
 
 #------------>>>>>>>>>>>>> Variables Initialization ------------->>>>>>>>>>>>>>>
 
+$subUseCase = "View Custom Events";
+
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -68,6 +70,12 @@ require_once 'infinitymetrics/model/InfinityMetricsException.class.php';
                     foreach ($evt as $evts) {
                         echo "<br> - - - - Custom Event: ";
                         echo $evts->getTitle();
+
+                        echo " - ";
+                        echo "<a href='";
+                        echo "addCustomEventEntry.php?custom_event_id=".$evts->getCustomEventId()."&workspace_id=".$ws_id."'>";
+                        echo "Add";
+                        echo "</a>";
 
                     }
                 }

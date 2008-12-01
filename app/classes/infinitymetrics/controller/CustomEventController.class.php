@@ -71,7 +71,6 @@ final class CustomEventController {
             // The below loop will only loop once.
             foreach($results as $events) {
                 $events->addCustomEventEntry($entry);
-                echo $events->getCustomEventId();
                 $entry->setCustomEventId($events->getCustomEventId());
                 $events->save();
             }
@@ -111,13 +110,15 @@ final class CustomEventController {
      * @param string $project_jn_name the name of the project to add the event
      *     to.
      */
-    public static function createEvent($notes, $title, $project_jn_name) {
+    public static function createEvent($notes, $title, $project_jn_name, $parent_project_jn_name) {
         try {
             CustomEventController::validateInputEvent($notes, $title,
                 $project_jn_name);
 
             $criteria = new Criteria(PersistentProjectPeer::PROJECT_JN_NAME,
                 $project_jn_name);
+            $criteria->add(PersistentProjectPeer::PARENT_PROJECT_JN_NAME,
+                $parent_project_jn_name);
             $results = PersistentProjectPeer::doSelect($criteria);
 
             // The below loop will only loop once.
@@ -132,10 +133,12 @@ final class CustomEventController {
                 $projects->addCustomEvent($event);
 
                 $projects->save();
+                return true;
             }
-            return $event;
+            //return $event;
         } catch (Exception $e) {
             throw $e;
+            return false;
         }
     }
     /**

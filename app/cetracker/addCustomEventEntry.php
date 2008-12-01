@@ -13,10 +13,10 @@ require_once 'infinitymetrics/controller/CustomEventController.class.php';
 require_once 'infinitymetrics/model/workspace/Project.class.php';
 require_once 'infinitymetrics/model/InfinityMetricsException.class.php';
 
-if (isset($_POST["notes"]) && isset($_POST["title"])) {
+if (isset($_POST["notes"])) {
 
     try {
-        $temp = CustomEventController::createEvent($_POST['notes'],$_POST['title'],$_GET['project_jn_name'],$_GET['parent_project_jn_name']);
+        $temp = CustomEventController::createEntry($_POST['notes'],$_GET['custom_event_id']);
         $_SESSION["successMessage"] = "Data entry successful!";
     }
     catch (Exception $e) {
@@ -28,7 +28,7 @@ if (isset($_POST["notes"]) && isset($_POST["title"])) {
 
 
 
-    $subUseCase = "Add Custom Event";
+    $subUseCase = "Add Custom Event Entry";
   
 ?>
 
@@ -38,27 +38,18 @@ if (isset($_POST["notes"]) && isset($_POST["title"])) {
 
 <?php include 'static-js-css.php';  ?>
 <?php include 'user-signup-header-adds.php' ?>
+
     </head>
     <body class="<?php /*echo $enableLeftNav ? $leftNavClass : $NoLeftNavClass;*/ ?>">
 <?php  include 'top-navigation.php';  ?>
 
     <table align=center>
     <tbody align=center><tr align=center><td align=center><b>
-    <?php echo $_GET['project_jn_name'] ?>
-    </b></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr></tbody>
+    <?php echo $_GET['custom_event_id'] ?>
+    </b></td><td></td><td></td></tr></tbody>
     </table>
 
-    <!--div id="breadcrumb" class="alone">
-    <h2 id="title">Home</h2>
-    <div class="breadcrumb"-->
 
-<?php
-   /* $totalBreadscrum = count(array_keys($breakscrum)); $idx = 0;
-    foreach (array_keys($breakscrum) as $keyUrl) {
-        echo "<a href=\"" . $keyUrl . "\"> " . $breakscrum[$keyUrl] . "</a> ".
-        (++$idx < $totalBreadscrum ? "» " : " ");
-    }*/
-?>
 
 </div></div> <!-- Strange unneeded /divs for PHP -->
 
@@ -79,15 +70,10 @@ if (isset($_POST["notes"]) && isset($_POST["title"])) {
 ?>
 
 <div id="content-wrap">
-    <form id="createcustomevent" autocomplete="off" method="post" action="<?php echo $PHP_SELF."?project_jn_name=".$_GET['project_jn_name']."&parent_project_jn_name=".$_GET['parent_project_jn_name']."&workspace_id=".$_GET['workspace_id'] ?>">
-  
+    <form id="createcustomevententry" autocomplete="off" method="post" action="<?php echo $PHP_SELF."?custom_event_id=".$_GET['custom_event_id']."&workspace_id=".$_GET['workspace_id'] ?>">
+
         <table align="center">
             <tbody>
-                <tr>
-                    <td class="status" width="30">&nbsp;</td>
-                    <td class="label" width="20"><label id="ltitle" for="title">Title</label></td>
-                    <td class="field"><input id="title" name="title" class="textfield" value="" maxlength="50" type="text"></td>
-	  		    </tr>
                 <tr>
                     <td class="status" width="30">&nbsp;</td>
                     <td class="label" width="20"><label id="lnotes" for="notes">Notes</label></td>
