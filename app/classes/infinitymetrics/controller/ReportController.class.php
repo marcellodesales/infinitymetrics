@@ -161,8 +161,8 @@ class ReportController
                 var barData = new google.visualization.DataTable();
                 barData.addColumn('string', 'Event Category');\n";
 
-                foreach ($metrics as $key => $value){
-                    $script .= "barData.addColumn('number', '".$key."');\n";
+                foreach ($metrics as $pName => $categories){
+                    $script .= "barData.addColumn('number', '".$pName."');\n";
                 }
                 
                 $script .= "barData.addRows(".count($report->getEventCategories()).");\n";
@@ -192,7 +192,52 @@ class ReportController
     }
 
     public function retrieveWorkspaceCollectionReport($user_id) {
+        if (!isset($user_id) || $user_id == '') {
+            throw new InfinityMetricsException('The user_id is required to generate this report');
+        }
 
+        $report = new Report();
+        $categories = $report->getEventCategories();
+        $metrics = $report->getWorkspaceCollectionMetrics($user_id);
+
+        $script =   "<script type=\"text/javascript\" src=\"http://www.google.com/jsapi\"></script>
+                     <script type=\"text/javascript\">
+                     google.load('visualization', '1', {packages:['columnchart']});
+
+                     google.setOnLoadCallback(drawChart);
+
+                     function drawChart() {
+                        var barData = new google.visualization.DataTable();
+                        barData.addColumn('string', 'Event Category');";
+
+        foreach ($metrics as $wsName => $cats){
+                    $script .= "barData.addColumn('number', '".$wsName."');\n";
+        }
+
+        $script .= "barData.addRows(".count($report->getEventCategories()).");\n";
+
+        if (count($metrics))
+        {
+            for ($i = 0; $i < count($categories); $i++)
+            {
+
+                $script .= "barData.setValue($i, 0, '".self::convertToTitleCase($categories[$i])."');\n";
+
+                $idx = 1;
+                foreach ($metrics as $key => $value) {
+                    $script .= "barData.setValue($i, ".$idx.", ".$value[$categories[$i]].");\n";
+                    $idx++;
+                }
+            }
+        }
+
+        $script .= "
+                var barChart = new google.visualization.ColumnChart(document.getElementById('bar_chart_div'));
+                barChart.draw(barData, {width: 500, height: 400, is3D: true, title: 'Workspace Metrics', 'isStacked': true, 'legend': 'bottom'});
+              }
+            </script>";
+
+        return $script;
     }
 
 }
