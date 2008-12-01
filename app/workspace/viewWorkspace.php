@@ -8,7 +8,8 @@
         Propel::init("infinitymetrics/orm/config/om-conf.php");
 
         require_once('PHPUnit/Framework.php');
-        require_once('infinitymetrics/controller/MetricsWorkspaceController.php');
+        require_once('infinitymetrics/controller/MetricsWorkspaceController.class.php');
+        require_once('infinitymetrics/controller/ReportController.class.php');
 
         $ws = PersistentWorkspacePeer::retrieveByPK($_GET['workspace_id']);
 
@@ -96,14 +97,18 @@
                                 echo "<h3>Projects currently in this Workspace</h3>\n";
                                 echo "<ul>";
 
-                                foreach ($ws->getProjects() as $wxp)
+                                foreach ($ws->getProjects() as $project)
                                 {
-                                    $projectJnName = $wxp->getProject()->getProjectJnName();
+                                    $projectJnName = $project->getProjectJnName();
                                     echo "<li><a href=\"../report/projectReport.php?project_id=$projectJnName\">$projectJnName</a></li>\n";
                                 }
                                 echo "</ul>";
+
+                                $report = new Report();
+                                echo ReportController::retrieveWorkspaceReport($ws->getWorkspaceId());
                             }
                         ?>
+                        <div id="bar_chart_div" style="float:right"></div>
                         <br /><br />
                         <div style = "float: right;">
                             <form action="updateWorkspace.php" accept-charset="UTF-8" method="post" id="node-form">
