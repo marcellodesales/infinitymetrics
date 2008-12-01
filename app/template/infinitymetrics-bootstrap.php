@@ -33,6 +33,7 @@ function isUserInReservedAreas() {
 ////ini_set("session.cache_expire","180"); // default is 180, which is 3 hours...
 ini_set("session.gc_maxlifetime","3600"); // default is 1440, which is only 24 minutes
 session_save_path("c:/ppm8-dev/sessions");
+session_start();
 
 if (!isUserLoggedIn()) {
    // header("Location: " . $_SERVER["home_address"] . "?error=Session Has Expired");

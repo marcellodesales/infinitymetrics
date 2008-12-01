@@ -13,11 +13,11 @@
                 <div id="header-title">
                     <?php include 'header-title.php' ?>
                 </div>
-                </div>
-                <div id="navigation">
-                    <ul>
-                         <?php include 'top-navigation-menu.php'; ?>
-                    </ul>
-                    <!img src="/static/images/infinity.png" width="32" height="32" alt="rootcandy test" id="logo">
-                </div>
+            </div>
+            <div id="navigation">
+                <ul>
+                     <?php include 'top-navigation-menu.php'; ?>
+                </ul>
+                <img src="/static/images/infinity.png" width="32" height="32" alt="rootcandy test" id="logo" />
+            </div>
                 

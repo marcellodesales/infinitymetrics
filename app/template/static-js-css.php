@@ -1,8 +1,8 @@
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link rel="shortcut icon" href="<?php echo $_SERVER["home_address"] ?>/template/images/favicon.ico">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="shortcut icon" href="<?php echo $_SERVER["home_address"] ?>/template/images/favicon.ico" />
 
-    <link type="text/css" rel="stylesheet" media="all" href="<?php echo $_SERVER["home_address"] ?>/template/style.css">
-    <link type="text/css" rel="stylesheet" media="screen" href="<?php echo $_SERVER["home_address"] ?>/template/icons.css">
+    <link type="text/css" rel="stylesheet" media="all" href="<?php echo $_SERVER["home_address"] ?>/template/style.css" />
+    <link type="text/css" rel="stylesheet" media="screen" href="<?php echo $_SERVER["home_address"] ?>/template/icons.css" />
     <script type="text/javascript" src="<?php echo $_SERVER["home_address"] ?>/template/edit_files/jquery.js"></script>
     <script type="text/javascript" src="<?php echo $_SERVER["home_address"] ?>/template/edit_files/drupal.js"></script>
     <script type="text/javascript" src="<?php echo $_SERVER["home_address"] ?>/template/edit_files/jquery_002.js"></script>
