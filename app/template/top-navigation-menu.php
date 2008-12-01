@@ -25,7 +25,7 @@ if (isUserLoggedIn()) {
                                 <img src="<?php echo $_SERVER["home_address"]; ?>/template/edit_files/admin-reports.png" alt="" title="" width="32" height="32" border="0" />
                                 <br />Reports</a>
                         </li>
-                        <?php echo $liCeTracker; ?><a href="<?php echo $_SERVER["home_address"]; ?>/cetracker">
+                        <?php echo $liCeTracker; ?><a href="<?php echo $_SERVER["home_address"]; ?>/cetracker/viewCustomEvents.php">
                                 <img src="<?php echo $_SERVER["home_address"]; ?>/template/edit_files/node-add.png" alt="" title="" width="32" height="32" border="0" />
                                 <br />Custom Events</a>
                         </li>
