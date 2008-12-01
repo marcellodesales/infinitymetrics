@@ -104,7 +104,7 @@
                                     }
                                 ?>
 
-                            </div><!-- end block-user-3 --->
+                            </div><!-- end block-user-3 -->
                         </div><!-- end sidebar-right -->
 
                         <div id="content">
@@ -156,8 +156,9 @@
 
                                             echo "<br />";
                                             echo "<h3>Projects currently in this Workspace</h3>\n";
+                                            echo "<strong>".$ws->getProjectJnName()." <small>(PARENT PROJECT)</small></strong>";
                                             echo "<ul>";
-
+                                            
                                             foreach ($ws->getProjects() as $project)
                                             {
                                                 $projectJnName = $project->getProjectJnName();
