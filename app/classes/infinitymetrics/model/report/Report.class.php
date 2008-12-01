@@ -98,7 +98,49 @@ class Report
     }
 
     public function getWorkspaceCollectionMetrics($user_id) {
+        if (!isset($user_id) || $user_id == '') {
+            throw new InfinityMetricsException('The user_id is required to generate this report');
+        }
+
+        $wsCollection = MetricsWorkspaceController::retrieveWorkspaceCollection($user_id);
         
+        $this->metrics = array();
+
+        foreach ($wsCollection as $type => $workspaces)
+        {
+            foreach ($workspaces as $ws)
+            {
+                foreach($ws->getProjects() as $project)
+                {
+                    $projectTotals[$project->getProjectJnName()] = $project->getTotalEventsByCategory();
+                }
+
+                $this->metrics[$ws->getTitle()] = array();
+
+                foreach (self::getEventCategories() as $category)
+                {
+                    $this->metrics[$ws->getTitle()][$category] = 0;
+                }
+            }
+        }
+        
+        foreach ($this->metrics as $title => $categories)
+        {
+            foreach ($categories as $category => $totalMetrics)
+            {
+                foreach ($projectTotals as $pName => $pCategories)
+                {
+                    foreach ($pCategories as $categoryKey => $value)
+                    {
+                        if ($categoryKey == $category) {
+                            $this->metrics[$title][$category] += $value;
+                        }
+                    }
+                }
+            }
+        }  
+
+        return $this->metrics;
     }
 
     public function getReportMetrics($PersistentObject, $AuxiliaryPersistentObject = NULL) {
