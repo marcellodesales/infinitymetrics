@@ -15,7 +15,12 @@ require_once 'infinitymetrics/model/InfinityMetricsException.class.php';
 
 if (isset($_POST["notes"]) && isset($_POST["title"])) {
 
-    $temp = CustomEventController::createEvent($_POST['notes'],$_POST['title'],$_GET['project_jn_name'],$_GET['parent_project_jn_name']);
+    try {
+        $temp = CustomEventController::createEvent($_POST['notes'],$_POST['title'],$_GET['project_jn_name'],$_GET['parent_project_jn_name']);
+    }
+    catch (Exception $e) {
+        $_SESSION["Data entry error."] = $e;
+    }
 }
 
 #------------>>>>>>>>>>>>> Variables Initialization ------------->>>>>>>>>>>>>>>
@@ -64,9 +69,17 @@ if (isset($_POST["notes"]) && isset($_POST["title"])) {
 
 </div></div> <!-- Strange unneeded /divs for PHP -->
 
+<?php
+    if (isset($_SESSION["Data entry error."]) && $_SESSION["Data entry error."] != "") {
+        echo "<div class=\"messages error\">"/*.$_SESSION["Data entry error."]."</div>";
+        $_SESSION["Data entry error."] = ""*/;
+        unset($_SESSION["Data entry error."]);
+    }
+?>
+
 <div id="content-wrap">
 
-    <form id="createcustomevent" autocomplete="off" method="post" action="<?php echo $PHP_SELF."?project_jn_name=".$_GET['project_jn_name']."&parent_project_jn_name=".$_GET['parent_project_jn_name'] ?>">
+    <form id="createcustomevent" autocomplete="off" method="post" action="<?php echo $PHP_SELF."?project_jn_name=".$_GET['project_jn_name']."&parent_project_jn_name=".$_GET['parent_project_jn_name']."&workspace_id=".$_GET['workspace_id'] ?>">
   
         <table align="center">
             <tbody>
@@ -84,7 +97,7 @@ if (isset($_POST["notes"]) && isset($_POST["title"])) {
                     <td colspan="2">
                         <input id="edit-submit" value="OK" class="form-submit" type="submit">
                         <p>
-                        <a href= "<?php echo 'viewCustomEvents.php?workspace_id='.$_GET['workspace_id'] ?>" ><input id="edit-delete" value="Cancel" class="form-submit" type="button" ></a>
+                        <input id="edit-delete" value="Cancel" class="form-submit" type="button" onclick="document.location= <?php echo "'viewCustomEvents.php?workspace_id=".$_GET['workspace_id']."'" ?>">
                     </td>
                 </tr>
 	  		</tbody>
