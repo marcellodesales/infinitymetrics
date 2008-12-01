@@ -13,9 +13,8 @@ $leftNavClass = "sidebars admin-reports-dblog admin-reports admin tableHeader-pr
 $NoLeftNavClass = "sidebar-right node-2-edit node-2 node";
 
 function isUserLoggedIn() {
-    //return array_key_exists("user", $_SESSION);
-    //NEEDS TO BE UNCOMMENTTED IN DEPLOYMENT ENVIRONMENT...
     return true;
+    //return array_key_exists("loggedUser", $_SESSION);
 }
 
 function contains($content, $str, $ignorecase=true){
@@ -35,8 +34,8 @@ function isUserInReservedAreas() {
 ini_set("session.gc_maxlifetime","3600"); // default is 1440, which is only 24 minutes
 session_save_path("c:/ppm8-dev/sessions");
 
-session_start();
-if (isUserLoggedIn()) {
+if (!isUserLoggedIn()) {
+   // header("Location: " . $_SERVER["home_address"] . "?error=Session Has Expired");
    //$user = $_SESSION["user"];
    //TODO: NEEDS to verify if the user is the owner of ANY project associated with ANY workspace
    //That means this user is a java.net project owner and will have a workspace, or this user is

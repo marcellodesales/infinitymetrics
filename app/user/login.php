@@ -14,25 +14,13 @@ if (isset($_POST["username"]) && isset($_POST["password"])) {
 
    try {
         $user = UserManagementController::login($_POST["username"], $_POST["password"]);
-
-         $_SESSION["signinError"] = "Authentication failed with Java.net for the given credentials.";
-
+        session_start();
+        $_SESSION["loggedUser"] = $user;
+        echo header('Location: ../workspace/workspaceCollection.php');
     } catch (Exception $e) {
         $_SESSION["signinError"] = $e;
     }
-
 }
-if (isset($errors)) {
-    echo "<font color='error'>";
-    print_r($e);
-    echo "</font>";
-} else
-if (isset($user)) {
-    echo header('Location: ../workspace/workspaceCollection.php');
-}
-
-
-
 
 #----------------------------->>>>>>>>>>>>> Variables Initialization ------------------->>>>>>>>>>>>>>>
 
@@ -44,8 +32,7 @@ $subUseCase = "User Login ";
     #breadscrum[URL] = Title
     $breakscrum = array(
                        $_SERVER["home_address"] => "Home",
-                        $_SERVER["home_address"]."/user" => "Users Login",
-                       
+                        $_SERVER["home_address"]."/user" => "Users Login",                       
                   );
 
     #leftMenu[n]["active"] - If the menu item is active or not
