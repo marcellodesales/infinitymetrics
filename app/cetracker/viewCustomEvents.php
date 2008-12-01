@@ -58,11 +58,12 @@ $subUseCase = "View Custom Events";
 
                 foreach ($proj as $pproj) {
                     echo "<br> - - Project: ";
+                    echo $pproj->getSummary()." - ";
                     echo "<a href='";
                     echo "addCustomEvent.php?project_jn_name=".$pproj->getProjectJnName()."&parent_project_jn_name=";
                     echo $pproj->getParentProjectJnName()?$pproj->getParentProjectJnName():"null";
                     echo "&workspace_id=".$ws_id."'>";
-                    echo $pproj->getSummary();
+                    echo "Add To";
                     echo "</a>";
 
                     $evt = $pproj->getCustomEvents();
@@ -74,7 +75,13 @@ $subUseCase = "View Custom Events";
                         echo " - ";
                         echo "<a href='";
                         echo "addCustomEventEntry.php?custom_event_id=".$evts->getCustomEventId()."&workspace_id=".$ws_id."'>";
-                        echo "Add";
+                        echo "Add To";
+                        echo "</a>";
+
+                        echo " ";
+                        echo "<a href='";
+                        echo "editCustomEvent.php?custom_event_id=".$evts->getCustomEventId()."&workspace_id=".$ws_id."'>";
+                        echo "Edit";
                         echo "</a>";
 
                     }

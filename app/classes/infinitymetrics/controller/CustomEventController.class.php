@@ -149,18 +149,18 @@ final class CustomEventController {
      *     If more states are added, this needs to become a string and switch.
      * @param string $newTitle the title to be entered into the event.
      */
-    public static function modifyEvent($event, boolean $toggle,
-        string $newTitle = null) {
+    public static function modifyEvent($event, $tempbool,
+        $newTitle) {
         try {
-            if ($toggle) {
-                if ($event->getState() === "Open") {
-                    $event->resolve();
+            if ($tempbool) {
+                if ($event->getState() == "OPEN") {
+                    $event->setState("RESOLVED");
                 } else {
-                    $event->reopen();
+                    $event->setState("OPEN");
                 }
-                if ($newTitle !== null) {
-                    $event->setTitle($newTitle);
-                }
+            }
+            if ($newTitle) {
+                $event->setTitle($newTitle);
             }
             $event->save();
         } catch (Exception $e) {
