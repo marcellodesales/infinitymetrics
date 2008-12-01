@@ -32,39 +32,41 @@ require_once('infinitymetrics/model/report/EventChannel.class.php');
 class Report
 {
     /**
-     * The Description of the EventChannel
+     * The Description of the Report
      * @var <string>  $description
      */
     private $description;
 
     /**
-     * The Name of the EventChannel
+     * The Name of the Report
      * @var <string> $name
      */
     private $name;
 
     /**
-     * The list of EventChannels contained in the Report
-     * @var <array_of_EventChannels>
+     * The metrics in the Report
+     * @var <array>
      */
-    private $eventChannels;
+    private $metrics;
+
+    private $validEventCategories = array('COMMIT', 'DOCUMENTATION', 'FORUM', 'ISSUE', 'MAILING_LIST');
 
     /**
      * Defautlt constructor
      * @return <Report>
      */
     public function __construct() {
-        $this->eventChannels = array();
+        $this->metrics = array();
     }
 
     /**
      * Builds the state of the Report
-     * @param <array_of_EventChannels> $eventChannels
+     * @param <string> $name
+     * @param <string> $description
      */
-    public function builder($name, $description, array $eventChannels) {
+    public function builder($name, $description) {
         $this->name = $name;
         $this->description = $description;
-        $this->eventChannels = $eventChannels;
     }
 
     /**
@@ -83,103 +85,98 @@ class Report
         return $this->name;
     }
 
-    /**
-     * Gets the Report's current array of EventChannels
-     * @return <array_of_EventChannels>
-     */
-    public function getEventChannels() {
-        return $this->eventChannels;
-    }
+    public function getReportMetrics($PersistentObject, $AuxiliaryPersistentObject = NULL) {
+        if (!isset($PersistentObject) || $PersistentObject == '') {
+            throw new InfinityMetricsException('This method needs an PersistentObject as an argument');
+        }
 
-    /**
-     * Searches through all EventChannels and returns an array of those matching
-     * the given EventCategory
-     * @param <EventCategory> $category
-     * @return <array_of_EventChannels> that match $category
-     */
-    public function filterByCategory(EventCategory $category) {
-        $filteredList = array();
-
-        foreach ($this->eventChannels as $channel)
+        if ($PersistentObject instanceof PersistentUser)
         {
-            $cloneChannel = clone $channel;
-            if ($cloneChannel->getCategory() == $category) {
-                array_push($filteredList, $cloneChannel);
+            if (!isset($AuxiliaryPersistentObject)) {
+                throw new InfinityMetricsException('The Auxiliary parameter was not given');
             }
-        }
+            if (!($AuxiliaryPersistentObject instanceof PersistentProject)) {
+                throw new InfinityMetricsException('The Auxiliary parameter must be of type PersistentProject');
+            }
+            $this->metrics = array();
+            $userJnName = $PersistentObject->getJnUsername();
+            $project = $AuxiliaryPersistentObject;
+            $criteria = new Criteria();
 
-        return $filteredList;
-    }
+            foreach ($this->validEventCategories as $category)
+            {
+                $this->metrics[$category] = 0;
+                $criteria->clear();
+                $criteria->add(PersistentChannelPeer::CATEGORY, $category);
+                $criteria->addAnd(PersistentChannelPeer::PROJECT_JN_NAME, $project->getProjectJnName());
+                $channels = PersistentChannelPeer::doSelect($criteria);
 
-    /**
-     * Searches through the Events in all EventChannles and returns an array of
-     * EventChannels containing only Events within the range of Dates
-     * @param <DateTime> $startDate
-     * @param <DateTime> $endDate
-     * @return <array_of_EventChannels> with Events within the date range specified
-     */
-    public function filterByDate(DateTime $startDate, DateTime $endDate) {
-        $filteredChannelList = array();
+                foreach ($channels as $channel)
+                {
+                    $criteria->clear();
+                    $criteria->add(PersistentEventPeer::JN_USERNAME, $userJnName);
 
-        foreach ($this->eventChannels as $channel)
+                    $this->metrics[$category] += count($channel->getEvents($criteria));
+                }
+            }
+
+            return $this->metrics;
+        }//end User Report
+
+        elseif ($PersistentObject instanceof PersistentProject)
         {
-            $cloneChannel = clone $channel;
-            $cloneChannel->setEvents($cloneChannel->getEventsByDate($startDate, $endDate));
-            $filteredChannelList[] = $cloneChannel;
-        }
+            $this->metrics = array();
+            $criteria = new Criteria();
 
-        return $filteredChannelList;
-    }
+            $project = $PersistentObject;
+            
+            $channels = $project->getChannels();
 
-    /**
-     * Searches through the Events in all EventChannels and returns an array of
-     * EventChannels containing only the Events that match the User
-     * @param <User> $user
-     * @return <array_of_EventChannels> with Events matching the given User
-     */
-    public function filterByUser(User $user) {
-        $filteredChannelList = array();
+            foreach ($channels as $channel) {
+                foreach ($channel->getEvents() as $event){
+                    if (!array_key_exists($event->getJnUsername(), $this->metrics)) {
+                        $this->metrics[$event->getJnUsername()] = array();
+                    }
+                }
+            }
+            
+            foreach ($this->metrics as $key => $value)
+            {
+                $this->metrics[$key] = array();
 
-        foreach ($this->eventChannels as $channel)
+                foreach ($this->validEventCategories as $category)
+                {
+                    $this->metrics[$key][$category] = 0;
+
+                    $criteria->clear();
+                    $criteria->add(PersistentChannelPeer::CATEGORY, $category);
+                    $criteria->addAnd(PersistentChannelPeer::PROJECT_JN_NAME, $project->getProjectJnName());
+                    $channels = PersistentChannelPeer::doSelect($criteria);
+
+                    foreach ($channels as $channel)
+                    {
+                        $criteria->clear();
+                        $criteria->add(PersistentEventPeer::JN_USERNAME, $key);
+
+                        $this->metrics[$key][$category] += count($channel->getEvents($criteria));
+                    }
+                }
+            }
+            
+            return $this->metrics;
+        }//end Project Report
+
+        elseif ($PersistentObject instanceof PersistentWorkspace)
         {
-            $cloneChannel = clone $channel;
-            $cloneChannel->setEvents($cloneChannel->getEventsByUser($user));
-            $filteredChannelList[] = $cloneChannel;
-        }
+            $this->metrics = array();
+            $projects = $PersistentObject->getProjects();
 
-        return $filteredChannelList;
-    }
+            foreach ($projects as $project) {
+                $this->metrics[$project->getProjectJnName()] = $project->getTotalEventsByCategory();
+            }
 
-    /**
-     * Sets the EventChannel's Description
-     * @param <string> $description
-     */
-    public function setDescription($description) {
-        $this->description = $description;
-    }
-
-    /**
-     * Sets the Name
-     * @param <string> $name
-     */
-    public function setName($name) {
-        $this->name = $name;
-    }
-
-    /**
-     * Sets the Report's list of EventChannels to the argument
-     * @param <array_of_EventChannels> $eventChannels 
-     */
-    public function setEventChannels(array $eventChannels) {
-        $this->eventChannels = $eventChannels;
-    }
-
-    /**
-     * Adds the EventChannel to the list of EventChannels in the Report
-     * @param <EventChannel> $eventChannel 
-     */
-    public function addEventChannel(EventChannel $eventChannel) {
-        $this->eventChannels[] = $eventChannel;
+            return $this->metrics;
+        }//end Workspace Report
     }
 }
 ?>

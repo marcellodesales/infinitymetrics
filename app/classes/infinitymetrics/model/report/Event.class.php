@@ -19,7 +19,7 @@
  * For more information please see <http://ppm-8.dev.java.net>.
  */
 
-require_once('infinitymetrics/model/user/User.class.php');
+require_once 'infinitymetrics/orm/PersistentEvent.php';
 
 /**
  * Defines the Model for an Event.
@@ -28,26 +28,14 @@ require_once('infinitymetrics/model/user/User.class.php');
  * @author Andres Ardila
  */
 
-class Event
+class Event extends PersistentEvent
 {
-    /**
-     * The Date on which the Event occurred.
-     * @var <DateTime>
-     */
-    private $date;
-
-    /**
-     * The User that originated the Event
-     * @var <User>
-     */
-    private $user;
-
     /**
      * Default constructor
      * @return <Event>
      */
     public function __construct() {
-        $this->date = new DateTime();
+        parent::__construct();
     }
 
     /**
@@ -55,49 +43,10 @@ class Event
      * @param <User> $user
      * @param <DateTime> $date 
      */
-    public function builder(User $user, DateTime $date) {
-        $this->user;
-        $this->date->setDate($date->format('Y'), $date->format('m'), $date->format('d'));
+    public function builder($jnUsername, DateTime $date) {
+        $this->setJnUsername($jnUsername);
+        $this->setDate($date);
     }
 
-    /**
-     * Gets the DateTime object for the Event
-     * @return <DateTime> 
-     */
-    public function getDateObject() {
-        return $this->date;
-    }
-    
-    /**
-     * Gets the string corresponding to the date in the format 'Y-m-d'
-     * @return <string> 
-     */
-    public function getDateString() {
-        return $this->date->format('Y-m-d');
-    }
-
-    /**
-     * Gets the User associated with the Event
-     * @return <User> 
-     */
-    public function getUser() {
-        return $this->user;
-    }
-
-    /**
-     * Sets the Event's Date to the argument
-     * @param <DateTime> $date 
-     */
-    public function setDate(DateTime $date) {
-        $this->date->setDate($date->format('Y'), $date->format('m'), $date->format('d'));
-    }
-
-    /**
-     * Sets the Event's User to the argument
-     * @param <User> $user 
-     */
-    public function setUser(User $user) {
-        $this->user = $user;
-    }
 }
 ?>
