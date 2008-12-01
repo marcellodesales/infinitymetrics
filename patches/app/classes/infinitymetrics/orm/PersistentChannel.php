@@ -77,8 +77,12 @@ class PersistentChannel extends PersistentBaseChannel {
     public function setEvents(array $events) {
         $this->clearEvents();
         foreach ($events as $event) {
-            $this->addEvent($event);
+            if ($event instanceof PersistentEvent) {
+                $this->addEvent($event);
+            }
+            else {
+                throw new InfinityMetricsException('The array must contain only elements of type PersistentEvent');
+            }
         }
     }
-
 } // PersistentChannel
