@@ -138,5 +138,44 @@ final class CustomEventController {
             throw $e;
         }
     }
+    /**
+     * This method implements the modification of a Custom Event UC201.
+     *
+     * @param CustomEvent $event the event to be modified.
+     * @param boolean $toggle if the status is to be changed.
+     *     If more states are added, this needs to become a string and switch.
+     * @param string $newTitle the title to be entered into the event.
+     */
+    public static function modifyEvent($event, boolean $toggle,
+        string $newTitle = null) {
+        try {
+            if ($toggle) {
+                if ($event->getState() === "Open") {
+                    $event->resolve();
+                } else {
+                    $event->reopen();
+                }
+                if ($newTitle !== null) {
+                    $event->setTitle($newTitle);
+                }
+            }
+            $event->save();
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
+    // Is it really this simple?
+    public static function removeEntry(CustomEventEntry $entry,
+        CustomEvent $entry = null) {
+        try {
+            $entry->delete();
+
+            if ($event !== null) {
+                $event->save();
+            }
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
 }
 ?>
