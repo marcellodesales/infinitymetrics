@@ -429,12 +429,13 @@ final class UserManagementController {
         }
         
         $c->add(PersistentUserPeer::JN_PASSWORD, $password);
-        $user = PersistentUserPeer::doSelect($c);
-        if ($user == null && count($user) == 1) {
+        $user = PersistentUserPeer::doSelectOne($c);
+
+        if ($user == null) {
             $error["passwordDoesnMatch"] = "The password for the '".$userName."' doesn't match";
             throw new InfinityMetricsException("Login fail", $error);
         }
-        return $user[0];
+        return $user;
     }
 
    /**
