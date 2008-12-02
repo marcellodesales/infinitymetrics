@@ -31,8 +31,8 @@ final class DateTimeUtil {
     }
 }
 
-        $a = "Thu, 20 Nov 2008 07:42:35 GMT";
-        $b = DateTimeUtil::getMySQLDate($a);
-        $a = "2008-11-25T19:00:00Z";
-        $b = DateTimeUtil::getMySQLDate($a);
+//        $a = "Thu, 20 Nov 2008 07:42:35 GMT";
+//        $b = DateTimeUtil::getMySQLDate($a);
+//        $a = "2008-11-25T19:00:00Z";
+//        $b = DateTimeUtil::getMySQLDate($a);
 ?>

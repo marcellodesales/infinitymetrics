@@ -73,8 +73,8 @@ class FullnameJNUsernameInMemoryCacheSystemTests extends PHPUnit_Framework_TestC
             $channel->setTitle("This is the users mailing list");
             $channel->save();
         }
+        $crit = new Criteria();
         for ($i = 0; $i < 10; $i++) {
-            $crit = new Criteria();
             $crit->add(PersistentEventPeer::EVENT_ID, $i);
             $crit->add(PersistentEventPeer::PROJECT_JN_NAME, $this->project->getProjectJnName());
             $crit->add(PersistentEventPeer::CHANNEL_ID, $channel->getChannelId());
@@ -82,14 +82,7 @@ class FullnameJNUsernameInMemoryCacheSystemTests extends PHPUnit_Framework_TestC
             $crit->add(PersistentEventPeer::DATE,DateTimeUtil::getMySQLDate("Tue, 0".$i." Nov 2008 0".$i.":00:00 GMT"));
             $crit->setDbName(PersistentEventPeer::DATABASE_NAME);
             PersistentEventPeer::doInsert($crit);
-
-//            $item = new PersistentEvent();
-//            $item->setEventId($i);
-//            $item->setProjectJnName($this->project->getProjectJnName());
-//            $item->setChannelId($channel->getChannelId());
-//            $item->setJnUsername(self::EXISTING_FULL_NAME);
-//            $item->setDate("Tue, 0$i Nov 2008 0$i:00:00 GMT");
-//            $entries[] = $crit;
+            $crit->clear();
         }
     }
     /**

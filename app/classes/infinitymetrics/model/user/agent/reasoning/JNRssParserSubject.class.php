@@ -40,11 +40,6 @@ class JNRssParserSubject extends ObservableSubject {
             throw new Exception("Please add observers before collecting Rss");
         }
 
-        $mtime = microtime();
-        $mtime = explode(" ",$mtime);
-        $mtime = $mtime[1] + $mtime[0];
-        $starttime = $mtime;
-
         $this->xmlReader->open($this->rssFeedUrl);
         
         $rss = new CollabnetRssChannel($this->rssFeedUrl);
@@ -114,55 +109,9 @@ class JNRssParserSubject extends ObservableSubject {
                     }
                 }
             }
-        }
-
-        $mtime = microtime();
-        $mtime = explode(" ",$mtime);
-        $mtime = $mtime[1] + $mtime[0];
-        $endtime = $mtime;
-        $totaltime = ($endtime - $starttime);
-        echo "Parsing was in ".$totaltime." seconds";
-   
+        }  
         $this->updateSubject($rss);
         $this->xmlReader->close();
     }
 }
-//
-//$projectName = "ppm";
-//$mailingList = "commits";
-//$url = CollabnetRssChannel::getUrl($projectName, $mailingList);
-//$chanLink = $url;
-//
-//$title = "[Issue 5750] [other]  Hudson : java.net.MalformedURLException: Unknown protocol:";
-//$link = "https://glassfish.dev.java.net/servlets/ReadMsg?list=issues&amp;msgNo=32302";
-//$description = "[Issue 5750] [other]  Hudson : java.net.MalformedURLException: Unknown protocol:";
-//$pubDate = "Mon, 15 Sep 2008 07:00:00 GMT";
-//$author = "mk111283@dev.java.net";
-//$guid = "https://glassfish.dev.java.net/servlets/ReadMsg?list=issues&amp;msgNo=32302";
-//$creator = "mk111283@dev.java.net";
-//$isoDate = "2008-09-15T07:00:00Z";
-//
-//$rss = new CollabnetRssChannel($url);
-//
-//$rss->setDescription($description);
-//$rss->setLink($chanLink);
-//$rss->setTitle($title);
-//
-//$builder = $rss->newRssItemBuilder();
-//$builder->title($title)->link($link)->description($description)->publicationDate($pubDate)->author($author)->guid($guid)->creator($creator)->date($isoDate);
-//$rssItem = $builder->build();
-//
-//$rss->addItem($rssItem);
-//
-//$rssToDbObserver = new RssToDatabaseObserver();
-//$rssToScreen = new RssToScreenObserver();
-//
-//$jRssParser = new JNRssParserSubject($url);
-////$jRssParser = new JavanetRssAgentReader("http://localhost/ppm8/mailingListRSS-ppm-example.rss.xml");
-//
-//$jRssParser->addObserver($rssToDbObserver);
-//$jRssParser->addObserver($rssToScreen);
-//
-//$jRssParser->collectRss();
-
 ?>

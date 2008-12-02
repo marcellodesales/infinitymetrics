@@ -89,14 +89,17 @@ class RssToDatabaseObserver implements Observer {
 
         $rssChannel = $collabnetRssChannel->getRssChannel();
         $allEvents = $rssChannel->getItems();
+        $crit = new Criteria();
         foreach($allEvents as $event) {
             try {
-                $item = new PersistentEvent();
-                $item->setEventId($event->getMessageNumber());
-                $item->setJnUsername($event->getAuthorUsername());
-                $item->setChannel($channel);
-                $item->setDate($event->getPublicationDateForMySql());
-                $item->save();
+                $crit->add(PersistentEventPeer::EVENT_ID, $event->getMessageNumber());
+                $crit->add(PersistentEventPeer::PROJECT_JN_NAME, $collabnetRssChannel->getProjectName());
+                $crit->add(PersistentEventPeer::CHANNEL_ID, $channel->getChannelId());
+                $crit->add(PersistentEventPeer::JN_USERNAME, $event->getAuthorUsername());
+                $crit->add(PersistentEventPeer::DATE, DateTimeUtil::getMySQLDate($event->getPublicationDateForMySql()));
+                $crit->setDbName(PersistentEventPeer::DATABASE_NAME);
+                PersistentEventPeer::doInsert($crit);
+                $crit->clear();
 
             } catch (Exception $e) {
                 //When an entry exists already. This might happen when the agent tries to save

@@ -121,10 +121,11 @@ final class PersonalAgentController {
      */
     public static function collectProjectEventsList(PersistentUser $user, $projectName) {
         $agent = self::makeAgentForUser($user);
-        if (!$this->agent->areUserCredentialsValidOnJN()) {
-            throw new InfinityMetricsException("Can't collect Events list: credentials are invalid");
+        if (!$agent->areUserCredentialsValidOnJN()) {
+            $error["invalidCredentials"] = "The credials are invalid";
+            throw new InfinityMetricsException("Can't collect Project's events list", $error);
         }
-        return $agent->getListOfRssChannels();
+        return $agent->getListOfRssChannels($projectName);
     }
     /**
      * This method implementes UC404 to retrieve the User's profile information from Java.net

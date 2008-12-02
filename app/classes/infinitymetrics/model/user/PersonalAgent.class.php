@@ -142,7 +142,14 @@ class PersonalAgent {
     public function getListOfRssChannels($projectName) {
         return $this->mailingListsWSImpl->getCompleteListOfChannels($projectName);
     }
-
+    /**
+     * Collects all the RssData for a given project. That means:
+     * 1. Get the list of all Rss Channels based on the call of getListOfRssChannels($projectName).
+     * 2. Add the entire list (after filtering with some preferences);
+     *
+     * @param string $projectName is the java.net project name
+     * @param Observer $observer an observer with regards to the Database feed of data.
+     */
     public function collectRssDataFromProject($projectName, Observer $observer) {
         $this->getListOfRssChannels($projectName);
         foreach($this->getListOfRssChannels($projectName) as $rss) {
@@ -203,17 +210,4 @@ class PersonalAgent {
         return $this->projectHomeWSImpl->getOwnersList($projectName);
     }
 }
-//
-//$u = new User();
-//$u->setJnUsername("marcello.sales@gmail.com");
-//$u->setJnPassword("utn@9oad");
-//$agent = new PersonalAgent($u);
-//$sub = $agent->getSubprojectsFromProject("ppm");
-//$owners = $agent->getProjectOwnersList("ppm");
-//$summ = $agent->getProjectSummary("ppm-8");
-//$other = $summ;
-//
-//$em = $agent->getAuthenticatedEmail();
-//$fn = $agent->getAuthenticatedFullName();
-//$ms = $agent->getAuthenticatedProjectsMembershipList();
 ?>
