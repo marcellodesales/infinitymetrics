@@ -191,17 +191,18 @@ class MetricsWorkspaceController {
         }
 
         $user = UserManagementController::retrieveUser($user_id);
-        $workspaces = array( 'OWN' => array(), 'SHARED' => array() );
+        $wsCollection = array( 'OWN' => array(), 'SHARED' => array() );
         try {
 
-            $c = new Criteria();
-            $c->add(PersistentWorkspacePeer::USER_ID, $user->getUserId());
-            $workspaces['OWN'] = PersistentWorkspacePeer::doSelect($c);
+            $criteria = new Criteria();
+            $criteria->add(PersistentWorkspacePeer::USER_ID, $user->getUserId());
+            $wsCollection['OWN'] = PersistentWorkspacePeer::doSelect($criteria);
 
-            $c->clear();
-            $c->add(PersistentWorkspaceSharePeer::USER_ID, $user->getUserId());
-            $workspaces['SHARED'] = PersistentWorkspaceSharePeer::doSelectJoinWorkspace($c);
-            return $workspaces;
+            $criteria->clear();
+            $criteria->add(PersistentWorkspaceSharePeer::USER_ID, $user->getUserId());
+            $wsCollection['SHARED'] = PersistentWorkspaceSharePeer::doSelectJoinWorkspace($criteria);
+            
+            return $wsCollection;
 
         } catch (Exception $e) {
             $errors = array();

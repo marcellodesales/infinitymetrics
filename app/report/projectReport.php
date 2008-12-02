@@ -1,131 +1,166 @@
 <?php
-    include '../template/header-no-left-nav.php';
-?>
-    <div id="content-wrap">
-        <div id="inside">
-            <div id="sidebar-right">
-                <div id="block-user-3" class="block block-user">
-                    <h2>Students in this project:</h2>
+    include '../template/infinitymetrics-bootstrap.php';
 
-                    <div class="content">
-                    
-                        <div class="item-list">
-                            <ul>
-                                <li class="first"><b>jsmith</b> (Leader)</li>
-                                <li>geek82</li>
-                                <li>shawnp</li>
-                                <li>sarag</li>
-                                <li class="last">becca</li>
-                            </ul>
-                        </div>
+#----------------------------->>>>>>>>>>>>> Controller Usage for UC101 and UC301 ----------------------------->>>>>>>>>>>>>>>
+    //for debugging
+    //$_GET['project_id']='PPM-1';
+
+    $user = $_SESSION["loggedUser"];
+
+    if (isset($_GET['project_id']) && $_GET['project_id'] != '')
+    {
+        require_once('infinitymetrics/controller/ReportController.class.php');
+
+        $project = PersistentProjectPeer::retrieveByPK($_GET['project_id']);
+
+        $eventAuthors = $project->getDistinctEventAuthors();
+
+        $registeredAuthors = array();
+
+        foreach ($eventAuthors as $key => $assocArray)
+        {
+            $jnUsername = $assocArray['JN_USERNAME'];
+            $dbUser = PersistentUserPeer::retrieveByJNUsername($jnUsername);
+
+            if ($dbUser != null) {
+                $registeredAuthors[$jnUsername] = $dbUser;
+            }
+            else {
+                $registeredAuthors[$jnUsername] = $jnUsername;
+            }
+        }
+    }
+    else {
+        header('Location: workspaceCollection.php');
+    }
+
+
+#----------------------------->>>>>>>>>>>>> Variables Initialization ------------------->>>>>>>>>>>>>>>
+
+    $subUseCase = "Project Report";
+    $enableLeftNav = false;
+
+    #breadscrum[URL] = Title
+    $breadcrums = array(
+                        $_SERVER["home_address"] => "Home",
+                        $_SERVER["home_address"]."/workspace/workspaceCollection.php" => "Workspace Collection",
+                        $_SERVER["home_address"]."/workspace/viewWorkspace.php" => "View Workspace",
+                        $_SERVER["home_address"].$_SERVER['PHP_SELF'] => "Project Report"
+                  );
+
+    #leftMenu[n]["active"] - If the menu item is active or not
+    #leftMenu[n]["url"] - the URL for the menu item
+    #leftMenu[n]["item"] - the item of the menu
+    #leftMenu[n]["tip"] - the tooltip of the URL
+    #$leftMenu = array();
+    #array_push($leftMenu, array("active"=>"menu-27 first active", "url"=>"signup-step1.php", "item"=>"1. Java.net Authentication", "tip"=>"Manage your site's book outlines."));
+    #array_push($leftMenu, array("active"=>"menu-27", "url"=>"signup-step2.php", "item"=>"2. Update Profile", "tip"=>"Update and review your profile info"));
+    #array_push($leftMenu, array("active"=>"menu-27", "url"=>"signup-step3.php", "item"=>"3. Confirm Registration", "tip"=>"Confirm you profile"));
+?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html class="js" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <title>Infinity Metrics: <?php echo $subUseCase; ?></title>
+    <?php include 'static-js-css.php';  ?>
+    <?php include 'user-signup-header-adds.php' ?>
+</head>
+<body class="<?php echo $enableLeftNav ? $leftNavClass : $NoLeftNavClass; ?>">
+
+    <?php  include 'top-navigation.php';  ?>
+
+                <div id="breadcrumb" class="alone">
+                    <h2 id="title">Home</h2>
+                    <div class="breadcrumb">
+                        <?php
+                            $totalBreadcrums = count(array_keys($breadcrums));
+                            $idx = 0;
+                            foreach (array_keys($breadcrums) as $keyUrl)
+                            {
+                                echo "<a href=\"$keyUrl\">{$breadcrums[$keyUrl]}</a> ".
+                                    (++$idx < $totalBreadcrums ? "» " : " ");
+                            }
+                        ?>
                     </div>
                 </div>
-            </div>
-            <div id="content">
 
-                <br />
-                <h2>Project Metrics Report</h2>
-                <br />
+                <div id="content-wrap">
+                        <div id="inside">
+                            <div id="sidebar-right">
+                                <div id="block-user-3" class="block block-user">
+                                    <br />
+                                    
+                                    <div class="content">
+                                        <div class="item-list">
+                                            <h2>Users with Metrics in this project:</h2>
+                                            <ul>
+                                            <?php
+                                                foreach ($registeredAuthors as $jnUsername => $userObj)
+                                                {
+                                                    if ($userObj instanceof PersistentUser) {
+                                                        $u = new PersistentUser();
+                                                        echo "<li><a href=\"./userReport.php?user_id=".$userObj->getUserId()."\">";
+                                                                
+                                                        if ($userObj->isOwnerOfProject($project)) {
+                                                            echo "<strong>".$userObj->getFirstName()." ".$userObj->getLastName()."</a></strong>";
+                                                        }
+                                                        else {
+                                                            echo $userObj->getFirstName()." ".$userObj->getLastName()."</a>";
+                                                        }
+                                                        echo "&nbsp<a href=\"../user/profile/viewProfile.php?userId=".$userObj->getUserId()."\">".
+                                                                "<img style=\"border: 0\" src=\"../template/icons/i16/misc/contact.png\" /></a>";
+                                                        echo "</li>";
+                                                    }
+                                                    else {
+                                                        echo "<li>$jnUsername</li>\n";
+                                                    }
+                                                }
+                                            ?>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div><!-- end block-user-3 -->
+                            </div><!-- end sidebar-right -->
 
-                <div class="t"><div class="b"><div class="l"><div class="r"><div class="bl"><div class="br"><div class="tl"><div class="tr">
-                    <div class="content-in">
+                            <div id="content">
+                                <br />
+                                <div class="t"><div class="b"><div class="l"><div class="r"><div class="bl"><div class="br"><div class="tl"><div class="tr">
+                                    <div class="content-in">
+                                        <h2>Project Metrics Report</h2>
+                                        <div style="float: left">
 
-                        <h3><?php echo $_GET['project_id'] ?></h3>
-                        <?php echo "<a href=\"https://{$_GET['project_id']}.dev.java.net\">https://{$_GET['project_id']}.dev.java.net</a>" ?>
-                        <br /><br />
-                        <!--Load the AJAX API-->
-                        <script type="text/javascript" src="http://www.google.com/jsapi"></script>
-                        <script type="text/javascript">
+                                            <h3><?php echo "{$_GET['project_id']}&nbsp;&nbsp;<a href=\"https://{$_GET['project_id']}.dev.java.net/\"><img style=\"border: 0\" src=\"../template/icons/i16/misc/world_link.png\" /></a>\n"; ?></h3>
+                                            <br />
+                                            <h4>Project Summary:</h4>
+                                            
+                                            <?php
+                                                echo "<p>";
+                                                if ($project->getSummary() == '') {
+                                                    echo "<span style=\"color: gray\">[Empty]</span>";
+                                                }
+                                                else {
+                                                    echo $project->getSummary();
+                                                }
+                                                echo "</p>\n";
+                                            ?>
+                                            
+                                        </div>
 
-                          // Load the Visualization API and the piechart package.
-                          google.load('visualization', '1', {packages:['piechart', 'columnchart']});
+                                        <div style="float: right; width: 420px; border: thin groove silver; padding: 15px">
 
-                          // Set a callback to run when the API is loaded.
-                          google.setOnLoadCallback(drawChart);
+                                            <?php echo ReportController::retrieveProjectReport($project->getProjectJnName()); ?>
 
-                          // Callback that creates and populates a data table,
-                          // instantiates the pie chart, passes in the data and
-                          // draws it.
-                          function drawChart() {
-                            var pieData = new google.visualization.DataTable();
-                            pieData.addColumn('string', 'Event Category');
-                            pieData.addColumn('number', 'Number of Entries');
-                            pieData.addRows(5);
-                            pieData.setValue(0, 0, 'Commits');
-                            pieData.setValue(0, 1, 11);
-                            pieData.setValue(1, 0, 'Discussion Forums');
-                            pieData.setValue(1, 1, 2);
-                            pieData.setValue(2, 0, 'Mailing Lists');
-                            pieData.setValue(2, 1, 2);
-                            pieData.setValue(3, 0, 'Custom Events');
-                            pieData.setValue(3, 1, 2);
-                            pieData.setValue(4, 0, 'Issues');
-                            pieData.setValue(4, 1, 7);
+                                            <div id="bar_chart_div"></div>
+                                        </div>
+                                        <div style="clear: both"></div>
 
-                            var barData = new google.visualization.DataTable();
-                            barData.addColumn('string', 'Student Name');
-                            barData.addColumn('number', 'Commits');
-                            barData.addColumn('number', 'Discussion Forums');
-                            barData.addColumn('number', 'Mailing Lists');
-                            barData.addColumn('number', 'Custom Events');
-                            barData.addColumn('number', 'Issues');
-                            barData.addRows(5);
-                            barData.setValue(0, 0, 'jsmith');
-                            barData.setValue(0, 1, 34);
-                            barData.setValue(0, 2, 6);
-                            barData.setValue(0, 3, 16);
-                            barData.setValue(0, 4, 0);
-                            barData.setValue(0, 5, 24);
-                            barData.setValue(1, 0, 'geek82');
-                            barData.setValue(1, 1, 36);
-                            barData.setValue(1, 2, 6);
-                            barData.setValue(1, 3, 20);
-                            barData.setValue(1, 4, 14);
-                            barData.setValue(1, 5, 32);
-                            barData.setValue(2, 0, 'shawnp');
-                            barData.setValue(2, 1, 6);
-                            barData.setValue(2, 2, 4);
-                            barData.setValue(2, 3, 2);
-                            barData.setValue(2, 4, 0);
-                            barData.setValue(2, 5, 18);
-                            barData.setValue(3, 0, 'sarag');
-                            barData.setValue(3, 1, 6);
-                            barData.setValue(3, 2, 2);
-                            barData.setValue(3, 3, 8);
-                            barData.setValue(3, 4, 0);
-                            barData.setValue(3, 5, 8);
-                            barData.setValue(4, 0, 'becca');
-                            barData.setValue(4, 1, 48);
-                            barData.setValue(4, 2, 12);
-                            barData.setValue(4, 3, 38);
-                            barData.setValue(4, 4, 4);
-                            barData.setValue(4, 5, 69);
-
-
-                            var pieChart = new google.visualization.PieChart(document.getElementById('pie_chart_div'));
-                            pieChart.draw(pieData, {width: 500, height: 240, is3D: true, title: 'Project Metrics By Category'});
-
-                            var barChart = new google.visualization.ColumnChart(document.getElementById('bar_chart_div'));
-                            barChart.draw(barData, {width: 500, height: 340, is3D: true, title: 'Project Metrics By Student and Category', 'isStacked': true, 'legend': 'bottom', 'titleY': 'Number of Events'});
-                          }
-                        </script>
-
-                        <div id="pie_chart_div"></div>
+                                        <br /><br />
+                                    </div>
+                                    <br class="clear" />
+                                </div></div></div></div></div></div></div></div>
+                            </div>
+                        </div>
                         <br />
-                        <div id="bar_chart_div"></div>
-
-                        <?php
-
-
-                        ?>
-                        <br /><br />
-                    </div>
-                    <br class="clear">
-                </div></div></div></div></div></div></div></div>
-            </div>
-        </div>
-        <BR>
-      </div>
-<?php
-    include '../template/footer.php';
-?>
+                      </div>
+                      
+<?php include '../template/footer.php'; ?>

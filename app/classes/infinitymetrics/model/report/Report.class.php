@@ -170,7 +170,7 @@ class Report
             }
             $this->metrics = array();
             $userJnName = $PersistentObject->getJnUsername();
-            $project = $AuxiliaryPersistentObject;
+            $project = clone $AuxiliaryPersistentObject;
             $criteria = new Criteria();
 
             foreach ($this->validEventCategories as $category)
@@ -198,7 +198,7 @@ class Report
             $this->metrics = array();
             $criteria = new Criteria();
 
-            $project = $PersistentObject;
+            $project = clone $PersistentObject;
             
             $channels = $project->getChannels();
 
@@ -217,16 +217,18 @@ class Report
                     $this->metrics[$jnUsername][$category] = 0;
 
                     $criteria->clear();
+                    $criteria->add(PersistentProjectPeer::PROJECT_JN_NAME, $project->getProjectJnName());
                     $criteria->add(PersistentChannelPeer::CATEGORY, $category);
-                    $criteria->addAnd(PersistentChannelPeer::PROJECT_JN_NAME, $project->getProjectJnName());
                     $channels = PersistentChannelPeer::doSelect($criteria);
 
                     foreach ($channels as $channel)
                     {
                         $criteria->clear();
                         $criteria->add(PersistentEventPeer::JN_USERNAME, $jnUsername);
+                        $criteria->add(PersistentEventPeer::CHANNEL_ID, $channel->getChannelId());
+                        $criteria->add(PersistentEventPeer::PROJECT_JN_NAME, $channel->getProjectJnName());
 
-                        $this->metrics[$jnUsername][$category] += count($channel->getEvents($criteria));
+                        $this->metrics[$jnUsername][$category] += PersistentEventPeer::doCount($criteria);
                     }
                 }
             }
@@ -245,6 +247,10 @@ class Report
 
             return $this->metrics;
         }//end Workspace Report
+
+        else {
+            throw new Exception ('Cannot generate a report for that argument');
+        }
     }
 }
 ?>

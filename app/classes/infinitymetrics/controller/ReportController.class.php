@@ -4,7 +4,8 @@ require_once('propel/Propel.php');
 
 Propel::init("infinitymetrics/orm/config/om-conf.php");
 
-require_once 'infinitymetrics/model/report/Report.class.php';
+require_once ('infinitymetrics/model/report/Report.class.php');
+require_once ('infinitymetrics/model/InfinityMetricsException.class.php');
 
 /**
  * Description of ReportController
@@ -27,19 +28,20 @@ class ReportController
     
     public function retrieveProjectReport($project_jn_name) {
 
-        //incomplete
-
-        if (!isset($projectJnName) || $projectJnName == '') {
+        if (!isset($project_jn_name) || $project_jn_name == '') {
             throw new InfinityMetricsException('The projectJnName must be provided');
         }
         
-        $project = PersistentProjectPeer::retrieveByPK($projectJnName);
+        $project = PersistentProjectPeer::retrieveByPK($project_jn_name);
 
-        if ($project == NULL) {
+        if ($project == null) {
             throw new InfinityMetricsException('The project was not found');
         }
         
-        $eventChannels = $project->getChannels();
+        $report = new Report();
+        $metrics = $report->getReportMetrics($project);
+        
+        $categories = $report->getEventCategories();
         
         $script =
 
@@ -51,25 +53,34 @@ class ReportController
 
               function drawChart() {
                 var barData = new google.visualization.DataTable();
-                barData.addColumn('string', 'Event Category');
-                barData.addColumn('number', 'Number of Entries');
-                barData.addRows(".count($eventChannels).");";
-
-                for ($i = 0; $i < count($eventChannels); $i++) {
-                    $script .= "barData.addColumn('string', '')";
-                    $script .= "barData.setValue($i, 0, '".$eventChannels[$i]->getCategory()."');\n";
-                    $script .= "barData.setValue($i, 1, ".count($eventChannels[$i]->getEvents()).");\n";
+                barData.addColumn('string', 'Event Category');";
+                foreach ($metrics as $username => $cats){
+                    $script .= "barData.addColumn('number', '".$username."');\n";
                 }
+                $script .= "barData.addRows(".count($categories).");\n";
+                
+                if (count($metrics))
+                {
+                    for ($i = 0; $i < count($categories); $i++)
+                    {
+
+                        $script .= "barData.setValue($i, 0, '".self::convertToTitleCase($categories[$i])."');\n";
+
+                        $idx = 1;
+                        foreach ($metrics as $key => $value) {
+                            $script .= "barData.setValue($i, ".$idx.", ".$value[$categories[$i]].");\n";
+                            $idx++;
+                        }
+                    }
+                }
+
                 $script .= "
                 var barChart = new google.visualization.ColumnChart(document.getElementById('bar_chart_div'));
-                barChart.draw(barData, {width: 500, height: 340, is3D: true, title: 'Project Metrics By User and Category', 'legend': 'none'});
+                barChart.draw(barData, {width: 420, height: 320, is3D: true, title: 'Project Metrics', 'isStacked': true, 'legend': 'bottom'});
               }
-            </script>
-        ";
+            </script>";
 
         return $script;
-        
-
     }
     
     public function retrieveUserReport($user_id, $projectJnName) {
