@@ -146,9 +146,10 @@ class ReportController
         }
         
         $report = new Report();
-        $categories = $report->getEventCategories();
         $metrics = $report->getReportMetrics($ws);
 
+        $categories = $report->getExtendedCategories();
+        
         $script =
 
         "   <script type=\"text/javascript\" src=\"http://www.google.com/jsapi\"></script>
@@ -161,11 +162,11 @@ class ReportController
                 var barData = new google.visualization.DataTable();
                 barData.addColumn('string', 'Event Category');\n";
 
-                foreach ($metrics as $pName => $categories){
+                foreach ($metrics as $pName => $cats){
                     $script .= "barData.addColumn('number', '".$pName."');\n";
                 }
                 
-                $script .= "barData.addRows(".count($report->getEventCategories()).");\n";
+                $script .= "barData.addRows(".count($categories).");\n";
 
                 if (count($metrics))
                 {
@@ -184,7 +185,7 @@ class ReportController
                 
                 $script .= "
                 var barChart = new google.visualization.ColumnChart(document.getElementById('bar_chart_div'));
-                barChart.draw(barData, {width: 500, height: 400, is3D: true, title: 'Workspace Metrics', 'isStacked': true, 'legend': 'bottom'});
+                barChart.draw(barData, {width: 420, height: 320, is3D: true, title: 'Workspace Metrics', 'isStacked': true, 'legend': 'bottom'});
               }
             </script>";
 
@@ -197,8 +198,9 @@ class ReportController
         }
 
         $report = new Report();
-        $categories = $report->getEventCategories();
         $metrics = $report->getWorkspaceCollectionMetrics($user_id);
+
+        $categories = $report->getExtendedCategories();
 
         $script =   "<script type=\"text/javascript\" src=\"http://www.google.com/jsapi\"></script>
                      <script type=\"text/javascript\">
@@ -214,7 +216,7 @@ class ReportController
                     $script .= "barData.addColumn('number', '".$wsName."');\n";
         }
 
-        $script .= "barData.addRows(".count($report->getEventCategories()).");\n";
+        $script .= "barData.addRows(".count($categories).");\n";
 
         if (count($metrics))
         {
@@ -233,12 +235,11 @@ class ReportController
 
         $script .= "
                 var barChart = new google.visualization.ColumnChart(document.getElementById('bar_chart_div'));
-                barChart.draw(barData, {width: 500, height: 400, is3D: true, title: 'Workspace Metrics', 'isStacked': true, 'legend': 'bottom'});
+                barChart.draw(barData, {width: 420, height: 320, is3D: true, title: 'Workspace Collection Metrics', 'isStacked': true, 'legend': 'bottom'});
               }
             </script>";
 
         return $script;
     }
-
 }
 ?>
