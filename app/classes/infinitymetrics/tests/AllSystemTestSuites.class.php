@@ -21,6 +21,7 @@
 require_once 'PHPUnit/Framework.php';
 require_once 'infinitymetrics/tests/system/AllUserSystemTests.class.php';
 require_once 'infinitymetrics/tests/system/AllCustomEventSystemTests.class.php';
+require_once 'infinitymetrics/tests/system/AllPersonalAgentSystemTests.class.php';
 /**
  * All the System Tests for the entire application.
  *
@@ -33,7 +34,8 @@ class AllSystemTests {
 
         $suite->addTest(AllUserComponentSystemTests::suite());
         $suite->addTest(AllCustomEventComponentSystemTests::suite());
-        
+        $suite->addTest(AllPersonalAgentComponentSystemTests::suite());
+
         return $suite;
     }
 }

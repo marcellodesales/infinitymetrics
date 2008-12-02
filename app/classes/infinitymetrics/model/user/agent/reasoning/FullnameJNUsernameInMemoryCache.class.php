@@ -83,7 +83,7 @@ final class FullnameJNUsernameInMemoryCache {
      * @param string $username is the registered username on the database
      * @param string $fullName is the fullname of the user found on RSS feeds
      */
-    private function updatePersistentReporsitory($username, $fullName) {
+    public function updatePersistentReporsitory($username, $fullName) {
         require_once 'infinitymetrics/orm/om/PersistentBaseUserPeer.php';
         $con = Propel::getConnection(PersistentBaseUserPeer::DATABASE_NAME);
         $sql = "update event set jn_username = '$username' WHERE jn_username='$fullName'";

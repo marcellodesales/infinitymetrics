@@ -47,24 +47,7 @@ final class UserManagementController {
      * @return boolean whether the user has passed the correct credentials or not.
      */
     public static function areUserCredentialsValidOnJN($username, $password) {
-        $agent = null;
-        $error = array();
-        if (!isset($username) || $username == "") {
-            $error["username"] = "The username is empty";
-        }
-        if (!isset($password) || $password == "") {
-            $error["password"] = "The password is empty";
-        }
-
-        if (count($error) > 0) {
-            throw new InfinityMetricsException("There are errors in the input", $error);
-        }
-
-        try {
-            $agent = PersonalAgentController::authenticateJNUser($username, $password);
-        } catch (InfinityMetricsException $ime) {
-            throw $ime;
-        }
+        $agent = PersonalAgentController::authenticateJavanetUser($$username, $password);
         return $agent->areUserCredentialsValidOnJN();
     }
     /**
@@ -459,9 +442,6 @@ final class UserManagementController {
         }
         return $user;
     }
-    
-   
-
     /**
      *
      * @param <type> $user_id is the id of the user.
@@ -482,10 +462,8 @@ final class UserManagementController {
             $errors["userNotFound"] = "The user referred by " . $user_id . " doesn't exist";
             throw new InfinityMetricsException("Can't retrieve user", $errors);
         }
-        return $profile;
-        
+        return $profile;   
     }
-
     /**
      * retrieveUserByUserName retrieve user by username .
      * @param <type> $username
@@ -510,16 +488,15 @@ final class UserManagementController {
     /** This is the implemention of UC005
      * this function validates the values .
      *
-     * @param <type> $username is the exixting username
-     * @param <type> $newPassword new password of instructor to be updated
-     * @param <type> $newEmail  new Email of instructor to be updated
-     * @param <type> $newFirstName new first name of instructor to be updated
-     * @param <type> $newLastName  new last name of instructor to be updated
-     * @param <type> $newProjectName  new project of instructor to be updated
-     * @param <type> $new_isOwner  new value of ownership of instructor to be updated
-     * @param <type> $newInstitutionAbbreviation  new institution of instructor to be updated
-     * @param <type> $newInstitutionIdent  new School identification of instructor to be updated
-     * @return <type>
+     * @param string $username is the existing username
+     * @param string $newPassword new password of instructor to be updated
+     * @param string $newEmail  new Email of instructor to be updated
+     * @param string $newFirstName new first name of instructor to be updated
+     * @param string $newLastName  new last name of instructor to be updated
+     * @param string $newProjectName  new project of instructor to be updated
+     * @param string $new_isOwner  new value of ownership of instructor to be updated
+     * @param string $newInstitutionAbbreviation  new institution of instructor to be updated
+     * @param string $newInstitutionIdent  new School identification of instructor to be updated
      */
  public static function validateInstructorprofileUpdate($username, $newPassword, $newEmail, $newFirstName,
                                    $newLastName, $newProjectName, $new_isOwner, $newInstitutionAbbreviation, $newInstitutionIdent) {

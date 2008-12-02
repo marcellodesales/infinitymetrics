@@ -1,6 +1,6 @@
 <?php
 /**
- * $Id: AllUnitTestSuites.class.php 202 2008-11-23 03:31:40Z marcellosales $
+ * $Id: AllUserSystemTests.class.php 202 2008-12-01 17:42:40Z marcellosales $
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -19,22 +19,21 @@
  * For more information please see <http://ppm-8.dev.java.net>.
  */
 require_once 'PHPUnit/Framework.php';
-require_once 'infinitymetrics/tests/unit/AllUtilityLibraryUnitTests.class.php';
-require_once 'infinitymetrics/tests/unit/AllPersonalAgentUnitTests.class.php';
-require_once 'infinitymetrics/tests/unit/AllUserUnitTests.class.php';
+require_once 'infinitymetrics/tests/system/agent/PersonalAgentSystemTests.class.php';
+require_once 'infinitymetrics/tests/system/agent/FullnameJNUsernameInMemoryCacheSystemTest.class.php';
 /**
- * All Unit tests for the entire application.
- * 
+ * All System Tests for the Personal Agent component. It includes system tests for the Personal Agent itself and
+ * for the his/her intelligence components.
+ *
  * @author Marcello de Sales <marcello.sales@gmail.com>
  */
-class AllUnitTests {
+class AllPersonalAgentComponentSystemTests {
     
     public static function suite() {
-        $suite = new PHPUnit_Framework_TestSuite('PHPUnit');
+        $suite = new PHPUnit_Framework_TestSuite('PHPUnit Framework');
 
-        $suite->addTest(AllUtilityLibraryUnitTests::suite());
-        $suite->addTest(AllPersonalAgentUnitTests::suite());
-        $suite->addTest(AllUserUnitTests::suite());
+        $suite->addTestSuite('PersonalAgentSystemTests');
+        $suite->addTestSuite('FullnameJNUsernameInMemoryCacheSystemTests');
 
         return $suite;
     }

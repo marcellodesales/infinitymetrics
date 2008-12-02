@@ -52,9 +52,10 @@ class UC404Test extends PHPUnit_Framework_TestCase {
      */
     public function testValidUserAuthentication() {
         try {
-            $areCreditialsOk = UserManagementController::areUserCredentialsValidOnJN(
-                                  self::USERNAME_CORRECT,self::PASSWORD_CORRECT);
-            $this->assertTrue($areCreditialsOk, "The correct user's credentials failed");
+            $agent = PersonalAgentController::authenticateJavanetUser(self::USERNAME_CORRECT,
+                                                                                self::PASSWORD_CORRECT);
+            $this->assertNotNull($agent, "The agent was not created");
+            $this->assertTrue($agent->areUserCredentialsValidOnJN(), "The agent should have the credentials verified");
 
         } catch (InfinityMetricsException $ime){
             $this->fail("The successful user's creditial authentication scenario failed: " . $ime);
@@ -64,28 +65,41 @@ class UC404Test extends PHPUnit_Framework_TestCase {
      * The test of an exceptional registration where the student doesn't enter
      * some of the field values.
      */
-    public function testMissingFieldsAuthentication() {
+    public function testWrongFieldsAuthentication() {
         try {
-            $areCreditialsNOTOk = UserManagementController::areUserCredentialsValidOnJN(
-                                    self::PASSWORD_INCORRECT, self::PASSWORD_INCORRECT);
-            $this->assertFalse($areCreditialsNOTOk, "The incorrect credentials should be invalid");
+            $agent = PersonalAgentController::authenticateJavanetUser(self::USERNAME_INCORRECT, self::PASSWORD_INCORRECT);
+            $this->assertFalse($agent->areUserCredentialsValidOnJN(), "The incorrect credentials should be invalid");
+            $this->fail("The exception must be thrown when the user is invalid");
 
-        } catch (InfinityMetricsException $ime){
-            $this->fail("The successful user's bad credentials scenario failed: " . $ime);
+        } catch (Exception $ime){
+            $this->assertNotNull($ime, "The exception is thrown when the user has passed the wrong credentials");
         }
     }
     /**
      * The test an exceptional registration where the student enteres an
      * existing username.
      */
-    public function testWrongFieldsAuthentication() {
+    public function testMissingFieldsAuthentication() {
         try {
-            $areCreditialsNOTOk = UserManagementController::areUserCredentialsValidOnJN(
-                                        self::USERNAME_INCORRECT, self::PASSWORD_INCORRECT);
-            $this->assertFalse($areCreditialsNOTOk, "The incorrect credentials should be invalid");
+            $agent = PersonalAgentController::authenticateJavanetUser("", "");
+            $this->fail("The missing fields should not create an agent and must throw an exception: " . $ime);
 
         } catch (InfinityMetricsException $ime){
-            $this->fail("The successful user's bad credentials scenario failed: " . $ime);
+            $this->assertNotNull($ime, "The exception is thrown when the user has passed the wrong credentials");
+        }
+        try {
+            $agent = PersonalAgentController::authenticateJavanetUser("", self::PASSWORD_CORRECT);
+            $this->fail("The missing java.net username should not create a new agent: " . $ime);
+
+        } catch (InfinityMetricsException $ime){
+            $this->assertNotNull($ime);
+        }
+        try {
+            $agent = PersonalAgentController::authenticateJavanetUser(self::USERNAME_CORRECT, "");
+            $this->fail("The missing password should not let the framework create a agent: " . $ime);
+
+        } catch (InfinityMetricsException $ime){
+            $this->assertNotNull($ime);
         }
     }
 

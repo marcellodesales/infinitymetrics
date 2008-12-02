@@ -65,5 +65,7 @@ class User extends PersistentUser {
             return false;
         }
     }
+
+
 }
 ?>
