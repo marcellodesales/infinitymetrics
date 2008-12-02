@@ -37,7 +37,7 @@ class PersistentUser extends PersistentBaseUser {
      */
     public function isOwnerOfProject(PersistentProject $project) {
         $stXProjec = PersistentUserXProjectPeer::retrieveByPK($this->getJnUsername(), $project->getProjectJnName());
-        return $stXProjec->getIsOwner() == 1;
+        return $stXProjec == null ? null : $stXProjec->getIsOwner() == 1;
     }
     /**
      * @return boolean verifies if the instance is a student
