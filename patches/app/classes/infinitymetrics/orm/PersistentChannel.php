@@ -74,15 +74,11 @@ class PersistentChannel extends PersistentBaseChannel {
     }
 
 
-    public function setEvents(array $events) {
-        $this->clearEvents();
-        foreach ($events as $event) {
-            if ($event instanceof PersistentEvent) {
-                $this->addEvent($event);
-            }
-            else {
-                throw new InfinityMetricsException('The array must contain only elements of type PersistentEvent');
-            }
-        }
+    public function getEvents() {
+        $criteria = new Criteria();
+        $criteria->add(PersistentEventPeer::CHANNEL_ID, $this->channel_id);
+        $criteria->add(PersistentEventPeer::PROJECT_JN_NAME, $this->project_jn_name);
+
+        return (PersistentEventPeer::doSelect($criteria));
     }
 } // PersistentChannel
