@@ -456,7 +456,7 @@ final class UserManagementController {
 
         $c = new Criteria();
         $c->add(PersistentUserPeer::USER_ID,$user_id);
-        $profile = PersistentUserPeer::doSelect($c);
+        $profile = PersistentUserPeer::doSelectOne($c);
         if ($profile == NULL) {
             $errors = array();
             $errors["userNotFound"] = "The user referred by " . $user_id . " doesn't exist";
@@ -717,7 +717,95 @@ final class UserManagementController {
         } catch (Exception $e) {
             throw $e;
         }
-         }
+  }
+
+    public static function validateJNUserProfileUpdate($username, $newPassword, $newEmail, $newFirstName, $newLastName,
+                                                            $newProjectName, $new_isProjectOwner) {
+        $error = array();
+        if (!isset($username) || $username == "") {
+            $error["username"] = "The username is empty";
+        }
+        if (!isset($newPassword) || $newPassword == "") {
+            $error["newPassword"] = "The password is empty";
+        }
+        if (!isset($newFirstName) || $newFirstName == "") {
+            $error["newFirstName"] = "The firstName is empty";
+        }
+        if (!isset($newLastName) || $newLastName == "") {
+            $error["newLastName"] = "The lastName is empty";
+        }
+        if (!isset($newEmail) || $newEmail == "") {
+            $error["newEmail"] = "The email is empty";
+        }
+        if (!isset($newProjectName) || $newProjectName == "") {
+            $error["newProjectName"] = "The java.net project name is empty";
+        }
+        if (!isset($new_isProjectOwner) || $new_isProjectOwner == "") {
+            $error["new_isOwner"] = "The information if the the student is a leader is not given";
+        }
+
+        if (count($error) > 0) {
+            throw new InfinityMetricsException("There are errors in the input", $error);
+        }
+        return true ;
+    }
+
+    public static function updateJNUserProfile($username, $newPassword, $newEmail, $newFirstName, $newLastName,
+                                                            $newProjectName, $new_isProjectOwner) {
+
+
+
+        self::validateJNUserProfileUpdate($username, $newPassword, $newEmail, $newFirstName, $newLastName,
+                                                $newProjectName, $new_isProjectOwner);
+      $newUser = self::retrieveUserByUserName($username);
+        if($newUser == null) {
+            $errors = array();
+            $errors["userNotFound"]= " the user reffered by " . $username. "doesn't exist";
+              throw new InfinityMetricsException("can't update profile",$errors);
+        }
+
+       $proj = PersistentProjectPeer::retrieveByPK($newProjectName);
+            if ($proj == null) {
+                $errors = array();
+                $errors["projectNotFound"] = "The project referred by " . $newProjectName . " doesn't exist";
+                throw new InfinityMetricsException("Can't update Student", $errors);
+            }
+        try{
+            $newUser->setFirstName($newFirstName);
+            $newUser->setLastName($newLastName);
+            $newUser->setEmail($newEmail);
+            $newUser->setJnPassword($newPassword);
+            $newUser->save();
+
+            $userProject = new PersistentUserXProject();
+            $userProject->setUser($newUser);
+            $userProject->setProjectJnName($proj->getProjectJnName());
+            $userProject->setIsOwner($new_isProjectOwner);
+            $userProject->save();
+
+            //TODO: Metrics workspace collect the names of all children project if you are IS PROJECt OWNER owner
+
+            $subject = "Welcome to Infinity Metrics 'nightly build'";
+            $body = "Hello ".$newUser->getFirstName().",\n\nThis is the confirmation Email. Your profile information
+                     at Infinity Metricshas been sucessfuly updated.\n\nPlease feel free to contact the 'Infinity
+                    Team' at any time at users@ppm8.dev.java.net.\n\nEnjoy!\n\nInfinity Metrics: Automatic
+                    Collaboration Metrics for java.net Projects\nhttp://ppm8.dev.java.net\nMailing Lists:
+                    https://ppm-8.dev.java.net/servlets/ProjectMailingListList";
+
+            //SendEmail::sendTextEmail("noreply@infinitymetrics.net", "dev@". $projectName . self::DOMAIN,
+              //                                                                  $student->getEmail(), $subject, $body);
+            return $newUser;
+
+        } catch (Exception $e) {
+            $errors = array();
+            $errors["userUpdate"] = $e->getMessage();
+            throw new InfinityMetricsException("Error updating the user profile", $errors);
+        }
+
+
+
+
+  }
 
 
 
