@@ -2,14 +2,16 @@
     include '../template/infinitymetrics-bootstrap.php';
 
 #----------------------------->>>>>>>>>>>>> Controller Usage for UC101 and UC301 ----------------------------->>>>>>>>>>>>>>>
+    
+    $user = $_SESSION["loggedUser"];
 
-    if (isset($_GET['workspace_id']))
+    if (isset($_GET['workspace_id']) && $_GET['workspace_id'] != '')
     {
         require_once('infinitymetrics/controller/MetricsWorkspaceController.class.php');
         require_once('infinitymetrics/controller/ReportController.class.php');
 
         $ws = PersistentWorkspacePeer::retrieveByPK($_GET['workspace_id']);
-}
+    }
     else {
         header('Location: workspaceCollection.php');
     }
@@ -61,6 +63,7 @@
                         ?>
                     </div>
                 </div>
+
                 <div id="content-wrap">
                     <div id="inside">
                         <div id="sidebar-right">
@@ -69,38 +72,47 @@
                                 <h2>Sharing Information</h2>
 
                                 <?php
-
+                                    echo "<div class=\"content\">\n";
+                                    echo "<div class=\"item-list\">\n";
+                                    
                                     if ( isset($_GET['type']) &&
                                          isset($_GET['workspace_id']) &&
                                          $_GET['type'] == 'own')
                                     {
                                         $wsShares = $ws->getWorkspaceShares();
+                                        
 
+                                        
                                         if ($wsShares == NULL) {
-                                            echo "<p>The workspace is not currently being shared with any other user</p>";
+                                            echo "<p>The workspace is not currently being shared with any other user</p>\n";
                                         }
                                         else {
-                                            echo "<div class=\"content\">\n";
-                                            echo "<div class=\"item-list\">\n";
+
                                             echo "Currently sharing this Workspace with:\n";
                                             echo "<ul>\n";
                                             foreach ($wsShares as $wss) {
                                                 echo "<li>".$wss->getUser()->getJnUsername()."</li>\n";
                                             }
                                             echo "</ul>\n";
-                                            echo "</div>\n</div>\n";
                                         }
-                                        echo    "<br />";
+                                        echo    "<br />\n";
                                         echo    "<form action=\"shareWorkspace.php\" accept-charset=\"UTF-8\" method=\"post\" id=\"node-form\">
                                                     <div class=\"node-form\">
                                                         <input name=\"shareWS\" id=\"edit-submit\" value=\"Share Workspace\" class=\"form-submit\" type=\"submit\" />
                                                         <input name=\"workspace_id\" id=\"workspace_id\" value=\"{$_GET['workspace_id']}\" type=\"hidden\" />
                                                     </div>
-                                                </form>";
+                                                </form>\n<br /><br />";
                                     }
                                     elseif (isset($_GET['type']) && $_GET['type'] == 'shared') {
-                                        echo "This workspace is currently being shared with you by <b>".
-                                             $ws->getUser()->getJnUsername()."</b>\n";
+                                        echo "<p>This workspace is currently being shared with you by <b>".
+                                             $ws->getUser()->getJnUsername()."</b></p>\n";
+                                    }
+                                    
+                                    echo "</div>\n</div>\n";
+                                    
+                                    if ($ws->getState() == 'NEW' || $ws->getState() == 'PAUSED')
+                                    {
+                                        include 'wsStateReminder.html';
                                     }
                                 ?>
 
@@ -136,8 +148,6 @@
                                                 }
                                             }
                                             
-                                            echo ReportController::retrieveWorkspaceReport($ws->getWorkspaceId());
-
                                             echo "<h2>Workspace Information</h2>\n";
                                             
                                             echo "<div style=\"float: left\">";
@@ -148,12 +158,15 @@
                                             echo "<tr><td><strong>State:</strong></td><td><span style=\"font-weight: bold; color:$color\">".$ws->getState()."</span></td></tr>\n";
                                             echo "</table>\n";
 
-                                            echo '<form action="updateWorkspace.php" accept-charset="UTF-8" method="post" id="node-form">
-                                                    <div class="node-form">
-                                                        <input name="updateWS" id="edit-submit" value="Change Workspace Information" class="form-submit" type="submit" />
-                                                    </div>
-                                                  </form>';
-
+                                            if (isset($_GET['type']) && $_GET['type'] == 'own')
+                                            {
+                                                echo '<form action="updateWorkspace.php" accept-charset="UTF-8" method="post" id="node-form">
+                                                        <div class="node-form">
+                                                            <input name="updateWS" id="edit-submit" value="Change Workspace Information" class="form-submit" type="submit" />
+                                                        </div>
+                                                      </form>';
+                                            }
+                                            
                                             echo "<br />";
                                             echo "<h3>Projects currently in this Workspace</h3>\n";
                                             echo "<strong>".$ws->getProjectJnName()." <small>(PARENT PROJECT)</small></strong>";
@@ -162,29 +175,27 @@
                                             foreach ($ws->getProjects() as $project)
                                             {
                                                 $projectJnName = $project->getProjectJnName();
-                                                echo "<li><a href=\"../report/projectReport.php?project_id=$projectJnName\">$projectJnName</a></li>\n";
+                                                echo "<li>\n";
+                                                echo "<a href=\"../report/projectReport.php?project_id=$projectJnName\">$projectJnName</a>";
+                                                echo "&nbsp;&nbsp;<a href=\"https://$projectJnName.dev.java.net/\"><img style=\"border: 0\" src=\"../template/icons/i16/misc/world_link.png\" /></a>\n";
+                                                echo "</li>\n";
                                             }
                                             echo "</ul>";                                            
                                                                                         
                                             echo "</div>\n";
                                             
-                                            echo '<div id="bar_chart_div" style="float:right"></div>';
+                                            echo "<div style=\"float: right; width: 420px; border: thin groove silver; padding: 15px\">";
                                             
+                                            echo ReportController::retrieveWorkspaceReport($ws->getWorkspaceId());
+
+                                            echo '<div id="bar_chart_div"></div>';
+                                            echo '</div>';
                                             echo '<div style="clear:both"></div>';
                                         }
                                     ?>
                                     
                                     <br /><br />
-                                    
 
-                                    
-                                    <?php
-
-                                        if (isset($_GET['type']) && $_GET['type'] != 'shared')
-                                        {
-
-                                        }
-                                    ?>
 
                                 </div>
                                 <br class="clear" />

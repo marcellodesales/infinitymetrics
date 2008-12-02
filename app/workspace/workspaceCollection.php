@@ -5,23 +5,24 @@
 
     require_once('infinitymetrics/controller/MetricsWorkspaceController.class.php');
     require_once('infinitymetrics/controller/UserManagementController.class.php');
+    require_once('infinitymetrics/controller/ReportController.class.php');
 
     $user = $_SESSION["loggedUser"];
 
     try {
         $wsCollection = MetricsWorkspaceController::retrieveWorkspaceCollection($user->getUserId());
-
-        if (count($wsCollection['OWN']) == 0)
-        {
+        
+        if (count($wsCollection['OWN']) == 0) {
             $_SESSION['noOwnWorkspaces'] = "No Workspaces found";
+        }
+        
+        if (count($wsCollection['SHARED']) == 0) {
+            $_SESSION['noSharedWorkspaces'] = "No Shared Workspaces found";
         }
 
         $criteria = new Criteria();
         $criteria->add(PersistentUserXProjectPeer::JN_USERNAME, $user->getJnUsername());
         $criteria->add(PersistentUserXProjectPeer::IS_OWNER, 1);
-
-            // THIS QUERY NEEDS TO BE REFACTORED TO EXCLUDE THOSE USER-PROJECT PAIRS THAT ALREADY EXIST IN THE WORKSPACE TABLE
-            // I TRIED WITH SUBQUERIES AND 'NOT IN', BUT I COULDN'T FIGURE IT OUT BECAUSE THERE IS A  MISMATCH OF JN_USERNAME IN THE uXP TABLE AND USER_ID IN THE WORKSPACE TABLE
 
         $uXps = PersistentUserXProjectPeer::doSelect($criteria);
         
@@ -31,15 +32,9 @@
             $criteria->add(PersistentWorkspacePeer::USER_ID, $user->getUserId());
             $criteria->add(PersistentWorkspacePeer::PROJECT_JN_NAME, $uXp->getProjectJnName());
 
-            if (PersistentWorkspacePeer::doCount($criteria) == 0)
-            {
+            if (PersistentWorkspacePeer::doCount($criteria) == 0) {
                 $_SESSION['available_user_x_projects'][] = $uXp;
             }
-        }
-
-        if (count($wsCollection['OWN']) == 0)
-        {
-            $_SESSION['noSharedWorkspaces'] = "No Shared Workspaces found";
         }
     }
     catch (Exception $e) {
@@ -97,13 +92,36 @@
                     <div id="inside">
                         <div id="sidebar-right">
                             <div id="block-user-3" class="block block-user">
-                                <h2>All users are welcomed</h2>
-                                <div class="content" align="center">
-                                    <img src="../../template/images/techglobe2.jpg" alt="Globe" />
-                                </div>
-                            </div>
-                        </div>
-                    </div><!-- End "inside" -->
+                                <br />
+                                
+                                <?php
+                                    if(isset($_SESSION['available_projects']))
+                                        {
+                                            echo "<div class=\"content\">\n";
+                                            echo "<div class=\"item-list\">\n";
+                                            echo "<img src=\"../template/icons/i24/misc/info.png\" align=\"left\" alt=\"info_icon\" />\n";
+                                            echo "<h2>&nbsp;You have new projects</h2>\n";
+                                            echo "<p>We found the following Projects for which you have not created a Workpsace:</p>\n";
+                                            echo "<ul>\n";
+                                            foreach ($_SESSION['available_user_x_projects'] as $uXp) {
+                                                echo "<li><a href=\"./createWorkspace.php?project_jn_name=".$uXp->getProjectJnName()."\">".$uXp->getProjectJnName()."</a></li>";
+                                            }
+                                            echo "</ul><br />\n";
+                                            echo "</div>\n";
+                                            echo "</div>\n";
+
+                                            $_SESSION['available_user_x_projects'] = '';
+                                            unset($_SESSION['available_user_x_projects']);
+                                        }
+
+                                        include 'wsStateReminder.html';
+                                    ?>
+
+                                    
+                                
+                            </div><!-- end block-user-3 -->
+                        </div><!-- end sidebar-right -->
+                    <!-- End "inside" -->
 
                     <div id="content">
 
@@ -149,6 +167,7 @@
                                             }
                                             echo "</ul>\n";
                                         }
+                                        echo '<br />';
 
                                         echo "<h3>Workspaces shared with me</h3>\n";
 
@@ -170,36 +189,27 @@
                                             }
                                             echo "</ul>\n";
                                         }
+                                        echo '<br />';
+                                        echo '<form action="createWorkspace.php" accept-charset="UTF-8" method="post" id="node-form">
+                                                <div class="node-form">
+                                                    <input name="createWS" id="edit-submit" value="Create New Workspace" class="form-submit" type="submit" />
+                                                </div>
+                                              </form>';
+                                                        
                                         echo "</div>";
-                                        echo "<div style=\"float: right; width: 30%; border: thin groove silver; padding: 15px\">";
+                                        echo "<div style=\"float: right; width: 420px; border: thin groove silver; padding: 15px\">";
+                                        
+                                        echo ReportController::retrieveWorkspaceCollectionReport($user->getUserId());
 
-                                        if(isset($_SESSION['available_projects']))
-                                        {
-                                            echo "<p>It seems you have the following Projects for which no Workpsace exists:</p>";
-                                            echo "<ul>";
-                                            foreach ($_SESSION['available_user_x_projects'] as $uXp)
-                                            {
-                                                echo "<li>".$uXp->getProjectJnName()."</li>";
-                                            }
-                                            echo "</ul>";
-                                            echo "</div";
-
-                                            $_SESSION['available_user_x_projects'] = '';
-                                            unset($_SESSION['available_user_x_projects']);
-                                        }
-
-                                        echo '<div style="clear: both"></div>';
-
+                                        echo "<div id=\"bar_chart_div\"></div>";
+                                        echo "</div>";
+                                        echo "<div style=\"clear: both\"></div>\n";
                                     }
                                 ?>
-
+                                
                                 <br />
-                                <form action="createWorkspace.php" accept-charset="UTF-8" method="post" id="node-form">
-                                    <div class="node-form">
-                                        <input name="createWS" id="edit-submit" value="Create Workspace" class="form-submit" type="submit" />
-                                    </div>
-                                </form>
-                            </div>
+
+                            </div><!-- end content-in -->
 
                         </div> <!-- End of blue box -->
                         <br class="clear" />
