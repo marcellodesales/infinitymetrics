@@ -67,61 +67,18 @@ class PersonalAgentTest extends PHPUnit_Framework_TestCase {
         Java.net user");
     }
     /**
-     * The test to verify the email address, fullname and list of projects the user has 
-     * (
-    [glassfish] => Array
-        (
-            [0] => Observer
-        )
-    [jax-ws] => Array
-        (
-            [0] => Observer
-        )
-    [ppm] => Array
-        (
-            [0] => Content Developer
-            [1] => Developer
-        )
-    [ppm-8] => Array
-        (
-            [0] => Developer
-            [1] => Project Owner
-        )
-    [sv-web-jug] => Array
-        (
-            [0] => Observer
-        )
-    )
-     */
-    public function testPersonalAgentLogin() {
-//        echo "Testing Agent Login";
-        $this->assertEquals($this->user->getEmail(), $this->agent->getAuthenticatedEmail(), "The value of the email
-               retrieved by the Agent is incorrect.");
-        $this->assertEquals(null, $this->agent->getAuthenticatedFullName(), "The value of the fullname retrieved by
-               the agent is incorrect.");
-        $this->assertTrue(count(array_keys($this->agent->getAuthenticatedProjectsMembershipList())) > 1);
-
-        foreach($this->agent->getAuthenticatedProjectsMembershipList() as $projectName => $rolesArray) {
-            $this->assertNotEquals("", $projectName);
-            foreach ($rolesArray as $role) {
-                $this->assertNotEquals("", $role);
-            }
-        }
-    }
-
-    /**
      * Verify the in-memory PersonalAgent instances
      */
     public function testPeronalAgentComparison() {
 //        echo "Testing Agent Comparison";
         $a = new PersonalAgent($this->user);
         $b = $this->agent;
-        $this->assertTrue($b === $this->agent);
-        $this->assertTrue($b !== $a);
-        $this->assertTrue($a->equals($this->agent));
-        $this->assertTrue($b->equals($a));
-        $this->assertTrue($a instanceof PersonalAgent);
-        $this->assertTrue($a instanceof PersonalAgent);
+        $this->assertTrue($b === $this->agent, "The reference of the 2 agents MUST be the same");
+        $this->assertTrue($b !== $a, "The references must be different");
+        $this->assertTrue($a->equals($this->agent), "The agents must be equals because they are from the same user");
+        $this->assertTrue($b->equals($a), "The agents must be the same because they are references to the same object");
+        $this->assertTrue($a instanceof PersonalAgent, "The agent instance must be of class PersonalAgent");
+        $this->assertTrue($b instanceof PersonalAgent, "The agent instance reference must of class PersonalAgent");
     }
     
     protected function tearDown() {
