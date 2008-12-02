@@ -55,12 +55,16 @@ class Report
      */
     private $validEventCategories = array('COMMIT', 'DOCUMENTATION', 'FORUM', 'ISSUE', 'MAILING_LIST');
 
+    private $validExtendedCategories;
+
     /**
      * Defautlt constructor
      * @return <Report>
      */
     public function __construct() {
         $this->metrics = array();
+        $this->validExtendedCategories = $this->validEventCategories;
+        $this->validExtendedCategories[] = 'CUSTOM_EVENT';
     }
 
     /**
@@ -97,6 +101,14 @@ class Report
         return $this->validEventCategories;
     }
 
+    /**
+     * Returns the array of ValidExtendedCategories
+     * @return <array>
+     */
+    public function getExtendedCategories() {
+        return $this->validExtendedCategories;
+    }
+
     public function getWorkspaceCollectionMetrics($user_id) {
         if (!isset($user_id) || $user_id == '') {
             throw new InfinityMetricsException('The user_id is required to generate this report');
@@ -117,7 +129,7 @@ class Report
 
                 $this->metrics[$ws->getTitle()] = array();
 
-                foreach (self::getEventCategories() as $category)
+                foreach (self::getExtendedCategories() as $category)
                 {
                     $this->metrics[$ws->getTitle()][$category] = 0;
                 }
@@ -198,13 +210,11 @@ class Report
                 }
             }
             
-            foreach ($this->metrics as $key => $value)
+            foreach ($this->metrics as $jnUsername => $value)
             {
-                $this->metrics[$key] = array();
-
                 foreach ($this->validEventCategories as $category)
                 {
-                    $this->metrics[$key][$category] = 0;
+                    $this->metrics[$jnUsername][$category] = 0;
 
                     $criteria->clear();
                     $criteria->add(PersistentChannelPeer::CATEGORY, $category);
@@ -214,9 +224,9 @@ class Report
                     foreach ($channels as $channel)
                     {
                         $criteria->clear();
-                        $criteria->add(PersistentEventPeer::JN_USERNAME, $key);
+                        $criteria->add(PersistentEventPeer::JN_USERNAME, $jnUsername);
 
-                        $this->metrics[$key][$category] += count($channel->getEvents($criteria));
+                        $this->metrics[$jnUsername][$category] += count($channel->getEvents($criteria));
                     }
                 }
             }
