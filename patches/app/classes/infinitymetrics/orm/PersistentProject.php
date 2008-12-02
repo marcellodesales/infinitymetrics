@@ -32,7 +32,12 @@ class PersistentProject extends PersistentBaseProject {
 	}
 
     public function getTotalEventsByCategory() {
-        $categories = array('COMMIT', 'DOCUMENTATION', 'FORUM', 'ISSUE', 'MAILING_LIST');
+        $categories = array (   'COMMIT',
+                                'DOCUMENTATION',
+                                'FORUM',
+                                'ISSUE',
+                                'MAILING_LIST' );
+
         $totalEvents = array();
         $criteria = new Criteria();
 
@@ -48,6 +53,10 @@ class PersistentProject extends PersistentBaseProject {
                 $totalEvents[$category] += count($channel->getEvents());
             }
         }
+
+        $criteria->clear();
+        $criteria->add(PersistentCustomEventPeer::PROJECT_JN_NAME, $this->project_jn_name);
+        $totalEvents['CUSTOM_EVENT'] = PersistentCustomEventPeer::doCount($criteria);
 
         return $totalEvents;
     }
