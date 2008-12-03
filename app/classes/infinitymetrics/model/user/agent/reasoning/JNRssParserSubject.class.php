@@ -28,20 +28,25 @@ class JNRssParserSubject extends ObservableSubject {
     private $xmlReader;
     
     private $rssFeedUrl;
+
+    private $rssInstance;
     
-    public function __construct($rssFeedUrl) {
+    public function __construct($rssFeedUrl, $rssInstance) {
         $this->rssFeedUrl = $rssFeedUrl;
+        $this->rssInstance = $rssInstance;
         $this->xmlReader = new XMLReader();
     }
 
-    public function collectRss() {
+    public function parseRss() {
 
         if (!$this->hasObserver()) {
             throw new Exception("Please add observers before collecting Rss");
         }
-
-        $this->xmlReader->open($this->rssFeedUrl);
-        
+        if (isset($this->rssInstance)) {
+            $this->xmlReader->XML($this->rssInstance);
+        } else {
+            $this->xmlReader->open($this->rssFeedUrl);
+        }
         $rss = new CollabnetRssChannel($this->rssFeedUrl);
         $numItems = 0;
         $currentTag = "";
@@ -70,6 +75,9 @@ class JNRssParserSubject extends ObservableSubject {
                         if ($reader->nodeType == XMLREADER::ELEMENT) {
                             if ($reader->localName == "title") {
                                 $reader->read();
+                                if ($reader->value == "No Messages in Mailing List") {
+                                    break 3;
+                                }
                                 $builder->title($reader->value);
                             } else
                             if ($reader->localName == "link") {
@@ -109,9 +117,30 @@ class JNRssParserSubject extends ObservableSubject {
                     }
                 }
             }
-        }  
-        $this->updateSubject($rss);
+        }
         $this->xmlReader->close();
+        $this->updateSubject($rss);        
     }
 }
+//$rssSource = "<?xml version=\"1.0\" encoding=\"UTF-8\"
+//<rss xmlns:taxo=\"http://purl.org/rss/1.0/modules/taxonomy/\" xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" version=\"2.0\">
+//  <channel>
+//    <title>Message List in RSS Format for Project ppm-8, Mailing List process</title>
+//    <link>https://ppm-8.dev.java.net/servlets/BrowseList?list=process</link>
+//    <description>Message List in RSS Format for Project ppm-8, Mailing List process</description>
+//    <item>
+//      <title>No Messages in Mailing List</title>
+//
+//      <link>https://ppm-8.dev.java.net/servlets/BrowseList?list=process</link>
+//      <description>No Messages in Mailing List process</description>
+//      <guid>https://ppm-8.dev.java.net/servlets/BrowseList?list=process</guid>
+//    </item>
+//  </channel>
+//</rss>";
+
+//$rss = new JNRssParserSubject("https://ppm-8.dev.java.net/servlets/MailingListRSS?listName=process");
+//$rss = new JNRssParserSubject($rssSource);
+//require_once 'infinitymetrics/model/user/agent/reasoning/RssToDatabaseObserver.class.php';
+//$rss->addObserver(new RssToDatabaseObserver());
+//$rss->collectRss();
 ?>

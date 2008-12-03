@@ -25,8 +25,7 @@ class InfinityMetricsException extends Exception {
     }
     
     public function  __toString() {
-        return "InfinityMetricsException (".$this->code."): " . $this->message . " - " .
-                                                                                   implode(" ", $this->getErrorList());
+        return $this->message;
     }
 }
 ?>

@@ -32,7 +32,7 @@ final class FullnameJNUsernameInMemoryCache {
      * @param string $username is a java.net username that has been found to match a given fullname
      * @param string $fullName is the fullname found to match the given fullname
      */
-    public function addUsernameForFullName($username, $fullName) {
+    public function addUsernameForFullNameToCache($username, $fullName) {
         $this->fullNamesUsernamesCache[$fullName] = $username;
     }
     public function isFullnameWithUsernameInCache($fullName) {
@@ -49,8 +49,7 @@ final class FullnameJNUsernameInMemoryCache {
         } else {
             $possibleFullNameFromPersistence = $this->getPossibleUsernameForFullName($fullName);
             if (isset ($possibleFullNameFromPersistence) && $possibleFullNameFromPersistence != "") {
-                $this->addUsernameForFullName($possibleFullNameFromPersistence, $fullName);
-                $this->updatePersistentReporsitory($possibleFullNameFromPersistence, $fullName);
+                $this->addUsernameForFullNameToCache($possibleFullNameFromPersistence, $fullName);
             }
             return $possibleFullNameFromPersistence;
         }

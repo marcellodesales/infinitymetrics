@@ -19,7 +19,7 @@
  * For more information please see <http://ppm-8.dev.java.net>.
  */
 require_once 'PHPUnit/Framework.php';
-//require_once 'infinitymetrics/tests/functional/agent/UC400Test.class.php';
+require_once 'infinitymetrics/tests/functional/agent/UC400Test.class.php';
 require_once 'infinitymetrics/tests/functional/agent/UC401Test.class.php';
 require_once 'infinitymetrics/tests/functional/agent/UC402Test.class.php';
 require_once 'infinitymetrics/tests/functional/agent/UC403Test.class.php';
@@ -34,7 +34,7 @@ class AllPersonalAgentComponentFunctionalTests {
     public static function suite() {
         $suite = new PHPUnit_Framework_TestSuite('PHPUnit Framework');
 
-//        $suite->addTestSuite('UC400Test');
+        $suite->addTestSuite('UC400Test');
         $suite->addTestSuite('UC401Test');
         $suite->addTestSuite('UC402Test');
         $suite->addTestSuite('UC403Test');

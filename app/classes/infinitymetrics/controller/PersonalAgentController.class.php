@@ -72,7 +72,34 @@ final class PersonalAgentController {
     public static function collectRssData(PersistentUser $user, $projectName) {
         $agent = self::makeAgentForUser($user);
         $rssToDbObserver = new RssToDatabaseObserver();
-        $agent->collectRssDataFromProject($projectName, $rssToDbObserver);
+        $project = PersistentProjectPeer::retrieveByPK($projectName);
+        if ($project == null) {
+            $error["projectNoFound"] = "There's no project called ". $projectName . " registered";
+            throw new InfinityMetricsException("Personal Agent can't collect Rss Data", $error);
+        }
+        if ($project->getParentProjectJnName() == "") {
+            $c = new Criteria();
+            $c->add(PersistentProjectPeer::PARENT_PROJECT_JN_NAME, $projectName);
+            $subProjects = PersistentProjectPeer::doSelect($c);
+            foreach ($subProjects as $subProj) {
+                echo "\n Starting collecting for " . $subProj->getProjectJnName();
+                $agent->collectRssDataFromProject($subProj->getProjectJnName(), $rssToDbObserver);
+            }
+//            $con = Propel::getConnection(PersistentBaseUserPeer::DATABASE_NAME);
+//            $sql = "SELECT project_jn_name
+//                    FROM project
+//                    WHERE parent_project_jn_name = '$projectName'";
+//            $stmt = $con->prepare($sql);
+//            $stmt->execute();
+//            $subProjectsNames = $stmt->fetch(PDO::FETCH_NUM);
+//            if (count($subProjectsNames) > 0) {
+//                foreach ($subProjectsNames as $subProjName) {
+//                    $agent->collectRssDataFromProject($subProjName, $rssToDbObserver);
+//                }
+//            }
+        } else {
+            $agent->collectRssDataFromProject($projectName, $rssToDbObserver);
+        }
     }
     /**
      * This method is the implementation of UC401

@@ -27,6 +27,8 @@ require_once 'infinitymetrics/util/screenscraperapi/JNUrlBuilder.class.php';
 require_once 'infinitymetrics/util/screenscraperapi/useredit/JNUserEditImpl.class.php';
 require_once 'infinitymetrics/util/screenscraperapi/projecthome/JNProjectHomeImpl.class.php';
 require_once 'infinitymetrics/util/screenscraperapi/mailinglist/JNMailingListsImpl.class.php';
+require_once 'infinitymetrics/util/screenscraperapi/rss/JNRssImpl.class.php';
+
 /**
  * Basic user class for the metrics workspace. User has username, password from
  * Java.net.
@@ -151,14 +153,19 @@ class PersonalAgent {
      * @param Observer $observer an observer with regards to the Database feed of data.
      */
     public function collectRssDataFromProject($projectName, Observer $observer) {
-        $this->getListOfRssChannels($projectName);
-        foreach($this->getListOfRssChannels($projectName) as $rss) {
-            if (is_numeric((int)$rss["id"])) {
-                $this->collectRssDataFromProjectForum($projectName, $rss["id"], $observer);
-            } else {
-                $this->collectRssDataFromProjectMailingList($projectName, $rss["id"], $observer);
+        $events = $this->getListOfRssChannels($projectName);
+        
+        if (count($events["mailingLists"]) > 0) {
+            foreach ($events["mailingLists"] as $channelId => $properties) {
+                $this->collectRssDataFromProjectMailingList($projectName, $channelId, $observer);
             }
         }
+        if (count($events["forums"]) > 0) {
+            foreach ($events["forums"] as $channelId => $properties) {
+                $this->collectRssDataFromProjectForum($projectName, $channelId, $observer);
+            }
+        }
+        echo "\nFinishing with project " . $projectName;
     }
     /**
      * Collects the RSS Data feed from the given MAILING LIST for a given observer to process.
@@ -167,12 +174,11 @@ class PersonalAgent {
      * @param Observer $observer is an instance of an observer interested in the Rss data.
      */
     private function collectRssDataFromProjectMailingList($projectName, $mailingList, Observer $observer) {
-        $url = CollabnetRssChannel::makeMailingListUrl($projectName, $mailingList);
-        
-        $jRssParser = new JNRssParserSubject($url);
+        $rssWS = new JNRssImpl($this->session);
+        $url = JNUrlBuilder::makeProjectRssUrlForMailingLists($projectName, $mailingList);
+        $jRssParser = new JNRssParserSubject($url, $rssWS->getRssContentsForMailingList($projectName, $mailingList));
         $jRssParser->addObserver($observer);
-
-        $jRssParser->collectRss();
+        $jRssParser->parseRss();
     }
     /**
      * Collects the RSS Data feed from the given Discussion Forum for a given observer to process.
@@ -181,12 +187,11 @@ class PersonalAgent {
      * @param Observer $observer is an instance of an observer interested in the Rss data.
      */
     private function collectRssDataFromProjectForum($projectName, $forumId, Observer $observer) {
-        $url = CollabnetRssChannel::makeDiscussionForumtUrl($projectName, $forumId);
-
-        $jRssParser = new JNRssParserSubject($url);
+        $rssWS = new JNRssImpl($this->session);
+        $url = JNUrlBuilder::makeProjectRssUrlForForum($projectName, $forumId);
+        $jRssParser = new JNRssParserSubject($url, $rssWS->getRssContentsForForum($projectName, $forumId));
         $jRssParser->addObserver($observer);
-
-        $jRssParser->collectRss();
+        $jRssParser->parseRss();
     }
     /**
      * @param string $projectName is the name of the projecr

@@ -18,11 +18,15 @@
  * and is licensed under the Berkeley Software Distribution (BSD).
  * For more information please see <http://ppm-8.dev.java.net>.
  */
+require_once 'propel/Propel.php';
+Propel::init('infinitymetrics/orm/config/om-conf.php');
+
 include_once 'infinitymetrics/util/go4pattenrs/behavorial/observer/Observable.class.php';
 include_once 'infinitymetrics/util/go4pattenrs/behavorial/observer/Observer.class.php';
+include_once 'infinitymetrics/util/ArrayList.class.php';
 include_once 'infinitymetrics/orm/PersistentChannel.php';
-include_once 'infinitymetrics/orm/PersistentEvent.php';
-
+include_once 'infinitymetrics/orm/PersistentProject.php';
+include_once 'infinitymetrics/model/user/agent/reasoning/FullnameJNUsernameInMemoryCache.class.php';
 /**
  * Basic user class for the metrics workspace. User has username, password from
  * Java.net.
@@ -47,14 +51,14 @@ class RssToDatabaseObserver implements Observer {
      */
     private function getRssFeedCategory($channelID) {
         switch (strtolower($channelID)) {
-            case "announces" : return "MAILING_LIST";
+            case "announce" : return "MAILING_LIST";
             case "cvs"       : return "COMMITS";
             case "dev"       : return "MAILING_LIST";
             case "users"     : return "MAILING_LIST";
             case "issues"    : return "ISSUE";
             case "commits"   : return "COMMIT";
             case "documents" : return "DOCUMENTATION";
-            default : return "FORUM";
+            default : return (int)$channelID ? "FORUM" : "MAILING_LIST";
         }
     }
     /**
@@ -65,8 +69,20 @@ class RssToDatabaseObserver implements Observer {
      * It saves all the events from the CollabnetRssChannel into the database.
      */
     public function update($collabnetRssChannel) {
+        $channelId = $collabnetRssChannel->getChannelId();
+        if (!isset($channelId) || $channelId == null || $channelId == "") {
+            //if the agent givens incorrect values, then just don't do anything...
+            return;
+        }
+        $rssChannel = $collabnetRssChannel->getRssChannel();
+        $allEvents = $rssChannel->getItems();
+
+        if (count($allEvents) == 0) {
+            return;
+        }
         $project = PersistentProjectPeer::retrieveByPK($collabnetRssChannel->getProjectName());
         if (!isset($project)) {
+            //TODO: REMOVE THIS ONCE THE PROJECTS ARE BEIN COLLECTED AUTOMATICALLY
             //creates a new project in case it doesn't exist... It should never happen
             //but to make sure we have data on the server.
             $project = new PersistentProject();
@@ -83,19 +99,28 @@ class RssToDatabaseObserver implements Observer {
             $channel->setChannelId($collabnetRssChannel->getChannelId());
             $channel->setProjectJnName($collabnetRssChannel->getProjectName());
             $channel->setCategory($this->getRssFeedCategory($collabnetRssChannel->getChannelId()));
-            $channel->setTitle($collabnetRssChannel->getChannelTitle());
+            $channel->setTitle(str_replace("'", " ", $collabnetRssChannel->getChannelTitle()));
             $channel->save();
         }
 
-        $rssChannel = $collabnetRssChannel->getRssChannel();
-        $allEvents = $rssChannel->getItems();
         $crit = new Criteria();
         foreach($allEvents as $event) {
             try {
                 $crit->add(PersistentEventPeer::EVENT_ID, $event->getMessageNumber());
                 $crit->add(PersistentEventPeer::PROJECT_JN_NAME, $collabnetRssChannel->getProjectName());
                 $crit->add(PersistentEventPeer::CHANNEL_ID, $channel->getChannelId());
-                $crit->add(PersistentEventPeer::JN_USERNAME, $event->getAuthorUsername());
+                $authorName = str_replace("'", " ", str_replace("@dev.java.net", "", $event->getAuthorUsername()));
+                if (strpos($authorName, " ")) {
+                    $cache = FullnameJNUsernameInMemoryCache::getInstance();
+                    $possibleUsernameMatch = $cache->getUsernameFromFullname($authorName);
+                    if (isset($possibleUsernameMatch)) {
+                        $crit->add(PersistentEventPeer::JN_USERNAME, $possibleUsernameMatch);
+                    } else {
+                        $crit->add(PersistentEventPeer::JN_USERNAME, $authorName);
+                    }
+                } else {
+                    $crit->add(PersistentEventPeer::JN_USERNAME, $authorName);
+                }
                 $crit->add(PersistentEventPeer::DATE, DateTimeUtil::getMySQLDate($event->getPublicationDateForMySql()));
                 $crit->setDbName(PersistentEventPeer::DATABASE_NAME);
                 PersistentEventPeer::doInsert($crit);
@@ -104,6 +129,7 @@ class RssToDatabaseObserver implements Observer {
             } catch (Exception $e) {
                 //When an entry exists already. This might happen when the agent tries to save
                 //a list tha has created before. This is a safe-net just to make sure.
+                echo $e->__toString();
             }
         }
     }
