@@ -1,7 +1,7 @@
 <?php
     include '../template/infinitymetrics-bootstrap.php';
 
-#----------------------------->>>>>>>>>>>>> Controller Usage for UC101 and UC301 ----------------------------->>>>>>>>>>>>>>>
+#----------------------------->>>>>>>>>>>>> Controller Usage for UC301 ----------------------------->>>>>>>>>>>>>>>
     //for debugging
     //$_GET['project_id']='PPM-1';
 
@@ -12,6 +12,13 @@
         require_once('infinitymetrics/controller/ReportController.class.php');
 
         $project = PersistentProjectPeer::retrieveByPK($_GET['project_id']);
+
+        try {
+            $reportScript = ReportController::retrieveProjectReport($project->getProjectJnName());
+        }
+        catch (InfinityMetricsException $ime) {
+            $_SESSION['report_error'] = $ime;
+        }
 
         $eventAuthors = $project->getDistinctEventAuthors();
 
@@ -43,8 +50,8 @@
     #breadscrum[URL] = Title
     $breadcrums = array(
                         $_SERVER["home_address"] => "Home",
-                        $_SERVER["home_address"]."/workspace/workspaceCollection.php" => "Workspace Collection",
-                        $_SERVER["home_address"]."/workspace/viewWorkspace.php" => "View Workspace",
+                        $_SERVER["home_address"]."../workspace/workspaceCollection.php" => "Workspace Collection",
+                        $_SERVER["home_address"]."../workspace/viewWorkspace.php" => "View Workspace",
                         $_SERVER["home_address"].$_SERVER['PHP_SELF'] => "Project Report"
                   );
 
@@ -99,7 +106,7 @@
                                                 {
                                                     if ($userObj instanceof PersistentUser) {
                                                         $u = new PersistentUser();
-                                                        echo "<li><a href=\"./userReport.php?user_id=".$userObj->getUserId()."\">";
+                                                        echo "<li><a href=\"./userReport.php?user_id=".$userObj->getUserId()."&project_id=".$_GET['project_id']."\">";
                                                                 
                                                         if ($userObj->isOwnerOfProject($project)) {
                                                             echo "<strong>".$userObj->getFirstName()." ".$userObj->getLastName()."</a></strong>";
@@ -127,7 +134,7 @@
                                 <div class="t"><div class="b"><div class="l"><div class="r"><div class="bl"><div class="br"><div class="tl"><div class="tr">
                                     <div class="content-in">
                                         <h2>Project Metrics Report</h2>
-                                        <div style="float: left">
+                                        <div style="float: left; width: 250px">
 
                                             <h3><?php echo "{$_GET['project_id']}&nbsp;&nbsp;<a href=\"https://{$_GET['project_id']}.dev.java.net/\"><img style=\"border: 0\" src=\"../template/icons/i16/misc/world_link.png\" /></a>\n"; ?></h3>
                                             <br />
@@ -148,9 +155,9 @@
 
                                         <div style="float: right; width: 420px; border: thin groove silver; padding: 15px">
 
-                                            <?php echo ReportController::retrieveProjectReport($project->getProjectJnName()); ?>
-
+                                            <?php echo $reportScript ?>
                                             <div id="bar_chart_div"></div>
+
                                         </div>
                                         <div style="clear: both"></div>
 

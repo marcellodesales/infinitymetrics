@@ -1,8 +1,11 @@
 <?php
     include '../template/infinitymetrics-bootstrap.php';
 
-#----------------------------->>>>>>>>>>>>> Controller Usage for UC101 and UC301 ----------------------------->>>>>>>>>>>>>>>
-    
+#----------------------------->>>>>>>>>>>>> Controller Usage for UC101 and UC303 ----------------------------->>>>>>>>>>>>>>>
+    //for debugging
+    //$_GET['type'] = 'own';
+    //$_GET['workspace_id'] = '2';
+
     $user = $_SESSION["loggedUser"];
 
     if (isset($_GET['workspace_id']) && $_GET['workspace_id'] != '')
@@ -11,6 +14,13 @@
         require_once('infinitymetrics/controller/ReportController.class.php');
 
         $ws = PersistentWorkspacePeer::retrieveByPK($_GET['workspace_id']);
+
+        try {
+            $reportScript = ReportController::retrieveWorkspaceReport($ws->getWorkspaceId());
+        }
+        catch (InfinityMetricsException $ime) {
+            $_SESSION["report_error"] = $ime;
+        }
     }
     else {
         header('Location: workspaceCollection.php');
@@ -25,7 +35,7 @@
     $breadcrums = array(
                         $_SERVER["home_address"] => "Home",
                         $_SERVER["home_address"]."/workspace/workspaceCollection.php" => "Workspace Collection",
-                        $_SERVER["home_address"].$_SERVER['PHP_SELF'] => "View Workspace"
+                        $_SERVER["home_address"].$_SERVER['PHP_SELF'] => $ws->getTitle()
                   );
 
     #leftMenu[n]["active"] - If the menu item is active or not
@@ -42,12 +52,12 @@
 <html class="js" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <head>
     <title>Infinity Metrics: <?php echo $subUseCase; ?></title>
-    <?php include 'static-js-css.php';  ?>
+    <?php include 'static-js-css.php' ?>
     <?php include 'user-signup-header-adds.php' ?>
 </head>
-<body class="<?php echo $enableLeftNav ? $leftNavClass : $NoLeftNavClass; ?>">
+<body class="<?php echo $enableLeftNav ? $leftNavClass : $NoLeftNavClass ?>">
 
-    <?php  include 'top-navigation.php';  ?>
+    <?php include 'top-navigation.php' ?>
 
                 <div id="breadcrumb" class="alone">
                     <h2 id="title">Home</h2>
@@ -150,10 +160,12 @@
                                             
                                             echo "<h2>Workspace Information</h2>\n";
                                             
-                                            echo "<div style=\"float: left\">";
-                                            echo "<table>";
-                                            echo "<tr><td><strong>Title:</strong></td><td>".$ws->getTitle()."</td></tr>\n";
-                                            echo "<tr><td><strong>Description:</strong></td><td>".$ws->getDescription()."</td></tr>\n";
+                                            echo '<div style="float: left; width: 280px">';
+                                            echo '<table>';
+                                            echo '<tr><td><strong>Title:</strong></td><td>'.$ws->getTitle().'</td></tr>';
+                                            echo '<tr><td colspan="2"><strong>Description:</strong></td></tr>';
+                                            echo '<tr><td colspan="2">';
+                                            echo ($ws->getDescription() == '' ? '<span style="color: gray"> [ Empty ]' : '<span style="font-size: 0.9em">'.$ws->getDescription()); echo "</span></td></tr>\n";
                                             $color = getStateColor($ws->getState());
                                             echo "<tr><td><strong>State:</strong></td><td><span style=\"font-weight: bold; color:$color\">".$ws->getState()."</span></td></tr>\n";
                                             echo "</table>\n";
@@ -162,13 +174,13 @@
                                             {
                                                 echo '<form action="updateWorkspace.php" accept-charset="UTF-8" method="post" id="node-form">
                                                         <div class="node-form">
-                                                            <input name="updateWS" id="edit-submit" value="Change Workspace Information" class="form-submit" type="submit" />
+                                                            <input name="updateWS" id="edit-submit" value="Edit Workspace Information" class="form-submit" type="submit" />
                                                         </div>
                                                       </form>';
                                             }
                                             
                                             echo "<br />";
-                                            echo "<h3>Projects currently in this Workspace</h3>\n";
+                                            echo "<h3>Projects in this Workspace</h3>\n";
                                             echo "<strong>".$ws->getProjectJnName()." <small>(PARENT PROJECT)</small></strong>";
                                             echo "<ul>";
                                             
@@ -177,7 +189,7 @@
                                                 $projectJnName = $project->getProjectJnName();
                                                 echo "<li>\n";
                                                 echo "<a href=\"../report/projectReport.php?project_id=$projectJnName\">$projectJnName</a>";
-                                                echo "&nbsp;&nbsp;<a href=\"https://$projectJnName.dev.java.net/\"><img style=\"border: 0\" src=\"../template/icons/i16/misc/world_link.png\" /></a>\n";
+                                                echo "&nbsp;&nbsp;<a href=\"https://$projectJnName.dev.java.net/\"><img style=\"border: 0\" src=\"../template/icons/i16/misc/world_link.png\" alt=\"link_icon\" /></a>\n";
                                                 echo "</li>\n";
                                             }
                                             echo "</ul>";                                            
@@ -186,9 +198,17 @@
                                             
                                             echo "<div style=\"float: right; width: 420px; border: thin groove silver; padding: 15px\">";
                                             
-                                            echo ReportController::retrieveWorkspaceReport($ws->getWorkspaceId());
-
-                                            echo '<div id="bar_chart_div"></div>';
+                                            if (isset($_SESSION['report_error']) && $_SESSION['report_error'] != '') {
+                                                echo "<div class=\"messages error\">{$_SESSION['report_error']}</div>";
+                                                $_SESSION['report_error'] = '';
+                                                unset($_SESSION['report_error']);
+                                            }
+                                            else {
+                                                echo $reportScript;
+                                                echo '<div id="bar_chart_div"></div>';
+                                                echo '<div id="table_chart_div"></div>';
+                                            }
+                                            
                                             echo '</div>';
                                             echo '<div style="clear:both"></div>';
                                         }
@@ -203,4 +223,4 @@
                         </div><!-- end content -->
                     </div><!-- end inside -->
                 </div>
-<?php include 'footer.php';   ?>
+<?php include 'footer.php' ?>

@@ -14,7 +14,7 @@ require_once ('infinitymetrics/model/InfinityMetricsException.class.php');
  */
 class ReportController
 {
-    private function convertToTitleCase($str) {
+    private function toTitleCase($str) {
         $str = strtolower($str);
         $str = substr_replace($str, strtoupper(substr($str, 0, 1)), 0, 1);
         $str = str_replace('_', ' ', $str);
@@ -64,7 +64,7 @@ class ReportController
                     for ($i = 0; $i < count($categories); $i++)
                     {
 
-                        $script .= "barData.setValue($i, 0, '".self::convertToTitleCase($categories[$i])."');\n";
+                        $script .= "barData.setValue($i, 0, '".self::toTitleCase($categories[$i])."');\n";
 
                         $idx = 1;
                         foreach ($metrics as $key => $value) {
@@ -127,13 +127,13 @@ class ReportController
                 barData.addRows(".count($metrics).");";
                 $idx = 0;
                 foreach ($metrics as $key => $value) {
-                    $script .= "barData.setValue($i, 0, '".$key."');\n";
-                    $script .= "barData.setValue($i, 1, ".$value.");\n";
+                    $script .= "barData.setValue($idx, 0, '".$key."');\n";
+                    $script .= "barData.setValue($idx, 1, ".$value.");\n";
                     $idx++;
                 }
                 $script .= "
                 var barChart = new google.visualization.ColumnChart(document.getElementById('bar_chart_div'));
-                barChart.draw(barData, {width: 500, height: 340, is3D: true, title: 'Metrics For ".$user->getJnUsername()." in ".$project->getProjectJnName()."', 'legend': 'none'});
+                barChart.draw(barData, {width: 420, height: 320, is3D: true, title: 'Metrics for ".$user->getJnUsername()." in ".$project->getProjectJnName()."', 'legend': 'none'});
               }
             </script>
         ";
@@ -160,45 +160,55 @@ class ReportController
         $metrics = $report->getReportMetrics($ws);
 
         $categories = $report->getExtendedCategories();
-        
+
         $script =
 
-        "   <script type=\"text/javascript\" src=\"http://www.google.com/jsapi\"></script>
-            <script type=\"text/javascript\">
-              google.load('visualization', '1', {packages:['columnchart']});
+        "<script type=\"text/javascript\" src=\"http://www.google.com/jsapi\"></script>
+        <script type=\"text/javascript\">
+        google.load('visualization', '1', {packages:['columnchart']});
 
-              google.setOnLoadCallback(drawChart);
+        google.setOnLoadCallback(drawChart);
 
-              function drawChart() {
-                var barData = new google.visualization.DataTable();
-                barData.addColumn('string', 'Event Category');\n";
+        function drawChart() {";
+        
+        $dataTable = "var data = new google.visualization.DataTable();
+                      data.addColumn('string', 'Event Category');\n";
 
-                foreach ($metrics as $pName => $cats){
-                    $script .= "barData.addColumn('number', '".$pName."');\n";
+        foreach ($metrics as $pName => $cats){
+            $dataTable .= "data.addColumn('number', '".$pName."');\n";
+        }
+
+        $dataTable .= "data.addRows(".count($categories).");\n";
+
+        if (count($metrics))
+        {
+            for ($i = 0; $i < count($categories); $i++)
+            {
+
+                $dataTable .= "data.setValue($i, 0, '".self::toTitleCase($categories[$i])."');\n";
+
+                $idx = 1;
+                foreach ($metrics as $key => $value) {
+                    $dataTable .= "data.setValue($i, ".$idx.", ".$value[$categories[$i]].");\n";
+                    $idx++;
                 }
-                
-                $script .= "barData.addRows(".count($categories).");\n";
+            }
+        }
+        $script .= $dataTable;
+        $script .= "
 
-                if (count($metrics))
-                {
-                    for ($i = 0; $i < count($categories); $i++)
-                    {
+            var barChart = new google.visualization.ColumnChart(document.getElementById('bar_chart_div'));
+                    barChart.draw(data, {width: 420, height: 320, is3D: true, title: 'Workspace Metrics', 'isStacked': true, 'legend': 'bottom'});";
 
-                        $script .= "barData.setValue($i, 0, '".self::convertToTitleCase($categories[$i])."');\n";
+        $tableData = str_replace('setValue', 'setCell', $dataTable);
+        $tableData = str_replace('data', 'tableData', $dataTable);
+        $script .= $tableData;
+        $script .= "
 
-                        $idx = 1;
-                        foreach ($metrics as $key => $value) {
-                            $script .= "barData.setValue($i, ".$idx.", ".$value[$categories[$i]].");\n";
-                            $idx++;
-                        }
-                    }
-                }
-                
-                $script .= "
-                var barChart = new google.visualization.ColumnChart(document.getElementById('bar_chart_div'));
-                barChart.draw(barData, {width: 420, height: 320, is3D: true, title: 'Workspace Metrics', 'isStacked': true, 'legend': 'bottom'});
-              }
-            </script>";
+            var table = new google.visualization.Table(document.getElementById('table_chart_div'));
+            table.draw(tableData, {showRowNumber: true});
+        }
+        </script>";
 
         return $script;
     }
@@ -234,7 +244,7 @@ class ReportController
             for ($i = 0; $i < count($categories); $i++)
             {
 
-                $script .= "barData.setValue($i, 0, '".self::convertToTitleCase($categories[$i])."');\n";
+                $script .= "barData.setValue($i, 0, '".self::toTitleCase($categories[$i])."');\n";
 
                 $idx = 1;
                 foreach ($metrics as $key => $value) {

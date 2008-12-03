@@ -122,9 +122,11 @@ class Report
         {
             foreach ($workspaces as $ws)
             {
+                $projectTotals[$ws->getTitle()] = array();
+                
                 foreach($ws->getProjects() as $project)
                 {
-                    $projectTotals[$project->getProjectJnName()] = $project->getTotalEventsByCategory();
+                    $projectTotals[$ws->getTitle()][$project->getProjectJnName()] = $project->getTotalEventsByCategory();
                 }
 
                 $this->metrics[$ws->getTitle()] = array();
@@ -132,26 +134,20 @@ class Report
                 foreach (self::getExtendedCategories() as $category)
                 {
                     $this->metrics[$ws->getTitle()][$category] = 0;
-                }
-            }
-        }
-        
-        foreach ($this->metrics as $title => $categories)
-        {
-            foreach ($categories as $category => $totalMetrics)
-            {
-                foreach ($projectTotals as $pName => $pCategories)
-                {
-                    foreach ($pCategories as $categoryKey => $value)
+                    
+                    foreach ($projectTotals[$ws->getTitle()] as $pName => $pCategories)
                     {
-                        if ($categoryKey == $category) {
-                            $this->metrics[$title][$category] += $value;
+                        foreach ($pCategories as $categoryKey => $value)
+                        {
+                            if ($categoryKey == $category) {
+                                $this->metrics[$ws->getTitle()][$category] += $value;
+                            }
                         }
                     }
                 }
             }
-        }  
-
+        }
+ 
         return $this->metrics;
     }
 

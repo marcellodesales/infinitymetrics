@@ -20,7 +20,7 @@
             $_SESSION['noSharedWorkspaces'] = "No Shared Workspaces found";
         }
 
-        $criteria = new Criteria();
+                $criteria = new Criteria();
         $criteria->add(PersistentUserXProjectPeer::JN_USERNAME, $user->getJnUsername());
         $criteria->add(PersistentUserXProjectPeer::IS_OWNER, 1);
 
@@ -37,8 +37,15 @@
             }
         }
     }
-    catch (Exception $e) {
-        $_SESSION['retrieveWSCollectionError'] = 'Unable to retrieve the Collection of Workspaces';
+    catch (InfinityMetricsException $ime) {
+        $_SESSION['retrieveWSCollectionError'] = $ime;
+    }
+
+    try {
+        $reportScript = ReportController::retrieveWorkspaceCollectionReport($user->getUserId());
+    }
+    catch (InfinityMetricsException $ime) {
+        $_SESSION['report_error'] = $ime;
     }
 
 #----------------------------->>>>>>>>>>>>> Variables Initialization ------------------->>>>>>>>>>>>>>>
@@ -65,13 +72,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html class="js" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <head>
-    <title>Infinity Metrics: <?php echo $subUseCase; ?></title>
-    <?php include 'static-js-css.php';  ?>
+    <title>Infinity Metrics: <?php echo $subUseCase ?></title>
+    <?php include 'static-js-css.php' ?>
     <?php include 'user-signup-header-adds.php' ?>
 </head>
-<body class="<?php echo $enableLeftNav ? $leftNavClass : $NoLeftNavClass; ?>">
+<body class="<?php echo $enableLeftNav ? $leftNavClass : $NoLeftNavClass ?>">
 
-    <?php  include 'top-navigation.php';  ?>
+    <?php include 'top-navigation.php' ?>
 
                 <div id="breadcrumb" class="alone">
                     <h2 id="title">Home</h2>
@@ -95,7 +102,7 @@
                                 <br />
                                 
                                 <?php
-                                    if(isset($_SESSION['available_projects']))
+                                    if(isset($_SESSION['available_user_x_projects']))
                                         {
                                             echo "<div class=\"content\">\n";
                                             echo "<div class=\"item-list\">\n";
@@ -197,12 +204,22 @@
                                               </form>';
                                                         
                                         echo "</div>";
+
                                         echo "<div style=\"float: right; width: 420px; border: thin groove silver; padding: 15px\">";
                                         
-                                        echo ReportController::retrieveWorkspaceCollectionReport($user->getUserId());
+                                        if (isset($_SESSION['report_error']) && $_SESSION['report_error'] != '')
+                                        {
+                                            echo "<div class=\"message error\">{$_SESSION['report_error']}</div>";
+                                            $_SESSION['report_error'] = '';
+                                            unset($_SESSION['report_error']);
+                                        }
+                                        else {
+                                            echo $reportScript;
+                                            echo "<div id=\"bar_chart_div\"></div>";
+                                        }
 
-                                        echo "<div id=\"bar_chart_div\"></div>";
                                         echo "</div>";
+                                        
                                         echo "<div style=\"clear: both\"></div>\n";
                                     }
                                 ?>
@@ -217,5 +234,4 @@
                 </div>
             </div>
 
-
-            <?php include 'footer.php';   ?>
+<?php include 'footer.php' ?>
