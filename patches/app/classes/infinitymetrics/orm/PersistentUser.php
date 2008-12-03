@@ -43,18 +43,18 @@ class PersistentUser extends PersistentBaseUser {
      * @return boolean verifies if the instance is a student
      */
     public function isStudent() {
-        return $this->getType() == $this->typeEnum->STUDENT;
+        return $this->getType() == UserTypeEnum::getInstance()->STUDENT;
     }
     /**
      * @return boolean verifies if the instance is an instructor
      */
     public function isInstructor() {
-        return $this->getType() == $this->typeEnum->INSTRUCTOR;
+        return $this->getType() == UserTypeEnum::getInstance()->INSTRUCTOR;
     }
     /**
      * @return boolean verifies if a regular Java.net user
      */
     public function isRegularJnUser() {
-        return $this->getType() == $this->typeEnum->JAVANET;
+        return $this->getType() == UserTypeEnum::getInstance()->JAVANET;
     }
 } // PersistentUser
