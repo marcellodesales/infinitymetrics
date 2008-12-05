@@ -167,15 +167,12 @@ final class CustomEventController {
             throw $e;
         }
     }
-    // Is it really this simple?
-    public static function removeEntry(CustomEventEntry $entry,
-        CustomEvent $entry = null) {
+    public static function removeEntry($dead_entry_id) {
         try {
-            $entry->delete();
-
-            if ($event !== null) {
-                $event->save();
-            }
+            $crit3 = new Criteria();
+            $crit3->add(PersistentCustomEventEntryPeer::ENTRY_ID,
+                $dead_entry_id);
+            PersistentCustomEventEntryPeer::doDelete($crit3);
         } catch (Exception $e) {
             throw $e;
         }
