@@ -84,6 +84,11 @@ $subUseCase = "View Custom Events";
                         echo "Edit";
                         echo "</a>";
 
+                        echo " ";
+                        echo "<a href='";
+                        echo "deleteCustomEventEntry.php?custom_event_id=".$evts->getCustomEventId()."&workspace_id=".$ws_id."'>";
+                        echo "Remove From";
+                        echo "</a>";
                     }
                 }
             }
