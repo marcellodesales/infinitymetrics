@@ -1,0 +1,20 @@
+#####
+## Implementation of the Front-Controller Web Pattern
+## http://java.sun.com/blueprints/patterns/FrontController.html
+## The implementation of this pattern allows Google to better
+## cache the files.
+#####
+#Action controller-test /frontcontroller.php?request_uri= virtual
+#####Action controller-test /Controller.php
+#####AddHandler controller-test .html .htm virtual
+
+#####RedirectMatch ^/$ http://localhost/main/index.html
+#####RedirectPermanent /index.html http://localhost/main/index.html
+
+## 403 != typo: let "forbidden" mean "start from the beginning"
+#####ErrorDocument 403 /errors/error-404.html
+#####ErrorDocument 404 /errors/error-404.html
+#####ErrorDocument 500 /errors/error-500.html
+
+#DirectoryIndex index.html index.php
+

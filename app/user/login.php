@@ -1,6 +1,7 @@
 <?php
 /**
  * @author Gurdeep Singh  <gurdeepsingh03@gmail.com>
+ * @author Marcello de Sales <marcello.sales@gmail.com>
  * This is the view to Log in as a User.
  */
 include '../template/infinitymetrics-bootstrap.php';
@@ -14,9 +15,9 @@ if (isset($_POST["username"]) && isset($_POST["password"])) {
 
    try {
         $user = UserManagementController::login($_POST["username"], $_POST["password"]);
-        session_start();
         $_SESSION["loggedUser"] = $user;
-        echo header('Location: ../workspace/workspaceCollection.php');
+        header('Location: ../workspace/workspaceCollection.php');
+
     } catch (Exception $e) {
         $_SESSION["signinError"] = $e;
     }
@@ -114,6 +115,9 @@ $subUseCase = "User Login ";
 	  			<td class="status" width="30">&nbsp;</td>
 	  			<td class="label" width="20"><label id="lusername" for="username">Username</label></td>
 	  			<td class="field"><input id="username" name="username" class="textfield" value="" maxlength="50" type="text"></td>
+                <td rowspan="3" align="center">
+                If you still does't have an accout, <BR>
+                <input name="op" id="edit-preview" value="Register your Java.net account" class="form-submit" type="button" onclick="document.location='index.php'"></td>
 	  		    </tr>
 	  		  <tr>
 	  			<td class="status"></td>
@@ -122,7 +126,7 @@ $subUseCase = "User Login ";
 	  		  </tr>
               <tr>
                 <td>&nbsp;</td>
-                <td colspan="2">
+                <td colspan="2" align="center">
                     <input id="edit-submit" value="Login" class="form-submit" type="submit">
                     <input id="edit-delete" value="Cancel" class="form-submit" type="button" onclick="document.location='..'">
                 </td>

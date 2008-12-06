@@ -4,18 +4,18 @@
 #----------------------------->>>>>>>>>>>>> Controller Usage for UC404 ----------------------------->>>>>>>>>>>>>>>
 
     if (isset($_POST["username"]) && isset($_POST["password"])) {
-
+        
         require_once 'infinitymetrics/controller/UserManagementController.class.php';
         require_once 'infinitymetrics/model/InfinityMetricsException.class.php';
 
         try {
-            $existentUser = PersistentUserPeer::retrieveByJNUsername($_POST["username"]);
+            $existentUser = UserManagementController::retrieveUserByUserName($_POST["username"]);
             if (isset($existentUser) && $existentUser->getJnUsername() == $_POST["username"]) {
                 $_SESSION["signupError"] = "User ".$_POST["username"]." already registered at Infinity Metrics";
             } else {
 
-                $userAgent = UserManagementController::authenticateJNUser($_POST["username"], $_POST["password"]);
-
+                $userAgent = UserManagementController::areUserCredentialsValidOnJN($_POST["username"],
+                                                                                   $_POST["password"]);
                 if ($userAgent->areUserCredentialsValidOnJN()) {
 
                     $userAgentAuthenticated["email"] = $userAgent->getAuthenticatedEmail();
@@ -41,9 +41,9 @@
 
     #breadscrum[URL] = Title
     $breakscrum = array(
-                        $home_address => "Home",
-                        $home_address."/user" => "Users Registration",
-                        $home_address."/user/student/signup-step1.php" => "1. Student Java.net Authentication"
+                        $_SERVER["home_address"] => "Home",
+                        $_SERVER["home_address"]."/user" => "Users Registration",
+                        $_SERVER["home_address"]."/user/student/signup-step1.php" => "1. Student Java.net Authentication"
                   );
                   
     #leftMenu[n]["active"] - If the menu item is active or not

@@ -45,6 +45,9 @@
         } else {
             $_SESSION["signupError"] = "Some fields are missing";
         }
+    } else {
+        $_SESSION["signupError"] = "You must authenticate through Java.net to continue on step 2";
+        header('Location: signup-step1.php');
     }
 
 #----------------------------->>>>>>>>>>>>> Variables Initialization ------------------->>>>>>>>>>>>>>>
@@ -53,10 +56,10 @@
     $enableLeftNav = true;
 
     $breakscrum = array(
-                        $home_address => "Home",
-                        $home_address."/user" => "Users Registration",
-                        $home_address."/user/student/signup-step1.php" => "1. Java.net Authentication",
-			$home_address."/user/student/signup-step2.php" => "2. Profile Update"
+                        $_SERVER["home_address"] => "Home",
+                        $_SERVER["home_address"]."/user" => "Users Registration",
+                        $_SERVER["home_address"]."/user/student/signup-step1.php" => "1. Java.net Authentication",
+                		$_SERVER["home_address"]."/user/student/signup-step2.php" => "2. Profile Update"
                   );
     $leftMenu = array();
     array_push($leftMenu, array("active"=>"menu-27", "url"=>"signup-step1.php", "item"=>"1. Java.net Authentication", "tip"=>"Manage your site's book outlines."));

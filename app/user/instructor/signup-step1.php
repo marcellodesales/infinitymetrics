@@ -42,9 +42,9 @@
 
     #breadscrum[URL] = Title
     $breakscrum = array(
-                       $home_address => "Home",
-                        $home_address."/user" => "Users Registration",
-                        $home_address."user\instructor\signup-step1.php" => "1. Instructor Java.net Authentication"
+                        $_SERVER["home_address"] => "Home",
+                        $_SERVER["home_address"]."/user" => "Users Registration",
+                        $_SERVER["home_address"]."user/instructor/signup-step1.php" => "1. Instructor Java.net Authentication"
                   );
 
     #leftMenu[n]["active"] - If the menu item is active or not

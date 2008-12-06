@@ -31,11 +31,11 @@
     $enableLeftNav = true;
 
     $breakscrum = array(
-                        $home_address => "Home",
-                        $home_address."/user" => "Users Registration",
-                        $home_address."/user/student/signup-step1.php" => "1. Student Java.net Authentication",
-			$home_address."/user/student/signup-step2.php" => "2. Student Profile Update",
-			$home_address."/user/student/signup-step2.php" => "3. Student Profile Confirmation"
+                        $_SERVER["home_address"] => "Home",
+                        $_SERVER["home_address"]."/user" => "Users Registration",
+                        $_SERVER["home_address"]."/user/student/signup-step1.php" => "1. Student Java.net Authentication",
+            			$_SERVER["home_address"]."/user/student/signup-step2.php" => "2. Student Profile Update",
+                        $_SERVER["home_address"]."/user/student/signup-step3.php" => "3. Student Profile Confirmation"
                   );
     $leftMenu = array();
     array_push($leftMenu, array("active"=>"menu-27", "url"=>"signup-step1.php", "item"=>"1. Java.net Authentication", "tip"=>"Manage your site's book outlines."));
