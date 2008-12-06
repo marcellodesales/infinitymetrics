@@ -1,7 +1,7 @@
 <?php
     include '../template/infinitymetrics-bootstrap.php';
 
-#----------------------------->>>>>>>>>>>>> Controller Usage for UC101 and UC303 ----------------------------->>>>>>>>>>>>>>>
+#----------------------------->>>>>>>>>>>>> Controller Usage for UC101, UC302 UC303 ----------------------------->>>>>>>>>>>>>>>
     //for debugging
     //$_GET['type'] = 'own';
     //$_GET['workspace_id'] = '2';
@@ -14,6 +14,13 @@
         require_once('infinitymetrics/controller/ReportController.class.php');
 
         $ws = PersistentWorkspacePeer::retrieveByPK($_GET['workspace_id']);
+
+        try {
+            $rankedProjects = ReportController::retrieveTopProjects($ws->getWorkspaceId());
+        }
+        catch (InfinityMetricsException $ime) {
+            $_SESSION["project_ranking_error"] = $ime;
+        }
 
         try {
             $reportScript = ReportController::retrieveWorkspaceReport($ws->getWorkspaceId());
@@ -51,7 +58,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html class="js" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <head>
-    <title>Infinity Metrics: <?php echo $subUseCase; ?></title>
+    <title>Infinity Metrics: <?php echo $subUseCase ?></title>
     <?php include 'static-js-css.php' ?>
     <?php include 'user-signup-header-adds.php' ?>
 </head>
@@ -80,51 +87,66 @@
                             <div id="block-user-3" class="block block-user">
                                 <br />
                                 <h2>Sharing Information</h2>
+                                <div class="content">
+                                    <div class="item-list">
 
-                                <?php
-                                    echo "<div class=\"content\">\n";
-                                    echo "<div class=\"item-list\">\n";
-                                    
-                                    if ( isset($_GET['type']) &&
-                                         isset($_GET['workspace_id']) &&
-                                         $_GET['type'] == 'own')
-                                    {
-                                        $wsShares = $ws->getWorkspaceShares();
-                                        
+                                    <?php
+                                        if ( isset($_GET['type']) &&
+                                             isset($_GET['workspace_id']) &&
+                                             $_GET['type'] == 'own')
+                                        {
+                                            $wsShares = $ws->getWorkspaceShares();
 
-                                        
-                                        if ($wsShares == NULL) {
-                                            echo "<p>The workspace is not currently being shared with any other user</p>\n";
-                                        }
-                                        else {
-
-                                            echo "Currently sharing this Workspace with:\n";
-                                            echo "<ul>\n";
-                                            foreach ($wsShares as $wss) {
-                                                echo "<li>".$wss->getUser()->getJnUsername()."</li>\n";
+                                            if ($wsShares == NULL) {
+                                                echo "<p>The workspace is not currently being shared with any other user</p>\n";
                                             }
-                                            echo "</ul>\n";
+                                            else {
+
+                                                echo "Currently sharing this Workspace with:\n";
+                                                echo "<ul>\n";
+                                                foreach ($wsShares as $wss) {
+                                                    echo "<li>".$wss->getUser()->getJnUsername()."</li>\n";
+                                                }
+                                                echo "</ul>\n";
+                                            }
+                                            echo    "<br />\n";
+                                            echo    "<form action=\"shareWorkspace.php\" accept-charset=\"UTF-8\" method=\"post\" id=\"node-form\">
+                                                        <div class=\"node-form\">
+                                                            <input name=\"shareWS\" id=\"edit-submit\" value=\"Share Workspace\" class=\"form-submit\" type=\"submit\" />
+                                                            <input name=\"workspace_id\" id=\"workspace_id\" value=\"{$_GET['workspace_id']}\" type=\"hidden\" />
+                                                        </div>
+                                                    </form>\n<br />";
                                         }
-                                        echo    "<br />\n";
-                                        echo    "<form action=\"shareWorkspace.php\" accept-charset=\"UTF-8\" method=\"post\" id=\"node-form\">
-                                                    <div class=\"node-form\">
-                                                        <input name=\"shareWS\" id=\"edit-submit\" value=\"Share Workspace\" class=\"form-submit\" type=\"submit\" />
-                                                        <input name=\"workspace_id\" id=\"workspace_id\" value=\"{$_GET['workspace_id']}\" type=\"hidden\" />
-                                                    </div>
-                                                </form>\n<br /><br />";
-                                    }
-                                    elseif (isset($_GET['type']) && $_GET['type'] == 'shared') {
-                                        echo "<p>This workspace is currently being shared with you by <b>".
-                                             $ws->getUser()->getJnUsername()."</b></p>\n";
-                                    }
-                                    
-                                    echo "</div>\n</div>\n";
-                                    
-                                    if ($ws->getState() == 'NEW' || $ws->getState() == 'PAUSED')
-                                    {
-                                        include 'wsStateReminder.html';
-                                    }
-                                ?>
+                                        elseif (isset($_GET['type']) && $_GET['type'] == 'shared') {
+                                            echo "<p>This workspace is currently being shared with you by <b>".
+                                                 $ws->getUser()->getJnUsername()."</b></p>\n";
+                                        }
+
+                                        if ($ws->getState() == 'NEW' || $ws->getState() == 'PAUSED')
+                                        {
+                                            include 'wsStateReminder.html';
+                                        }
+                                    ?>
+                                    </div>
+                                    <div class="item-list">
+                                        <h2>
+                                            Project in this Workspace<br />
+                                            Ranked by contribution
+                                        </h2>
+                                        
+                                        <?php
+                                            if (!isset($_SESSION['project_ranking_error'])) {
+                                            echo "<h4>".$ws->getProjectJnName()." <small>(PARENT PROJECT)</small></h4>";
+                                            echo "<ol>\n";
+                                            foreach ($rankedProjects as $projectJnName => $total) {
+                                                    echo "<li><a href=\"../report/projectReport.php?project_id=$projectJnName\">$projectJnName</a>&nbsp;($total)&nbsp;&nbsp;<a href=\"https://$projectJnName.dev.java.net/\"><img style=\"border: 0\" src=\"../template/icons/i16/misc/world_link.png\" alt=\"link_icon\" /></a>\n</li>";
+                                                }
+                                            }
+                                            echo "</ol>";
+                                        ?>
+                                        
+                                    </div>
+                                </div>
 
                             </div><!-- end block-user-3 -->
                         </div><!-- end sidebar-right -->
@@ -133,6 +155,7 @@
                             <br />
                             <div class="t"><div class="b"><div class="l"><div class="r"><div class="bl"><div class="br"><div class="tl"><div class="tr">
                                 <div class="content-in">
+                                    <div>
                                     <?php
 
                                         if (isset($_GET['trackback']))
@@ -161,14 +184,14 @@
                                             echo "<h2>Workspace Information</h2>\n";
                                             
                                             echo '<div style="float: left; width: 280px">';
+                                            $color = getStateColor($ws->getState());
                                             echo '<table>';
+                                            echo "<tr><td><strong>State:</strong></td><td><span style=\"font-weight: bold; color:$color\">".$ws->getState()."</span></td></tr>\n";
                                             echo '<tr><td><strong>Title:</strong></td><td>'.$ws->getTitle().'</td></tr>';
                                             echo '<tr><td colspan="2"><strong>Description:</strong></td></tr>';
                                             echo '<tr><td colspan="2">';
                                             echo ($ws->getDescription() == '' ? '<span style="color: gray"> [ Empty ]' : '<span style="font-size: 0.9em">'.$ws->getDescription()); echo "</span></td></tr>\n";
-                                            $color = getStateColor($ws->getState());
-                                            echo "<tr><td><strong>State:</strong></td><td><span style=\"font-weight: bold; color:$color\">".$ws->getState()."</span></td></tr>\n";
-                                            echo "</table>\n";
+                                            echo "</table><br />\n";
 
                                             if (isset($_GET['type']) && $_GET['type'] == 'own')
                                             {
@@ -178,21 +201,6 @@
                                                         </div>
                                                       </form>';
                                             }
-                                            
-                                            echo "<br />";
-                                            echo "<h3>Projects in this Workspace</h3>\n";
-                                            echo "<strong>".$ws->getProjectJnName()." <small>(PARENT PROJECT)</small></strong>";
-                                            echo "<ul>";
-                                            
-                                            foreach ($ws->getProjects() as $project)
-                                            {
-                                                $projectJnName = $project->getProjectJnName();
-                                                echo "<li>\n";
-                                                echo "<a href=\"../report/projectReport.php?project_id=$projectJnName\">$projectJnName</a>";
-                                                echo "&nbsp;&nbsp;<a href=\"https://$projectJnName.dev.java.net/\"><img style=\"border: 0\" src=\"../template/icons/i16/misc/world_link.png\" alt=\"link_icon\" /></a>\n";
-                                                echo "</li>\n";
-                                            }
-                                            echo "</ul>";                                            
                                                                                         
                                             echo "</div>\n";
                                             
@@ -204,19 +212,24 @@
                                                 unset($_SESSION['report_error']);
                                             }
                                             else {
-                                                echo $reportScript;
-                                                echo '<div id="bar_chart_div"></div>';
-                                                echo '<div id="table_chart_div"></div>';
+                                                echo $reportScript."\n";
+                                                echo "<div id=\"bar_chart_div\"></div>\n";
+                                                
                                             }
                                             
                                             echo '</div>';
                                             echo '<div style="clear:both"></div>';
+                                            echo "";
                                         }
                                     ?>
                                     
                                     <br /><br />
 
-
+                                    </div>
+                                    <div>
+                                        </div><div id="table_chart_div"></div>
+                                        <br />
+                                    </div>
                                 </div>
                                 <br class="clear" />
                             </div></div></div></div></div></div></div></div>

@@ -141,8 +141,34 @@ class ReportController
         return $script;
     }
     
-    public function retrieveTopProjects($workspace_id, $num) {
-        
+    public function retrieveTopProjects($workspace_id, $num=null) {
+        if (!isset($workspace_id) || $workspace_id == '') {
+            throw new InfinityMetricsException('The workspace_id must be provided');
+        }
+
+        $ws = PersistentWorkspacePeer::retrieveByPK($workspace_id);
+
+        if ($ws == NULL) {
+            throw new InfinityMetricsException('The workspace was not found');
+        }
+
+        $report = new Report();
+        $metrics = $report->getReportMetrics($ws);
+
+        $projectTotals = array();
+
+        foreach ($metrics as $projName => $categories) {
+            $projectTotals[$projName] = array_sum($categories);
+        }
+
+        arsort($projectTotals);
+
+        if ($num == null) {
+            return $projectTotals;
+        }
+        else {
+            return array_splice($projectTotals, 0, (int)$num);
+        }
     }
     
     public function retrieveWorkspaceReport($workspace_id) {
@@ -165,7 +191,7 @@ class ReportController
 
         "<script type=\"text/javascript\" src=\"http://www.google.com/jsapi\"></script>
         <script type=\"text/javascript\">
-        google.load('visualization', '1', {packages:['columnchart']});
+        google.load('visualization', '1', {packages:['table', 'columnchart']});
 
         google.setOnLoadCallback(drawChart);
 
@@ -184,7 +210,6 @@ class ReportController
         {
             for ($i = 0; $i < count($categories); $i++)
             {
-
                 $dataTable .= "data.setValue($i, 0, '".self::toTitleCase($categories[$i])."');\n";
 
                 $idx = 1;
@@ -198,10 +223,10 @@ class ReportController
         $script .= "
 
             var barChart = new google.visualization.ColumnChart(document.getElementById('bar_chart_div'));
-                    barChart.draw(data, {width: 420, height: 320, is3D: true, title: 'Workspace Metrics', 'isStacked': true, 'legend': 'bottom'});";
+                    barChart.draw(data, {width: 420, height: 320, is3D: true, title: 'Workspace Metrics', 'isStacked': true, 'legend': 'bottom'});\n\n";
 
         $tableData = str_replace('setValue', 'setCell', $dataTable);
-        $tableData = str_replace('data', 'tableData', $dataTable);
+        $tableData = str_replace('data', 'tableData', $tableData);
         $script .= $tableData;
         $script .= "
 
