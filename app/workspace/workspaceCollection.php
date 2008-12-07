@@ -8,6 +8,8 @@
     require_once('infinitymetrics/controller/UserManagementController.class.php');
     require_once('infinitymetrics/controller/ReportController.class.php');
 
+    //$_SESSION["loggedUser"] = PersistentUserPeer::retrieveByJNUsername('aardila');
+
     $user = $_SESSION["loggedUser"];
 
     try {
@@ -21,7 +23,7 @@
             $_SESSION['noSharedWorkspaces'] = "No Shared Workspaces found";
         }
 
-                $criteria = new Criteria();
+        $criteria = new Criteria();
         $criteria->add(PersistentUserXProjectPeer::JN_USERNAME, $user->getJnUsername());
         $criteria->add(PersistentUserXProjectPeer::IS_OWNER, 1);
 
@@ -35,6 +37,19 @@
 
             if (PersistentWorkspacePeer::doCount($criteria) == 0) {
                 $_SESSION['available_user_x_projects'][] = $uXp;
+            }
+        }
+
+        $stateFlag = false;
+
+        foreach ($wsCollection as $type => $workspaces)
+        {
+            foreach ($workspaces as $ws)
+            {
+                if ($ws->getState() == 'NEW' || $ws->getState() == 'PAUSED') {
+                    $stateFlag = true;
+                    break;
+                }
             }
         }
     }
@@ -101,11 +116,10 @@
                         <div id="sidebar-right" align="center">
                             <div id="block-user-3" class="block block-user">
                                 <br />
-                                
+                                <div class="content">
                                 <?php
                                     if(isset($_SESSION['available_user_x_projects']))
                                         {
-                                            echo "<div class=\"content\">\n";
                                             echo "<div class=\"item-list\">\n";
                                             echo "<img src=\"../template/icons/i24/misc/info.png\" align=\"left\" alt=\"info_icon\" />\n";
                                             echo "<h2>&nbsp;You have new projects</h2>\n";
@@ -116,20 +130,18 @@
                                             }
                                             echo "</ul><br />\n";
                                             echo "</div>\n";
-                                            echo "</div>\n";
 
                                             $_SESSION['available_user_x_projects'] = '';
                                             unset($_SESSION['available_user_x_projects']);
                                         }
 
-                                        include 'wsStateReminder.html';
+                                        if ($stateFlag) {
+                                            include 'wsStateReminder.html';
+                                        }
                                     ?>
-
-                                    
-                                
+                                </div>
                             </div><!-- end block-user-3 -->
                         </div><!-- end sidebar-right -->
-                    <!-- End "inside" -->
 
                     <div id="content">
 
@@ -191,7 +203,7 @@
                                             {
                                                 $color = getStateLabelColor($ws->getState());
                                                 echo "<li>\n";
-                                                echo "<a href=\"$path?type=shared&amp;workspace_id=".$ws->getWorkspaceId()."\">".$ws->getTitle()."</a>";
+                                                echo "<a href=\"viewWorkspace.php?type=shared&amp;workspace_id=".$ws->getWorkspaceId()."\">".$ws->getTitle()."</a>";
                                                 echo " <small><b><span style=\"color:$color\">".$ws->getState()."</span></b></small>";
                                                 echo "</li>\n";
                                             }
@@ -228,7 +240,6 @@
                                 <br />
 
                             </div><!-- end content-in -->
-
                         </div> <!-- End of blue box -->
                         <br class="clear" />
                     </div></div></div></div></div></div></div></div>

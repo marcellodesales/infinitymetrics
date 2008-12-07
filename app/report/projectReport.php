@@ -13,6 +13,10 @@
 
         $project = PersistentProjectPeer::retrieveByPK($_GET['project_id']);
 
+        if ($project == null) {
+            header('Location: workspaceCollection.php');
+        }
+
         try {
             $reportScript = ReportController::retrieveProjectReport($project->getProjectJnName());
         }
@@ -114,7 +118,7 @@
                                                         else {
                                                             echo $userObj->getFirstName()." ".$userObj->getLastName()."</a>";
                                                         }
-                                                        echo "&nbsp<a href=\"../user/profile/viewProfile.php?userId=".$userObj->getUserId()."\">".
+                                                        echo "&nbsp;<a href=\"../user/profile/viewProfile.php?userId=".$userObj->getUserId()."\">".
                                                                 "<img style=\"border: 0\" src=\"../template/icons/i16/misc/contact.png\" /></a>";
                                                         echo "</li>";
                                                     }

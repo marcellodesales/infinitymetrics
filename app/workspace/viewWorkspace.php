@@ -3,8 +3,8 @@
 
 #----------------------------->>>>>>>>>>>>> Controller Usage for UC101, UC302 UC303 ----------------------------->>>>>>>>>>>>>>>
     //for debugging
-    //$_GET['type'] = 'own';
-    //$_GET['workspace_id'] = '2';
+    $_GET['type'] = 'own';
+    $_GET['workspace_id'] = '2';
 
     $user = $_SESSION["loggedUser"];
 
@@ -15,6 +15,17 @@
 
         $ws = PersistentWorkspacePeer::retrieveByPK($_GET['workspace_id']);
 
+        if ($ws == null) {
+            header('Location: workspaceCollection.php');
+        }
+        
+        try {
+            $reportScript = ReportController::retrieveWorkspaceReport($ws->getWorkspaceId());
+        }
+        catch (InfinityMetricsException $ime) {
+            $_SESSION["report_error"] = $ime;
+        }
+
         try {
             $rankedProjects = ReportController::retrieveTopProjects($ws->getWorkspaceId());
         }
@@ -22,11 +33,10 @@
             $_SESSION["project_ranking_error"] = $ime;
         }
 
-        try {
-            $reportScript = ReportController::retrieveWorkspaceReport($ws->getWorkspaceId());
-        }
-        catch (InfinityMetricsException $ime) {
-            $_SESSION["report_error"] = $ime;
+        $stateFlag = false;
+
+        if ($ws->getState() == 'NEW' || $ws->getState() == 'PAUSED') {
+            $stateFlag = true;
         }
     }
     else {
@@ -101,11 +111,12 @@
                                                 echo "<p>The workspace is not currently being shared with any other user</p>\n";
                                             }
                                             else {
-
                                                 echo "Currently sharing this Workspace with:\n";
                                                 echo "<ul>\n";
                                                 foreach ($wsShares as $wss) {
-                                                    echo "<li>".$wss->getUser()->getJnUsername()."</li>\n";
+                                                    echo "<li>".$wss->getUser()->getFirstName()." ".$wss->getUser()->getLastName().
+                                                         "&nbsp;<a href=\"../user/profile/viewProfile.php?userId=".$wss->getUser()->getUserId()."\">".
+                                                         "<img style=\"border: 0\" src=\"../template/icons/i16/misc/contact.png\" /></a>";
                                                 }
                                                 echo "</ul>\n";
                                             }
@@ -118,20 +129,26 @@
                                                     </form>\n<br />";
                                         }
                                         elseif (isset($_GET['type']) && $_GET['type'] == 'shared') {
-                                            echo "<p>This workspace is currently being shared with you by <b>".
-                                                 $ws->getUser()->getJnUsername()."</b></p>\n";
+                                            echo "<p>This workspace is currently being shared with you by <strong>".
+                                                 $ws->getUser()->getFirstName()." ".$ws->getUser()->getLastName().
+                                                 "&nbsp;<a href=\"../user/profile/viewProfile.php?userId=".$ws->getUser()->getUserId()."\">".
+                                                 "<img style=\"border: 0\" src=\"../template/icons/i16/misc/contact.png\" /></a>".
+                                                 "</strong></p>\n";
                                         }
+                                    ?>
 
-                                        if ($ws->getState() == 'NEW' || $ws->getState() == 'PAUSED')
-                                        {
+                                    </div>
+
+                                   <?php
+                                        if ($stateFlag) {
                                             include 'wsStateReminder.html';
                                         }
                                     ?>
-                                    </div>
+                                    
                                     <div class="item-list">
                                         <h2>
-                                            Project in this Workspace<br />
-                                            Ranked by contribution
+                                            Projects in this Workspace:<br />
+                                            <small>(Ranked by contribution)</small>
                                         </h2>
                                         
                                         <?php
@@ -180,16 +197,17 @@
                                                     default:            return NULL; break;
                                                 }
                                             }
-                                            
+                                            echo $reportScript."\n";
                                             echo "<h2>Workspace Information</h2>\n";
                                             
-                                            echo '<div style="float: left; width: 280px">';
+                                            echo '<div style="float: left; width: 300px">';
                                             $color = getStateColor($ws->getState());
+                                            echo "<div style=\"border: thin groove silver; padding: 15px\">\n";
                                             echo '<table>';
                                             echo "<tr><td><strong>State:</strong></td><td><span style=\"font-weight: bold; color:$color\">".$ws->getState()."</span></td></tr>\n";
-                                            echo '<tr><td><strong>Title:</strong></td><td>'.$ws->getTitle().'</td></tr>';
-                                            echo '<tr><td colspan="2"><strong>Description:</strong></td></tr>';
-                                            echo '<tr><td colspan="2">';
+                                            echo "<tr><td><strong>Title:</strong></td><td>".$ws->getTitle()."</td></tr>\n";
+                                            echo "<tr><td colspan=\"2\"><strong>Description:</strong></td></tr>\n";
+                                            echo "<tr><td colspan=\"2\">\n";
                                             echo ($ws->getDescription() == '' ? '<span style="color: gray"> [ Empty ]' : '<span style="font-size: 0.9em">'.$ws->getDescription()); echo "</span></td></tr>\n";
                                             echo "</table><br />\n";
 
@@ -199,12 +217,15 @@
                                                         <div class="node-form">
                                                             <input name="updateWS" id="edit-submit" value="Edit Workspace Information" class="form-submit" type="submit" />
                                                         </div>
-                                                      </form>';
+                                                      </form><br />';
                                             }
-                                                                                        
-                                            echo "</div>\n";
+                                            echo "</div>";
+                                            echo "<div style=\"border: thin groove silver; padding: 10px; margin-top: 10px\">";
+                                            echo "<div id=\"ws_pie_chart_div\"></div>\n<br />\n";
+                                            echo "<div id=\"cat_pie_chart_div\"></div>\n";
+                                            echo "</div>\n</div>\n";
                                             
-                                            echo "<div style=\"float: right; width: 420px; border: thin groove silver; padding: 15px\">";
+                                            echo "<div style=\"float: left; width: 420px; border: thin groove silver; padding: 15px; margin-left: 10px\">";
                                             
                                             if (isset($_SESSION['report_error']) && $_SESSION['report_error'] != '') {
                                                 echo "<div class=\"messages error\">{$_SESSION['report_error']}</div>";
@@ -212,9 +233,8 @@
                                                 unset($_SESSION['report_error']);
                                             }
                                             else {
-                                                echo $reportScript."\n";
-                                                echo "<div id=\"bar_chart_div\"></div>\n";
-                                                
+                                                echo "<div id=\"col_chart_div\"></div><br />\n";
+                                                echo "<div id=\"table_chart_div\"></div>\n";
                                             }
                                             
                                             echo '</div>';
@@ -225,10 +245,6 @@
                                     
                                     <br /><br />
 
-                                    </div>
-                                    <div>
-                                        </div><div id="table_chart_div"></div>
-                                        <br />
                                     </div>
                                 </div>
                                 <br class="clear" />

@@ -200,8 +200,13 @@ class MetricsWorkspaceController {
 
             $criteria->clear();
             $criteria->add(PersistentWorkspaceSharePeer::USER_ID, $user->getUserId());
-            $wsCollection['SHARED'] = PersistentWorkspaceSharePeer::doSelectJoinWorkspace($criteria);
-            
+            $wsShares = PersistentWorkspaceSharePeer::doSelectJoinWorkspace($criteria);
+
+            foreach ($wsShares as $wss)
+            {
+                $wsCollection['SHARED'][] = $wss->getWorkspace();
+            }
+
             return $wsCollection;
 
         } catch (Exception $e) {

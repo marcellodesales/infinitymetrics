@@ -53,7 +53,13 @@ class Report
      * A list of valid Event Categories
      * @var <array>
      */
-    private $validEventCategories = array('COMMIT', 'DOCUMENTATION', 'FORUM', 'ISSUE', 'MAILING_LIST');
+    private $validEventCategories = array(  
+                                            'COMMIT',
+                                            #'DOCUMENTATION',
+                                            'FORUM',
+                                            'ISSUE',
+                                            'MAILING_LIST'
+                                    );
 
     private $validExtendedCategories;
 
@@ -109,6 +115,49 @@ class Report
         return $this->validExtendedCategories;
     }
 
+    public function getMetricsTotalsByCategory() {
+        $categories = array();
+        $total = array();
+
+        foreach ($this->metrics as $key => $value)
+        {
+            $categories = array_keys($value);
+            break;
+        }
+
+        foreach ($categories as $category)
+        {
+            $total[$category] = 0;
+        }
+
+        foreach ($this->metrics as $key => $cats)
+        {
+            foreach ($cats as $cat => $value)
+            {
+                foreach ($total as $category => $val)
+                {
+                    if ($cat == $category) {
+                        $total[$category] += $value;
+                    }
+                }
+            }
+        }
+        
+        return $total;
+    }
+
+    public function getMetricsTotalsByKey() {
+        $total = array();
+
+        foreach ($this->metrics as $key => $value)
+        {
+            $total[$key] = array_sum($value);
+        }
+        
+        return $total;
+
+    }
+
     public function getWorkspaceCollectionMetrics($user_id) {
         if (!isset($user_id) || $user_id == '') {
             throw new InfinityMetricsException('The user_id is required to generate this report');
@@ -147,6 +196,8 @@ class Report
                 }
             }
         }
+
+        $this->metrics = self::metrics_natsort_keys($this->metrics);
  
         return $this->metrics;
     }
@@ -228,6 +279,8 @@ class Report
                     }
                 }
             }
+
+            $this->metrics = self::metrics_natsort_keys($this->metrics);
             
             return $this->metrics;
         }//end Project Report
@@ -241,12 +294,32 @@ class Report
                 $this->metrics[$project->getProjectJnName()] = $project->getTotalEventsByCategory();
             }
 
+            $this->metrics = self::metrics_natsort_keys($this->metrics);
+            
             return $this->metrics;
         }//end Workspace Report
 
         else {
             throw new Exception ('Cannot generate a report for that argument');
         }
+    }
+
+    private function metrics_natsort_keys(array $metrics) {
+        $sorted = array();
+        $keys = array_keys($metrics);
+        natsort($keys);
+
+        foreach ($keys as $key)
+        {
+            $sorted[$key] = array();
+        }
+
+        foreach ($metrics as $key => $value)
+        {
+            $sorted[$key] = $value;
+        }
+
+        return $sorted;
     }
 }
 ?>

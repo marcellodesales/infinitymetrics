@@ -154,13 +154,8 @@ class ReportController
 
         $report = new Report();
         $metrics = $report->getReportMetrics($ws);
-
-        $projectTotals = array();
-
-        foreach ($metrics as $projName => $categories) {
-            $projectTotals[$projName] = array_sum($categories);
-        }
-
+        $projectTotals = $report->getMetricsTotalsByKey();
+        
         arsort($projectTotals);
 
         if ($num == null) {
@@ -184,6 +179,8 @@ class ReportController
         
         $report = new Report();
         $metrics = $report->getReportMetrics($ws);
+        $categoryTotals = $report->getMetricsTotalsByCategory();
+        $wsTotals = $report->getMetricsTotalsByKey();
 
         $categories = $report->getExtendedCategories();
 
@@ -191,49 +188,109 @@ class ReportController
 
         "<script type=\"text/javascript\" src=\"http://www.google.com/jsapi\"></script>
         <script type=\"text/javascript\">
-        google.load('visualization', '1', {packages:['table', 'columnchart']});
+        google.load('visualization', '1', {packages:['piechart', 'table', 'columnchart']});
 
         google.setOnLoadCallback(drawChart);
 
-        function drawChart() {";
-        
-        $dataTable = "var data = new google.visualization.DataTable();
-                      data.addColumn('string', 'Event Category');\n";
+        function drawChart() {
+            var wsPieData = new google.visualization.DataTable();
+            wsPieData.addColumn('string', 'Project');
+            wsPieData.addColumn('number', 'Total Events');\n";
 
-        foreach ($metrics as $pName => $cats){
-            $dataTable .= "data.addColumn('number', '".$pName."');\n";
+        $script .= "wsPieData.addRows(".count($wsTotals).");\n";
+
+        $idx = 0;
+        foreach ($wsTotals as $key => $value)
+        {
+            $script .= "wsPieData.setValue($idx, 0, '$key');\n";
+            $script .= "wsPieData.setValue($idx, 1, $value);\n";
+            $idx++;
         }
 
-        $dataTable .= "data.addRows(".count($categories).");\n";
+        $script .=
+
+            "\nvar wsPieChart = new google.visualization.PieChart(document.getElementById('ws_pie_chart_div'));
+            wsPieChart.draw(wsPieData, {width: 280, height: 280, is3D: true, title: 'Metrics by Project', legend: 'bottom'});\n";
+
+        $script .=
+
+            "var catPieData = new google.visualization.DataTable();
+            catPieData.addColumn('string', 'Event Category');
+            catPieData.addColumn('number', 'Total Events');\n";
+
+        $script .= "catPieData.addRows(".count($categoryTotals).");\n";
+
+        $idx = 0;
+        foreach ($categoryTotals as $key => $value)
+        {
+            $script .= "catPieData.setValue($idx, 0, '".self::toTitleCase($key)."');\n";
+            $script .= "catPieData.setValue($idx, 1, $value);\n";
+            $idx++;
+        }
+
+        $script .=
+
+            "\nvar catPieChart = new google.visualization.PieChart(document.getElementById('cat_pie_chart_div'));
+            catPieChart.draw(catPieData, {width: 280, height: 280, is3D: true, title: 'Metrics by Category', legend: 'bottom'});\n
+
+
+            var colChartData = new google.visualization.DataTable();\n
+            colChartData.addColumn('string', 'Event Category');\n";
+
+        foreach ($metrics as $pName => $cats){
+            $script .= "colChartData.addColumn('number', '".$pName."');\n";
+        }
+
+        $script .= "colChartData.addRows(".count($categories).");\n";
 
         if (count($metrics))
         {
             for ($i = 0; $i < count($categories); $i++)
             {
-                $dataTable .= "data.setValue($i, 0, '".self::toTitleCase($categories[$i])."');\n";
+                $script .= "colChartData.setValue($i, 0, '".self::toTitleCase($categories[$i])."');\n";
 
                 $idx = 1;
                 foreach ($metrics as $key => $value) {
-                    $dataTable .= "data.setValue($i, ".$idx.", ".$value[$categories[$i]].");\n";
+                    $script .= "colChartData.setValue($i, ".$idx.", ".$value[$categories[$i]].");\n";
                     $idx++;
                 }
             }
         }
-        $script .= $dataTable;
-        $script .= "
+        
+        $script .= 
 
-            var barChart = new google.visualization.ColumnChart(document.getElementById('bar_chart_div'));
-                    barChart.draw(data, {width: 420, height: 320, is3D: true, title: 'Workspace Metrics', 'isStacked': true, 'legend': 'bottom'});\n\n";
+                "var barChart = new google.visualization.ColumnChart(document.getElementById('col_chart_div'));
+                barChart.draw(colChartData, {width: 420, height: 360, is3D: true, title: 'Workspace Metrics', 'isStacked': true, 'legend': 'bottom'});\n\n
 
-        $tableData = str_replace('setValue', 'setCell', $dataTable);
-        $tableData = str_replace('data', 'tableData', $tableData);
-        $script .= $tableData;
-        $script .= "
-
-            var table = new google.visualization.Table(document.getElementById('table_chart_div'));
-            table.draw(tableData, {showRowNumber: true});
+                var tableData = new google.visualization.DataTable();
+                tableData.addColumn('string', 'Project');\n";
+        
+        foreach ($categories as $category) {
+            $script .= "tableData.addColumn('number', '".self::toTitleCase($category)."');\n";
         }
-        </script>";
+
+        $script .= "tableData.addRows(".count($metrics).");\n";
+
+        if (count($metrics))
+        {
+            $idx = 0;
+            foreach ($metrics as $pName => $cats)
+            {
+                $script .= "tableData.setCell($idx, 0, '$pName');\n";
+                for ($i = 0; $i < count($categories); $i++)
+                {
+                    $script .= "tableData.setCell($idx, ".($i+1).", {$cats[$categories[$i]]});\n";
+                }
+                $idx++;
+            }
+        }
+
+        $script .=
+
+                "var table = new google.visualization.Table(document.getElementById('table_chart_div'));
+                table.draw(tableData, {showRowNumber: true});
+            }
+            </script>";
 
         return $script;
     }

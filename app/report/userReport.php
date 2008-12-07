@@ -97,7 +97,7 @@
                                     <div style="float: left; width: 250px">
                                         
                                         <h3>
-                                            <?php echo $user->getFirstName().' '.$user->getLastName().
+                                            <?php echo $reportUser->getFirstName().' '.$reportUser->getLastName().
                                                             "&nbsp<a href=\"../user/profile/viewProfile.php?userId={$_GET['user_id']}\">".
                                                             "<img style=\"border: 0\" src=\"../template/icons/i16/misc/contact.png\" /></a>"
                                             ?>
