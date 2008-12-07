@@ -3,8 +3,8 @@
 
 #----------------------------->>>>>>>>>>>>> Controller Usage for UC101, UC302 UC303 ----------------------------->>>>>>>>>>>>>>>
     //for debugging
-    $_GET['type'] = 'own';
-    $_GET['workspace_id'] = '2';
+    //$_GET['type'] = 'own';
+    //$_GET['workspace_id'] = '2';
 
     $user = $_SESSION["loggedUser"];
 
