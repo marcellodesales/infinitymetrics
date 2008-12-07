@@ -45,11 +45,7 @@
         } else {
             $_SESSION["signupError"] = "Some fields are missing";
         }
-    } else {
-        $_SESSION["signupError"] = "You must authenticate through Java.net to continue on step 2";
-        header('Location: signup-step1.php');
-    }
-
+    } 
 #----------------------------->>>>>>>>>>>>> Variables Initialization ------------------->>>>>>>>>>>>>>>
 
     $subUseCase = "2. Student Profile Update";
@@ -142,10 +138,9 @@
 	  			<td class="label"><label id="iinstitution" for="institution">Institution</label></td>
 	  			<td class="field"><select name="institutionAbbr">
 <?php
-            $c = new Criteria();
-            $c->addAscendingOrderByColumn(PersistentInstitutionPeer::ABBREVIATION);
-            $institutions = PersistentInstitutionPeer::doSelect($c);
+    require_once 'infinitymetrics/controller/UserManagementController.class.php';
 
+            $institutions = UserManagementController::retrieveInstitutions();
             foreach ($institutions as $inst) {
                 echo "<option value=\"".$inst->getAbbreviation()."\"\">(".$inst->getAbbreviation().") ".$inst->getName().", ".$inst->getStateProvince().", ".$inst->getCountry()."</option>";
             }

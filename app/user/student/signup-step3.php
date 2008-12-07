@@ -19,8 +19,9 @@
                             $regStudent["jnPassword"], $regStudent["email"], $regStudent["firstName"],
                             $regStudent["lastName"], $regStudent["schoolId"], $regStudent["jnProject"],
                             $regStudent["instAbbrev"], $regStudent["isLeader"]);
+
                 $_SESSION["successMessage"] = "Your account was created and an email was sent to " . $regStudent["email"];
-                header('Location: ../');
+                header('Location: ' . $_SERVER["home_address"]);
 
         } catch (Exception $ime) {
             $_SESSION["signupError"] = $ime;

@@ -44,11 +44,10 @@ final class UserManagementController {
     /**
      * @param string $username is the java.net username of the user
      * @param string $password is the java.net passworld of the user
-     * @return boolean whether the user has passed the correct credentials or not.
+     * @return PersonalAgent with the correct credentials or not.
      */
     public static function areUserCredentialsValidOnJN($username, $password) {
-        $agent = PersonalAgentController::authenticateJavanetUser($username, $password);
-        return $agent->areUserCredentialsValidOnJN();
+        return PersonalAgentController::authenticateJavanetUser($username, $password);
     }
     /**
      *  Validates the registration input form.
@@ -483,6 +482,12 @@ final class UserManagementController {
             throw new InfinityMetricsException("Can't retrieve user", $errors);
         }
         return $user;
+    }
+
+    public static function retrieveInstitutions() {
+        $c = new Criteria();
+        $c->addAscendingOrderByColumn(PersistentInstitutionPeer::ABBREVIATION);
+        return PersistentInstitutionPeer::doSelect($c);
     }
 
     /** This is the implemention of UC005

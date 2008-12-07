@@ -17,9 +17,6 @@
 
 <?php include 'user-signup-header-adds.php' ?>
 
-<?php
-require_once 'infinitymetrics/controller/ReportController.class.php';
-?>
 </head>
 <body class="<?php echo $enableLeftNav ? $leftNavClass : $NoLeftNavClass; ?>">
 
@@ -75,18 +72,25 @@ require_once 'infinitymetrics/controller/ReportController.class.php';
         </div>
                     </div>
         <div id="content">
-
+<?php
+        if (isset($_SESSION["successMessage"]) && $_SESSION["successMessage"] != "") {
+             echo "<div class=\"messages ok\">".$_SESSION["successMessage"]."</div>";
+             $_SESSION["successMessage"] = "";
+             unset($_SESSION["successMessage"]);
+        }
+?>
           <div class="t"><div class="b"><div class="l"><div class="r"><div class="bl"><div class="br"><div class="tl"><div class="tr"><div class="content-in">
 
             <table>
                 <tr>
-                    <td><img src="../../template/images/techglobe2.jpg"></td>
+                    <td><img src="../../template/images/techglobe.png"></td>
                     <td align="center"><h2>Welcome to Infinity Metrics</h2></td>
                     <td>
-                Wanna know what's really going on in a project? What if you could track the performance of multiple
-                Java.net projects on the same environment without creating boring spreadsheets? <b>Infinity Metrics</b>
-                aggregates data from Java.net and provide reports for all types of users, specially those from the
-                academia teaching Global Software Engineering.
+                Wanna know what's really going on in a Java.net project? What if you could track the performance of multiple
+                projects on the same environment without the need of complicated spreadsheets? <strong>Infinity Metrics</strong>
+                aggregates data from <strong>Java.net</strong> and provide reports for all types of users, Project Owners
+                and specially those from the academia teaching <strong>Global Software Engineering</strong>.
+                Read more <a href="help/"><img src="template/images/next.png" border="0"></a>
                     </td>
                     <td align="right"><input name="op" id="edit-preview" value="Get Started now!" class="form-submit" type="button" onclick="document.location='user/index.php'"></td>
                 </tr>

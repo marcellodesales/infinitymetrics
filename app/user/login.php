@@ -16,8 +16,14 @@ if (isset($_POST["username"]) && isset($_POST["password"])) {
    try {
         $user = UserManagementController::login($_POST["username"], $_POST["password"]);
         $_SESSION["loggedUser"] = $user;
-        header('Location: ../workspace/workspaceCollection.php');
-
+        if ($user->getType() == UserTypeEnum::getInstance()->INSTRUCTOR) {
+            header('Location: ../workspace/workspaceCollection.php');
+        } else {
+            $c = new Criteria();
+            $c->add(PersistentUserXProjectPeer::JN_USERNAME, $user->getJnUsername());
+            $project = PersistentUserXProjectPeer::doSelectOne($c);
+            header("Location: ../report/projectReport.php?project_id=".$project->getProjectJnName());
+        }
     } catch (Exception $e) {
         $_SESSION["signinError"] = $e;
     }
@@ -116,7 +122,7 @@ $subUseCase = "User Login ";
 	  			<td class="label" width="20"><label id="lusername" for="username">Username</label></td>
 	  			<td class="field"><input id="username" name="username" class="textfield" value="" maxlength="50" type="text"></td>
                 <td rowspan="3" align="center">
-                If you still does't have an accout, <BR>
+                If you still don't have an accout, <BR>
                 <input name="op" id="edit-preview" value="Register your Java.net account" class="form-submit" type="button" onclick="document.location='index.php'"></td>
 	  		    </tr>
 	  		  <tr>

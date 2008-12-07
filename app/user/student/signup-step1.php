@@ -4,12 +4,12 @@
 #----------------------------->>>>>>>>>>>>> Controller Usage for UC404 ----------------------------->>>>>>>>>>>>>>>
 
     if (isset($_POST["username"]) && isset($_POST["password"])) {
-        
+
         require_once 'infinitymetrics/controller/UserManagementController.class.php';
         require_once 'infinitymetrics/model/InfinityMetricsException.class.php';
 
         try {
-            $existentUser = UserManagementController::retrieveUserByUserName($_POST["username"]);
+            $existentUser = PersistentUserPeer::retrieveByJNUsername($_POST["username"]);
             if (isset($existentUser) && $existentUser->getJnUsername() == $_POST["username"]) {
                 $_SESSION["signupError"] = "User ".$_POST["username"]." already registered at Infinity Metrics";
             } else {

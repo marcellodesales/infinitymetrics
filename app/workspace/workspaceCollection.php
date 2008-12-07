@@ -1,4 +1,5 @@
 <?php
+
     include '../template/infinitymetrics-bootstrap.php';
 
 #----------------------------->>>>>>>>>>>>> Controller Usage for UC102 ----------------------------->>>>>>>>>>>>>>>
@@ -97,7 +98,7 @@
 
                 <div id="content-wrap">
                     <div id="inside">
-                        <div id="sidebar-right">
+                        <div id="sidebar-right" align="center">
                             <div id="block-user-3" class="block block-user">
                                 <br />
                                 

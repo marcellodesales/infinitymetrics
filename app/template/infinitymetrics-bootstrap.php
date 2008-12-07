@@ -1,5 +1,8 @@
 <?php
 
+require_once 'propel/Propel.php';
+Propel::init('infinitymetrics/orm/config/om-conf.php');
+
 ini_set('include_path', ini_get('include_path') . PATH_SEPARATOR . '/home/group8/pear/PEAR');
 ini_set('include_path', ini_get('include_path') . PATH_SEPARATOR . '/home/group8/infinitymetrics/app/classes');
 ini_set('include_path', ini_get('include_path') . PATH_SEPARATOR . '/home/group8/infinitymetrics/app/template');
@@ -22,8 +25,19 @@ function contains($content, $str, $ignorecase=true){
 }
 
 function isUserInReservedAreas() {
-    return contains($_SERVER["REQUEST_URI"], "/workspace") || contains($_SERVER["REQUEST_URI"], "/cetracker") ||
-               contains($_SERVER["REQUEST_URI"], "/report");
+    if (strpos($_SERVER["REQUEST_URI"], "workspace")) {
+        return true;
+    } else
+    if (strpos($_SERVER["REQUEST_URI"], "cetracker")) {
+        return true;
+    } else
+    if (strpos($_SERVER["REQUEST_URI"], "report")) {
+        return true;
+    } else
+    if (strpos($_SERVER["REQUEST_URI"], "logout")) {
+        return true;
+    } else
+        return false;
 }
 
 session_cache_limiter('private');
@@ -31,16 +45,15 @@ session_cache_expire(180); // 2 hours
 session_start();
 
 if (isUserInReservedAreas()) {
-   if (!isUserLoggedIn() && strpos($_SERVER["REQUEST_URI"],"/user/login.php")) {
-       
+    if (!isUserLoggedIn()) {
         $_SESSION["signinError"] = "Invalid session to visit a reserved page";
         header("Location: " . $_SERVER["home_address"] . "/user/login.php");
-   }
-   //$user = $_SESSION["user"];
+    }
+    //$user = $_SESSION["user"];
    //TODO: NEEDS to verify if the user is the owner of ANY project associated with ANY workspace
    //That means this user is a java.net project owner and will have a workspace, or this user is
    //an instructor. Both types of users have workspaces.
-   //$user->hasWorkspace() should be the method created on the PersistenUser class 
+   //$user->hasWorkspace() should be the method created on the PersistenUser class
    //(TO BE PATCHED with the correct implementation).
    //$userHasWorkspace = $user->isInstructor();
 }
