@@ -47,7 +47,7 @@ final class UserManagementController {
      * @return boolean whether the user has passed the correct credentials or not.
      */
     public static function areUserCredentialsValidOnJN($username, $password) {
-        $agent = PersonalAgentController::authenticateJavanetUser($$username, $password);
+        $agent = PersonalAgentController::authenticateJavanetUser($username, $password);
         return $agent->areUserCredentialsValidOnJN();
     }
     /**
@@ -802,10 +802,63 @@ final class UserManagementController {
             throw new InfinityMetricsException("Error updating the user profile", $errors);
         }
 
-
-
-
   }
+
+    public static function validateInstitutionRegistrationForm($institutionName, $institutionAbbreviation, $city,
+                                                               $stateProvince,$country) {
+        $error = array();
+        if (!isset($institutionName) || $institutionName == "") {
+            $error["institutionName"] = "The Institution Name is empty.  ";
+        }
+        if (!isset($institutionAbbreviation) ||$institutionAbbreviation == "") {
+            $error["abbreviation"] = "The Institution Abbreviation is empty.  ";
+        }
+        if (!isset($city) || $city == "") {
+            $error["city"] = "The City Name is empty. ";
+        }
+        if (!isset($stateProvince) || $stateProvince == "") {
+            $error["stateProvince"] = "The State/Province Name is empty. ";
+        }
+        if (!isset($country) || $country == "") {
+            $error["country"] = "The Country Name is empty.";
+        }
+        if (count($error) > 0) {
+            throw new InfinityMetricsException("There are errors in the input", $error);
+        }
+        return true;
+    }
+
+   public static function registerInstitution($institutionName, $institutionAbbreviation, $city,
+                                                               $stateProvince,$country){
+
+     try {
+         UserManagementController::validateInstitutionRegistrationForm($institutionName, $institutionAbbreviation,
+                                                                        $city, $stateProvince, $country);
+
+           $inst = PersistentInstitutionPeer::retrieveByAbbreviation($institutionAbbreviation);
+           if($inst != null){
+              $errors = array();
+                $errors["institutionAlreadyRegistered"] = "The institution referred by " . $institutionAbbreviation . " already exists";
+                throw new InfinityMetricsException(" Institution is already registered with Infinity Metrics", $errors);
+           }
+
+            $institution = new Institution();
+            $institution->setAbbreviation($institutionAbbreviation);
+            $institution->setName($institutionName);
+            $institution->setCity($city);
+            $institution->setStateProvince($stateProvince);
+            $institution->setCountry($country);
+            $institution->save();
+
+  
+            return $institution;
+
+        } catch (Exception $e) {
+            throw $e;
+        }
+   }
+
+
 
 
 

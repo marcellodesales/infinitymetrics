@@ -25,6 +25,7 @@ require_once 'infinitymetrics/tests/functional/user/UC003Test.class.php';
 require_once 'infinitymetrics/tests/functional/user/UC004Test.class.php';
 require_once 'infinitymetrics/tests/functional/user/UC005Test.class.php';
 require_once 'infinitymetrics/tests/functional/user/UC006Test.class.php';
+require_once 'infinitymetrics/tests/functional/user/UC002aTest.class.php';
 /**
  * 
  * All Functional Tests for the User Component.
@@ -42,6 +43,7 @@ class AllUserComponentFunctionalTests {
         $suite->addTestSuite('UC004Test');
         $suite->addTestSuite('UC005Test');
         $suite->addTestSuite('UC006Test');
+        $suite->addTestSuite('UC002aTest');
         
         return $suite;
     }
