@@ -299,23 +299,14 @@ final class UserManagementController {
      * @return whether the form is valid or not.
      * @throws InfinityMetricsException if the form contains errors.
      */
-    public static function validateInstructorRegistrationForm($username, $password, $email, $firstName,
-                                   $lastName, $projectName, $isOwner, $institutionAbbreviation, $institutionIdent) {
+    public static function validateInstructorRegistrationForm($firstName, $lastName, $projectName, $isOwner,
+                                                              $institutionAbbreviation, $institutionIdent) {
         $error = array();
-        if (!isset($username) || $username == "") {
-            $error["username"] = "The username is empty";
-        }
-        if (!isset($password) || $password == "") {
-            $error["password"] = "The password is empty";
-        }
-        if (!isset($email) || $email == "") {
-            $error["email"] = "The email is empty";
-        }
         if (!isset($firstName) || $firstName == "") {
-            $error["firstName"] = "The firstName is empty";
+            $error["firstName"] = "The first name is empty";
         }
         if (!isset($lastName) || $lastName == "") {
-            $error["lastName"] = "The lastName is empty";
+            $error["lastName"] = "The last name is empty";
         }
         if (!isset($projectName) || $projectName == "") {
             $error["projectName"] = "The project name is empty";
@@ -350,9 +341,7 @@ final class UserManagementController {
     public static function registerInstructor($username, $password, $email, $firstName, $lastName, $projectName,
                                                 $isOwner, $institutionAbbreviation, $schoolIdentification) {
         try {
-            UserManagementController::validateInstructorRegistrationForm($username, $password, $email, $firstName,
-                                   $lastName, $projectName, $isOwner, $institutionAbbreviation, $schoolIdentification);
-
+            
             $inst = PersistentInstitutionPeer::retrieveByAbbreviation($institutionAbbreviation);
             $proj = PersistentProjectPeer::retrieveByPK($projectName);
 
@@ -483,7 +472,9 @@ final class UserManagementController {
         }
         return $user;
     }
-
+    /**
+     * @return Array[PersistentInstitution] is the current list of institutions registered
+     */
     public static function retrieveInstitutions() {
         $c = new Criteria();
         $c->addAscendingOrderByColumn(PersistentInstitutionPeer::ABBREVIATION);
@@ -530,9 +521,9 @@ final class UserManagementController {
         if (!isset($newInstitutionAbbreviation) || $newInstitutionAbbreviation == "") {
             $error["newInstitutionAbbreviation"] = "The institution abbreviation is empty";
         }
-        if (!isset($newInstitutionIdent) || $newInstitutionIdent == "") {
-            $error["newInstitutionIdentification"] = "The institution identification is empty";
-        }
+//        if (!isset($newInstitutionIdent) || $newInstitutionIdent == "") {
+//            $error["newInstitutionIdentification"] = "The institution identification is empty";
+//        } instructors may not enter their institution identification
 
         if (count($error) > 0) {
             throw new InfinityMetricsException("There are errors in the input", $error);

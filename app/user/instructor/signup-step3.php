@@ -6,18 +6,18 @@
         header('Location: signup-step1.php');
     }
 
-    if (isset($_POST) && isset($_POST["submit"]) && isset($_SESSION["userAgentAuthenticated"]) &&
-               isset($_SESSION["regInstructor"])) {
+    $regInstructor = $_SESSION["regInstructor"];
 
-        $regInstructor = $_SESSION["regInstructor"];
-
+    if (isset($_POST) && isset($_POST["submit"])) {
+        
         require_once 'infinitymetrics/controller/UserManagementController.class.php';
         require_once 'infinitymetrics/model/InfinityMetricsException.class.php';
 
         try {
             $userAgent = UserManagementController::registerInstructor($regInstructor["jnUsername"],
                             $regInstructor["jnPassword"], $regInstructor["email"], $regInstructor["firstName"],
-                            $regInstructor["lastName"], $regInstructor["jnProject"],$regInstructor["instAbbrev"]);
+                            $regInstructor["lastName"], $regInstructor["jnProject"], $regInstructor["isLeader"],
+                            $regInstructor["instAbbrev"], $regInstructor["schoolId"]);
                 $_SESSION["successMessage"] = "Your account was created and an email was sent to " . $regInstructor["email"];
                 header('Location: ../');
 
@@ -56,7 +56,7 @@
 <?php  include_once 'top-navigation.php';  ?>
 
                   <div id="breadcrumb" class="alone">
-                    <h2 id="title">Home</h2>
+                    <h2 id="title">Instructor Registration</h2>
                     <div class="breadcrumb">
 <?php
                         $totalBreadscrum = count(array_keys($breakscrum)); $idx = 0;
@@ -110,28 +110,38 @@
 
             <table><tbody>
               <tr>
+	  		  	<td class="label"><label id="lfullName" for="firstname">Type of Membership</label></td>
+	  		  	<td class="field">Instructor</td>
+	  		  	<td class="status"><span id="fullNameStatus"></span></td>
+	  		  </tr>
+              <tr>
 	  		  	<td class="label"><label id="lfullName" for="firstname">Full Name</label></td>
-	  		  	<td class="field"><?php echo $_SESSION["regInstructor"]["firstName"] ?> <?php echo $_SESSION["regInstructor"]["lastName"] ?></td>
+	  		  	<td class="field"><?php echo $regInstructor["firstName"] ?> <?php echo $regInstructor["lastName"] ?></td>
 	  		  	<td class="status"><span id="fullNameStatus"></span></td>
 	  		  </tr>
       		  <tr>
 	  			<td class="label"><label id="iinstitution" for="institution">Institution</label></td>
-	  			<td class="field"><?php echo $_SESSION["reginstructor"]["instAbbrev"] ?></td>
+	  			<td class="field"><?php echo $regInstructor["instAbbrev"] ?></td>
 	  			<td class="status"><span id="institutionStatus"></span></td>
 	  		  </tr>
       		  <tr>
 	  			<td class="label"><label id="lemail" for="email">Email Address at Java.net</label></td>
-	  			<td class="field"><?php echo $_SESSION["regInstructor"]["email"] ?></td>
+	  			<td class="field"><?php echo $regInstructor["email"] ?></td>
 	  			<td class="status"><span id="emailStatus"></span></td>
 	  		  </tr>
 	  		  <tr>
 	  			<td class="label"><label id="lusername" for="username">Java.net Username</label></td>
-	  			<td class="field"><?php echo $_SESSION["reginstructor"]["jnUsername"] ?></td>
+	  			<td class="field"><?php echo $regInstructor["jnUsername"] ?></td>
 	  			<td class="status"><span id="usernameStatus"></span></td>
 	  		  </tr>
       		  <tr>
 	  			<td class="label"><label id="iProjectName" for="institution">Project You Participate</label></td>
-	  			<td class="field"><?php echo $_SESSION["regInstructor"]["jnProject"] ?></td>
+	  			<td class="field"><?php echo $regInstructor["jnProject"] ?></td>
+	  			<td class="status"><span id="projectStatus"></span></td>
+	  		  </tr>
+      		  <tr>
+	  			<td class="label"><label id="iProjectName" for="institution">Role You're Playing</label></td>
+	  			<td class="field"><?php echo $regInstructor["isLeader"] ? "Instructor" : "Instructor Member" ?></td>
 	  			<td class="status"><span id="projectStatus"></span></td>
 	  		  </tr>
       		  <tr>

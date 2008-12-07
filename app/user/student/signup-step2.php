@@ -17,7 +17,6 @@
 
             try {
                 $firstLastName = explode(" ", $_POST["fullName"]);
-                //isLeaderProject = 1|0projectname
                 $isLeader = in_array("Project Owner", $_SESSION["userAgentAuthenticated"]["projects"][$_POST["jnProject"]]);
                 $userAgent = UserManagementController::validateStudentRegistrationForm(
                                  $_SESSION["userAgentAuthenticated"]["jnUsername"],
@@ -77,7 +76,7 @@
 <?php  include_once 'top-navigation.php';  ?>
 
                   <div id="breadcrumb" class="alone">
-                    <h2 id="title">Home</h2>
+                    <h2 id="title">Student Registration</h2>
                     <div class="breadcrumb">
 <?php
                         $totalBreadscrum = count(array_keys($breakscrum)); $idx = 0;
@@ -169,9 +168,11 @@
 	  			<td class="field"><select name="jnProject">
 <?php
         foreach($_SESSION["userAgentAuthenticated"]["projects"] as $projectName => $rolesArray) {
-                $studentMemberType = in_array("Project Owner", $rolesArray) ? "Team Leader of " : "Team Member of ";
+                $isOwner = in_array("Project Owner", $rolesArray);
+                $studentMemberType = $isOwner ? "Team Leader of " : "Team Member of ";
+                $checked = $isOwner ? "SELECTED" : "";
                 $roles = implode(", ", $rolesArray);
-                echo "<option value=\"".$projectName."\">".$studentMemberType."(".$projectName.") as ".$roles."</option>";
+                echo "<option ".$checked." value=\"".$projectName."\">".$studentMemberType."(".$projectName.") as ".$roles."</option>";
         }
 ?>
                                    </select>

@@ -6,8 +6,7 @@
         header('Location: signup-step1.php');
     }
 
-    if (isset($_POST) && isset($_POST["submit"]) && isset($_SESSION["userAgentAuthenticated"]) &&
-               isset($_SESSION["regStudent"])) {
+    if (isset($_POST) && isset($_POST["submit"])) {
 
         $regStudent = $_SESSION["regStudent"];
         
@@ -58,7 +57,7 @@
 <?php  include_once 'top-navigation.php';  ?>
 
                   <div id="breadcrumb" class="alone">
-                    <h2 id="title">Home</h2>
+                    <h2 id="title">Student Registration</h2>
                     <div class="breadcrumb">
 <?php
                         $totalBreadscrum = count(array_keys($breakscrum)); $idx = 0;
@@ -111,6 +110,11 @@
 ?>
 
             <table><tbody>
+              <tr>
+	  		  	<td class="label"><label id="lfullName" for="firstname">Type of User</label></td>
+	  		  	<td class="field">Student</td>
+	  		  	<td class="status"><span id="fullNameStatus"></span></td>
+	  		  </tr>
               <tr>
 	  		  	<td class="label"><label id="lfullName" for="firstname">Full Name</label></td>
 	  		  	<td class="field"><?php echo $_SESSION["regStudent"]["firstName"] ?> <?php echo $_SESSION["regStudent"]["lastName"] ?></td>

@@ -1,6 +1,7 @@
 <?php
 /**
  * @author Gurdeep Singh  <gurdeepsingh03@gmail.com>
+ * @author Marcello de Sales <marcello.sales@gmail.com>
  * This is the view to register a new institution.
  */
 include '../../template/infinitymetrics-bootstrap.php';
@@ -11,28 +12,19 @@ if (isset($_POST["inst_name"]) && isset($_POST["inst_abbv"]) && isset($_POST["ci
                  && isset($_POST["state"]) && isset($_POST["country"])) {
 
     require_once 'infinitymetrics/controller/UserManagementController.class.php';
-    require_once 'infinitymetrics/model/InfinityMetricsException.class.php';
 
- /*   $inst = PersistentInstitutionPeer::retrieveByAbbreviation($_POST["inst_abbv"]);
-     if($inst != null) {
-        $errors = array();
-                $errors["institutionAlreadyRegistered"] = "The institution referred by " . $_POST["inst_abbv"] . " already exists";
-                throw new InfinityMetricsException(" Instituion is already registered with Infinity Metrics", $errors);
-     }else {
-*/
    try {
-       $institution = UserManagementController::registerInstitution($_POST["inst_name"],$_POST["inst_abbv"],$_POST["city"],
-                 $_POST["state"],$_POST["country"]);
-          header('Location: signup-step2.php?createdInstitution =$institution->getInstitutionId();');
+       $_POST["state"] = isset($_POST["nonUsState"]) ? $_POST["nonUsState"] : $_POST["state"];
+       $institution = UserManagementController::registerInstitution($_POST["inst_name"],$_POST["inst_abbv"],
+                                                                    $_POST["city"], $_POST["state"],
+                                                                    $_POST["country"]);
+          header('Location: signup-step2.php?createdInstitution='.$institution->getInstitutionId());
     } catch (Exception $e) {
         $_SESSION["signupError"] = $e;
     }
- 
 }
 
 #----------------------------->>>>>>>>>>>>> Variables Initialization ------------------->>>>>>>>>>>>>>>
-
-
 
 $subUseCase = "Register Institution ";
     $enableLeftNav = true;
@@ -52,16 +44,9 @@ $subUseCase = "Register Institution ";
     #leftMenu[n]["tip"] - the tooltip of the URL
     $leftMenu = array();
     array_push($leftMenu, array("active"=>"menu-27", "url"=>"signup-step1.php", "item"=>"1. Java.net Authentication", "tip"=>"Manage your site's book outlines."));
-    array_push($leftMenu, array("active"=>"menu-27 first active", "url"=>"signup-step2.php", "item"=>"2. Update Profile", "tip"=>"Update and review your profile info"));
+    array_push($leftMenu, array("active"=>"menu-27", "url"=>"signup-step2.php", "item"=>"2. Update Profile", "tip"=>"Update and review your profile info"));
     array_push($leftMenu, array("active"=>"menu-27 first active", "url"=>"signup-step2a.php", "item"=>"2a. Register Institution ", "tip"=>"Register your institution"));
     array_push($leftMenu, array("active"=>"menu-27", "url"=>"signup-step3.php", "item"=>"3. Confirm Registration", "tip"=>"Confirm you profile"));
-
-?>
-
-<?php
-//session_start();
-//session_register("user");
-//$user = $HTTP_POST_VARS['username'];
 
 ?>
 
@@ -79,7 +64,7 @@ $subUseCase = "Register Institution ";
 <?php  include 'top-navigation.php';  ?>
 
                   <div id="breadcrumb" class="alone">
-                    <h2 id="title">Home</h2>
+                    <h2 id="title">Institution Registration</h2>
                     <div class="breadcrumb">
 <?php
                         $totalBreadscrum = count(array_keys($breakscrum)); $idx = 0;
@@ -134,12 +119,11 @@ $subUseCase = "Register Institution ";
 	  		  <tr>
 	  			<td class="status" width="50">&nbsp;</td>
 	  			<td class="label" width="20"><label id="linst_name" for="institutionName">Institution</label></td>
-	  			<td class="field"><input id="inst_name" name="inst_name" class="textfield" value="" maxlength="50" type="text"></td>
-                
+	  			<td class="field"><input id="inst_name" name="inst_name" size="52" class="textfield" value="" maxlength="50" type="text"></td>
 	  		  <tr>
 	  			<td class="status"></td>
 	  			<td class="label"><label id="linst_abbv" for="institutionAbbreviation">Abbreviation</label></td>
-	  			<td class="field"><input id="inst_abbv" name="inst_abbv" class="textfield" maxlength="50" value="" type="text"></td>
+	  			<td class="field"><input id="inst_abbv" name="inst_abbv" class="textfield" size="15" maxlength="10" value="" type="text"></td>
 	  		  </tr>
 
               <tr>
@@ -151,18 +135,71 @@ $subUseCase = "Register Institution ";
               <tr>
 	  			<td class="status"></td>
 	  			<td class="label"><label id="lstate" for="stateProvince">State/Province</label></td>
-	  			<td class="field"><input id="state" name="state" class="textfield" maxlength="50" value="" type="text"></td>
+	  			<td class="field">
+                <select id="state" name="state" size="1">
+                    <option value="-1">Choose State</option>
+                    <option value="AL">Alabama</option>
+                    <option value="AK">Alaska</option>
+                    <option value="AZ">Arizona</option>
+                    <option value="AR">Arkansas</option>
+                    <option value="CA" selected>California</option>
+                    <option value="CO">Colorado</option>
+                    <option value="CT">Connecticut</option>
+                    <option value="DE">Delaware</option>
+                    <option value="DC">Dist of Columbia</option>
+                    <option value="FL">Florida</option>
+                    <option value="GA">Georgia</option>
+                    <option value="HI">Hawaii</option>
+                    <option value="ID">Idaho</option>
+                    <option value="IL">Illinois</option>
+                    <option value="IN">Indiana</option>
+                    <option value="IA">Iowa</option>
+                    <option value="KS">Kansas</option>
+                    <option value="KY">Kentucky</option>
+                    <option value="LA">Louisiana</option>
+                    <option value="ME">Maine</option>
+                    <option value="MD">Maryland</option>
+                    <option value="MA">Massachusetts</option>
+                    <option value="MI">Michigan</option>
+                    <option value="MN">Minnesota</option>
+                    <option value="MS">Mississippi</option>
+                    <option value="MO">Missouri</option>
+                    <option value="MT">Montana</option>
+                    <option value="NE">Nebraska</option>
+                    <option value="NV">Nevada</option>
+                    <option value="NH">New Hampshire</option>
+                    <option value="NJ">New Jersey</option>
+                    <option value="NM">New Mexico</option>
+                    <option value="NY">New York</option>
+                    <option value="NC">North Carolina</option>
+                    <option value="ND">North Dakota</option>
+                    <option value="OH">Ohio</option>
+                    <option value="OK">Oklahoma</option>
+                    <option value="OR">Oregon</option>
+                    <option value="PA">Pennsylvania</option>
+                    <option value="RI">Rhode Island</option>
+                    <option value="SC">South Carolina</option>
+                    <option value="SD">South Dakota</option>
+                    <option value="TN">Tennessee</option>
+                    <option value="TX">Texas</option>
+                    <option value="UT">Utah</option>
+                    <option value="VT">Vermont</option>
+                    <option value="VA">Virginia</option>
+                    <option value="WA">Washington</option>
+                    <option value="WV">West Virginia</option>
+                    <option value="WI">Wisconsin</option>
+                    <option value="WY">Wyoming</option>
+                    <option value="-2">Non-US</option>
+                </select>
+                <input id ="nonUsState" type="text" size="30" maxlength="50" name="nonUsState" class="textfield">
+                </td>
 	  		  </tr>
 
               <tr>
 	  			<td class="status"></td>
                  <td class="label"><label id="lcountry" for="country">Country</label></td>
 	  			<td>
-       <noscript>         
-       <input id ="country" type="hidden" name="country" class="textfield" value="en">
-       </noscript>
-  <select id="country" name="country"
-            onchange="javascript:reloadTos(reloadTimeZones)" >
+         <select id="country" name="country">
   <option value="AF"
 
           >
@@ -1395,21 +1432,16 @@ $subUseCase = "Register Institution ";
   <input type="submit" name="country" id="country"
                    style="display:none" />
     </noscript>
-
- 
 	  			
 	  		  </tr>
               <td>
   </td>
 </tr>
-
-
-
               <tr>
                 <td>&nbsp;</td>
                 <td colspan="2" align="center">
-                    <input id="edit-submit" value="Register Institution" class="form-submit" type="submit" onclick="document.location = signup-step2.php">
-                    <input id="edit-delete" value="Cancel" class="form-submit" type="button" onclick="document.location=signup-step2.php">
+                    <input id="edit-submit" value="Register Institution" class="form-submit" type="submit">
+                    <input id="edit-delete" value="Cancel" class="form-submit" type="button" onclick="document.location='signup-step2.php'">
                 </td>
               </tr>
 	  		  </tbody></table>

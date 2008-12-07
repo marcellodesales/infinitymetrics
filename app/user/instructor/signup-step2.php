@@ -10,27 +10,28 @@
 
     if (isset($_POST) && isset($_POST["submit"])) {
         if (isset($_POST["username"]) && isset($_POST["email"]) && isset($_POST["fullName"]) &&
-            isset($_POST["institutionAbbr"]) && isset($_POST["jnProject"])) {
+            isset($_POST["institutionAbbr"]) && isset($_POST["jnProject"]) && isset($_POST["schoolId"])) {
 
             require_once 'infinitymetrics/controller/UserManagementController.class.php';
             require_once 'infinitymetrics/model/InfinityMetricsException.class.php';
 
             try {
                 $firstLastName = explode(" ", $_POST["fullName"]);
-                                 $userAgent = UserManagementController::validateInstructorRegistrationForm(
-                                 $_SESSION["userAgentAuthenticated"]["jnUsername"],
-                                 $_SESSION["userAgentAuthenticated"]["jnPassword"],
-                                 $_SESSION["userAgentAuthenticated"]["email"], $firstLastName[0], $firstLastName[1],
-                                 $_POST["jnProject"], $_POST["institutionAbbr"]);
+                $isLeader = in_array("Project Owner", $_SESSION["userAgentAuthenticated"]["projects"][$_POST["jnProject"]]);
+                UserManagementController::validateInstructorRegistrationForm($firstLastName[0], $firstLastName[1],
+                                                                             $isLeader, $_POST["jnProject"],
+                                                                         $_POST["institutionAbbr"], $_POST["schoolId"]);
 
                 $regInstructor["jnUsername"] = $_SESSION["userAgentAuthenticated"]["jnUsername"];
                 $regInstructor["jnPassword"] = $_SESSION["userAgentAuthenticated"]["jnPassword"];
                 $regInstructor["email"] = $_SESSION["userAgentAuthenticated"]["email"];
                 $regInstructor["firstName"] = $firstLastName[0];
                 $regInstructor["lastName"] = $firstLastName[1];
+                $regInstructor["schoolId"] = $_POST["schoolId"];
                 $regInstructor["jnProject"] = $_POST["jnProject"];
                 $regInstructor["instAbbrev"] = $_POST["institutionAbbr"];
-
+                $regInstructor["isLeader"] = $isLeader;
+                
                 $_SESSION["regInstructor"] = $regInstructor;
 
                 header('Location: signup-step3.php');
@@ -49,10 +50,10 @@
     $enableLeftNav = true;
 
     $breakscrum = array(
-                       $home_address => "Home",
-                       $home_address."/user" => "Users Registration",
-                       $home_address."user\instructor\signup-step1.php" =>  "1. Java.net Authentication",
-                       $home_address."/user/instructor/signup-step2.php" => "2. Profile Update"
+                       $_SERVER["home_address"] => "Home",
+                       $_SERVER["home_address"] ."/user" => "Users Registration",
+                       $_SERVER["home_address"] ."user\instructor\signup-step1.php" =>  "1. Java.net Authentication",
+                       $_SERVER["home_address"] ."/user/instructor/signup-step2.php" => "2. Profile Update"
                   );
     $leftMenu = array();
     array_push($leftMenu, array("active"=>"menu-27", "url"=>"signup-step1.php", "item"=>"1. Java.net Authentication", "tip"=>"Manage your site's book outlines."));
@@ -74,7 +75,7 @@
 <?php  include_once 'top-navigation.php';  ?>
 
                   <div id="breadcrumb" class="alone">
-                    <h2 id="title">Home</h2>
+                    <h2 id="title">Instructor Registration</h2>
                     <div class="breadcrumb">
 <?php
                         $totalBreadscrum = count(array_keys($breakscrum)); $idx = 0;
@@ -133,27 +134,27 @@
 	  		  </tr>
       		  <tr>
 	  			<td class="label"><label id="iinstitution" for="institution">Institution</label></td>
-	  			<td class="field"><select name="institutionAbbr">
-                <td>
-                 <input name="submit1" id="edit-delete" value="ADD NEW INSTITUTION" class="form-submit" type="button" onclick="document.location='signup-step2a.php'">
-                </td>
-<?php
-            $c = new Criteria();
-            $c->addAscendingOrderByColumn(PersistentInstitutionPeer::ABBREVIATION);
-            $institutions = PersistentInstitutionPeer::doSelect($c);
 
+	  			<td class="field"><select name="institutionAbbr">
+<?php
+    require_once 'infinitymetrics/controller/UserManagementController.class.php';
+
+            $institutions = UserManagementController::retrieveInstitutions();
             foreach ($institutions as $inst) {
-                if(isset($_GET["createdInstitution"])){
-                    if($inst->getInstitutionId()==$_GET["createdInstitution"]){
-                        print "<option CHECKED value =".$inst->getAbbreviation().">";
-                    }
-                }else
-                echo "<option value=\"".$inst->getAbbreviation()."\"\">(".$inst->getAbbreviation().") ".$inst->getName().", ".$inst->getStateProvince().", ".$inst->getCountry()."</option>";
+                $wasCreated = isset($_GET["createdInstitution"]) &&
+                              $inst->getInstitutionId() == $_GET["createdInstitution"] ? "SELECTED" : "";
+                echo "<option ".$wasCreated." value=\"".$inst->getAbbreviation()."\"\">(".$inst->getAbbreviation().") ".$inst->getName().", ".$inst->getStateProvince().", ".$inst->getCountry()."</option>";
             }
 ?>
                                    </select>
                 </td>
-	  			<td class="status"><span id="institutionStatus"></span></td>
+	  			<td class="status"><input name="submit1" id="edit-preview" value="ADD NEW INSTITUTION" class="form-submit" type="button" onclick="document.location='signup-step2a.php'">
+                <span id="institutionStatus"></span></td>
+	  		  </tr>
+      		  <tr>
+	  			<td class="label"><label id="lschoolId" for="schoolId">School Identification #</label></td>
+	  			<td class="field"><input style="background-color: rgb(255, 255, 160);" id="schoolId" name="schoolId" class="textfield" value="" maxlength="30" type="text"></td>
+	  			<td class="status"><span id="schoolIdStatus"></span></td>
 	  		  </tr>
       		  <tr>
 	  			<td class="label">* <label id="lusername" for="username">Java.net Username</label></td>
@@ -168,7 +169,15 @@
       		  <tr>
 	  			<td class="label"><label id="iProjectName" for="institution">I am a...</label></td>
 	  			<td class="field"><select name="jnProject">
-
+<?php
+        foreach($_SESSION["userAgentAuthenticated"]["projects"] as $projectName => $rolesArray) {
+                $isOwner = in_array("Project Owner", $rolesArray);
+                $userMemberType = $isOwner ? "Instructor of " : "Team Member of ";
+                $checked = $isOwner ? "SELECTED" : "";
+                $roles = implode(", ", $rolesArray);
+                echo "<option ".$checked." value=\"".$projectName."\">".$userMemberType."(".$projectName.") as ".$roles."</option>";
+        }
+?>
                                    </select>
                 </td>
 	  			<td class="status"><span id="projectStatus"></span></td>

@@ -83,7 +83,7 @@
 
             <table>
                 <tr>
-                    <td><img src="../../template/images/techglobe.png"></td>
+                    <td><img src="../../template/images/techglobe.gif"></td>
                     <td align="center"><h2>Welcome to Infinity Metrics</h2></td>
                     <td>
                 Wanna know what's really going on in a Java.net project? What if you could track the performance of multiple
