@@ -863,8 +863,22 @@ final class UserManagementController {
         }
    }
 
-
-
+   /**
+    * Makes the URL for the page the user has to land after making a login
+    * @param PersistentUser $user is the user from the session.
+    * @return string the complete URL for the redirect
+    */
+   public static function makeLoginLandingPage($user) {
+        if ($user->getType() == UserTypeEnum::getInstance()->INSTRUCTOR) {
+            return "../workspace/workspaceCollection.php";
+        } else {
+            //This scenario is related to a student only... For Java.net users this needs to be fixed by M5
+            $c = new Criteria();
+            $c->add(PersistentUserXProjectPeer::JN_USERNAME, $user->getJnUsername());
+            $uniqueStudent = PersistentUserXProjectPeer::doSelectOne($c);
+            return "../report/projectReport.php?project_id=".$project->getProjectJnName();
+        }
+   }
 
 
 

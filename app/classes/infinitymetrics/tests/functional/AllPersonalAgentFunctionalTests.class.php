@@ -34,7 +34,7 @@ class AllPersonalAgentComponentFunctionalTests {
     public static function suite() {
         $suite = new PHPUnit_Framework_TestSuite('PHPUnit Framework');
 
-        $suite->addTestSuite('UC400Test');
+//        $suite->addTestSuite('UC400Test');
         $suite->addTestSuite('UC401Test');
         $suite->addTestSuite('UC402Test');
         $suite->addTestSuite('UC403Test');

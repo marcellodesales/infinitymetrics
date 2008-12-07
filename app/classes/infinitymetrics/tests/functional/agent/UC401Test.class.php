@@ -40,7 +40,7 @@ class UC401Test extends PHPUnit_Framework_TestCase {
      */
     protected function setUp() {
         parent::setUp();
-
+        PersistentProjectPeer::doDelete("ppm");
         $this->user = new PersistentUser();
         $this->user->setJnUsername(self::USERNAME_CORRECT);
         $this->user->setJnPassword(self::PASSWORD_CORRECT);

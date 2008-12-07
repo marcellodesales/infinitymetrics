@@ -165,7 +165,6 @@ class PersonalAgent {
                 $this->collectRssDataFromProjectForum($projectName, $channelId, $observer);
             }
         }
-        echo "\nFinishing with project " . $projectName;
     }
     /**
      * Collects the RSS Data feed from the given MAILING LIST for a given observer to process.

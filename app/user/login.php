@@ -16,14 +16,8 @@ if (isset($_POST["username"]) && isset($_POST["password"])) {
    try {
         $user = UserManagementController::login($_POST["username"], $_POST["password"]);
         $_SESSION["loggedUser"] = $user;
-        if ($user->getType() == UserTypeEnum::getInstance()->INSTRUCTOR) {
-            header('Location: ../workspace/workspaceCollection.php');
-        } else {
-            $c = new Criteria();
-            $c->add(PersistentUserXProjectPeer::JN_USERNAME, $user->getJnUsername());
-            $project = PersistentUserXProjectPeer::doSelectOne($c);
-            header("Location: ../report/projectReport.php?project_id=".$project->getProjectJnName());
-        }
+        header('Location: ' . UserManagementController::makeLoginLandingPage($user));
+        
     } catch (Exception $e) {
         $_SESSION["signinError"] = $e;
     }
