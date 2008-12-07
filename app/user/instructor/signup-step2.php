@@ -134,12 +134,20 @@
       		  <tr>
 	  			<td class="label"><label id="iinstitution" for="institution">Institution</label></td>
 	  			<td class="field"><select name="institutionAbbr">
+                <td>
+                 <input name="submit1" id="edit-delete" value="ADD NEW INSTITUTION" class="form-submit" type="button" onclick="document.location='signup-step2a.php'">
+                </td>
 <?php
             $c = new Criteria();
             $c->addAscendingOrderByColumn(PersistentInstitutionPeer::ABBREVIATION);
             $institutions = PersistentInstitutionPeer::doSelect($c);
 
             foreach ($institutions as $inst) {
+                if(isset($_GET["createdInstitution"])){
+                    if($inst->getInstitutionId()==$_GET["createdInstitution"]){
+                        print "<option CHECKED value =".$inst->getAbbreviation().">";
+                    }
+                }else
                 echo "<option value=\"".$inst->getAbbreviation()."\"\">(".$inst->getAbbreviation().") ".$inst->getName().", ".$inst->getStateProvince().", ".$inst->getCountry()."</option>";
             }
 ?>
