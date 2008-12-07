@@ -82,21 +82,9 @@ final class PersonalAgentController {
             $c->add(PersistentProjectPeer::PARENT_PROJECT_JN_NAME, $projectName);
             $subProjects = PersistentProjectPeer::doSelect($c);
             foreach ($subProjects as $subProj) {
-                echo "\n Starting collecting for " . $subProj->getProjectJnName();
                 $agent->collectRssDataFromProject($subProj->getProjectJnName(), $rssToDbObserver);
             }
-//            $con = Propel::getConnection(PersistentBaseUserPeer::DATABASE_NAME);
-//            $sql = "SELECT project_jn_name
-//                    FROM project
-//                    WHERE parent_project_jn_name = '$projectName'";
-//            $stmt = $con->prepare($sql);
-//            $stmt->execute();
-//            $subProjectsNames = $stmt->fetch(PDO::FETCH_NUM);
-//            if (count($subProjectsNames) > 0) {
-//                foreach ($subProjectsNames as $subProjName) {
-//                    $agent->collectRssDataFromProject($subProjName, $rssToDbObserver);
-//                }
-//            }
+
         } else {
             $agent->collectRssDataFromProject($projectName, $rssToDbObserver);
         }
