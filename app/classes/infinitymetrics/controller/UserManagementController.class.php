@@ -156,8 +156,8 @@ final class UserManagementController {
                     Collaboration Metrics for java.net Projects\nhttp://ppm8.dev.java.net\nMailing Lists:
                     https://ppm-8.dev.java.net/servlets/ProjectMailingListList";
             
-            //SendEmail::sendTextEmail("noreply@infinitymetrics.net", "dev@". $projectName . self::DOMAIN,
-              //                                                                  $student->getEmail(), $subject, $body);
+            SendEmail::sendTextEmail("noreply@infinitymetrics.net", "dev@". $projectName . self::DOMAIN,
+                                                                              $student->getEmail(), $subject, $body);
             return $student;
 
         } catch (Exception $e) {
@@ -283,8 +283,8 @@ final class UserManagementController {
                     Collaboration Metrics for java.net Projects\nhttp://ppm8.dev.java.net\nMailing Lists:
                     https://ppm-8.dev.java.net/servlets/ProjectMailingListList";
 
-            //SendEmail::sendTextEmail("noreply@infinitymetrics.net", "dev@". $projectName . self::DOMAIN,
-              //                                                                  $user->getEmail(), $subject, $body);
+            SendEmail::sendTextEmail("noreply@infinitymetrics.net", "dev@". $projectName . self::DOMAIN,
+                                                                              $student->getEmail(), $subject, $body);
             return $user;
 
         } catch (Exception $e) {
@@ -369,7 +369,8 @@ final class UserManagementController {
                      note that for automatic services need your most updated Java.net information in case you change
                      it.\n\nPlease feel free to contact the 'Infinity Team' at any time at http://ppm-8.dev.java.net.
                      \n\nEnjoy!";
-	        //UserManagementController::sendEmailToUser($instructor, $subject, $body);
+	        SendEmail::sendTextEmail("noreply@infinitymetrics.net", "dev@". $projectName . self::DOMAIN,
+                                                                              $student->getEmail(), $subject, $body);
             return $instructor;
 
         } catch (Exception $e) {
@@ -593,8 +594,8 @@ final class UserManagementController {
  	        $body = "Hello ".$newInstructor->getFirstName().",\n\nThis is the confirmation Email . Your Profile Information
                      has been successfully updated.\n\nPlease feel free to contact the 'Infinity Team' at any time at http://ppm-8.dev.java.net.
                      \n\nEnjoy!";
-	        //SendEmail::sendTextEmail("noreply@infinitymetrics.net", "dev@". $projectName . self::DOMAIN,
-              //                                                                  $newInstructor->getEmail(), $subject, $body);
+	        SendEmail::sendTextEmail("noreply@infinitymetrics.net", "dev@". $projectName . self::DOMAIN,
+                                                                        $newInstructor->getEmail(), $subject, $body);
             return $newInstructor;
 
         } catch (Exception $e) {
@@ -710,8 +711,8 @@ final class UserManagementController {
                     Collaboration Metrics for java.net Projects\nhttp://ppm8.dev.java.net\nMailing Lists:
                     https://ppm-8.dev.java.net/servlets/ProjectMailingListList";
 
-            //SendEmail::sendTextEmail("noreply@infinitymetrics.net", "dev@". $projectName . self::DOMAIN,
-              //                                                                  $newStudent->getEmail(), $subject, $body);
+            SendEmail::sendTextEmail("noreply@infinitymetrics.net", "dev@". $projectName . self::DOMAIN,
+                                                                            $newStudent->getEmail(), $subject, $body);
             return $newStudent;
 
 
@@ -794,8 +795,8 @@ final class UserManagementController {
                     Collaboration Metrics for java.net Projects\nhttp://ppm8.dev.java.net\nMailing Lists:
                     https://ppm-8.dev.java.net/servlets/ProjectMailingListList";
 
-            //SendEmail::sendTextEmail("noreply@infinitymetrics.net", "dev@". $projectName . self::DOMAIN,
-              //                                                                  $student->getEmail(), $subject, $body);
+            SendEmail::sendTextEmail("noreply@infinitymetrics.net", "dev@". $projectName . self::DOMAIN,
+                                                                                $student->getEmail(), $subject, $body);
             return $newUser;
 
         } catch (Exception $e) {

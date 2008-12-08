@@ -12,6 +12,16 @@
         
         require_once 'infinitymetrics/controller/UserManagementController.class.php';
         require_once 'infinitymetrics/model/InfinityMetricsException.class.php';
+        require_once 'infinitymetrics/controller/MetricsWorkspaceController.class.php';
+
+        try {
+            $tempUser = new PersistentUser();
+            $tempUser->setJnUsername($regInstructor["jnUsername"]);
+            $tempUser->setJnPassword($regInstructor["jnPassword"]);
+            MetricsWorkspaceController::registerParentProject($tempUser, $regInstructor["jnProject"],
+                                                             $regInstructor["jnUsername"] . "'s saved parent project");
+        } catch (Exception $e) {
+        }
 
         try {
             $userAgent = UserManagementController::registerInstructor($regInstructor["jnUsername"],

@@ -21,6 +21,7 @@
  */
 require_once 'infinitymetrics/model/workspace/MetricsWorkspace.class.php';
 require_once 'infinitymetrics/model/user/UserTypeEnum.class.php';
+require_once 'infinitymetrics/controller/PersonalAgentController.class.php';
 /**
  * Description of MetricsWorkspaceController
  *
@@ -340,6 +341,38 @@ class MetricsWorkspaceController {
             $errors = array();
             $errors["errorSharingWorkspace"] = $e->getMessage();
             throw new InfinityMetricsException("Can't update workspace", $errors);
+        }
+    }
+    /**
+     * Registers a single project
+     * @param string $projectName is the name of the Java.net project
+     * @param string $parentProjectName is the name of the parent project. Can be "" empty if it's the parent
+     * @param string $projectSummary is the summary of the project
+     */
+    public static function registerProject($projectName, $parentProjectName, $projectSummary) {
+        $proj = new PersistentProject();
+        $proj->setProjectJnName($projectName);
+        $proj->setParentProjectJnName($parentProjectName);
+        $proj->setSummary($projectSummary);
+        $proj->save();
+    }
+    /**
+     * Registers a parent project and all its subprojects
+     * @param PersistentUser $user is the user requesting the registration
+     * @param string $parentProjectName is the name of the parent project on Java.net
+     * @param string $projectSummary is the summary of the parent project
+     */
+    public static function registerParentProject($user, $parentProjectName, $projectSummary) {
+        try {
+            self::registerProject($parentProjectName, "", $projectSummary);
+            $subProjects = PersonalAgentController::collectChildrenProjects($user, $parentProjectName);
+            foreach($subProjects as $proj) {
+                self::registerProject($proj["name"], $parentProjectName, $proj["title"]);
+            }
+            
+        } catch (Exception $e) {
+            $error["cantRegisterProject"] = $e->getMessage();
+            throw new InfinityMetricsException("Can't register Parent Project or Subprojects", $error);
         }
     }
 }
