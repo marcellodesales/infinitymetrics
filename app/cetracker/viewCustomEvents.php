@@ -1,106 +1,107 @@
+<!--====  Top of File  ======================================================-->
+
 <?php
-/**
- * @author Brett
- */
+    /**
+     * @author Brett <fghtikty@gmail.com>
+     */
+    include '../template/infinitymetrics-bootstrap.php';
 
-include '../template/infinitymetrics-bootstrap.php';
+    //===  Includes  =========================================================//
 
-#----->>>>>>>>>>>>> Controller Usage for ***** ------------------>>>>>>>>>>>>>>>
+    require_once 'infinitymetrics/controller/CustomEventController.class.php';
+    require_once 'infinitymetrics/model/workspace/Project.class.php';
+    require_once 'infinitymetrics/model/InfinityMetricsException.class.php';
 
-require_once 'infinitymetrics/controller/CustomEventController.class.php';
-require_once 'infinitymetrics/model/workspace/Project.class.php';
-require_once 'infinitymetrics/model/InfinityMetricsException.class.php';
+    //===  Initialization  ===================================================//
 
-#------------>>>>>>>>>>>>> Variables Initialization ------------->>>>>>>>>>>>>>>
-
-$subUseCase = "View Custom Events";
-
+    $subUseCase = "View Custom Events";
 ?>
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html class="js" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en"><head>
-<title>Infinity Metrics: <?php echo $subUseCase; ?></title>
+<!--====  Formatting  =======================================================-->
 
-<?php include 'static-js-css.php';  ?>
-<?php include 'user-signup-header-adds.php' ?>
-    </head>
-    <body class="<?php /*echo $enableLeftNav ? $leftNavClass : $NoLeftNavClass;*/ ?>">
-<?php  include 'top-navigation.php';  ?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html class="js" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en">
 
+<!--====  Header  ===========================================================-->
 
-</div></div> <!-- Strange unneeded /divs for PHP -->
+<head>
+    <title>
+        Infinity Metrics: <?php echo $subUseCase; ?>
+    </title>
 
-<div id="content-wrap">
-    <!--div id="inside"-->
+    <?php include 'static-js-css.php';  ?>
+    <?php include 'user-signup-header-adds.php' ?>
+</head>
 
-               
-        <table align="center">
-        <tbody>
-        <tr>
-        <td>
-        <?php
+<!--====  Top of Body  ======================================================-->
 
-            $ws_id = $_GET['workspace_id'];
+<body>
+    <?php  include 'top-navigation.php';  ?>
+    </div></div>
+    
+    <!--====  Main Body Formatting  =========================================-->
+    
+    <div class="t"><div class="b"><div class="l"><div class="r"><div class="bl">
+    <div class="br"><div class="tl"><div class="tr"><div class="content-in">
 
-            $crit = new Criteria(PersistentWorkspacePeer::WORKSPACE_ID, $ws_id);
-            $ws = PersistentWorkspacePeer::doSelect($crit);
+    <div id="content-wrap">
+        <table align="center"><tbody><tr><td>
 
+            <!--====  Main Body  ========================================-->
 
-            foreach ($ws as $wwss) {
-                echo "<br>Workspace: ";
+            <?php
+                $ws_id = $_GET['workspace_id'];
+                $crit = new Criteria(PersistentWorkspacePeer::WORKSPACE_ID,
+                    $ws_id);
+                $ws = PersistentWorkspacePeer::doSelect($crit);
 
+                foreach ($ws as $wwss) {
+                    echo "<br>Workspace: ".$wwss->getTitle();
 
-                echo $wwss->getTitle();
+                    $crit2= new Criteria(PersistentProjectPeer::PROJECT_JN_NAME,
+                        $wwss->getProjectJnName());
+                    $proj = PersistentProjectPeer::doSelect($crit2);
 
+                    foreach ($proj as $pproj) {
+                        echo "<br> - - Project: ".$pproj->getSummary()." - ".
+                             "<a href='addCustomEvent.php?project_jn_name=".
+                             $pproj->getProjectJnName().
+                             "&parent_project_jn_name=";
+                        echo $pproj->getParentProjectJnName()?
+                             $pproj->getParentProjectJnName():"null";
+                        echo "&workspace_id=".$ws_id."'>Add To</a>";
 
-                $crit2 = new Criteria(PersistentProjectPeer::PROJECT_JN_NAME, $wwss->getProjectJnName());
-                $proj = PersistentProjectPeer::doSelect($crit2);
+                        $evt = $pproj->getCustomEvents();
 
-                foreach ($proj as $pproj) {
-                    echo "<br> - - Project: ";
-                    echo $pproj->getSummary()." - ";
-                    echo "<a href='";
-                    echo "addCustomEvent.php?project_jn_name=".$pproj->getProjectJnName()."&parent_project_jn_name=";
-                    echo $pproj->getParentProjectJnName()?$pproj->getParentProjectJnName():"null";
-                    echo "&workspace_id=".$ws_id."'>";
-                    echo "Add To";
-                    echo "</a>";
+                        foreach ($evt as $evts) {
+                            echo "<br> - - - - Custom Event: ".
+                                 $evts->getTitle();
 
-                    $evt = $pproj->getCustomEvents();
+                            echo " - <a href='addCustomEventEntry.php".
+                                 "?custom_event_id=".$evts->getCustomEventId().
+                                 "&workspace_id=".$ws_id."'>Add To</a>";
 
-                    foreach ($evt as $evts) {
-                        echo "<br> - - - - Custom Event: ";
-                        echo $evts->getTitle();
+                            echo " <a href='editCustomEvent.php".
+                                 "?custom_event_id=".$evts->getCustomEventId().
+                                 "&workspace_id=".$ws_id."'>Edit</a>";
 
-                        echo " - ";
-                        echo "<a href='";
-                        echo "addCustomEventEntry.php?custom_event_id=".$evts->getCustomEventId()."&workspace_id=".$ws_id."'>";
-                        echo "Add To";
-                        echo "</a>";
-
-                        echo " ";
-                        echo "<a href='";
-                        echo "editCustomEvent.php?custom_event_id=".$evts->getCustomEventId()."&workspace_id=".$ws_id."'>";
-                        echo "Edit";
-                        echo "</a>";
-
-                        echo " ";
-                        echo "<a href='";
-                        echo "deleteCustomEventEntry.php?custom_event_id=".$evts->getCustomEventId()."&workspace_id=".$ws_id."'>";
-                        echo "Remove From";
-                        echo "</a>";
+                            echo " <a href='deleteCustomEventEntry.php".
+                                 "?custom_event_id=".$evts->getCustomEventId().
+                                 "&workspace_id=".$ws_id."'>Remove From</a>";
+                        }
                     }
                 }
-            }
-        ?>
-        </td>
-        </tr>
-        </tbody>
-        </table>
-              
+            ?>
 
-</div>
+            <!--====  Main Body Close  ======================================-->
 
-</div> <!-- Strange unneeded /div for PHP -->
+        </td></tr></tbody></table>
+    </div>
 
-<?php include 'footer.php';   ?>
+    </div></div></div></div></div></div></div></div></div>
+
+    <!--====  End of File  ==================================================-->
+
+    </div><?php include 'footer.php'; ?>
+</body>

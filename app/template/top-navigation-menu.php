@@ -24,7 +24,7 @@ if (isUserLoggedIn()) {
 <?php
     $user = $_SESSION["loggedUser"];
     if ($user->getType() == UserTypeEnum::getInstance()->INSTRUCTOR) { ?>
-                        <?php echo $liCeTracker; ?><a href="<?php echo $_SERVER["home_address"]; ?>/cetracker/viewCustomEvents.php">
+                        <?php echo $liCeTracker; ?><a href="<?php echo $_SERVER["home_address"]; ?>/cetracker/index.php">
                                 <img src="<?php echo $_SERVER["home_address"]; ?>/template/edit_files/node-add.png" alt="" title="" width="32" height="32" border="0" />
                                 <br />Custom Events</a>
                         </li>
