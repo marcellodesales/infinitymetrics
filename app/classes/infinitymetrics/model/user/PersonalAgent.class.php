@@ -28,7 +28,8 @@ require_once 'infinitymetrics/util/screenscraperapi/useredit/JNUserEditImpl.clas
 require_once 'infinitymetrics/util/screenscraperapi/projecthome/JNProjectHomeImpl.class.php';
 require_once 'infinitymetrics/util/screenscraperapi/mailinglist/JNMailingListsImpl.class.php';
 require_once 'infinitymetrics/util/screenscraperapi/rss/JNRssImpl.class.php';
-
+require_once 'infinitymetrics/model/user/agent/reasoning/ProjectHistoryToDatabase.class.php';
+require_once 'infinitymetrics/model/user/agent/reasoning/JNRssParserSubject.class.php';
 /**
  * Basic user class for the metrics workspace. User has username, password from
  * Java.net.
@@ -154,14 +155,17 @@ class PersonalAgent {
      */
     public function collectRssDataFromProject($projectName, Observer $observer) {
         $events = $this->getListOfRssChannels($projectName);
-        
+//        echo "\nCollecting for project ". $projectName . " all the following events";
+        print_r($events);
         if (count($events["mailingLists"]) > 0) {
             foreach ($events["mailingLists"] as $channelId => $properties) {
-                $this->collectRssDataFromProjectMailingList($projectName, $channelId, $observer);
+//                echo "\n=>channel Id " . $channelId . "/" . $projectName;
+                $this->collectDataFromProjectMailingListHistory($projectName, $channelId, $properties["description"]);
             }
         }
         if (count($events["forums"]) > 0) {
             foreach ($events["forums"] as $channelId => $properties) {
+//                echo "\n=>channel Id " . $channelId . "/" . $projectName;
                 $this->collectRssDataFromProjectForum($projectName, $channelId, $observer);
             }
         }
@@ -178,6 +182,20 @@ class PersonalAgent {
         $jRssParser = new JNRssParserSubject($url, $rssWS->getRssContentsForMailingList($projectName, $mailingList));
         $jRssParser->addObserver($observer);
         $jRssParser->parseRss();
+    }
+
+    /**
+     * Collects the RSS Data feed from the given MAILING LIST for a given observer to process.
+     * @param string $projectName is the java.net project name.
+     * @param string $mailingList is the mailing list name id used in the URLs of the RSS feeds. (dev, users, issues)
+     * @param Observer $observer is an instance of an observer interested in the Rss data.
+     */
+    private function collectDataFromProjectMailingListHistory($projectName, $mailingList, $mailingListDesc) {
+        $historyWS = new JNMailinListsImpl($this->session);
+        $events = $historyWS->getCompleteMailingListHistory($mailingList, $projectName);
+        if (count($events)) {
+            new ProjectHistoryToDatabase($projectName, $mailingList, $mailingListDesc, $events);
+        }
     }
     /**
      * Collects the RSS Data feed from the given Discussion Forum for a given observer to process.
@@ -214,4 +232,10 @@ class PersonalAgent {
         return $this->projectHomeWSImpl->getOwnersList($projectName);
     }
 }
+//$u = new User();
+//$u->setJnUsername("marcellosales");
+//$u->setJnPassword("utn@9oad");
+//$ag = new PersonalAgent($u);
+//require_once 'infinitymetrics/model/user/agent/reasoning/RssToDatabaseObserver.class.php';
+//$ag->collectRssDataFromProject("ppm-8", new RssToDatabaseObserver());
 ?>

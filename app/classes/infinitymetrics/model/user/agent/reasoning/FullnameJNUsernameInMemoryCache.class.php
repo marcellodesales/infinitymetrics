@@ -1,7 +1,5 @@
 <?php
 
-include_once 'infinitymetrics/util/go4pattenrs/creational/Singleton.class.php';
-
 final class FullnameJNUsernameInMemoryCache {
     /**
      * @var FullnameJNUsernameInMemoryCache is the single instance of this class
