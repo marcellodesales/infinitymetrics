@@ -874,7 +874,7 @@ final class UserManagementController {
             $c = new Criteria();
             $c->add(PersistentUserXProjectPeer::JN_USERNAME, $user->getJnUsername());
             $uniqueStudent = PersistentUserXProjectPeer::doSelectOne($c);
-            return "../report/projectReport.php?project_id=".$project->getProjectJnName();
+            return "../report/projectReport.php?project_id=".$uniqueStudent->getProjectJnName();
         }
    }
 
