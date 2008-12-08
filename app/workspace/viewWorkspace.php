@@ -3,7 +3,6 @@
 
 #----------------------------->>>>>>>>>>>>> Controller Usage for UC101, UC302 UC303 ----------------------------->>>>>>>>>>>>>>>
     //for debugging
-    //$_GET['type'] = 'own';
     //$_GET['workspace_id'] = '2';
 
     $user = $_SESSION["loggedUser"];
@@ -18,6 +17,8 @@
         if ($ws == null) {
             header('Location: workspaceCollection.php');
         }
+        
+        $_SESSION['isOwnWS']= $ws->isOwner($user->getUserId());
         
         try {
             $reportScript = ReportController::retrieveWorkspaceReport($ws->getWorkspaceId());
@@ -52,7 +53,7 @@
     $breadcrums = array(
                         $_SERVER["home_address"] => "Home",
                         $_SERVER["home_address"]."/workspace/workspaceCollection.php" => "Workspace Collection",
-                        $_SERVER["home_address"].$_SERVER['PHP_SELF'] => $ws->getTitle()
+                        $_SERVER["home_address"].$_SERVER['REQUEST_URI'] => $ws->getTitle()
                   );
 
     #leftMenu[n]["active"] - If the menu item is active or not
@@ -77,7 +78,7 @@
     <?php include 'top-navigation.php' ?>
 
                 <div id="breadcrumb" class="alone">
-                    <h2 id="title">Home</h2>
+                    <h2 id="title">&nbsp;</h2>
                     <div class="breadcrumb">
                         <?php
                             $totalBreadcrums = count(array_keys($breadcrums));
@@ -98,12 +99,11 @@
                                 <br />
                                 <h2>Sharing Information</h2>
                                 <div class="content">
-                                    <div class="item-list">
-
+                                    
                                     <?php
-                                        if ( isset($_GET['type']) &&
+                                        if ( isset($_SESSION['isOwnWS']) &&
                                              isset($_GET['workspace_id']) &&
-                                             $_GET['type'] == 'own')
+                                             $_SESSION['isOwnWS'] == true)
                                         {
                                             $wsShares = $ws->getWorkspaceShares();
 
@@ -111,33 +111,32 @@
                                                 echo "<p>The workspace is not currently being shared with any other user</p>\n";
                                             }
                                             else {
+                                                echo "<div class=\"item-list\">";
                                                 echo "Currently sharing this Workspace with:\n";
                                                 echo "<ul>\n";
                                                 foreach ($wsShares as $wss) {
-                                                    echo "<li>".$wss->getUser()->getFirstName()." ".$wss->getUser()->getLastName().
-                                                         "&nbsp;<a href=\"../user/profile/viewProfile.php?userId=".$wss->getUser()->getUserId()."\">".
-                                                         "<img style=\"border: 0\" src=\"../template/icons/i16/misc/contact.png\" /></a>";
+                                                    echo '<li><a href="../user/profile/viewProfile.php?userId='.$wss->getUser()->getUserId().'">'.
+                                                         $wss->getUser()->getFirstName()." ".$wss->getUser()->getLastName().'</a>'.
+                                                         "&nbsp;<img style=\"border: 0\" src=\"../template/icons/i16/misc/contact.png\" />\n";
                                                 }
-                                                echo "</ul>\n";
+                                                echo "</ul>\n</div>";
                                             }
                                             echo    "<br />\n";
-                                            echo    "<form action=\"shareWorkspace.php\" accept-charset=\"UTF-8\" method=\"post\" id=\"node-form\">
+                                            echo    "<form action=\"shareWorkspace.php?workspace_id=".$ws->getWorkspaceId()."\" accept-charset=\"UTF-8\" method=\"post\" id=\"node-form\">
                                                         <div class=\"node-form\">
                                                             <input name=\"shareWS\" id=\"edit-submit\" value=\"Share Workspace\" class=\"form-submit\" type=\"submit\" />
-                                                            <input name=\"workspace_id\" id=\"workspace_id\" value=\"{$_GET['workspace_id']}\" type=\"hidden\" />
                                                         </div>
                                                     </form>\n<br />";
                                         }
-                                        elseif (isset($_GET['type']) && $_GET['type'] == 'shared') {
-                                            echo "<p>This workspace is currently being shared with you by <strong>".
-                                                 $ws->getUser()->getFirstName()." ".$ws->getUser()->getLastName().
-                                                 "&nbsp;<a href=\"../user/profile/viewProfile.php?userId=".$ws->getUser()->getUserId()."\">".
-                                                 "<img style=\"border: 0\" src=\"../template/icons/i16/misc/contact.png\" /></a>".
-                                                 "</strong></p>\n";
+                                        elseif (isset($_SESSION['isOwnWS']) && $_SESSION['isOwnWS'] == false) {
+                                            echo '<p>This workspace is currently being shared with you by <strong>'.
+                                                 '<a href="../user/profile/viewProfile.php?userId='.$ws->getUser()->getUserId().'">'.
+                                                 $ws->getUser()->getFirstName()." ".$ws->getUser()->getLastName().'</a>'.
+                                                 '&nbsp;<img style="border: 0" src="../template/icons/i16/misc/contact.png" />'.
+                                                 "</strong></p>\n<br />\n";
                                         }
                                     ?>
 
-                                    </div>
 
                                    <?php
                                         if ($stateFlag) {
@@ -156,10 +155,14 @@
                                             echo "<h4>".$ws->getProjectJnName()." <small>(PARENT PROJECT)</small></h4>";
                                             echo "<ol>\n";
                                             foreach ($rankedProjects as $projectJnName => $total) {
-                                                    echo "<li><a href=\"../report/projectReport.php?project_id=$projectJnName\">$projectJnName</a>&nbsp;($total)&nbsp;&nbsp;<a href=\"https://$projectJnName.dev.java.net/\"><img style=\"border: 0\" src=\"../template/icons/i16/misc/world_link.png\" alt=\"link_icon\" /></a>\n</li>";
+                                                echo "<li>\n".
+                                                     "<a href=\"../report/projectReport.php?project_id=$projectJnName\">$projectJnName</a>".
+                                                     "&nbsp;&nbsp;<a href=\"https://$projectJnName.dev.java.net/\">".
+                                                     "<img style=\"border: 0\" src=\"../template/icons/i16/misc/world_link.png\" alt=\"link_icon\" /></a>\n".
+                                                     "</li>";
                                                 }
                                             }
-                                            echo "</ol>";
+                                            echo "</ol>\n";
                                         ?>
                                         
                                     </div>
@@ -211,7 +214,7 @@
                                             echo ($ws->getDescription() == '' ? '<span style="color: gray"> [ Empty ]' : '<span style="font-size: 0.9em">'.$ws->getDescription()); echo "</span></td></tr>\n";
                                             echo "</table><br />\n";
 
-                                            if (isset($_GET['type']) && $_GET['type'] == 'own')
+                                            if (isset($_SESSION['isOwnWS']) && $_SESSION['isOwnWS'] == true)
                                             {
                                                 echo '<form action="updateWorkspace.php" accept-charset="UTF-8" method="post" id="node-form">
                                                         <div class="node-form">
@@ -230,7 +233,7 @@
                                             if (isset($_SESSION['report_error']) && $_SESSION['report_error'] != '') {
                                                 echo "<div class=\"messages error\">{$_SESSION['report_error']}</div>";
                                                 $_SESSION['report_error'] = '';
-                                                unset($_SESSION['report_error']);
+                                                
                                             }
                                             else {
                                                 echo "<div id=\"col_chart_div\"></div><br />\n";
@@ -252,4 +255,14 @@
                         </div><!-- end content -->
                     </div><!-- end inside -->
                 </div>
+                <?php
+                if (isset($_SESSION['isOwnWS'])) {
+                    $_SESSION['isOwnWS'] = '';
+                    unset($_SESSION['isOwnWS']);
+                }
+                if (isset($_SESSION['report_error'])) {
+                    $_SESSION['report_error'] = '';
+                    unset($_SESSION['report_error']);
+                }
+                ?>
 <?php include 'footer.php' ?>

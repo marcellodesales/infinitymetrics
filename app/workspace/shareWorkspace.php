@@ -14,8 +14,20 @@
     require_once('infinitymetrics/controller/MetricsWorkspaceController.class.php');
     require_once('infinitymetrics/controller/UserManagementController.class.php');
 
+    $user = $_SESSION["loggedUser"];
+    
     if (isset($_GET['workspace_id']) && $_GET['workspace_id'] != '') {
-        $showForm = true;
+        $ws = PersistentWorkspacePeer::retrieveByPK($_GET['workspace_id']);
+
+        if ($ws == null) {
+            header('Location: workspaceCollection.php');
+        }
+        if ( !$ws->isOwner($user->getUserId())) {
+            $_SESSION['permissions_error'] = "You are not the owner of this Workspace. Only Workspace owners can share their Workspaces with others";
+        }
+        else {
+            $showForm = true;
+        }
     }
     elseif (!isset($_POST['submit'])) {
         $_SESSION['invalid_arrival_path'] = 'Please go back to the <a href="workspaceCollection.php">Workspace Collection</a> to select a workspace to be shared.';
@@ -105,13 +117,17 @@
                             <div class="t"><div class="b"><div class="l"><div class="r"><div class="bl"><div class="br"><div class="tl"><div class="tr">
                                 <div class="content-in">
                                 <?php
-                                    if (isset($_SESSION['invalid_arrival_path']) && $_SESSION['invalid_arrival_path'] != '') {
+
+                                    if (isset($_SESSION['permissions_error'])) {
+                                        echo "<div class=\"messages error\">{$_SESSION['permissions_error']}</div>";
+                                    }
+                                    if (isset($_SESSION['invalid_arrival_path'])) {
                                         echo "<div class=\"messages error\">{$_SESSION['invalid_arrival_path']}</div>";
                                     }
-                                    elseif (isset($_SESSION['userToShareWith_error']) && $_SESSION['userToShareWith_error'] != '') {
+                                    elseif (isset($_SESSION['userToShareWith_error'])) {
                                         echo "<div class=\"messages error\">{$_SESSION['userToShareWith_error']}</div>";
                                     }
-                                    elseif (isset($_SESSION['ws_sharing error']) && $_SESSION['ws_sharing error'] != '') {
+                                    elseif (isset($_SESSION['ws_sharing error'])) {
                                         echo "<div class=\"messages error\">{$_SESSION['ws_sharing error']}</div>";
                                     }
                                     elseif (isset($_SESSION['success'])) {
@@ -150,13 +166,21 @@
 
                 <?php
                     #-------->>>>>> unset all $_SESSION vars here -----------------
+                    
+                    if (isset($_SESSION['permissions_error'])) {
+                        $_SESSION['permissions_error'] = '';
+                        unset($_SESSION['permissions_error']);
+                    }
                     if (isset($_SESSION['invalid_arrival_path'])) {
+                        $_SESSION['invalid_arrival_path'] = '';
                         unset($_SESSION['invalid_arrival_path']);
                     }
                     if (isset($_SESSION['userToShareWith_error'])) {
-                            unset($_SESSION['userToShareWith_error']);
+                        $_SESSION['userToShareWith_error'] = '';
+                        unset($_SESSION['userToShareWith_error']);
                     }
                     if (isset($_SESSION['ws_sharing error'])) {
+                        $_SESSION['ws_sharing error'] = '';
                         unset($_SESSION['ws_sharing error']);
                     }
                 ?>

@@ -97,7 +97,7 @@
     <?php include 'top-navigation.php' ?>
 
                 <div id="breadcrumb" class="alone">
-                    <h2 id="title">Home</h2>
+                    <h2 id="title">&nbsp;</h2>
                     <div class="breadcrumb">
                         <?php
                             $totalBreadcrums = count(array_keys($breadcrums));
@@ -113,7 +113,7 @@
 
                 <div id="content-wrap">
                     <div id="inside">
-                        <div id="sidebar-right" align="center">
+                        <div id="sidebar-right">
                             <div id="block-user-3" class="block block-user">
                                 <br />
                                 <div class="content">
@@ -132,7 +132,6 @@
                                             echo "</div>\n";
 
                                             $_SESSION['available_user_x_projects'] = '';
-                                            unset($_SESSION['available_user_x_projects']);
                                         }
 
                                         if ($stateFlag) {
@@ -154,7 +153,6 @@
                                     if (isset($_SESSION['retrieveWSCollectionError'])) {
                                         echo "<div class=\"messages error\">{$_SESSION['retrieveWSCollectionError']}</div>\n";
                                         $_SESSION['retrieveWSCollectionError'] = '';
-                                        unset($_SESSION['retrieveWSCollectionError']);
                                     }
                                     else {
                                         function getStateLabelColor($state) {
@@ -173,7 +171,6 @@
                                         {
                                             echo "<span style=\"color: gray\">".$_SESSION['noOwnWorkspaces']."</span><br /><br />\n";
                                             $_SESSION['noOwnWorkspaces'] = '';
-                                            unset($_SESSION['noOwnWorkspaces']);
                                         }
                                         else {
                                             echo "<ul>\n";
@@ -181,7 +178,7 @@
                                             {
                                                 $color = getStateLabelColor($ws->getState());
                                                 echo "<li>\n";
-                                                echo "<a href=\"viewWorkspace.php?type=own&amp;workspace_id=".$ws->getWorkspaceId()."\">".$ws->getTitle()."</a>";
+                                                echo "<a href=\"viewWorkspace.php?workspace_id=".$ws->getWorkspaceId()."\">".$ws->getTitle()."</a>";
                                                 echo " <small><b><span style=\"color:$color\">".$ws->getState()."</span></b></small>";
                                                 echo "</li>\n";
                                             }
@@ -195,7 +192,6 @@
                                         {
                                             echo "<span style=\"color: gray\">".$_SESSION['noSharedWorkspaces']."</span><br /><br />\n";
                                             $_SESSION['noSharedWorkspaces'] = '';
-                                            unset($_SESSION['noSharedWorkspaces']);
                                         }
                                         else {
                                             echo "<ul>\n";
@@ -203,7 +199,7 @@
                                             {
                                                 $color = getStateLabelColor($ws->getState());
                                                 echo "<li>\n";
-                                                echo "<a href=\"viewWorkspace.php?type=shared&amp;workspace_id=".$ws->getWorkspaceId()."\">".$ws->getTitle()."</a>";
+                                                echo "<a href=\"viewWorkspace.php?workspace_id=".$ws->getWorkspaceId()."\">".$ws->getTitle()."</a>";
                                                 echo " <small><b><span style=\"color:$color\">".$ws->getState()."</span></b></small>";
                                                 echo "</li>\n";
                                             }
@@ -224,7 +220,6 @@
                                         {
                                             echo "<div class=\"message error\">{$_SESSION['report_error']}</div>";
                                             $_SESSION['report_error'] = '';
-                                            unset($_SESSION['report_error']);
                                         }
                                         else {
                                             echo $reportScript;
@@ -245,5 +240,27 @@
                     </div></div></div></div></div></div></div></div>
                 </div>
             </div>
+            <?php
+                if (isset($_SESSION['available_user_x_projects'])) {
+                    $_SESSION['available_user_x_projects'] = '';
+                    unset($_SESSION['available_user_x_projects']);
+                }
+                if (isset($_SESSION['retrieveWSCollectionError'])) {
+                    $_SESSION['retrieveWSCollectionError'] = '';
+                    unset($_SESSION['retrieveWSCollectionError']);
+                }
+                if (isset($_SESSION['noOwnWorkspaces'])) {
+                    $_SESSION['noOwnWorkspaces'] = '';
+                    unset($_SESSION['noOwnWorkspaces']);
+                }
+                if (isset($_SESSION['noSharedWorkspaces'])) {
+                    $_SESSION['noSharedWorkspaces'] = '';
+                    unset($_SESSION['noSharedWorkspaces']);
+                }
+                if (isset($_SESSION['report_error'])) {
+                    $_SESSION['report_error'] = '';
+                    unset($_SESSION['report_error']);
+                }
+            ?>
 
 <?php include 'footer.php' ?>
