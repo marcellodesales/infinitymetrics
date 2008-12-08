@@ -63,7 +63,7 @@ class PersistentWorkspace extends PersistentBaseWorkspace {
             $criteria->add(PersistentWorkspaceSharePeer::USER_ID, $user_id);
             //just count the number of shares. This is the case to be just 1 (a workspace can be shared with one
             //user just once.
-            return PersistentWorkspaceSharePeer::doCount($criteria) == 0;
+            return PersistentWorkspaceSharePeer::doCount($criteria) != 0;
         }
     }
 

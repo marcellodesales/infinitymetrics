@@ -33,7 +33,7 @@ class PersistentProject extends PersistentBaseProject {
 
     public function getTotalEventsByCategory() {
         $categories = array (   'COMMIT',
-                                'DOCUMENTATION',
+                                #'DOCUMENTATION',
                                 'FORUM',
                                 'ISSUE',
                                 'MAILING_LIST' );
