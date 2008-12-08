@@ -11,39 +11,36 @@
 
 #----------------------------->>>>>>>>>>>>> Controller Usage for UC404 ----------------------------->>>>>>>>>>>>>>>
   require_once 'infinitymetrics/controller/UserManagementController.class.php';
+  require_once 'infinitymetrics/controller/MetricsWorkspaceController.class.php';
   require_once 'infinitymetrics/model/InfinityMetricsException.class.php';
   require_once 'infinitymetrics/model/user/UserTypeEnum.class.php';
 
  if(isset($_GET["userId"]) && ($_GET["userId"]!=""))
    {
    try {
-             $user_logged = UserManagementController::viewProfile($_GET["userId"]);
-            //  $user_logged = UserManagementController::retrieveUser($_GET["userId"]);
+            $user_logged = UserManagementController::retrieveUser($_GET["userId"]);
 
        } catch (Exception $e) {
           throw $e;
       }
  }
- else {  // $_SESSION["loggedUser"]= 1076;
-       $userProfile = UserManagementController::viewProfile($_SESSION["loggedUser"]);
-       $user_logged = UserManagementController::retrieveUser($_SESSION["loggedUser"]);
+ else {
+       $user = $_SESSION["loggedUser"];
+       $user_logged = UserManagementController::viewProfile($user->getUserId());
+       $user_logged = UserManagementController::retrieveUser($user->getUserId());
   }
-        $userId = $user_logged->getUserId();
-      $c = new Criteria();
-      $c->add(PersistentUserPeer::USER_ID, $userId);
-      $user = PersistentUserPeer::doSelectOne($c);
-//$user = PersistentUserPeer::retrieveByPK($userId);
-$userName = $user->getJnUsername();
-$firstName = $user->getFirstName();
-
-$lastName = $user->getLastName();
-$email = $user->getEmail();
-$type = $user->getType();
+      
+$userName = $user_logged->getJnUsername();
+$firstName = $user_logged->getFirstName();
+$lastName = $user_logged->getLastName();
+$email = $user_logged->getEmail();
+$type = $user_logged->getType();
+$userId = $user_logged->getUserId();
 
 
 if($type == UserTypeEnum::getInstance()->STUDENT || $type == UserTypeEnum::getInstance()->INSTRUCTOR){
 
-           $cr = new Criteria();
+     $cr = new Criteria();
      $cr->add(PersistentUserPeer::USER_ID, $userId);
      $inst1 = PersistentUserXInstitutionPeer::doSelectOne($cr);
            $instId = $inst1->getInstitutionId();
@@ -54,61 +51,20 @@ if($type == UserTypeEnum::getInstance()->STUDENT || $type == UserTypeEnum::getIn
     $inst_name = $inst_user->getName();
     $inst_city = $inst_user->getCity();
     $inst_state =$inst_user->getStateProvince();
-    $inst_country = $inst_user->getCountry();
+    $inst_country =$inst_user->getCountry();
 
 
     $instU = PersistentUserXInstitutionPeer::retrieveByPK($userId, $instId);
     $user_inst_ID = $instU->getIdentification();
 
 }
-
-if($type == UserTypeEnum::getInstance()->INSTRUCTOR){
-
-    $c = new Criteria();
-    $c->add(PersistentWorkspacePeer::USER_ID,$userId);
-    $workspace = PersistentWorkspacePeer::doSelectOne($c);
-    $wsTitle = $workspace->getTitle();
-    $wsprojectName = $workspace->getProjectJnName();
-    $wsDescription = $workspace->getDescription();
-    $wsState = $workspace->getState();
-
-    $cr = new Criteria();
-    $cr->add(PersistentProjectPeer::PROJECT_JN_NAME,$wsprojectName);
-     $proj1 = PersistentProjectPeer::doSelectOne($cr);
-   // $proj1 = PersistentUserXProjectPeer::doSelectJoinUser($cr);
-      $pr_name = $proj1->getProjectJnName();
-
-    $proj = PersistentProjectPeer::retrieveByPK($pr_name);
-   $projectName = $proj->getProjectJnName();
-   $project_owner = $proj->getParentProjectJnName();
-   $project_summary = $proj->getSummary();
-
-}
-if($type == UserTypeEnum::getInstance()->STUDENT || $type == UserTypeEnum::getInstance()->JAVANET){
-$cr = new Criteria();
-    $cr->add(PersistentUserXProjectPeer::JN_USERNAME,$userName);
-  
-   $proj1 = PersistentUserXProjectPeer::doSelectOne($cr);
-      $project_jn_name = $proj1->getProjectJnName();
-
-    $c = new Criteria();
-    $c->add(PersistentProjectPeer::PROJECT_JN_NAME, $project_jn_name);
-    $proj = PersistentProjectPeer::doSelectOne($c);
-   $projectName = $proj->getProjectJnName();
-   $project_owner = $proj->getParentProjectJnName();
-   $project_summary = $proj->getSummary();
-}
-
-  
-
-
 ?>
 
 
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html class="js" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en"><head>
-<title>Infinity Metrics: <?php echo "Profile View" ?></title>
+<title>Infinity Metrics: <?php echo $subUseCase ?></title>
 
 <?php include '../../template/static-js-css.php';  ?>
 
@@ -150,56 +106,102 @@ $cr = new Criteria();
              unset($_SESSION["successMessage"]);
         }
 ?>
-<table align="center" >
-<tr><td align="justify" width="33%">
- <h1> <?php  echo " You are logged in as a          "." ".$type;?></h1><br><br><br>
-      <?php  echo "Name           :".$firstName." ".$lastName;?> <br><br>
-      <?php  echo "UserName         :".$userName  ;?><br><br>
-      <?php  echo "Email         :".$email;?><br><br>
-      
-</td>
-</tr>
-</table>
-
-<table align="center" >
+ <table align="left" >
       <tr><td align="justify" width="33%">
-      <?php  echo "Project         :".$projectName ;?><br><br>
-      
-      <?php echo "Project summary      :".$project_summary;?><br><br>
-      <?php  if($project_owner==0)
-            echo "You are Owner for this project"?><br><br>
-       </td>
-      </tr>
-      </table>
-
- <table align="center" >
-      <tr><td align="justify" width="33%">
-      <?php  if($type == UserTypeEnum::getInstance()->STUDENT || $type ==UserTypeEnum::getInstance()->INSTRUCTOR)
-            echo "Identification ID      :".$user_inst_ID;?><br><br>
-      <?php  echo "institution name         :".$inst_name;?><br><br>
-      <?php  echo "Abbereviation   :".$inst_abbv;?><br><br>
-      <?php  echo "city      :".$inst_city;?><br><br>
-      <?php  echo "state      :".$inst_state;?><br><br>
-      <?php  echo "Country      :".$inst_country;?><br><br>
+      <pre>
+      <?php  
+            echo " You are logged in as a"." ".$type."\n";
+            echo " Name              :".$firstName." ".$lastName."\n";
+            echo " UserName          :".$userName."\n"  ;
+            echo " Email             :".$email."\n";
+            if($type == UserTypeEnum::getInstance()->STUDENT || $type ==UserTypeEnum::getInstance()->INSTRUCTOR){
+            echo " Identification ID :".$user_inst_ID."\n";
+            echo " Institution name  :".$inst_name."\n";
+            echo " Abbereviation     :".$inst_abbv."\n";
+            echo " city              :".$inst_city."\n";
+            echo " state             :".$inst_state."\n";
+            echo " Country           :".$inst_country."\n\n";
+      }
+   
+            ?>
+         </pre>
+            <br>
      </td>
       </tr>
       </table>
 
-
-   <table align="center" >
+  
+   <table align="right" >
       <tr><td align="justify" width="33%">
-      <?php  if($type ==UserTypeEnum::getInstance()->INSTRUCTOR)
-            echo "WorkSpace Title      :".$wsTitle;?><br><br>
-      <?php   if($type ==UserTypeEnum::getInstance()->INSTRUCTOR)
-            echo "Project Name         :".$wsprojectName;?><br><br>
-      <?php  if($type ==UserTypeEnum::getInstance()->INSTRUCTOR)
-            echo "Descripion   :".$wsDescription;?><br><br>
-      <?php  if($type ==UserTypeEnum::getInstance()->INSTRUCTOR)
-            echo "State:".$wsState;?><br><br>
+      <pre>
+      <?php 
+      if($type == UserTypeEnum::getInstance()->INSTRUCTOR || $type == UserTypeEnum::getInstance()->JAVANET){
+            echo "    Your WorkSpace Information "."\n";
+    $cri = new Criteria();
+    $cri->add(PersistentWorkspacePeer::USER_ID,$userId);
+    $workspaces = PersistentWorkspacePeer::doSelect($cri);
+    $wsc = PersistentWorkspacePeer::doCount($cri);
+    if($wsc !=0){
+     foreach($workspaces as $workspace){
+    $wsTitle = $workspace->getTitle();
+    $wsProjectName = $workspace->getProjectJnName();
+    $wsDescription = $workspace->getDescription();
+    $wsState = $workspace->getState();
 
+    $project = PersistentProjectPeer::retrieveByPK($wsProjectName);
+    $projectName = $project->getProjectJnName();
+    $project_summary = $project->getSummary();
+    $is_owner =$user_logged->isOwnerOfProject($project);
+    
+            echo " Title             : ".$wsTitle ."\n";
+            echo " Discription       : ".$wsDescription."\n";
+            echo " Project Name      : ".$projectName."\n";
+            echo " Project Summary   : ".$project_summary."\n";
+            echo " State             : ".$wsState."\n";
+            if($is_owner)
+            echo " Owner             : YES"."\n";
+            else
+            echo " Owner             : NO"."\n";
+            echo "\n\n";
+
+        }
+      }
+   }
+
+   if($type == UserTypeEnum::getInstance()->STUDENT || $type == UserTypeEnum::getInstance()->JAVANET){
+            echo "     Your Project Information"."\n";
+        $crit = new Criteria();
+        $crit->add(PersistentUserXProjectPeer::JN_USERNAME,$userName);
+        $projects = PersistentUserXProjectPeer::doSelect($crit);
+
+        foreach($projects as $project){
+         $project_jn_name = $project->getProjectJnName();
+
+            $proj = PersistentProjectPeer::retrieveByPK($project_jn_name);
+
+            $projectName = $proj->getProjectJnName();
+            $project_summary = $proj->getSummary();
+            $parentProject = $proj->getParentProjectJnName();
+            $is_owner =$user_logged->isOwnerOfProject($proj);
+            
+            echo " Project Name      : ".$projectName."\n";
+            echo " Project Summary   : ".$project_summary."\n";
+            echo " Parent Project    : ".$parentProject."\n";
+           if($is_owner)
+            echo " Owner             : YES"."\n";
+           else
+            echo " Owner             : NO"."\n";
+           echo "\n\n";
+        }
+    }
+
+                     
+            ?>
+      </pre>
        </td>
       </tr>
       </table>
+    
  <tr>
  <td width="33%" align="justify">
 <input name="op" id="edit-submit" value="Update Profile" class="form-submit" type="button" onclick="document.location='updateProfile.php'">
