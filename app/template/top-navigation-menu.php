@@ -1,4 +1,6 @@
 <?php
+require_once 'infinitymetrics/model/user/UserTypeEnum.class.php';
+
     $liWorkspace = contains($_SERVER["REQUEST_URI"], "workspace") ||
                    contains($_SERVER["REQUEST_URI"], "report") ? "<li id=\"current\">" : "<li>";
     $liCeTracker = contains($_SERVER["REQUEST_URI"], "cetracker") ? "<li id=\"current\">" : "<li>";
