@@ -199,9 +199,9 @@ final class UserManagementController {
      * @param string $projectName
      * @param boolean $isProjectOwner
      */
-    private static function validateUserRegistrationForm($username, $password, $email, $firstName, $lastName,
+    public static function validateUserRegistrationForm($username, $password, $email, $firstName, $lastName,
                                                             $projectName, $isProjectOwner) {
-        $error = array();
+         $error = array();
         if (!isset($username) || $username == "") {
             $error["username"] = "The username is empty";
         }
@@ -220,8 +220,8 @@ final class UserManagementController {
         if (!isset($projectName) || $projectName == "") {
             $error["projectName"] = "The java.net project name is empty";
         }
-        if (!isset($isProjectOwner)) {
-            $error["isLeader"] = "The information if the the student is a leader is not given";
+        if (!isset($isProjectOwner) || $isProjectOwner =="") {
+            $error["isProjectName"] = "The information if the the user is a owner is not given";
         }
 
         if (count($error) > 0) {
@@ -237,18 +237,24 @@ final class UserManagementController {
     * @param string $firstName the user's first name
     * @param string $lastName the user's last name
     * @param string $projectName the user's project name
-    * @param boolean $isLeader defines if the student is a leader of the given $projectName.
+    * @param boolean $isLeader defines if the user is a leader of the given $projectName.
     * @return User the instance of the user for the given input. It also relates the studnet to the
     * instance of project and the institution identified by the abbreviation.
     * @throws InfinityMetricsException, PropelException, Exception depending on what goes wrong.
     */
-    public static function registerUser($username, $password, $email, $firstName, $lastName, $projectName,
-                                                                                                    $isProjectOwner) {
-        try {
+    public static function registerUser($username, $password, $email, $firstName,
+                                         $lastName, $projectName,$isProjectOwner) {
+
+       try {
             UserManagementController::validateUserRegistrationForm($username, $password, $email, $firstName,
                                                                       $lastName, $projectName, $isProjectOwner);
 
             $proj = PersistentProjectPeer::retrieveByPK($projectName);
+            if($proj ==null){
+                $errors = array();
+                $errors["projectNotFound"] = "The project referred by " . $projectName . " doesn't exist";
+                throw new InfinityMetricsException("Can't register User", $errors);
+                }
 
             $user = new User();
             $user->setFirstName($firstName);
@@ -278,7 +284,7 @@ final class UserManagementController {
                     https://ppm-8.dev.java.net/servlets/ProjectMailingListList";
 
             //SendEmail::sendTextEmail("noreply@infinitymetrics.net", "dev@". $projectName . self::DOMAIN,
-              //                                                                  $student->getEmail(), $subject, $body);
+              //                                                                  $user->getEmail(), $subject, $body);
             return $user;
 
         } catch (Exception $e) {
