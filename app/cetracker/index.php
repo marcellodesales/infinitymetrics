@@ -41,46 +41,50 @@
 
 <body>
     <?php  include 'top-navigation.php';  ?>
-    </div></div>
 
     <!--====  Main Body Formatting  =========================================-->
 
-    <div class="t"><div class="b"><div class="l"><div class="r"><div class="bl">
-    <div class="br"><div class="tl"><div class="tr"><div class="content-in">
+    <div id="content-wrap"><div id="content"><div class="t"><div class="b">
+    <div class="l"><div class="r"><div class="bl"><div class="br">
+    <div class="tl"><div class="tr"><div class="content-in">
+    <div class="node-form">
 
-    <div id="content-wrap">
         <table align="center"><tbody><tr><td>
 
-            <!--====  Main Body  ========================================-->
+            <!--====  Main Body  ============================================-->
 
             <?php
                 $ws = MetricsWorkspaceController::
-                    retrieveWorkspaceCollection(321/*$user_id*/);
+                    retrieveWorkspaceCollection($user_id);
 
-                 echo "Your own workspaces:<br>";
-                 foreach ($ws['OWN'] as $wwss) {
-                     echo " - <a href='viewCustomEvents.php".
-                         "?workspace_id=".$wwss->getWorkspaceId().
-                         "'>".$wwss->getTitle()."</a>";
+                 echo "Your own workspaces:";
+                 echo "</td></tr></table><table>";
+   
+                 foreach ($ws['OWN'] as $workspace) {
+                     echo "<tr><td width='8%'></td><td><a href='viewCustomEven".
+                          "ts.php?workspace_id=".$workspace->getWorkspaceId().
+                          "'>".$workspace->getTitle()."</a></td></tr>";
                  }
 
+                 echo "</td></tr></table><table><tr height='20'></tr><tr><td>";
+                 echo "Your shared workspaces:";
+                 echo "</td></tr></table><table>";
 
-                 echo "<p>Your shared workspaces:<br>";
-                 foreach ($ws['SHARED'] as $wwss) {
-                     echo " - <a href='viewCustomEvents.php".
-                         "?workspace_id=".$wwss->getWorkspaceId().
-                         "'>".$wwss->getTitle()."</a>";
+                 foreach ($ws['SHARED'] as $workspace) {
+                     echo "<tr><td width='8%'></td><td><a href='viewCustomEven".
+                          "ts.php?workspace_id=".$workspace->getWorkspaceId().
+                          "'>".$workspace->getTitle()."</a></td></tr>";
                  }
             ?>
 
             <!--====  Main Body Close  ======================================-->
 
-        </td></tr></tbody></table>
-    </div>
+        </tbody></table>
 
-    </div></div></div></div></div></div></div></div></div>
+    </div></div></div><br class="clear"></div></div></div></div></div></div>
+    </div></div></div>
 
     <!--====  End of File  ==================================================-->
 
-    </div><?php include 'footer.php'; ?>
+    <?php include 'footer.php'; ?>
 </body>

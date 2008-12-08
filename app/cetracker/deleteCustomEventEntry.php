@@ -44,28 +44,20 @@
 <body>
     <?php include 'top-navigation.php';  ?>
 
-    <table align=center>
-        <tbody align=center>
-            <tr align=center>
-                <td align=center>
-                    <b>
-                    Click an entry to remove it.
-                    </b><p><b>
-                    <?php echo $ce->getTitle(); ?>
-                    </b>
-                </td>
-                <td></td><td></td>
-            </tr>
-        </tbody>
-    </table>
+    <table><tbody><tr>
+        <td align=center width="30%">
+                    <b><?php echo $ce->getTitle(); ?></b>
+       </td><td width="60%">&nbsp;</td>
+    </tr></tbody></table>
     </div></div>
 
     <!--====  Main Body Formatting  =========================================-->
 
-    <div class="t"><div class="b"><div class="l"><div class="r"><div class="bl">
-    <div class="br"><div class="tl"><div class="tr"><div class="content-in">
+    <div id="content-wrap"><div id="content"><div class="t"><div class="b">
+    <div class="l"><div class="r"><div class="bl"><div class="br">
+    <div class="tl"><div class="tr"><div class="content-in">
+    <div class="node-form">
 
-    <div id="content-wrap">
         <form id="removecustomevententry" autocomplete="off" method="post" 
             action="<?php echo $PHP_SELF."?custom_event_id=".
             $_GET['custom_event_id']."&workspace_id=".$_GET['workspace_id'] ?>">
@@ -75,6 +67,8 @@
                 <!--====  Main Body  ================================-->
 
                 <?php
+                    echo "<b>Click an entry to remove it.</b><p>";
+
                     if (isset($_GET['delete_entry_id'])) {
                         CustomEventController::removeEntry(
                             $_GET['delete_entry_id']);
@@ -95,7 +89,8 @@
                     $entries = PersistentCustomEventEntryPeer::doSelect($crit2);
 
                     foreach ($entries as $entry) {
-                        echo " - - <a href='deleteCustomEventEntry.php".
+                        echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='deleteCus".
+                             "tomEventEntry.php".
                              "?custom_event_id=".$ce_id."&workspace_id=".
                              $_GET['workspace_id']."&delete_entry_id=".
                              $entry->getEntryID()."'>".$entry->getNotes().
@@ -107,12 +102,12 @@
                 
             </td></tr></tbody></table>
         </form>
-    </div>
 
-    </div></div></div></div></div></div></div></div></div>
+    </div></div></div><br class="clear"></div></div></div></div></div></div>
+    </div></div></div>
 
     <!--====  End of File  ==================================================-->
 
-    </div><?php include 'footer.php'; ?>
+    <?php include 'footer.php'; ?>
 </body>
 

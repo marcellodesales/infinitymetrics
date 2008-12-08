@@ -42,10 +42,11 @@
     
     <!--====  Main Body Formatting  =========================================-->
     
-    <div class="t"><div class="b"><div class="l"><div class="r"><div class="bl">
-    <div class="br"><div class="tl"><div class="tr"><div class="content-in">
+    <div id="content-wrap"><div id="content"><div class="t"><div class="b">
+    <div class="l"><div class="r"><div class="bl"><div class="br">
+    <div class="tl"><div class="tr"><div class="content-in">
+    <div class="node-form">
 
-    <div id="content-wrap">
         <table align="center"><tbody><tr><td>
 
             <!--====  Main Body  ========================================-->
@@ -57,14 +58,14 @@
                 $ws = PersistentWorkspacePeer::doSelect($crit);
 
                 foreach ($ws as $wwss) {
-                    echo "<br>Workspace: ".$wwss->getTitle();
-
+                    echo "Workspace: ".$wwss->getTitle();
                     $crit2= new Criteria(PersistentProjectPeer::PROJECT_JN_NAME,
                         $wwss->getProjectJnName());
                     $proj = PersistentProjectPeer::doSelect($crit2);
 
                     foreach ($proj as $pproj) {
-                        echo "<br> - - Project: ".$pproj->getSummary()." - ".
+                        echo "<br>&nbsp;&nbsp;&nbsp;Project: ".
+                             $pproj->getProjectJnName()." - ".
                              "<a href='addCustomEvent.php?project_jn_name=".
                              $pproj->getProjectJnName().
                              "&parent_project_jn_name=";
@@ -75,8 +76,8 @@
                         $evt = $pproj->getCustomEvents();
 
                         foreach ($evt as $evts) {
-                            echo "<br> - - - - Custom Event: ".
-                                 $evts->getTitle();
+                            echo "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".
+                                 "Custom Event: ".$evts->getTitle();
 
                             echo " - <a href='addCustomEventEntry.php".
                                  "?custom_event_id=".$evts->getCustomEventId().
@@ -97,11 +98,11 @@
             <!--====  Main Body Close  ======================================-->
 
         </td></tr></tbody></table>
-    </div>
 
-    </div></div></div></div></div></div></div></div></div>
+    </div></div></div><br class="clear"></div></div></div></div></div></div>
+    </div></div></div>
 
     <!--====  End of File  ==================================================-->
 
-    </div><?php include 'footer.php'; ?>
+    <?php include 'footer.php'; ?>
 </body>

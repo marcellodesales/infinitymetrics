@@ -61,23 +61,16 @@
 <body>
     <?php  include 'top-navigation.php';  ?>
 
-    <table align=center>
-        <tbody align=center>
-            <tr align=center>
-                <td align=center>
-                    <b>
-                    <?php echo $_GET['custom_event_id'] ?>
-                    </b>
-                    <p>
-                    <?php
-                        echo $tempevent->getTitle()."<p>".
-                            $tempevent->getState();
-                    ?>
-                </td>
-                <td></td><td></td>
-            </tr>
-        </tbody>
-    </table>
+    <table><tbody><tr>
+        <td align=center width="30%">
+            <b>
+            <?php
+                echo $tempevent->getTitle()."&nbsp;&nbsp;&nbsp;&nbsp;".
+                    $tempevent->getState();
+            ?>
+            </b>
+       </td><td width="60%">&nbsp;</td>
+    </tr></tbody></table>
     </div></div>
 
     <!--====  Notifications  ================================================-->
@@ -106,10 +99,11 @@
 
     <!--====  Main Body Formatting  =========================================-->
 
-    <div class="t"><div class="b"><div class="l"><div class="r"><div class="bl">
-    <div class="br"><div class="tl"><div class="tr"><div class="content-in">
+    <div id="content-wrap"><div id="content"><div class="t"><div class="b">
+    <div class="l"><div class="r"><div class="bl"><div class="br">
+    <div class="tl"><div class="tr"><div class="content-in">
+    <div class="node-form">
 
-    <div id="content-wrap">
         <form id="createcustomevententry" autocomplete="off" method="post" 
             action="<?php echo $PHP_SELF."?custom_event_id=".
             $_GET['custom_event_id']."&workspace_id=".$_GET['workspace_id'] ?>">
@@ -118,11 +112,11 @@
                 <!--====  Main Body  ========================================-->
 
                 <tr>
-                    <td class="status" width="30">&nbsp;</td>
-                    <td class="label" width="20"><label id="lnewtitle"
+                    <td class="label" width="70"><label id="lnewtitle"
                         for="newTitle">New Title</label></td>
                     <td class="field"><input id="newTitle" name="newTitle"
-                        ="textfield" value="" maxlength="50" type="text"></td>
+                        type="textfield" value="" maxlength="50" type="text">
+                    </td>
                 </tr>
                 <tr>
                     <td colspan="2">
@@ -143,11 +137,11 @@
 
             </tbody></table>
         </form>
-    </div>
 
-    </div></div></div></div></div></div></div></div></div>
+    </div></div></div><br class="clear"></div></div></div></div></div></div>
+    </div></div></div>
 
     <!--====  End of File  ==================================================-->
 
-    </div><?php include 'footer.php'; ?>
+    <?php include 'footer.php'; ?>
 </body>

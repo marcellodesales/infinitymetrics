@@ -16,6 +16,7 @@
 
     $temp = false;
     $subUseCase = "Add Custom Event Entry";
+    $ce_id = $_GET['custom_event_id'];
 
     //===  Action Listener  ==================================================//
 
@@ -55,13 +56,15 @@
 <body>
     <?php  include 'top-navigation.php';  ?>
 
-    <table align=center><tbody align=center><tr align=center>
-        <td align=center>
-            <b>
-            <?php echo $_GET['custom_event_id'] ?>
-            </b>
-        </td>
-        <td></td><td></td>
+    <table><tbody><tr>
+        <td align=center width="30%">
+            <b><?php
+                $crit = new Criteria();
+                $crit->add(PersistentCustomEventPeer::CUSTOM_EVENT_ID, $ce_id);
+                $ce = PersistentCustomEventPeer::doSelectOne($crit);
+                echo $ce->getTitle()
+            ?></b>
+        </td><td width="60%">&nbsp;</td>
     </tr></tbody></table>
     </div></div>
 
@@ -91,10 +94,11 @@
 
     <!--====  Main Body Formatting  =========================================-->
 
-    <div class="t"><div class="b"><div class="l"><div class="r"><div class="bl">
-    <div class="br"><div class="tl"><div class="tr"><div class="content-in">
-
-    <div id="content-wrap">
+    <div id="content-wrap"><div id="content"><div class="t"><div class="b">
+    <div class="l"><div class="r"><div class="bl"><div class="br">
+    <div class="tl"><div class="tr"><div class="content-in">
+    <div class="node-form">
+    
         <form id="createcustomevententry" autocomplete="off" method="post" 
             action="<?php echo $PHP_SELF."?custom_event_id=".
             $_GET['custom_event_id']."&workspace_id=".$_GET['workspace_id'] ?>">
@@ -127,11 +131,11 @@
 
             </tbody></table>
         </form>
-    </div>
 
-    </div></div></div></div></div></div></div></div></div>
+    </div></div></div><br class="clear"></div></div></div></div></div></div>
+    </div></div></div>
 
     <!--====  End of File  ==================================================-->
 
-    </div><?php include 'footer.php';   ?>
+    <?php include 'footer.php';   ?>
 </body>
