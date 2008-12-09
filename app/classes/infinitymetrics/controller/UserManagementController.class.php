@@ -170,14 +170,14 @@ final class UserManagementController {
                                                          PersistentProject $existingProject, $isProjectOwner) {
         try {
             $studentInstitution = new PersistentUserXInstitution();
-            $studentInstitution->setInstitution($existingInstitution);
-            $studentInstitution->setUser($newUser);
+            $studentInstitution->setInstitutionId($existingInstitution->getInstitutionId());
+            $studentInstitution->setUserId($newUser->getUserId());
             $studentInstitution->setIdentification($institutionIdentification);
             $studentInstitution->save();
 
             $userProject = new PersistentUserXProject();
-            $userProject->setUser($newUser);
-            $userProject->setProject($existingProject);
+            $userProject->setProjectJnName($existingProject->getProjectJnName());
+            $userProject->setJnUsername($newUser->getJnUsername());
             $userProject->setIsOwner($isProjectOwner);
             $userProject->save();
 
