@@ -155,15 +155,6 @@
                                         $_SESSION['retrieveWSCollectionError'] = '';
                                     }
                                     else {
-                                        function getStateLabelColor($state) {
-                                            switch ($state)
-                                            {
-                                                case ('NEW'):       return "Blue"; break;
-                                                case ('ACTIVE'):    return "Green"; break;
-                                                case ('PAUSED'):    return "Orange"; break;
-                                                case ('INACTIVE'):  return "Red"; break;
-                                            }
-                                        }
                                         echo "<h2>Current Workspaces</h2><br />";
                                         echo "<div style=\"float: left\">";
                                         echo "<h3>My Workspaces</h3>\n";
@@ -176,7 +167,7 @@
                                             echo "<ul>\n";
                                             foreach($wsCollection['OWN'] as $ws)
                                             {
-                                                $color = getStateLabelColor($ws->getState());
+                                                $color = MetricsWorkspaceController::getStateColor($ws->getState());
                                                 echo "<li>\n";
                                                 echo "<a href=\"viewWorkspace.php?workspace_id=".$ws->getWorkspaceId()."\">".$ws->getTitle()."</a>";
                                                 echo " <small><b><span style=\"color:$color\">".$ws->getState()."</span></b></small>";

@@ -13,21 +13,21 @@ require_once 'infinitymetrics/model/user/UserTypeEnum.class.php';
                    !contains($_SERVER["REQUEST_URI"], "user") ? "<li id=\"current\">" : "<li>";
 ?>
                         <?php echo $liHome; ?><a href="<?php echo $_SERVER["home_address"] ?>">
-                                <img src="<?php echo $_SERVER["home_address"] ?>/template/edit_files/home.png" alt="" title="" width="32" height="32" border="0" />
+                                <img src="<?php echo $_SERVER["home_address"] ?>/template/edit_files/home.png" alt="" title="" width="32" height="32" style="border: 0" />
                                 <br />Home</a>
                         </li>
 <?php
 if (isUserLoggedIn()) {
 ?>
                         <?php echo $liWorkspace; ?><a href="<?php echo $_SERVER["home_address"] ?>/workspace/workspaceCollection.php">
-                                <img src="<?php echo $_SERVER["home_address"]; ?>/template/edit_files/admin-reports.png" alt="" title="" width="32" height="32" border="0" />
+                                <img src="<?php echo $_SERVER["home_address"]; ?>/template/edit_files/admin-reports.png" alt="" title="" width="32" height="32" style="border: 0" />
                                 <br />Workspace</a>
                         </li>
 <?php
     $user = $_SESSION["loggedUser"];
     if ($user->getType() == UserTypeEnum::getInstance()->INSTRUCTOR) { ?>
                         <?php echo $liCeTracker; ?><a href="<?php echo $_SERVER["home_address"]; ?>/cetracker/index.php">
-                                <img src="<?php echo $_SERVER["home_address"]; ?>/template/edit_files/node-add.png" alt="" title="" width="32" height="32" border="0" />
+                                <img src="<?php echo $_SERVER["home_address"]; ?>/template/edit_files/node-add.png" alt="" title="" width="32" height="32" style="border: 0" />
                                 <br />Custom Events</a>
                         </li>
 
@@ -35,10 +35,10 @@ if (isUserLoggedIn()) {
 }
 ?>
                         <?php echo $liUser; ?><a href="<?php echo $_SERVER["home_address"] ?>/user">
-                                <img src="<?php echo $_SERVER["home_address"]; ?>/template/edit_files/admin-user.png" alt="" title="" width="32" height="32" border="0" />
+                                <img src="<?php echo $_SERVER["home_address"]; ?>/template/edit_files/admin-user.png" alt="" title="" width="32" height="32" style="border: 0" />
                                 <br />Users</a>
                         </li>
                         <?php echo $liHelp ?><a href="<?php echo $_SERVER["home_address"] ?>/help">
-                                <img src="<?php echo $_SERVER["home_address"]; ?>/template/edit_files/admin-help.png" alt="" title="" width="32" height="32" border="0" />
+                                <img src="<?php echo $_SERVER["home_address"]; ?>/template/edit_files/admin-help.png" alt="" title="" width="32" height="32" style="border: 0" />
                                 <br />Help</a>
                         </li>

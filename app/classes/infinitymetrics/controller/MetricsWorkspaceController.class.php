@@ -25,7 +25,7 @@ require_once 'infinitymetrics/controller/PersonalAgentController.class.php';
 /**
  * Description of MetricsWorkspaceController
  *
- * @author Andres Ardila <aardilam@gmail.com>
+ * @author Andres Ardila <aardila1@fau.edu>
  * @author Marcello de Sales <marcello.sales@gmail.com>
  */
 class MetricsWorkspaceController {
@@ -37,7 +37,7 @@ class MetricsWorkspaceController {
      * @param string $description is the description for the workspace
      * @throws InfinityMetricsException if any of the given parameters is invalid
      */
-    private static function validateWorkspaceForm($userId, $projectName, $title, $description) {
+    private static function validateWorkspaceForm($userId, $projectName, $title, $description=null) {
 
         $error = array();
         if (!isset($userId) || $userId == "") {
@@ -49,12 +49,9 @@ class MetricsWorkspaceController {
         if (!isset($title) || $title == "") {
             $error["title"] = "The title is empty";
         }
-        if (!isset($description) || $description == "") {
-            $error["description"] = "The description is empty";
-        }
 
-        if (count($error) > 0) {
-            throw new InfinityMetricsException("Can't create workspace", $error);
+        if (count($error)) {
+            throw new InfinityMetricsException("Cannot create workspace", $error);
         }
     }
     /**
@@ -66,21 +63,19 @@ class MetricsWorkspaceController {
     public static function retrieveProject($projectName) {
 
         if (!isset($projectName) || $projectName == "") {
-            $error = array();
-            $error["projectName"] = "The project identification is empty";
-            throw new InfinityMetricsException("Can't retrive workspace", $error);
+            $error = array("projectName" => "The project identification is empty");
+            throw new InfinityMetricsException("Cannot retrive workspace", $error);
         }
 
         $proj = PersistentProjectPeer::retrieveByPK($projectName);
         if ($proj == null) {
-            $errors = array();
-            $errors["projectNotFound"] = "The project referred by " . $projectName . " doesn't exist";
-            throw new InfinityMetricsException("Can't retrieve Project", $errors);
+            $errors = array("projectNotFound" => "Project ".$projectName." doesn't exist");
+            throw new InfinityMetricsException("Cannot retrieve Project", $errors);
         }
         return $proj;
     }
     /**
-     * Implements the UC100 Create Workspace  
+     * Implements the UC100 Create Workspace
      * @param string $userId is the user identification
      * @param string $projectName is the project name
      * @param string $title is the title of the workspace
@@ -89,15 +84,25 @@ class MetricsWorkspaceController {
      * a non-existing project, and other possible persistence problems.
      * @return PersistentWorkspace the newly created workspaced based on the input
      */
-    public static function createWorkspace($userId, $projectName, $title, $description) {
+    public static function createWorkspace($userId, $parentProjectName, $title, $description=null) {
 
-        self::validateWorkspaceForm($userId, $projectName, $title, $description);
+        self::validateWorkspaceForm($userId, $parentProjectName, $title, $description);
 
-        $user = UserManagementController::retrieveUser($userId);
-        
-        $proj = self::retrieveProject($projectName);
+        $proj = PersistentProjectPeer::retrieveByPK($parentProjectName);
 
-        if ($user->isOwnerOfProject($proj)) {
+        if ($project == null) {
+            try {
+                $user = UserManagementController::retrieveUser($userId);
+
+                $childrenProjects = PersonalAgentController::collectChildrenProjects($user, $parentProjectName);
+            }
+            catch (Exception $e) {
+                $errors = array( "errorCollectingChildrenProjects" => $e->getMessage() );
+                throw new InfinityMetricsException("Cannot collect children projects for this parent", $errors);
+            }
+
+        }
+        elseif ($user->isOwnerOfProject($proj)) {
 
             try {
                 $ws = new PersistentWorkspace();
@@ -109,16 +114,14 @@ class MetricsWorkspaceController {
                 return $ws;
 
             } catch (Exception $e) {
-                $errors = array();
-                $errors["errorSavingWorkspace"] = $e->getMessage();
-                throw new InfinityMetricsException("Can't create Workspace", $errors);
+                $errors = array( "errorSavingWorkspace" => $e->getMessage() );
+                throw new InfinityMetricsException("Cannot create Workspace", $errors);
             }
-            
+
         } else {
-            $errors = array();
-            $errors["permissionDenied"] = "The user " . $user->getJnUsername() . " is not the owner of project
-                                                                                   " . $projectName . " doesn't exist";
-            throw new InfinityMetricsException("Can't create Workspace", $errors);
+            $errors = array("permissionDenied" => "User ".$user->getJnUsername().
+                            " is not the owner of project".$projectName);
+            throw new InfinityMetricsException("Cannot create Workspace", $errors);
         }
     }
     /**
@@ -130,25 +133,23 @@ class MetricsWorkspaceController {
     private static function validateChangeStateForm($workspace_id, $newState) {
         $error = array();
         if (!isset($workspace_id)|| $workspace_id == "") {
-            $errors = array();
             $errors["workspace_id"] = "The workspace id must be provided";
         }
         if (!isset($newState) || $newState == "") {
-            $errors = array();
             $errors["newState"] = "The new state for the workspace must be provided";
         }
-        
+
         $validStates = array('NEW', 'ACTIVE', 'INACTIVE', 'PAUSED');
-        if ( array_search($newState, $validStates) === FALSE ) {
+        if ( array_search($newState, $validStates) === false ) {
             $errors["workspace_state"] = "The new state for the workspace " . $newState . " is not in the valid list (" .
                                                                                        implode(",", $validStates) . ")";
         }
-        if (count($error) > 0) {
-            throw new InfinityMetricsException("Can't create workspace", $error);
+        if (count($error)) {
+            throw new InfinityMetricsException("Cannot create workspace", $error);
         }
     }
     /**
-     * This method implements UC105 Change Workspace State  
+     * This method implements UC105 Change Workspace State
      * @param string $workspace_id is the workspace identification
      * @param string $newState is one of the valid states 'NEW', 'ACTIVE', 'INACTIVE', 'PAUSED'
      * @throws InfinityMetricsException if any of the given parameters is invalid. Also if the workspace_id refers to
@@ -156,7 +157,7 @@ class MetricsWorkspaceController {
      * @return PersistentWorkspace the workspace with the changed state
      */
     public static function changeWorkspaceState($workspace_id, $newState) {
-        
+
         self::validateChangeStateForm($workspace_id, $newState);
 
         //call the UC101 to retrieve the workspace
@@ -168,14 +169,13 @@ class MetricsWorkspaceController {
             return $ws;
 
         } catch (Exception $e) {
-            $errors = array();
-            $errors["errorChangingWorkspaceState"] = $e->getMessage();
-            throw new InfinityMetricsException("Can't change Workspace state", $errors);
+            $errors = array("errorChangingWorkspaceState" => $e->getMessage());
+            throw new InfinityMetricsException("Cannot change Workspace state", $errors);
         }
     }
 
     /**
-     * This method implements UC102 View Workspace Collection  
+     * This method implements UC102 View Workspace Collection
      * @param string $user_id is the user identification
      * @throws InfinityMetricsException if the user_id is empty. Also if it refers to a non-existing user, and other
      * possible persistence problems.
@@ -183,12 +183,9 @@ class MetricsWorkspaceController {
      *         workspace['SHARED'] = array with shared workspaces
      */
     public static function retrieveWorkspaceCollection($user_id) {
-        $error = array();
         if (!isset($user_id) || $user_id == "") {
-            $error["userId"] = "The username identification is empty";
-        }
-        if (count($error) > 0) {
-            throw new InfinityMetricsException("Can't retrieve workspace collection", $error);
+            $errors = array("userId" => "The username identification is empty");
+            throw new InfinityMetricsException("Cannot retrieve workspace collection", $errors);
         }
 
         $user = UserManagementController::retrieveUser($user_id);
@@ -203,17 +200,15 @@ class MetricsWorkspaceController {
             $criteria->add(PersistentWorkspaceSharePeer::USER_ID, $user->getUserId());
             $wsShares = PersistentWorkspaceSharePeer::doSelectJoinWorkspace($criteria);
 
-            foreach ($wsShares as $wss)
-            {
+            foreach ($wsShares as $wss){
                 $wsCollection['SHARED'][] = $wss->getWorkspace();
             }
 
             return $wsCollection;
 
         } catch (Exception $e) {
-            $errors = array();
-            $errors["errorChangingWorkspaceState"] = $e->getMessage();
-            throw new InfinityMetricsException("Can't retrieve workspace collection", $errors);
+            $errors = array("errorChangingWorkspaceState" => $e->getMessage());
+            throw new InfinityMetricsException("Cannot retrieve workspace collection", $errors);
         }
     }
     /**
@@ -224,16 +219,14 @@ class MetricsWorkspaceController {
      */
     public static function retrieveWorkspace($workspace_id) {
         if (!isset($workspace_id)|| $workspace_id == "") {
-            $errors = array();
-            $errors["workspace_id"] = "The workspace id must be provided";
-            throw new InfinityMetricsException("Can't retrieve workspace", $errors);
+            $errors = array("workspace_id" => "The workspace id must be provided");
+            throw new InfinityMetricsException("Cannot retrieve workspace", $errors);
         }
 
         $ws = PersistentWorkspacePeer::retrieveByPK($workspace_id);
         if ($ws == NULL) {
-            $errors = array();
-            $errors["workspaceNotFound"] = "The workspace referred by " . $workspace_id . " doesn't exist";
-            throw new InfinityMetricsException("Can't retrieve workspace", $errors);
+            $errors = array("workspaceNotFound" => "The workspace referred by ". $workspace_id." doesn't exist");
+            throw new InfinityMetricsException("Cannot retrieve workspace", $errors);
         }
         return $ws;
     }
@@ -244,15 +237,15 @@ class MetricsWorkspaceController {
      * @throws InfinityMetricsException if any of the given parameters is invalid.
      */
     private static function validateShareWorkspaceForm($workspace_id, $userIdWithWhomToShareWorkspace) {
-        $error = array();
+        $errors = array();
         if (!isset($workspace_id)|| $workspace_id == "") {
             $errors["workspace_id"] = "The workspace id must be provided";
         }
         if (!isset($jnUsernameWithWhomToShareWorkspace) || $userIdWithWhomToShareWorkspace == "") {
             $errors["userIdWithWhomToShareWorkspace"] = "The username of the user to be shared with must be provided";
         }
-        if (count($error) > 0) {
-            throw new InfinityMetricsException("Can't share workspace", $error);
+        if (count($errors) > 0) {
+            throw new InfinityMetricsException("Cannot share workspace", $errors);
         }
     }
 
@@ -272,13 +265,11 @@ class MetricsWorkspaceController {
         $ws = self::retrieveWorkspace($workspace_id);
 
         $user = UserManagementController::retrieveUser($userIdWithWhomToShareWorkspace);
-        
+
         if ( $ws->isSharedWithUser($user->getUserId()) )
         {
-            $errors = array();
-            $errors["alreadyShared"] = "The workspace referred by " . $workspace_id . " is already shared with user ".
-                                                    "referred by " . $userIdWithWhomToShareWorkspace;
-            throw new InfinityMetricsException("Can't share workspace", $errors);
+            $errors = array("alreadyShared" => "This workspace is already being shared with ".$user->getJnUsername());
+            throw new InfinityMetricsException("Cannot share workspace", $errors);
         }
         try {
             $wss = new PersistentWorkspaceShare();
@@ -288,9 +279,8 @@ class MetricsWorkspaceController {
             return $wss;
 
         } catch (Exception $e) {
-            $errors = array();
-            $errors["errorSharingWorkspace"] = $e->getMessage();
-            throw new InfinityMetricsException("Can't share workspace", $errors);
+            $errors = array("errorSharingWorkspace" => $e->getMessage());
+            throw new InfinityMetricsException("Cannot share workspace", $errors);
         }
     }
     /**
@@ -310,12 +300,9 @@ class MetricsWorkspaceController {
         if (!isset($title) || $title == "") {
             $error["title"] = "The title is empty";
         }
-        if (!isset($description) || $description == "") {
-            $error["description"] = "The description is empty";
-        }
 
-        if (count($error) > 0) {
-            throw new InfinityMetricsException("Can't update workspace profile", $error);
+        if (count($error)) {
+            throw new InfinityMetricsException("Cannot update workspace profile", $error);
         }
     }
     /**
@@ -325,7 +312,7 @@ class MetricsWorkspaceController {
      * @param string $newDescription is the description of the workspace
      * @return PersistentWorkspace the udpated version of the workspace
      */
-    public static function updateWorkspaceProfile($workspace_id, $newTitle, $newDescription) {
+    public static function updateWorkspaceProfile($workspace_id, $newTitle, $newDescription=null) {
 
         self::validateUpdateWorkspaceForm($workspace_id, $newTitle, $newDescription);
 
@@ -336,11 +323,10 @@ class MetricsWorkspaceController {
             $ws->setDescription($newDescription);
             $ws->save();
             return $ws;
-                
+
         } catch (Exception $e) {
-            $errors = array();
-            $errors["errorSharingWorkspace"] = $e->getMessage();
-            throw new InfinityMetricsException("Can't update workspace", $errors);
+            $errors = array("errorSharingWorkspace" => $e->getMessage());
+            throw new InfinityMetricsException("Cannot update workspace", $errors);
         }
     }
     /**
@@ -362,7 +348,7 @@ class MetricsWorkspaceController {
      * @param string $parentProjectName is the name of the parent project on Java.net
      * @param string $projectSummary is the summary of the parent project
      */
-    public static function registerParentProject($user, $parentProjectName, $projectSummary) {
+    public static function registerParentProject(PersistentUser $user, $parentProjectName, $projectSummary) {
         try {
             self::registerProject($parentProjectName, "", $projectSummary);
             $subProjects = PersonalAgentController::collectChildrenProjects($user, $parentProjectName);
@@ -373,6 +359,22 @@ class MetricsWorkspaceController {
         } catch (Exception $e) {
             $error["cantRegisterProject"] = $e->getMessage();
             throw new InfinityMetricsException("Can't register Parent Project or Subprojects", $error);
+        }
+    }
+
+    /**
+     * Returns the corresponding CSS color name for a given state
+     * @param <string> $state
+     * @return <CSS Color>
+     */
+    public function getStateColor($state) {
+        switch ($state)
+        {
+            case ('NEW'):       return "Blue"; break;
+            case ('ACTIVE'):    return "Green"; break;
+            case ('PAUSED'):    return "Orange"; break;
+            case ('INACTIVE'):  return "Red"; break;
+            default:            return null; break;
         }
     }
 }

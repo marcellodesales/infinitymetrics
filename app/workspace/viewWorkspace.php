@@ -178,33 +178,31 @@
                                     <div>
                                     <?php
 
-                                        if (isset($_GET['trackback']))
+                                        if (isset($_GET['trackback']) && $_GET['trackback'] != '')
                                         {
-                                            echo "<div style=\"margin: 20px; padding-left: 15px; border-style: solid; border-width: thin; border-color= #F0F0F0\">\n";
-                                            echo "<table><tr>\n";
-                                            echo "<td valign=\"center\"><img src=\"/template/icons/i24/status/status-ok.png\" /></td>\n";
-                                            echo "<td valign=\"center\"><h4>Your Workspace has been created successfully</p></h4></td>\n";
-                                            echo "</tr></table>\n";
-                                            echo "</div>";
+                                            if ($_GET['trackback'] == 'new') {
+                                                echo "<div style=\"margin: 20px; padding-left: 15px; border-style: solid; border-width: thin; border-color= #F0F0F0\">\n";
+                                                echo "<table><tr>\n";
+                                                echo "<td valign=\"center\"><img src=\"/template/icons/i24/status/status-ok.png\" /></td>\n";
+                                                echo "<td valign=\"center\"><h4>Your Workspace has been created successfully</p></h4></td>\n";
+                                                echo "</tr></table>\n";
+                                                echo "</div>";
+                                            }
+                                            elseif ($_GET['trackback'] == 'state') {
+                                                echo "<div class=\"messages ok\"><img src=\"../template/icons/i24/status/status-ok.png alt=\"success\" />The <strong>state<strong> of your Workspace has been updated successfully!</div>";
+                                            }
+                                            elseif ($_GET['trackback'] == 'profile') {
+                                                echo "<div class=\"messages ok\"><img src=\"../template/icons/i24/status/status-ok.png alt=\"success\" />Your <strong>Workspace Profile</strong> has been updated successfully!</div>";
+                                            }
                                         }
 
                                         if (isset($_GET['workspace_id']))
                                         {
-                                            function getStateColor($state) {
-                                                switch ($state)
-                                                {
-                                                    case ('NEW'):       return "Blue"; break;
-                                                    case ('ACTIVE'):    return "Green"; break;
-                                                    case ('PAUSED'):    return "Orange"; break;
-                                                    case ('INACTIVE'):  return "Red"; break;
-                                                    default:            return NULL; break;
-                                                }
-                                            }
                                             echo $reportScript."\n";
                                             echo "<h2>Workspace Information</h2>\n";
                                             
                                             echo '<div style="float: left; width: 300px">';
-                                            $color = getStateColor($ws->getState());
+                                            $color = MetricsWorkspaceController::getStateColor($ws->getState());
                                             echo "<div style=\"border: thin groove silver; padding: 15px\">\n";
                                             echo '<table>';
                                             echo "<tr><td><strong>State:</strong></td><td><span style=\"font-weight: bold; color:$color\">".$ws->getState()."</span></td></tr>\n";
@@ -216,7 +214,7 @@
 
                                             if (isset($_SESSION['isOwnWS']) && $_SESSION['isOwnWS'] == true)
                                             {
-                                                echo '<form action="updateWorkspace.php" accept-charset="UTF-8" method="post" id="node-form">
+                                                echo '<form action="updateWorkspace.php?workspace_id='.$ws->getWorkspaceId().'" accept-charset="UTF-8" method="post" id="node-form">
                                                         <div class="node-form">
                                                             <input name="updateWS" id="edit-submit" value="Edit Workspace Information" class="form-submit" type="submit" />
                                                         </div>

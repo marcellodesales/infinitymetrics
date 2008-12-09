@@ -1,12 +1,10 @@
 <?php
     include '../template/infinitymetrics-bootstrap.php';
 
-#----------------------------->>>>>>>>>>>>> Controller Usage for UC104 ----------------------------->>>>>>>>>>>>>>>
+#----------------------------->>>>>>>>>>>>> Controller Usage for UC103 & UC105 ----------------------------->>>>>>>>>>>>>>>
     //for debugging
     //$_GET['workspace_id'] = 2;
-    //$_POST['workspace_id'] = 2;
-    //$_POST['jn_username_to_share_with'] = 'user999';
-    //$_POST['submit'] = 'Submit';
+    
     //echo '$_GET '; print_r($_GET); echo '<br />';
     //echo '$_POST '; print_r($_POST);echo '<br />';
     //echo '$_SESSION '; print_r($_SESSION);echo '<br />';
@@ -15,55 +13,73 @@
     require_once('infinitymetrics/controller/UserManagementController.class.php');
 
     $user = $_SESSION["loggedUser"];
-    
-    if (isset($_GET['workspace_id']) && $_GET['workspace_id'] != '') {
+    $showForm = false;
+
+    if (isset($_GET['workspace_id']) && $_GET['workspace_id'] != '')
+    {
         $ws = PersistentWorkspacePeer::retrieveByPK($_GET['workspace_id']);
 
         if ($ws == null) {
             header('Location: workspaceCollection.php');
         }
+
         if ( !$ws->isOwner($user->getUserId())) {
-            $_SESSION['permissions_error'] = "You are not the owner of this Workspace. Only Workspace owners can share their Workspaces with others";
+            $_SESSION['permissions_error'] = "You are not the owner of this Workspace. Only Workspace owners can update a Workspace";
         }
         else {
             $showForm = true;
         }
     }
-    elseif (!isset($_POST['submit'])) {
-        $_SESSION['invalid_arrival_path'] = 'Please go back to the <a href="workspaceCollection.php">Workspace Collection</a> to select a workspace to be shared.';
+    elseif (!isset($_POST['state_submit']) && !isset($_POST['profile_submit'])) {
+        $_SESSION['invalid_arrival_path'] = 'Please go back to the <a href="workspaceCollection.php">Workspace Collection</a> to select a workspace update.';
     }
 
-    if (isset($_POST['workspace_id']) &&
-        isset($_POST['jn_username_to_share_with']) )
-    {
+    if (isset($_POST['state_submit']) && 
+        isset($_POST['workspace_id']) &&
+        isset($_POST['state_select']) )
+        {
+
         try {
-            $userToShareWith = UserManagementController::retrieveUserByUserName($_POST['jn_username_to_share_with']);
+            MetricsWorkspaceController::changeWorkspaceState($_POST['workspace_id'], $_POST['state_select']);
 
-            $ws = MetricsWorkspaceController::shareWorkspace(
-                    $_POST['workspace_id'],
-                    $userToShareWith->getUserId()
-            );
-
-            $showForm = false;
-            $_SESSION['success'] = "The Workspace was successfully shared with <strong>".$userToShareWith->getJnUsername()."</strong>";
+            header("Location: viewWorkspace.php?trackback=state&workspace_id={$_POST['workspace_id']}");
         }
         catch (Exception $e) {
+            $_SESSION['state_error'] = $e;
+            $ws = PersistentWorkspacePeer::retrieveByPK($_POST['workspace_id']);
             $showForm = true;
-            $_SESSION['ws_sharing error'] = $e;
-        } 
+        }
+    }
+    if (isset($_POST['profile_submit']) &&
+        isset($_POST['workspace_id']) &&
+        isset($_POST['new_title']) &&
+        isset($_POST['new_desc']) )
+        {
+
+        try {
+            MetricsWorkspaceController::updateWorkspaceProfile(
+                $_POST['workspace_id'], $_POST['new_title'], $_POST['new_desc']);
+
+            header("Location: viewWorkspace.php?trackback=profile&workspace_id={$_POST['workspace_id']}");
+        }
+        catch (Exception $e) {
+            $_SESSION['profile_error'] = $e;
+            $ws = PersistentWorkspacePeer::retrieveByPK($_POST['workspace_id']);
+            $showForm = true;
+        }
     }
 
 #----------------------------->>>>>>>>>>>>> Variables Initialization ------------------->>>>>>>>>>>>>>>
 
-    $subUseCase = "Share Workspace";
+    $subUseCase = "Edit Workspace Details";
     $enableLeftNav = false;
 
     #breadscrum[URL] = Title
     $breadcrums = array(
                         $_SERVER["home_address"] => "Home",
                         $_SERVER["home_address"]."/workspace/workspaceCollection.php" => "Workspace Collection",
-                        $_SERVER["home_address"]."/workspace/viewWorkspace.php".(isset($_GET['workspace_id']) ? "?type=own&workspace_id={$_GET['workspace_id']}" : (isset($_POST['workspace_id'])? "?type=own&workspace_id={$_POST['workspace_id']}" : '')) => 'View Workspace',
-                        $_SERVER["home_address"].$_SERVER['PHP_SELF'] => 'Share Workspace'
+                        $_SERVER["home_address"]."/workspace/viewWorkspace.php".(isset($_GET['workspace_id']) ? "?workspace_id={$_GET['workspace_id']}" : (isset($_POST['workspace_id'])? "?workspace_id={$_POST['workspace_id']}" : '')) => 'View Workspace',
+                        $_SERVER["home_address"].$_SERVER['PHP_SELF'] => 'Edit Workspace'
                   );
 
     #leftMenu[n]["active"] - If the menu item is active or not
@@ -107,7 +123,11 @@
                         <div id="sidebar-right">
                             <div id="block-user-3" class="block block-user">
                                 <br />
-                                <h2></h2>
+                                <div style="font-size:0.90em">
+                                    <img src="../template/icons/i24/misc/info.png" style="float: left" alt="info_icon" />
+                                    <h2>&nbsp;Workspace State</h2>
+                                    <p>Keep in mind that the Personal Agent does not collect Metrics for Workspaces in the <small><strong>NEW</strong></small> and <small><strong>PAUSED</strong></small> states</p>
+                                </div>
 
                             </div><!-- end block-user-3 -->
                         </div><!-- end sidebar-right -->
@@ -124,38 +144,36 @@
                                     if (isset($_SESSION['invalid_arrival_path'])) {
                                         echo "<div class=\"messages error\">{$_SESSION['invalid_arrival_path']}</div>";
                                     }
-                                    elseif (isset($_SESSION['userToShareWith_error'])) {
-                                        echo "<div class=\"messages error\">{$_SESSION['userToShareWith_error']}</div>";
+                                    elseif (isset($_SESSION['state_error'])) {
+                                        echo "<div class=\"messages error\">{$_SESSION['state_error']}</div>";
                                     }
-                                    elseif (isset($_SESSION['ws_sharing error'])) {
-                                        echo "<div class=\"messages error\">{$_SESSION['ws_sharing error']}</div>";
-                                    }
-                                    elseif (isset($_SESSION['success'])) {
-                                        echo "<div class=\"messages ok\">{$_SESSION['success']}</div>";
-                                        echo "<br />
-                                            <form action=\"viewWorkspace.php?type=own&workspace_id={$_POST['workspace_id']}\" accept-charset=\"UTF-8\" method=\"post\" id=\"node-form\">
-                                                <input name=\"submit\" id=\"edit-submit\" value=\"Go back to Workspace\" class=\"form-submit\" type=\"submit\">
-                                            </form>";
+                                    elseif (isset($_SESSION['profile_error'])) {
+                                        echo "<div class=\"messages error\">{$_SESSION['profile_error']}</div>";
                                     }
                                     
-                                    if (isset($showForm) && $showForm == true)
-                                    {
-                                        echo    "<h3>Share Workspace</h3>
-                                                <form action=\"{$_SERVER['PHP_SELF']}\" accept-charset=\"UTF-8\" method=\"post\" id=\"node-form\">
-                                                    Please enter the Java.net username of the person with whom you wish to share this Workspace:
-                                                        <br /><br />
-                                                        <input type=\"text\" name=\"jn_username_to_share_with\" size=\"35\">
 
-                                                    <br /><br />
-                                                    <input name=\"clear\" id=\"edit-delete\" value=\"Clear\" class=\"form-submit\" type=\"reset\">
-                                                    <input name=\"submit\" id=\"edit-submit\" value=\"Submit\" class=\"form-submit\" type=\"submit\">
-                                                    <input name=\"workspace_id\" id=\"workspace_id\" value=\"".(isset($_GET['workspace_id']) ? $_GET['workspace_id'] : $_POST['workspace_id'])."\" type=\"hidden\">
-                                                </form>";
+                                    if ($showForm) {
+                                        switch($ws->getState()) {
+                                            case 'NEW'      :
+                                            case 'INACTIVE' :   $states = array('ACTIVE');
+                                                                break;
+                                            case 'ACTIVE'   :   $states = array('PAUSED', 'INACTIVE');
+                                                                break;
+                                            case 'PAUSED'   :   $states = array('ACTIVE', 'INACTIVE');
+
+                                        }
+                                        $curState = $ws->getState();
+                                        $color = MetricsWorkspaceController::getStateColor($curState);
+                                        $curTitle = $ws->getTitle();
+                                        $curDesc = $ws->getDescription();
+
+                                        include 'updateForm.php';
                                     }
-                                    
-                                    ?>
+                                ?>
 
-                                    <br /><br />
+                                        <div style="clear: both"></div>
+                                    
+                                    <br />
 
                                 </div>
                                 <br class="clear" />
@@ -175,14 +193,15 @@
                         $_SESSION['invalid_arrival_path'] = '';
                         unset($_SESSION['invalid_arrival_path']);
                     }
-                    if (isset($_SESSION['userToShareWith_error'])) {
-                        $_SESSION['userToShareWith_error'] = '';
-                        unset($_SESSION['userToShareWith_error']);
+                    if (isset($_SESSION['state_error'])) {
+                        $_SESSION['state_error'] = '';
+                        unset($_SESSION['state_error']);
                     }
-                    if (isset($_SESSION['ws_sharing error'])) {
-                        $_SESSION['ws_sharing error'] = '';
-                        unset($_SESSION['ws_sharing error']);
+                    if (isset($_SESSION['profile_error'])) {
+                        $_SESSION['profile_error'] = '';
+                        unset($_SESSION['profile_error']);
                     }
+
                 ?>
 
 <?php include 'footer.php' ?>
