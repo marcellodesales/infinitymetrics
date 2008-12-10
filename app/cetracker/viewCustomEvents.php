@@ -15,6 +15,7 @@
     //===  Initialization  ===================================================//
 
     $subUseCase = "View Custom Events";
+    $projectFlag = false;
 ?>
 
 <!--====  Formatting  =======================================================-->
@@ -49,7 +50,7 @@
 
         <table align="center"><tbody><tr><td>
 
-            <!--====  Main Body  ========================================-->
+            <!--====  Main Body  ============================================-->
 
             <?php
                 $ws_id = $_GET['workspace_id'];
@@ -65,13 +66,21 @@
 
                     foreach ($proj as $pproj) {
                         echo "<br>&nbsp;&nbsp;&nbsp;Project: ".
-                             $pproj->getProjectJnName()." - ".
-                             "<a href='addCustomEvent.php?project_jn_name=".
-                             $pproj->getProjectJnName().
-                             "&parent_project_jn_name=";
-                        echo $pproj->getParentProjectJnName()?
-                             $pproj->getParentProjectJnName():"null";
-                        echo "&workspace_id=".$ws_id."'>Add To</a>";
+                             $pproj->getProjectJnName();
+
+                        if ($projectFlag) {
+                            echo " - <a href='addCustomEvent.php?project_jn_na".
+                                "me=".$pproj->getProjectJnName().
+                                 "&parent_project_jn_name=";
+
+                            echo $pproj->getParentProjectJnName()?
+                                 $pproj->getParentProjectJnName():"null";
+
+                            echo "&workspace_id=".$ws_id."' style='text-decoration: none;'><input value='Add To' class='form-submit' type='button'></a>";
+                        }
+                        else {
+                            $projectFlag = true;
+                        }
 
                         $evt = $pproj->getCustomEvents();
 
@@ -79,17 +88,11 @@
                             echo "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".
                                  "Custom Event: ".$evts->getTitle();
 
-                            echo " - <a href='addCustomEventEntry.php".
-                                 "?custom_event_id=".$evts->getCustomEventId().
-                                 "&workspace_id=".$ws_id."'>Add To</a>";
-
-                            echo " <a href='editCustomEvent.php".
-                                 "?custom_event_id=".$evts->getCustomEventId().
-                                 "&workspace_id=".$ws_id."'>Edit</a>";
-
-                            echo " <a href='deleteCustomEventEntry.php".
-                                 "?custom_event_id=".$evts->getCustomEventId().
-                                 "&workspace_id=".$ws_id."'>Remove From</a>";
+                            echo " - <a href='viewCustomEvent.php?custom_event".
+                                 "_id=".$evts->getCustomEventId()."&workspace_".
+                                 "id=".$ws_id."' style='text-decoration: none;".
+                                 "'><input value='View' class='form-submit' ty".
+                                 "pe='button'></a>";
                         }
                     }
                 }

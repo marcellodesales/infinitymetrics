@@ -64,7 +64,8 @@ final class CustomEventController {
             CustomEventController::validateInputEntry($notes, $event_id);
             $entry = new CustomEventEntry($notes);
 
-            $criteria = new Criteria(PersistentCustomEventPeer::CUSTOM_EVENT_ID,
+            $criteria = new Criteria();
+            $criteria->add(PersistentCustomEventPeer::CUSTOM_EVENT_ID,
                 $event_id);
             $results = PersistentCustomEventPeer::doSelect($criteria);
 
@@ -115,7 +116,8 @@ final class CustomEventController {
             CustomEventController::validateInputEvent($notes, $title,
                 $project_jn_name);
 
-            $criteria = new Criteria(PersistentProjectPeer::PROJECT_JN_NAME,
+            $criteria = new Criteria();
+            $criteria->add(PersistentProjectPeer::PROJECT_JN_NAME,
                 $project_jn_name);
             $criteria->add(PersistentProjectPeer::PARENT_PROJECT_JN_NAME,
                 $parent_project_jn_name);

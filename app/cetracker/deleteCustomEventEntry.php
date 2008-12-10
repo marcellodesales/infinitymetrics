@@ -15,9 +15,14 @@
     //===  Initialization  ===================================================//
 
     $subUseCase = "Remove Custom Event Entry";
-    $ce_id = $_GET['custom_event_id'];
+    $entry_id = $_GET['entry_id'];
 
     $crit = new Criteria();
+    $crit->add(PersistentCustomEventEntryPeer::ENTRY_ID, $entry_id);
+    $entry = PersistentCustomEventEntryPeer::doSelectOne($crit);
+
+    $ce_id = $entry->getCustomEventId();
+    $crit->clear();
     $crit->add(PersistentCustomEventPeer::CUSTOM_EVENT_ID, $ce_id);
     $ce = PersistentCustomEventPeer::doSelectOne($crit);
 ?>
@@ -60,14 +65,14 @@
 
         <form id="removecustomevententry" autocomplete="off" method="post" 
             action="<?php echo $PHP_SELF."?custom_event_id=".
-            $_GET['custom_event_id']."&workspace_id=".$_GET['workspace_id'] ?>">
+            $ce_id."&workspace_id=".$_GET['workspace_id'] ?>">
             
             <table align="center"><tbody><tr><td>
 
                 <!--====  Main Body  ================================-->
 
                 <?php
-                    echo "<b>Click an entry to remove it.</b><p>";
+                    echo "<b>Click the entry to confirm removal.</b><p>";
 
                     if (isset($_GET['delete_entry_id'])) {
                         CustomEventController::removeEntry(
@@ -81,21 +86,13 @@
                     }
 
                     echo $ce->getTitle()."<br>";
-                    $ce_id = $_GET['custom_event_id'];
 
-                    $crit2 = new Criteria();
-                    $crit2->add(PersistentCustomEventEntryPeer::CUSTOM_EVENT_ID,
-                        $ce_id);
-                    $entries = PersistentCustomEventEntryPeer::doSelect($crit2);
-
-                    foreach ($entries as $entry) {
-                        echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='deleteCus".
-                             "tomEventEntry.php".
-                             "?custom_event_id=".$ce_id."&workspace_id=".
-                             $_GET['workspace_id']."&delete_entry_id=".
-                             $entry->getEntryID()."'>".$entry->getNotes().
-                             "</a><br>";
-                    }
+                    echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='deleteCus".
+                         "tomEventEntry.php".
+                         "?entry_id=".$entry_id."&workspace_id=".
+                         $_GET['workspace_id']."&delete_entry_id=".
+                         $entry_id."'>".$entry->getNotes().
+                         "</a><br>";
                 ?>
                 
                 <!--====  Main Body Close  ==================================-->

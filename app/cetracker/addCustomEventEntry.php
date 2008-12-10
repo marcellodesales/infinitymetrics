@@ -24,7 +24,7 @@
 
         try {
             $temp = CustomEventController::createEntry($_POST['notes'],
-                $_GET['custom_event_id']);
+                $ce_id);
             $_SESSION["successMessage"] = "Data entry successful!";
         }
         catch (Exception $e) {
@@ -101,7 +101,7 @@
     
         <form id="createcustomevententry" autocomplete="off" method="post" 
             action="<?php echo $PHP_SELF."?custom_event_id=".
-            $_GET['custom_event_id']."&workspace_id=".$_GET['workspace_id'] ?>">
+            $ce_id."&workspace_id=".$_GET['workspace_id'] ?>">
 
             <table align="center"><tbody>
 
