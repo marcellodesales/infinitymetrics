@@ -156,7 +156,8 @@
                                     }
                                     else {
                                         echo "<h2>Current Workspaces</h2><br />";
-                                        echo "<div style=\"float: left\">";
+                                        echo '<div style="float: left; width: 300px">';
+                                        echo "<div style=\"border: thin groove silver; padding: 15px\">\n";
                                         echo "<h3>My Workspaces</h3>\n";
                                         if (isset($_SESSION['noOwnWorkspaces']))
                                         {
@@ -204,8 +205,12 @@
                                               </form>';
                                                         
                                         echo "</div>";
+                                        echo "<div style=\"border: thin groove silver; padding: 10px; margin-top: 10px\">";
+                                        echo "<div id=\"ws_pie_chart_div\"></div>\n<br />\n";
+                                        echo "<div id=\"cat_pie_chart_div\"></div>\n";
+                                        echo "</div>\n</div>\n";
 
-                                        echo "<div style=\"float: right; width: 420px; border: thin groove silver; padding: 15px\">";
+                                        echo "<div style=\"float: left; width: 420px; border: thin groove silver; padding: 15px; margin-left: 10px\">";
                                         
                                         if (isset($_SESSION['report_error']) && $_SESSION['report_error'] != '')
                                         {
@@ -214,10 +219,12 @@
                                         }
                                         else {
                                             echo $reportScript;
-                                            echo "<div id=\"bar_chart_div\"></div>";
-                                        }
+                                            echo "<div id=\"bar_chart_div\"></div><br />\n";
+                                            echo "<div id=\"table_chart_div\"></div>\n";
+                                            }
 
-                                        echo "</div>";
+                                            echo '</div>';
+                                            echo '<div style="clear:both"></div>';
                                         
                                         echo "<div style=\"clear: both\"></div>\n";
                                     }

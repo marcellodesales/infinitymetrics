@@ -26,7 +26,6 @@
                                                     <tr>
                                                         <td>
                                                             <br />
-                                                            <input name="clear" id="edit-delete" value="Clear" class="form-submit" type="reset" />
                                                             <input name="state_submit" id="edit-submit" value="Submit" class="form-submit" type="submit" />
                                                             <input name="workspace_id" value="<?php echo (isset($_GET['workspace_id']) ? $_GET['workspace_id'] : $_POST['workspace_id']) ?>" type="hidden" />
                                                             <br />

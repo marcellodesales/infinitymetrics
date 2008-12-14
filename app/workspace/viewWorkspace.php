@@ -189,10 +189,10 @@
                                                 echo "</div>";
                                             }
                                             elseif ($_GET['trackback'] == 'state') {
-                                                echo "<div class=\"messages ok\"><img src=\"../template/icons/i24/status/status-ok.png alt=\"success\" />The <strong>state<strong> of your Workspace has been updated successfully!</div>";
+                                                echo "<div class=\"messages ok\">The <strong>state</strong> of your Workspace has been updated successfully!</div>";
                                             }
                                             elseif ($_GET['trackback'] == 'profile') {
-                                                echo "<div class=\"messages ok\"><img src=\"../template/icons/i24/status/status-ok.png alt=\"success\" />Your <strong>Workspace Profile</strong> has been updated successfully!</div>";
+                                                echo "<div class=\"messages ok\">Your <strong>Workspace Profile</strong> has been updated successfully!</div>";
                                             }
                                         }
 

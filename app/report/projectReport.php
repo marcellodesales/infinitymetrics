@@ -54,8 +54,8 @@
     #breadscrum[URL] = Title
     $breadcrums = array(
                         $_SERVER["home_address"] => "Home",
-                        $_SERVER["home_address"]."../workspace/workspaceCollection.php" => "Workspace Collection",
-                        $_SERVER["home_address"]."../workspace/viewWorkspace.php" => "View Workspace",
+                        $_SERVER["home_address"]."/workspace/workspaceCollection.php" => "Workspace Collection",
+                        $_SERVER["home_address"]."/workspace/viewWorkspace.php" => "View Workspace",
                         $_SERVER["home_address"].$_SERVER['PHP_SELF'] => "Project Report"
                   );
 
@@ -138,31 +138,37 @@
                                 <div class="t"><div class="b"><div class="l"><div class="r"><div class="bl"><div class="br"><div class="tl"><div class="tr">
                                     <div class="content-in">
                                         <h2>Project Metrics Report</h2>
-                                        <div style="float: left; width: 250px">
-
-                                            <h3><?php echo "{$_GET['project_id']}&nbsp;&nbsp;<a href=\"https://{$_GET['project_id']}.dev.java.net/\"><img style=\"border: 0\" src=\"../template/icons/i16/misc/world_link.png\" /></a>\n"; ?></h3>
-                                            <br />
-                                            <h4>Project Summary:</h4>
+                                        <div style="float: left; width: 300px">
+                                            <div style="border: thin groove silver; padding: 15px">
+                                                <h3><?php echo "{$_GET['project_id']}&nbsp;&nbsp;<a href=\"https://{$_GET['project_id']}.dev.java.net/\"><img style=\"border: 0\" src=\"../template/icons/i16/misc/world_link.png\" /></a>\n"; ?></h3>
+                                                <br />
+                                                <h4>Project Summary:</h4>
                                             
-                                            <?php
-                                                echo "<p>";
-                                                if ($project->getSummary() == '') {
-                                                    echo "<span style=\"color: gray\">[Empty]</span>";
-                                                }
-                                                else {
-                                                    echo $project->getSummary();
-                                                }
-                                                echo "</p>\n";
-                                            ?>
-                                            
+                                                <?php
+                                                    echo $reportScript;
+
+                                                    echo "<p>";
+                                                    if ($project->getSummary() == '') {
+                                                        echo "<span style=\"color: gray\">[Empty]</span>";
+                                                    }
+                                                    else {
+                                                        echo $project->getSummary();
+                                                    }
+                                                    echo "</p>\n";
+                                                ?>
+                                                </div>
+                                                <div style="border: thin groove silver; padding: 10px; margin-top: 10px">
+                                                    <div id="ws_pie_chart_div"></div><br />
+                                                    <div id="cat_pie_chart_div"></div>
+                                                </div>
+                                            </div>
+                                        
+                                            <div style="float: left; width: 420px; border: thin groove silver; padding: 15px; margin-left: 10px">
+                                                <div id="bar_chart_div"></div>
+                                                <div id="table_chart_div"></div>
+                                            </div>
                                         </div>
-
-                                        <div style="float: right; width: 420px; border: thin groove silver; padding: 15px">
-
-                                            <?php echo $reportScript ?>
-                                            <div id="bar_chart_div"></div>
-
-                                        </div>
+                                        
                                         <div style="clear: both"></div>
 
                                         <br /><br />

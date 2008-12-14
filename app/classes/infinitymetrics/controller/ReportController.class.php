@@ -39,20 +39,29 @@ class ReportController
         }
         
         $report = new Report();
-        $metrics = $report->getReportMetrics($project);
+        $metrics = $report->getMetricsReport($project);
+        $categoryTotals = $report->getMetricsTotalsByCategory();
+        arsort($categoryTotals);
+        $userTotals = $report->getMetricsTotalsByKey();
+        arsort($userTotals);
         
         $categories = $report->getEventCategories();
         
         $script =
 
-        "   <script type=\"text/javascript\" src=\"http://www.google.com/jsapi\"></script>
+           "<script type=\"text/javascript\" src=\"http://www.google.com/jsapi\"></script>
             <script type=\"text/javascript\">\n
-              google.load('visualization', '1', {packages:['columnchart']});
+              google.load('visualization', '1', {packages:['piechart', 'table', 'columnchart']});
 
               google.setOnLoadCallback(drawChart);
 
-              function drawChart() {
-                var barData = new google.visualization.DataTable();
+              function drawChart() {\n";
+
+        $script .= self::getPieChartByKeyScript($userTotals, 'Metrics by User');
+        $script .= self::getPieChartByCategoryScript($categoryTotals);
+        $script .=
+
+                "var barData = new google.visualization.DataTable();
                 barData.addColumn('string', 'Event Category');";
                 foreach ($metrics as $username => $cats){
                     $script .= "barData.addColumn('number', '".$username."');\n";
@@ -76,7 +85,36 @@ class ReportController
 
                 $script .= "
                 var barChart = new google.visualization.ColumnChart(document.getElementById('bar_chart_div'));
-                barChart.draw(barData, {width: 420, height: 320, is3D: true, title: 'Project Metrics', 'isStacked': true, 'legend': 'bottom'});
+                barChart.draw(barData, {width: 420, height: 360, is3D: true, title: 'Project Metrics', 'isStacked': true, 'legend': 'bottom'});
+
+                var tableData = new google.visualization.DataTable();
+                tableData.addColumn('string', 'User');\n";
+
+        foreach ($categories as $category) {
+            $script .= "tableData.addColumn('number', '".self::toTitleCase($category)."');\n";
+        }
+        $script .= "tableData.addColumn('number', 'Total');\n";
+        $script .= "tableData.addRows(".(count($metrics)+1).");\n";
+
+        if (count($metrics))
+        {
+            $idx = 0;
+            foreach ($metrics as $username => $cats)
+            {
+                $script .= "tableData.setCell($idx, 0, '$username');\n";
+                for ($i = 0; $i < count($categories); $i++)
+                {
+                    $script .= "tableData.setCell($idx, ".($i+1).", {$cats[$categories[$i]]});\n";
+                }
+                $script .= "tableData.setCell($idx, ".(count($categories)+1).", ".$userTotals[$username].");";
+                $idx++;
+            }
+        }
+
+        $script .=
+
+                "var table = new google.visualization.Table(document.getElementById('table_chart_div'));
+                table.draw(tableData);
               }
             </script>";
 
@@ -110,30 +148,34 @@ class ReportController
         }
 
         $report = new Report();
-        $metrics = $report->getReportMetrics($user, $project);
+        $metrics = $report->getMetricsReport($user, $project);
         
         $script =
 
         "   <script type=\"text/javascript\" src=\"http://www.google.com/jsapi\"></script>
             <script type=\"text/javascript\">\n
-              google.load('visualization', '1', {packages:['columnchart']});
+              google.load('visualization', '1', {packages:['piechart', 'columnchart']});
 
               google.setOnLoadCallback(drawChart);
 
-              function drawChart() {
-                var barData = new google.visualization.DataTable();
+              function drawChart() {\n";
+
+        $script .= self::getPieChartByCategoryScript($metrics);
+        $script .=
+
+                "var barData = new google.visualization.DataTable();
                 barData.addColumn('string', 'Event Category');
                 barData.addColumn('number', 'Number of Entries');
                 barData.addRows(".count($metrics).");";
                 $idx = 0;
                 foreach ($metrics as $key => $value) {
-                    $script .= "barData.setValue($idx, 0, '".$key."');\n";
+                    $script .= "barData.setValue($idx, 0, '".self::toTitleCase($key)."');\n";
                     $script .= "barData.setValue($idx, 1, ".$value.");\n";
                     $idx++;
                 }
                 $script .= "
                 var barChart = new google.visualization.ColumnChart(document.getElementById('bar_chart_div'));
-                barChart.draw(barData, {width: 420, height: 320, is3D: true, title: 'Metrics for ".$user->getJnUsername()." in ".$project->getProjectJnName()."', 'legend': 'none'});
+                barChart.draw(barData, {width: 420, height: 360, is3D: true, title: 'Metrics for ".$user->getJnUsername()." in ".$project->getProjectJnName()."', 'legend': 'none'});
               }
             </script>
         ";
@@ -148,12 +190,12 @@ class ReportController
 
         $ws = PersistentWorkspacePeer::retrieveByPK($workspace_id);
 
-        if ($ws == NULL) {
+        if ($ws == null) {
             throw new InfinityMetricsException('The workspace was not found');
         }
 
         $report = new Report();
-        $metrics = $report->getReportMetrics($ws);
+        $metrics = $report->getMetricsReport($ws);
         $projectTotals = $report->getMetricsTotalsByKey();
         
         arsort($projectTotals);
@@ -173,14 +215,16 @@ class ReportController
         
         $ws = PersistentWorkspacePeer::retrieveByPK($workspace_id);
         
-        if ($ws == NULL) {
+        if ($ws == null) {
             throw new InfinityMetricsException('The workspace was not found');
         }
         
         $report = new Report();
-        $metrics = $report->getReportMetrics($ws);
+        $metrics = $report->getMetricsReport($ws);
         $categoryTotals = $report->getMetricsTotalsByCategory();
+        arsort($categoryTotals);
         $wsTotals = $report->getMetricsTotalsByKey();
+        arsort($wsTotals);
 
         $categories = $report->getExtendedCategories();
 
@@ -192,50 +236,13 @@ class ReportController
 
         google.setOnLoadCallback(drawChart);
 
-        function drawChart() {
-            var wsPieData = new google.visualization.DataTable();
-            wsPieData.addColumn('string', 'Project');
-            wsPieData.addColumn('number', 'Total Events');\n";
+        function drawChart() {";
 
-        $script .= "wsPieData.addRows(".count($wsTotals).");\n";
+            $script .= self::getPieChartByKeyScript($wsTotals, 'Metrics by Project');
+            $script .= self::getPieChartByCategoryScript($categoryTotals);
 
-        $idx = 0;
-        foreach ($wsTotals as $key => $value)
-        {
-            $script .= "wsPieData.setValue($idx, 0, '$key');\n";
-            $script .= "wsPieData.setValue($idx, 1, $value);\n";
-            $idx++;
-        }
-
-        $script .=
-
-            "\nvar wsPieChart = new google.visualization.PieChart(document.getElementById('ws_pie_chart_div'));
-            wsPieChart.draw(wsPieData, {width: 280, height: 280, is3D: true, title: 'Metrics by Project', legend: 'bottom'});\n";
-
-        $script .=
-
-            "var catPieData = new google.visualization.DataTable();
-            catPieData.addColumn('string', 'Event Category');
-            catPieData.addColumn('number', 'Total Events');\n";
-
-        $script .= "catPieData.addRows(".count($categoryTotals).");\n";
-
-        $idx = 0;
-        foreach ($categoryTotals as $key => $value)
-        {
-            $script .= "catPieData.setValue($idx, 0, '".self::toTitleCase($key)."');\n";
-            $script .= "catPieData.setValue($idx, 1, $value);\n";
-            $idx++;
-        }
-
-        $script .=
-
-            "\nvar catPieChart = new google.visualization.PieChart(document.getElementById('cat_pie_chart_div'));
-            catPieChart.draw(catPieData, {width: 280, height: 280, is3D: true, title: 'Metrics by Category', legend: 'bottom'});\n
-
-
-            var colChartData = new google.visualization.DataTable();\n
-            colChartData.addColumn('string', 'Event Category');\n";
+            $script .= "var colChartData = new google.visualization.DataTable();
+                        colChartData.addColumn('string', 'Event Category');\n";
 
         foreach ($metrics as $pName => $cats){
             $script .= "colChartData.addColumn('number', '".$pName."');\n";
@@ -260,7 +267,7 @@ class ReportController
         $script .= 
 
                 "var barChart = new google.visualization.ColumnChart(document.getElementById('col_chart_div'));
-                barChart.draw(colChartData, {width: 420, height: 360, is3D: true, title: 'Workspace Metrics', 'isStacked': true, 'legend': 'bottom'});\n\n
+                barChart.draw(colChartData, {width: 420, height: 360, is3D: false, title: 'Workspace Metrics', 'isStacked': true, 'legend': 'bottom'});\n\n
 
                 var tableData = new google.visualization.DataTable();
                 tableData.addColumn('string', 'Project');\n";
@@ -268,8 +275,8 @@ class ReportController
         foreach ($categories as $category) {
             $script .= "tableData.addColumn('number', '".self::toTitleCase($category)."');\n";
         }
-
-        $script .= "tableData.addRows(".count($metrics).");\n";
+        $script .= "tableData.addColumn('number', 'Total');\n";
+        $script .= "tableData.addRows(".(count($metrics)+1).");\n";
 
         if (count($metrics))
         {
@@ -281,6 +288,7 @@ class ReportController
                 {
                     $script .= "tableData.setCell($idx, ".($i+1).", {$cats[$categories[$i]]});\n";
                 }
+                $script .= "tableData.setCell($idx, ".(count($categories)+1).", ".$wsTotals[$pName].");";
                 $idx++;
             }
         }
@@ -288,7 +296,7 @@ class ReportController
         $script .=
 
                 "var table = new google.visualization.Table(document.getElementById('table_chart_div'));
-                table.draw(tableData, {showRowNumber: true});
+                table.draw(tableData);
             }
             </script>";
 
@@ -302,17 +310,24 @@ class ReportController
 
         $report = new Report();
         $metrics = $report->getWorkspaceCollectionMetrics($user_id);
-
+        $wsCollectionTotals = $report->getMetricsTotalsByKey();
+        arsort($wsCollectionTotals);
+        $categoryTotals = $report->getMetricsTotalsByCategory();
+        arsort($categoryTotals);
+        
         $categories = $report->getExtendedCategories();
 
         $script =   "<script type=\"text/javascript\" src=\"http://www.google.com/jsapi\"></script>
                      <script type=\"text/javascript\">
-                     google.load('visualization', '1', {packages:['columnchart']});
+                     google.load('visualization', '1', {packages:['piechart', 'table', 'columnchart']});
 
                      google.setOnLoadCallback(drawChart);
 
-                     function drawChart() {
-                        var barData = new google.visualization.DataTable();
+                     function drawChart() {\n";
+
+        $script .= self::getPieChartByKeyScript($wsCollectionTotals, 'Metrics by Workspace');
+        $script .= self::getPieChartByCategoryScript($categoryTotals);
+        $script .=      "var barData = new google.visualization.DataTable();
                         barData.addColumn('string', 'Event Category');";
 
         foreach ($metrics as $wsName => $cats){
@@ -338,9 +353,88 @@ class ReportController
 
         $script .= "
                 var barChart = new google.visualization.ColumnChart(document.getElementById('bar_chart_div'));
-                barChart.draw(barData, {width: 420, height: 320, is3D: true, title: 'Workspace Collection Metrics', 'isStacked': true, 'legend': 'bottom'});
+                barChart.draw(barData, {width: 420, height: 360, is3D: true, title: 'Workspace Collection Metrics', 'isStacked': true, 'legend': 'bottom'});
+
+                var tableData = new google.visualization.DataTable();
+                tableData.addColumn('string', 'Workspace');\n";
+
+        foreach ($categories as $category) {
+            $script .= "tableData.addColumn('number', '".self::toTitleCase($category)."');\n";
+        }
+        $script .= "tableData.addColumn('number', 'Total');\n";
+        $script .= "tableData.addRows(".(count($metrics)+1).");\n";
+
+        if (count($metrics))
+        {
+            $idx = 0;
+            foreach ($metrics as $wsTitle => $cats)
+            {
+                $script .= "tableData.setCell($idx, 0, '$wsTitle');\n";
+                for ($i = 0; $i < count($categories); $i++)
+                {
+                    $script .= "tableData.setCell($idx, ".($i+1).", {$cats[$categories[$i]]});\n";
+                }
+                $script .= "tableData.setCell($idx, ".(count($categories)+1).", ".$wsCollectionTotals[$wsTitle].");";
+                $idx++;
+            }
+        }
+
+        $script .=
+
+                "var table = new google.visualization.Table(document.getElementById('table_chart_div'));
+                table.draw(tableData);
               }
             </script>";
+
+        return $script;
+    }
+
+    private function getPieChartByKeyScript($data, $title) {
+        $script =
+
+            "var wsPieData = new google.visualization.DataTable();
+            wsPieData.addColumn('string', 'Project');
+            wsPieData.addColumn('number', 'Total Events');\n";
+
+        $script .= "wsPieData.addRows(".count($data).");\n";
+
+        $idx = 0;
+        foreach ($data as $key => $value)
+        {
+            $script .= "wsPieData.setValue($idx, 0, '$key');\n";
+            $script .= "wsPieData.setValue($idx, 1, $value);\n";
+            $idx++;
+        }
+
+        $script .=
+
+            "\nvar wsPieChart = new google.visualization.PieChart(document.getElementById('ws_pie_chart_div'));
+            wsPieChart.draw(wsPieData, {width: 280, height: 280, is3D: true, title: '$title', legend: 'bottom'});\n";
+
+        return $script;
+    }
+
+    private function getPieChartByCategoryScript($data) {
+        $script =
+
+            "var catPieData = new google.visualization.DataTable();
+            catPieData.addColumn('string', 'Event Category');
+            catPieData.addColumn('number', 'Total Events');\n";
+
+        $script .= "catPieData.addRows(".count($data).");\n";
+
+        $idx = 0;
+        foreach ($data as $key => $value)
+        {
+            $script .= "catPieData.setValue($idx, 0, '".self::toTitleCase($key)."');\n";
+            $script .= "catPieData.setValue($idx, 1, $value);\n";
+            $idx++;
+        }
+
+        $script .=
+
+            "\nvar catPieChart = new google.visualization.PieChart(document.getElementById('cat_pie_chart_div'));
+            catPieChart.draw(catPieData, {width: 280, height: 280, is3D: true, title: 'Metrics by Category', legend: 'bottom'});\n";
 
         return $script;
     }

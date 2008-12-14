@@ -202,7 +202,7 @@ class Report
         return $this->metrics;
     }
 
-    public function getReportMetrics($PersistentObject, $AuxiliaryPersistentObject = NULL) {
+    public function getMetricsReport($PersistentObject, $AuxiliaryPersistentObject = NULL) {
         if (!isset($PersistentObject) || $PersistentObject == '') {
             throw new InfinityMetricsException('This method needs an PersistentObject as an argument');
         }
@@ -231,9 +231,11 @@ class Report
                 foreach ($channels as $channel)
                 {
                     $criteria->clear();
+                    $criteria->add(PersistentEventPeer::CHANNEL_ID, $channel->getChannelId());
+                    $criteria->add(PersistentEventPeer::PROJECT_JN_NAME, $channel->getProjectJnName());
                     $criteria->add(PersistentEventPeer::JN_USERNAME, $userJnName);
 
-                    $this->metrics[$category] += count($channel->getEvents($criteria));
+                    $this->metrics[$category] += PersistentEventPeer::doCount($criteria);
                 }
             }
 
@@ -280,7 +282,8 @@ class Report
                 }
             }
 
-            $this->metrics = self::metrics_natsort_keys($this->metrics);
+            //$this->metrics = self::metrics_natsort_keys($this->metrics);
+            arsort($this->metrics);
             
             return $this->metrics;
         }//end Project Report

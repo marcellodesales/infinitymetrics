@@ -34,8 +34,8 @@
     #breadscrum[URL] = Title
     $breadcrums = array(
                         $_SERVER["home_address"] => "Home",
-                        $_SERVER["home_address"]."../workspace/workspaceCollection.php" => "Workspace Collection",
-                        $_SERVER["home_address"]."../workspace/viewWorkspace.php" => "View Workspace",
+                        $_SERVER["home_address"]."/workspace/workspaceCollection.php" => "Workspace Collection",
+                        $_SERVER["home_address"]."/workspace/viewWorkspace.php" => "View Workspace",
                         $_SERVER["home_address"].$_SERVER['PHP_SELF'] => "User Metrics Report"
                   );
 
@@ -94,10 +94,13 @@
                             <div class="t"><div class="b"><div class="l"><div class="r"><div class="bl"><div class="br"><div class="tl"><div class="tr">
                                 <div class="content-in">
                                     <h2>Metrics Report</h2>
-                                    <div style="float: left; width: 250px">
+                                    <div style="float: left; width: 300px">
+                                        <div style="border: thin groove silver; padding: 15px">
                                         
                                         <h3>
-                                            <?php echo $reportUser->getFirstName().' '.$reportUser->getLastName().
+                                            <?php 
+                                                    echo $reportScript;
+                                                    echo $reportUser->getFirstName().' '.$reportUser->getLastName().
                                                             "&nbsp<a href=\"../user/profile/viewProfile.php?userId={$_GET['user_id']}\">".
                                                             "<img style=\"border: 0\" src=\"../template/icons/i16/misc/contact.png\" /></a>"
                                             ?>
@@ -105,17 +108,18 @@
                                         <h3><?php echo "in project {$_GET['project_id']}&nbsp;&nbsp;<a href=\"https://{$_GET['project_id']}.dev.java.net/\"><img style=\"border: 0\" src=\"../template/icons/i16/misc/world_link.png\" /></a>\n"; ?></h3>
                                             
                                         </div>
-
-                                        <div style="float: right; width: 420px; border: thin groove silver; padding: 15px">
-
-                                            <?php echo $reportScript ?>
-                                            <div id="bar_chart_div"></div>
-
+                                        <div style="border: thin groove silver; padding: 10px; margin-top: 10px">
+                                            <div id="cat_pie_chart_div"></div>
                                         </div>
-                                        <div style="clear: both"></div>
+                                    </div>
+                                    <div style="float: left; width: 420px; border: thin groove silver; padding: 15px; margin-left: 10px">
+                                        <div id="bar_chart_div"></div>
+                                    </div>
+                                </div>
 
-                                    <br /><br />
+                                <div style="clear: both"></div>
 
+                                    <br />
 
                                 </div>
                                 <br class="clear" />
