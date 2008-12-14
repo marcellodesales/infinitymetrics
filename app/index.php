@@ -39,37 +39,39 @@
                     <div id="inside">
 
                         <div id="sidebar-right">
+                            <div class="content">
 
-      		<div class="node-form">
-            <form id="signinform" autocomplete="off" method="post" action="user/login.php">
-<?php
-        if (isset($_SESSION["signinError"]) && $_SESSION["signinError"] != "") {
-             echo "<div class=\"messages error\">".$_SESSION["signinError"]."</div>";
-             $_SESSION["signinError"] = "";
-             unset($_SESSION["signinError"]);
-        }
-?>
-	  		  <table align="center">
-	  		  <tbody>
-	  		  <tr>
-	  			<td class="status" width="30">&nbsp;</td>
-	  			<td class="label" width="20"><label id="lusername" for="username">Username</label></td>
-	  			<td class="field"><input id="username" name="username" class="textfield" value="" maxlength="50" type="text"></td>
-	  		    </tr>
-	  		  <tr>
-	  			<td class="status"></td>
-	  			<td class="label"><label id="lpassword" for="password">Password</label></td>
-	  			<td class="field"><input id="password" name="password" class="textfield" maxlength="50" value="" type="password"></td>
-	  		  </tr>
-              <tr>
-                <td>&nbsp;</td>
-                <td colspan="2" align="right">
-                    <input id="edit-submit" value="Login" class="form-submit" type="submit"><BR>
-                </td>
-              </tr>
-	  		  </tbody></table>
-        </form>
-        </div>
+                                <div class="node-form">
+                                    <form id="signinform" autocomplete="off" method="post" action="user/login.php">
+                                        <?php
+                                            if (isset($_SESSION["signinError"]) && $_SESSION["signinError"] != "") {
+                                                echo "<div class=\"messages error\">".$_SESSION["signinError"]."</div>";
+                                                $_SESSION["signinError"] = "";
+                                                unset($_SESSION["signinError"]);
+                                            }
+                                        ?>
+                                        <table style="font-size: 0.80em">
+                                            <tr>
+                                                <td class="status" width="30">&nbsp;</td>
+                                                <td class="label"><label id="lusername" for="username">Username</label></td>
+                                                <td class="field"><input id="username" name="username" class="textfield" size="14" value="" maxlength="50" type="text"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="status"></td>
+                                                <td class="label"><label id="lpassword" for="password">Password</label></td>
+                                                <td class="field"><input id="password" name="password" class="textfield" size="14" maxlength="50" value="" type="password"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>&nbsp;</td>
+                                                <td colspan="2" align="right">
+                                                    <input id="edit-submit" value="Login" class="form-submit" type="submit"><BR>
+                                            </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </div>
         <div id="content">
 <?php
@@ -86,7 +88,7 @@
                     <td><img src="../../template/images/techglobe.gif"></td>
                     <td align="center"><h2>Welcome to Infinity Metrics</h2></td>
                     <td>
-                Wanna know what's really going on in a Java.net project? What if you could track the performance of multiple
+                Want to know what's really going on in a Java.net project? What if you could track the performance of multiple
                 projects on the same environment without the need of complicated spreadsheets? <strong>Infinity Metrics</strong>
                 aggregates data from <strong>Java.net</strong> and provide reports for all types of users, Project Owners
                 and specially those from the academia teaching <strong>Global Software Engineering</strong>.
