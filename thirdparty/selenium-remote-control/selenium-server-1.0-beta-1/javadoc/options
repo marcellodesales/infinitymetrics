@@ -1,0 +1,17 @@
+-classpath '/opt/teamcity/general-buildAgent/work/8898c9089b57ed53/target/classes:/home/teamcity-j2ee/.m2/repository/jetty/org.mortbay.jetty/5.1.10/org.mortbay.jetty-5.1.10.jar:/home/teamcity-j2ee/.m2/repository/javax/servlet/servlet-api/2.4/servlet-api-2.4.jar:/home/teamcity-j2ee/.m2/repository/commons-logging/commons-logging/1.0.4/commons-logging-1.0.4.jar:/home/teamcity-j2ee/.m2/repository/ant/ant/1.6.5/ant-1.6.5.jar:/home/teamcity-j2ee/.m2/repository/bouncycastle/bcprov-jdk15/135/bcprov-jdk15-135.jar'
+ -protected
+-sourcepath
+'/opt/teamcity/general-buildAgent/work/8898c9089b57ed53/src/main/java'
+-author
+-bottom
+'Copyright © 2008. All Rights Reserved.'
+-charset
+'ISO-8859-1'
+-d
+'/opt/teamcity/general-buildAgent/work/8898c9089b57ed53/target/apidocs'
+-doctitle
+'Selenium RC Server (Coreless) 1.0-beta-1 API'
+-use
+-version
+-windowtitle
+'Selenium RC Server (Coreless) 1.0-beta-1 API'
