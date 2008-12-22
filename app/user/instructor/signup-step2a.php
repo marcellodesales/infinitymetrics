@@ -92,9 +92,20 @@ $subUseCase = "Register Institution ";
 
                         <div id="sidebar-right">
                           <div id="block-user-3" class="block block-user">
-                              <h2>All users are welcomed</h2>
+                              <h2></h2>
                               <div class="content" align="center">
-                                <img src="../../template/images/techglobe2.jpg">
+                               
+                                <table align="left">
+                                <tbody>
+                                <td>
+                                  <b>Institution: </b>This is The name of the institution you want to register.<br>
+                                  <b>Abbreviation: </b>This is the abbreviation of Institution<br>
+                                  <b>City: </b>This is City where this institution is located<br>
+                                  <b>State/Province: </b>Here select the state or province if in USA otherwise provide it   <br>
+                                  <b>Country: </b>Here select the country from the list<br>
+                                &nbsp;</td>
+                                </tbody>
+                                </table>
                               </div>
                           </div>
                         </div>

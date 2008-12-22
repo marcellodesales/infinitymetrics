@@ -103,9 +103,20 @@
 
                         <div id="sidebar-right">
                           <div id="block-user-3" class="block block-user">
-                              <h2>All users are welcomed</h2>
+                              <h2></h2>
                               <div class="content" align="center">
-                                <img src="../../template/images/techglobe2.jpg">
+                                <table align="left">
+                                <tbody>
+                                <td>
+                                  <b>Full Name: </b>This is your full real Name<br>
+                                  <b>Institution: </b>This is institution you belong to<br>
+                                  <b>School Identification #: </b>This is your Identification number of institution you belong to<br>
+                                  <b>username: </b>This is your username at java.net for which you are registering<br>
+                                  <b>Email: </b>This is your email Id. It doesnot need to be same as java.net<br>
+                                  <b>I am a : </b>This is the role you are playing in the project<br>
+                                &nbsp;</td>
+                                </tbody>
+                                </table>
                               </div>
                           </div>
                         </div>

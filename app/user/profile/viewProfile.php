@@ -85,9 +85,19 @@ if($type == UserTypeEnum::getInstance()->STUDENT || $type == UserTypeEnum::getIn
 
                         <div id="sidebar-right">
                           <div id="block-user-3" class="block block-user">
-                              <h2>You are welcome</h2>
+                              <h2></h2>
                               <div class="content" align="center">
-                                <img src="../../template/images/techglobe2.jpg">
+                                 <table align="left">
+                                <tbody>
+
+                                 <td>
+                                 Here you can view your Profile. It displays all your personal information as you provided. <br>
+                                 <b>Workspace: </b> Here all the information of workspaces you have created is displayed.<br>
+                                 <b>Projects: </b> Here all the information of the projects in which you are participating is displayed.<br>
+                                  &nbsp;</td>
+
+                                </tbody>
+                                </table>
 
 
                               </div>

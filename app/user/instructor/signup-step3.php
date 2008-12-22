@@ -9,7 +9,7 @@
     $regInstructor = $_SESSION["regInstructor"];
 
     if (isset($_POST) && isset($_POST["submit"])) {
-        
+
         require_once 'infinitymetrics/controller/UserManagementController.class.php';
         require_once 'infinitymetrics/model/InfinityMetricsException.class.php';
         require_once 'infinitymetrics/controller/MetricsWorkspaceController.class.php';
@@ -94,9 +94,17 @@
 
                         <div id="sidebar-right">
                           <div id="block-user-3" class="block block-user">
-                              <h2>All users are welcomed</h2>
+                              <h2></h2>
                               <div class="content" align="center">
-                                <img src="../../template/images/techglobe2.jpg">
+                                
+                                <table align="left">
+                                <tbody>
+                                <td>
+                                  This is the final step in Instructor registration. Here confirm your details and get registered.
+                                 
+                                &nbsp;</td>
+                                </tbody>
+                                </table>
                               </div>
                           </div>
                         </div>

@@ -67,7 +67,7 @@
 <?php  include_once 'top-navigation.php';  ?>
 
                   <div id="breadcrumb" class="alone">
-                    <h2 id="title">Home</h2>
+                    <h2 id="title">User Registration</h2>
                     <div class="breadcrumb">
 <?php
                         $totalBreadscrum = count(array_keys($breakscrum)); $idx = 0;
@@ -95,9 +95,16 @@
 
                         <div id="sidebar-right">
                           <div id="block-user-3" class="block block-user">
-                              <h2>All users are welcomed</h2>
+                              <h2></h2>
                               <div class="content" align="center">
-                                <img src="../../template/images/techglobe2.jpg">
+                                 <table align="left">
+                                <tbody>
+                                <td>
+                                  This is the final step in User registration. Here confirm your details and get registered.
+
+                                &nbsp;</td>
+                                </tbody>
+                                </table>
                               </div>
                           </div>
                         </div>

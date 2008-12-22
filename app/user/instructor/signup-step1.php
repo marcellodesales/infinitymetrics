@@ -1,5 +1,6 @@
 <?php
-    include '../../template/infinitymetrics-bootstrap.php';
+
+include '../../template/infinitymetrics-bootstrap.php';
     
 
 #----------------------------->>>>>>>>>>>>> Controller Usage for UC404 ----------------------------->>>>>>>>>>>>>>>
@@ -71,7 +72,7 @@
 <?php  include 'top-navigation.php';  ?>
 
                   <div id="breadcrumb" class="alone">
-                    <h2 id="title">Home</h2>
+                    <h2 id="title">Instructor Registration</h2>
                     <div class="breadcrumb">
 <?php
                         $totalBreadscrum = count(array_keys($breakscrum)); $idx = 0;
@@ -99,9 +100,19 @@
 
                         <div id="sidebar-right">
                           <div id="block-user-3" class="block block-user">
-                              <h2>All users are welcomed</h2>
+                              <h2></h2>
                               <div class="content" align="center">
-                                <img src="../../template/images/techglobe2.jpg">
+                               
+                                <table align="left">
+                                <tbody>
+                              
+                                 <td>
+                                 <b>username</b>: This is your username registered at java.net<br>
+                                 <b>password</b>: This is your password at java.net
+                                  &nbsp;</td>
+                             
+                                </tbody>
+                                </table>
                               </div>
                           </div>
                         </div>
