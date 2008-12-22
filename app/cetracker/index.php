@@ -9,7 +9,8 @@
     //===  Includes  =========================================================//
 
     require_once 'infinitymetrics/controller/CustomEventController.class.php';
-    require_once 'infinitymetrics/controller/MetricsWorkspaceController.php';
+    require_once 'infinitymetrics/controller/MetricsWorkspaceController.class.'.
+                 'php';
     require_once 'infinitymetrics/model/workspace/Project.class.php';
     require_once 'infinitymetrics/model/InfinityMetricsException.class.php';
 
@@ -56,6 +57,10 @@
             <?php
                 $ws = MetricsWorkspaceController::
                     retrieveWorkspaceCollection($user_id);
+
+                 echo "<font size='4'>Welcome ".$user->getJnUsername().
+                      ", you are at the Custom Event Index.</font><br>Please ".
+                      "select the workspace you wish to work on.<p><br><p>";
 
                  echo "Your own workspaces:";
                  echo "</td></tr></table><table>";

@@ -20,6 +20,11 @@
     $crit = new Criteria();
     $crit->add(PersistentCustomEventPeer::CUSTOM_EVENT_ID, $ce_id);
     $ce = PersistentCustomEventPeer::doSelectOne($crit);
+
+    $crit->clear();
+    $crit->add(PersistentWorkspacePeer::WORKSPACE_ID, $ws_id);
+    $ws = PersistentWorkspacePeer::doSelectOne($crit);
+    $ws_title = $ws->getTitle();
 ?>
 
 <!--====  Formatting  =======================================================-->
@@ -57,7 +62,8 @@
             <!--====  Main Body  ========================================-->
 
             <?php
-                echo "Custom Event: ".$ce->getTitle()." - ".$ce->getDate();
+                echo "<font size='4'>Custom Event: ".$ce->getTitle().
+                     "</font> - ".$ce->getDate();
 
                 $crit->clear();
                 $crit->add(PersistentCustomEventEntryPeer::CUSTOM_EVENT_ID,
@@ -88,6 +94,16 @@
             <!--====  Main Body Close  ======================================-->
 
         </td></tr></tbody></table>
+
+        <hr />
+        <?php
+            echo "Goto: ";
+            echo "<a href='index.php' style='text-decoration: none;'><input".
+                 " value='CE Index' class='form-submit' type='button'></a>";
+            echo "<a href='viewCustomEvents.php?workspace_id=".$ws_id."' style".
+                 "='text-decoration: none;'><input value='".$ws_title."' class='".
+                 "form-submit' type='button'></a>";
+        ?>
 
     </div></div></div><br class="clear"></div></div></div></div></div></div>
     </div></div></div>

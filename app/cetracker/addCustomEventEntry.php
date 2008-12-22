@@ -18,6 +18,16 @@
     $subUseCase = "Add Custom Event Entry";
     $ce_id = $_GET['custom_event_id'];
 
+    $ws_id = $_GET['workspace_id'];
+    $c = new Criteria();
+    $c->add(PersistentWorkspacePeer::WORKSPACE_ID, $ws_id);
+    $ws = PersistentWorkspacePeer::doSelectOne($c);
+    $ws_title = $ws->getTitle();
+
+    $c->clear();
+    $c->add(PersistentCustomEventPeer::CUSTOM_EVENT_ID, $ce_id);
+    $ce = PersistentCustomEventPeer::doSelectOne($c);
+
     //===  Action Listener  ==================================================//
 
     if (isset($_POST["notes"])) {
@@ -57,12 +67,10 @@
     <?php  include 'top-navigation.php';  ?>
 
     <table><tbody><tr>
-        <td align=center width="30%">
+        <td align=center width="50%">
             <b><?php
-                $crit = new Criteria();
-                $crit->add(PersistentCustomEventPeer::CUSTOM_EVENT_ID, $ce_id);
-                $ce = PersistentCustomEventPeer::doSelectOne($crit);
-                echo $ce->getTitle()
+                echo "<font size='4'>Now adding entry to: ".$ce->getTitle().
+                     "</font>";
             ?></b>
         </td><td width="60%">&nbsp;</td>
     </tr></tbody></table>
@@ -101,7 +109,7 @@
     
         <form id="createcustomevententry" autocomplete="off" method="post" 
             action="<?php echo $PHP_SELF."?custom_event_id=".
-            $ce_id."&workspace_id=".$_GET['workspace_id'] ?>">
+            $ce_id."&workspace_id=".$ws_id ?>">
 
             <table align="center"><tbody>
 
@@ -112,6 +120,7 @@
                         Notes</label></td>
                     <td class="field"><input id="notes" name="notes" 
                         class="textfield" value="" maxlength="50" type="text">
+                        &nbsp;(Enter the notes for the custom event entry here.)
                         </td>
                 </tr>
                 <tr>
@@ -123,7 +132,7 @@
                             class="form-submit" type="button"
                             onclick="document.location= <?php echo
                             "'viewCustomEvents.php?workspace_id=".
-                            $_GET['workspace_id']."'" ?>">
+                            $ws_id."'" ?>">
                     </td>
                 </tr>
 
@@ -131,6 +140,20 @@
 
             </tbody></table>
         </form>
+
+        <hr />
+        <?php
+            echo "Goto: ";
+            echo "<a href='index.php' style='text-decoration: none;'><input".
+                 " value='CE Index' class='form-submit' type='button'></a>";
+            echo "<a href='viewCustomEvents.php?workspace_id=".$ws_id."' style".
+                 "='text-decoration: none;'><input value='".$ws_title."'".
+                 " class='form-submit' type='button'></a>";
+            echo "<a href='viewCustomEvent.php?custom_event_id=".$ce_id.
+                 "&workspace_id=".$ws_id."' style='text-decoration: none;'>".
+                 "<input value='".$ce->getTitle()."' class='".
+                 "form-submit' type='button'></a>";
+        ?>
 
     </div></div></div><br class="clear"></div></div></div></div></div></div>
     </div></div></div>

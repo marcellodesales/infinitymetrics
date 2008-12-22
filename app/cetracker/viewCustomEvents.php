@@ -59,7 +59,7 @@
                 $ws = PersistentWorkspacePeer::doSelect($crit);
 
                 foreach ($ws as $wwss) {
-                    echo "Workspace: ".$wwss->getTitle();
+                    echo "<font size='4'>Workspace: ".$wwss->getTitle()."</font>";
                     $crit2= new Criteria(PersistentProjectPeer::PROJECT_JN_NAME,
                         $wwss->getProjectJnName());
                     $proj = PersistentProjectPeer::doSelect($crit2);
@@ -102,6 +102,13 @@
 
         </td></tr></tbody></table>
 
+        <hr />
+        <?php
+            echo "Goto: ";
+            echo "<a href='index.php' style='text-decoration: none;'><input".
+                 " value='CE Index' class='form-submit' type='button'></a>";
+        ?>
+        
     </div></div></div><br class="clear"></div></div></div></div></div></div>
     </div></div></div>
 
