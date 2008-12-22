@@ -5,7 +5,6 @@
 
     require_once ('infinitymetrics/controller/MetricsWorkspaceController.class.php');
     require_once ('infinitymetrics/controller/UserManagementController.class.php');
-    print_r ($_POST);
     $user = $_SESSION["loggedUser"];
 
     if (isset($_POST['parentJnProject']) &&
