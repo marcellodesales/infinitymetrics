@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="PHPUnit" tests="69" assertions="254" failures="5" errors="0" time="67.271049">
+    <testsuite name="PHPUnit" tests="20" assertions="107" failures="0" errors="0" time="20.549130">
+      <testsuite name="PHPUnit Framework" tests="11" assertions="45" failures="0" errors="0" time="0.337624">
+        <testsuite name="AbstractCollectionTest" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\unit\util\AbstractCollectionTest.class.php" tests="4" assertions="20" failures="0" errors="0" time="0.080667">
+          <testcase name="testCollectionCreation" class="AbstractCollectionTest" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\unit\util\AbstractCollectionTest.class.php" line="19" assertions="2" time="0.018557"/>
+          <testcase name="testManipulationCollection" class="AbstractCollectionTest" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\unit\util\AbstractCollectionTest.class.php" line="25" assertions="6" time="0.021740"/>
+          <testcase name="testDifferentSizeAndEmpty" class="AbstractCollectionTest" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\unit\util\AbstractCollectionTest.class.php" line="40" assertions="3" time="0.019184"/>
+          <testcase name="testAddCollections" class="AbstractCollectionTest" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\unit\util\AbstractCollectionTest.class.php" line="52" assertions="9" time="0.021186"/>
+        </testsuite>
+        <testsuite name="ArrayListTest" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\unit\util\ArrayListTest.class.php" tests="3" assertions="17" failures="0" errors="0" time="0.122617">
+          <testcase name="testCollectionCreation" class="ArrayListTest" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\unit\util\ArrayListTest.class.php" line="19" assertions="5" time="0.018291"/>
+          <testcase name="testManipulationWithIndexes" class="ArrayListTest" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\unit\util\ArrayListTest.class.php" line="28" assertions="8" time="0.077158"/>
+          <testcase name="testAddAllWithClearIndexes" class="ArrayListTest" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\unit\util\ArrayListTest.class.php" line="45" assertions="4" time="0.027168"/>
+        </testsuite>
+        <testsuite name="DateTimeUtilTest" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\unit\util\DateTimeUtilTest.class.php" tests="4" assertions="8" failures="0" errors="0" time="0.134340">
+          <testcase name="testHumanReadableDateTimeToMySQLDateFormat" class="DateTimeUtilTest" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\unit\util\DateTimeUtilTest.class.php" line="11" assertions="2" time="0.018066"/>
+          <testcase name="testIsoDateTimeToMySQLDateFormat" class="DateTimeUtilTest" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\unit\util\DateTimeUtilTest.class.php" line="19" assertions="2" time="0.023166"/>
+          <testcase name="testHumanReadableDateTimeToMySQLDateTimeFormat" class="DateTimeUtilTest" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\unit\util\DateTimeUtilTest.class.php" line="26" assertions="2" time="0.067519"/>
+          <testcase name="testIsoDateTimeToMySQLDateTimeFormat" class="DateTimeUtilTest" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\unit\util\DateTimeUtilTest.class.php" line="35" assertions="2" time="0.025589"/>
+        </testsuite>
+      </testsuite>
+      <testsuite name="PHPUnit Framework" tests="5" assertions="41" failures="0" errors="0" time="20.122893">
+        <testsuite name="FullnameJNUsernameInMemoryCacheTest" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\unit\agent\FullnameJNUsernameInMemoryCacheTest.class.php" tests="2" assertions="17" failures="0" errors="0" time="4.016345">
+          <testcase name="testFindingExistingUsernameForFullname" class="FullnameJNUsernameInMemoryCacheTest" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\unit\agent\FullnameJNUsernameInMemoryCacheTest.class.php" line="88" assertions="15" time="3.312201"/>
+          <testcase name="testNotFindingExistingUsernameForFullname" class="FullnameJNUsernameInMemoryCacheTest" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\unit\agent\FullnameJNUsernameInMemoryCacheTest.class.php" line="111" assertions="2" time="0.704144"/>
+        </testsuite>
+        <testsuite name="PersonalAgentTest" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\unit\agent\PersonalAgentTest.class.php" tests="3" assertions="24" failures="0" errors="0" time="16.106548">
+          <testcase name="testPersonalAgentCreation" class="PersonalAgentTest" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\unit\agent\PersonalAgentTest.class.php" line="61" assertions="3" time="4.507561"/>
+          <testcase name="testPersonalAgentLogin" class="PersonalAgentTest" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\unit\agent\PersonalAgentTest.class.php" line="96" assertions="15" time="8.517611"/>
+          <testcase name="testPeronalAgentComparison" class="PersonalAgentTest" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\unit\agent\PersonalAgentTest.class.php" line="115" assertions="6" time="3.081376"/>
+        </testsuite>
+      </testsuite>
+      <testsuite name="PHPUnit Framework" tests="4" assertions="21" failures="0" errors="0" time="0.088613">
+        <testsuite name="InstructorTest" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\unit\user\InstructorTest.class.php" tests="1" assertions="7" failures="0" errors="0" time="0.024419">
+          <testcase name="testUserComparison" class="InstructorTest" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\unit\user\InstructorTest.class.php" line="49" assertions="7" time="0.024419"/>
+        </testsuite>
+        <testsuite name="StudentTest" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\unit\user\StudentTest.class.php" tests="1" assertions="7" failures="0" errors="0" time="0.023119">
+          <testcase name="testUserComparison" class="StudentTest" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\unit\user\StudentTest.class.php" line="47" assertions="7" time="0.023119"/>
+        </testsuite>
+        <testsuite name="UserTest" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\unit\user\UserTest.class.php" tests="2" assertions="7" failures="0" errors="0" time="0.041075">
+          <testcase name="testProperties" class="UserTest" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\unit\user\UserTest.class.php" line="48" assertions="0" time="0.019573"/>
+          <testcase name="testUserComparison" class="UserTest" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\unit\user\UserTest.class.php" line="52" assertions="7" time="0.021502"/>
+        </testsuite>
+      </testsuite>
+    </testsuite>
+    <testsuite name="PHPUnit" tests="13" assertions="44" failures="0" errors="0" time="3.885192">
+      <testsuite name="PHPUnit Framework" tests="9" assertions="33" failures="0" errors="0" time="2.899204">
+        <testsuite name="UserSystemTest" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\system\user\UserSystemTest.class.php" tests="3" assertions="10" failures="0" errors="0" time="0.717537">
+          <testcase name="testCreationAndRetrival" class="UserSystemTest" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\system\user\UserSystemTest.class.php" line="69" assertions="4" time="0.187688"/>
+          <testcase name="testCreationWithExistingUser" class="UserSystemTest" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\system\user\UserSystemTest.class.php" line="79" assertions="2" time="0.197745"/>
+          <testcase name="testUserUpdateWithAndWithValidAndInvalidDataAndDelete" class="UserSystemTest" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\system\user\UserSystemTest.class.php" line="107" assertions="4" time="0.332104"/>
+        </testsuite>
+        <testsuite name="StudentSystemTest" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\system\user\StudentSystemTest.class.php" tests="3" assertions="10" failures="0" errors="0" time="1.322867">
+          <testcase name="testCreationAndRetrival" class="StudentSystemTest" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\system\user\StudentSystemTest.class.php" line="84" assertions="4" time="0.236388"/>
+          <testcase name="testCreationWithExistingUser" class="StudentSystemTest" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\system\user\StudentSystemTest.class.php" line="94" assertions="2" time="0.306701"/>
+          <testcase name="testUserUpdateWithAndWithValidAndInvalidDataAndDelete" class="StudentSystemTest" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\system\user\StudentSystemTest.class.php" line="122" assertions="4" time="0.779778"/>
+        </testsuite>
+        <testsuite name="InstructorSystemTest" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\system\user\InstructorSystemTest.class.php" tests="3" assertions="13" failures="0" errors="0" time="0.858800">
+          <testcase name="testCreationAndRetrival" class="InstructorSystemTest" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\system\user\InstructorSystemTest.class.php" line="81" assertions="7" time="0.148368"/>
+          <testcase name="testCreationWithExistingUser" class="InstructorSystemTest" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\system\user\InstructorSystemTest.class.php" line="94" assertions="2" time="0.365247"/>
+          <testcase name="testUserUpdateWithAndWithValidAndInvalidDataAndDelete" class="InstructorSystemTest" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\system\user\InstructorSystemTest.class.php" line="124" assertions="4" time="0.345185"/>
+        </testsuite>
+      </testsuite>
+      <testsuite name="PHPUnit Framework" tests="4" assertions="11" failures="0" errors="0" time="0.985988">
+        <testsuite name="CustomEventSystemTest" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\system\cetracker\CustomEventSystemTest.class.php" tests="4" assertions="11" failures="0" errors="0" time="0.985988">
+          <testcase name="testCreationAndRetrival" class="CustomEventSystemTest" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\system\cetracker\CustomEventSystemTest.class.php" line="71" assertions="2" time="0.226671"/>
+          <testcase name="testCreationWithExistingCustomEvent" class="CustomEventSystemTest" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\system\cetracker\CustomEventSystemTest.class.php" line="87" assertions="2" time="0.174646"/>
+          <testcase name="testCustomEventEntries" class="CustomEventSystemTest" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\system\cetracker\CustomEventSystemTest.class.php" line="105" assertions="5" time="0.284911"/>
+          <testcase name="testCustomEventUpdateWithInvalidData" class="CustomEventSystemTest" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\system\cetracker\CustomEventSystemTest.class.php" line="133" assertions="2" time="0.299760"/>
+        </testsuite>
+      </testsuite>
+    </testsuite>
+    <testsuite name="PHPUnit" tests="36" assertions="103" failures="5" errors="0" time="42.836726">
+      <testsuite name="PHPUnit Framework" tests="12" assertions="56" failures="5" errors="0" time="3.325962">
+        <testsuite name="UC001Test" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\user\UC001Test.class.php" tests="3" assertions="30" failures="0" errors="0" time="1.531625">
+          <testcase name="testSuccessfulStudentRegistration" class="UC001Test" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\user\UC001Test.class.php" line="78" assertions="20" time="0.860721"/>
+          <testcase name="testMissingFieldsStudentRegistration" class="UC001Test" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\user\UC001Test.class.php" line="150" assertions="9" time="0.234008"/>
+          <testcase name="testRegisterExistingStudentLeaderRegistration" class="UC001Test" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\user\UC001Test.class.php" line="202" assertions="1" time="0.436896"/>
+        </testsuite>
+        <testsuite name="UC002Test" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\user\UC002Test.class.php" tests="3" assertions="22" failures="0" errors="0" time="1.489717">
+          <testcase name="testSuccessfulInstructorRegistration" class="UC002Test" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\user\UC002Test.class.php" line="85" assertions="10" time="0.710001"/>
+          <testcase name="testMissingFieldsStudentRegistration" class="UC002Test" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\user\UC002Test.class.php" line="123" assertions="11" time="0.314356"/>
+          <testcase name="testRegisterExistingInstructorRegistration" class="UC002Test" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\user\UC002Test.class.php" line="173" assertions="1" time="0.465360"/>
+        </testsuite>
+        <testsuite name="UC003Test" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\user\UC003test.class.php" tests="3" assertions="1" failures="2" errors="0" time="0.187449">
+          <testcase name="testValidUserLogin" class="UC003Test" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\user\UC003test.class.php" line="55" assertions="0" time="0.098777"/>
+          <testcase name="testWrongFieldsLogin" class="UC003Test" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\user\UC003test.class.php" line="69" assertions="1" time="0.057301">
+            <failure type="PHPUnit_Framework_ExpectationFailedException">testWrongFieldsLogin(UC003Test)
+The incorrect username\password
+Failed asserting that 
+Array
+(
+)
+ is false.
+
+C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\user\UC003test.class.php:73
+</failure>
+          </testcase>
+          <testcase name="testMissingFieldsLogin" class="UC003Test" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\user\UC003test.class.php" line="81" assertions="0" time="0.031371">
+            <failure type="PHPUnit_Framework_AssertionFailedError">testMissingFieldsLogin(UC003Test)
+The successful user's bad credentials scenario failed: InfinityMetricsException (34354): InfinityMetricsException (34354): There are errors in the input - The username is empty The password is empty - The username is empty The password is empty
+
+C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\user\UC003test.class.php:87
+</failure>
+          </testcase>
+        </testsuite>
+        <testsuite name="UC004Test" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\user\UC004Test.class.php" tests="3" assertions="3" failures="3" errors="0" time="0.117170">
+          <testcase name="testValidUserView" class="UC004Test" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\user\UC004Test.class.php" line="53" assertions="1" time="0.034735">
+            <failure type="PHPUnit_Framework_ExpectationFailedException">testValidUserView(UC004Test)
+The correct user's credentials failed
+Failed asserting that 
+Array
+(
+)
+ is true.
+
+C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\user\UC004Test.class.php:56
+</failure>
+          </testcase>
+          <testcase name="testWrongFieldsView" class="UC004Test" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\user\UC004Test.class.php" line="66" assertions="1" time="0.035627">
+            <failure type="PHPUnit_Framework_ExpectationFailedException">testWrongFieldsView(UC004Test)
+The incorrect username\password
+Failed asserting that 
+Array
+(
+)
+ is false.
+
+C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\user\UC004Test.class.php:70
+</failure>
+          </testcase>
+          <testcase name="testMissingFieldsView" class="UC004Test" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\user\UC004Test.class.php" line="79" assertions="1" time="0.046808">
+            <failure type="PHPUnit_Framework_ExpectationFailedException">testMissingFieldsView(UC004Test)
+The incorrect credentials should be invalid
+Failed asserting that 
+Array
+(
+)
+ is false.
+
+C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\user\UC004Test.class.php:82
+</failure>
+          </testcase>
+        </testsuite>
+      </testsuite>
+      <testsuite name="PHPUnit Framework" tests="21" assertions="44" failures="0" errors="0" time="19.759927">
+        <testsuite name="UC100Test" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\workspace\UC100Test.class.php" tests="3" assertions="9" failures="0" errors="0" time="1.692823">
+          <testcase name="testWorkspaceCreation" class="UC100Test" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\workspace\UC100Test.class.php" line="57" assertions="3" time="0.420021"/>
+          <testcase name="testExceptionEmptyParams" class="UC100Test" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\workspace\UC100Test.class.php" line="75" assertions="5" time="0.646266"/>
+          <testcase name="testExceptionInexistentUserId" class="UC100Test" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\workspace\UC100Test.class.php" line="91" assertions="1" time="0.626536"/>
+        </testsuite>
+        <testsuite name="UC101Test" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\workspace\UC101Test.class.php" tests="2" assertions="2" failures="0" errors="0" time="1.524026">
+          <testcase name="testViewExistingWorkspace" class="UC101Test" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\workspace\UC101Test.class.php" line="63" assertions="1" time="0.796802"/>
+          <testcase name="testViewInexistingWorkspace" class="UC101Test" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\workspace\UC101Test.class.php" line="69" assertions="1" time="0.727224"/>
+        </testsuite>
+        <testsuite name="UC102Test" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\workspace\UC102Test.class.php" tests="3" assertions="14" failures="0" errors="0" time="6.299294">
+          <testcase name="testRetreiveWorkspaceCollection" class="UC102Test" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\workspace\UC102Test.class.php" line="77" assertions="14" time="1.503040"/>
+          <testcase name="testExemptionUserIDEmpty" class="UC102Test" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\workspace\UC102Test.class.php" line="101" assertions="0" time="2.183015"/>
+          <testcase name="testExemptionInexistentUserId" class="UC102Test" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\workspace\UC102Test.class.php" line="112" assertions="0" time="2.613239"/>
+        </testsuite>
+        <testsuite name="UC103Test" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\workspace\UC103Test.class.php" tests="3" assertions="6" failures="0" errors="0" time="2.348201">
+          <testcase name="testUpdateProfile" class="UC103Test" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\workspace\UC103Test.class.php" line="63" assertions="4" time="0.935786"/>
+          <testcase name="testExceptionEmptyArgs" class="UC103Test" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\workspace\UC103Test.class.php" line="79" assertions="1" time="0.437261"/>
+          <testcase name="testExceptionInexistentWorkspaceId" class="UC103Test" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\workspace\UC103Test.class.php" line="89" assertions="1" time="0.975154"/>
+        </testsuite>
+        <testsuite name="UC104Test" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\workspace\UC104Test.class.php" tests="6" assertions="7" failures="0" errors="0" time="5.789764">
+          <testcase name="testShareWorkspace" class="UC104Test" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\workspace\UC104Test.class.php" line="73" assertions="2" time="0.640022"/>
+          <testcase name="testExemptionWorkspaceIDEmpty" class="UC104Test" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\workspace\UC104Test.class.php" line="86" assertions="1" time="1.405687"/>
+          <testcase name="testExemptionUserJnUsernameWithWhomToShareWorkspaceEmpty" class="UC104Test" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\workspace\UC104Test.class.php" line="96" assertions="1" time="1.211187"/>
+          <testcase name="testExemptionInexistentWorkspaceId" class="UC104Test" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\workspace\UC104Test.class.php" line="106" assertions="1" time="0.866343"/>
+          <testcase name="testExemptionInexistentJnUsernameWithWhomToShareWorkspaceEmpty" class="UC104Test" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\workspace\UC104Test.class.php" line="116" assertions="1" time="0.873161"/>
+          <testcase name="testExemptionWorkspaceAlreadyBeingShared" class="UC104Test" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\workspace\UC104Test.class.php" line="126" assertions="1" time="0.793364"/>
+        </testsuite>
+        <testsuite name="UC105Test" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\workspace\UC105Test.class.php" tests="4" assertions="6" failures="0" errors="0" time="2.105819">
+          <testcase name="testChangeWorkspaceState" class="UC105Test" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\workspace\UC105Test.class.php" line="61" assertions="3" time="0.715824"/>
+          <testcase name="testExceptionEmptyParams" class="UC105Test" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\workspace\UC105Test.class.php" line="74" assertions="1" time="0.424805"/>
+          <testcase name="testExceptionInvalidNewState" class="UC105Test" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\workspace\UC105Test.class.php" line="84" assertions="1" time="0.435767"/>
+          <testcase name="testExceptionInexistentWorkspaceId" class="UC105Test" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\workspace\UC105Test.class.php" line="96" assertions="1" time="0.529423"/>
+        </testsuite>
+      </testsuite>
+      <testsuite name="PHPUnit Framework" tests="3" assertions="3" failures="0" errors="0" time="19.750838">
+        <testsuite name="UC404Test" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\agent\UC404Test.class.php" tests="3" assertions="3" failures="0" errors="0" time="19.750838">
+          <testcase name="testValidUserAuthentication" class="UC404Test" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\agent\UC404Test.class.php" line="53" assertions="1" time="9.188834"/>
+          <testcase name="testMissingFieldsAuthentication" class="UC404Test" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\agent\UC404Test.class.php" line="67" assertions="1" time="5.598044"/>
+          <testcase name="testWrongFieldsAuthentication" class="UC404Test" file="C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\agent\UC404Test.class.php" line="81" assertions="1" time="4.963960"/>
+        </testsuite>
+      </testsuite>
+    </testsuite>
+  </testsuite>
+</testsuites>

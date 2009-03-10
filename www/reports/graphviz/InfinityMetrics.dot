@@ -1,0 +1,260 @@
+digraph G {
+graph [ overlap="scale",splines="true",sep=".1",fontsize="8" ];
+"PHPUnit" [ color="red" ];
+"PHPUnit Framework" [ color="green" ];
+"AbstractCollectionTest" [ color="green" ];
+"ArrayListTest" [ color="green" ];
+"DateTimeUtilTest" [ color="green" ];
+"FullnameJNUsernameInMemoryCacheTest" [ color="green" ];
+"PersonalAgentTest" [ color="green" ];
+"InstructorTest" [ color="green" ];
+"StudentTest" [ color="green" ];
+"UserTest" [ color="green" ];
+"UserSystemTest" [ color="green" ];
+"StudentSystemTest" [ color="green" ];
+"InstructorSystemTest" [ color="green" ];
+"CustomEventSystemTest" [ color="green" ];
+"UC001Test" [ color="green" ];
+"UC002Test" [ color="green" ];
+"UC003Test" [ color="red" ];
+"UC004Test" [ color="red" ];
+"UC100Test" [ color="green" ];
+"UC101Test" [ color="green" ];
+"UC102Test" [ color="green" ];
+"UC103Test" [ color="green" ];
+"UC104Test" [ color="green" ];
+"UC105Test" [ color="green" ];
+"UC404Test" [ color="green" ];
+subgraph "cluster_AbstractCollectionTest" {
+label="";
+"testCollectionCreation" [ color="green" ];
+"testManipulationCollection" [ color="green" ];
+"testDifferentSizeAndEmpty" [ color="green" ];
+"testAddCollections" [ color="green" ];
+}
+subgraph "cluster_ArrayListTest" {
+label="";
+"testCollectionCreation" [ color="green" ];
+"testManipulationWithIndexes" [ color="green" ];
+"testAddAllWithClearIndexes" [ color="green" ];
+}
+subgraph "cluster_DateTimeUtilTest" {
+label="";
+"testHumanReadableDateTimeToMySQLDateFormat" [ color="green" ];
+"testIsoDateTimeToMySQLDateFormat" [ color="green" ];
+"testHumanReadableDateTimeToMySQLDateTimeFormat" [ color="green" ];
+"testIsoDateTimeToMySQLDateTimeFormat" [ color="green" ];
+}
+subgraph "cluster_FullnameJNUsernameInMemoryCacheTest" {
+label="";
+"testFindingExistingUsernameForFullname" [ color="green" ];
+"testNotFindingExistingUsernameForFullname" [ color="green" ];
+}
+subgraph "cluster_PersonalAgentTest" {
+label="";
+"testPersonalAgentCreation" [ color="green" ];
+"testPersonalAgentLogin" [ color="green" ];
+"testPeronalAgentComparison" [ color="green" ];
+}
+subgraph "cluster_InstructorTest" {
+label="";
+"testUserComparison" [ color="green" ];
+}
+subgraph "cluster_StudentTest" {
+label="";
+"testUserComparison" [ color="green" ];
+}
+subgraph "cluster_UserTest" {
+label="";
+"testProperties" [ color="green" ];
+"testUserComparison" [ color="green" ];
+}
+subgraph "cluster_UserSystemTest" {
+label="";
+"testCreationAndRetrival" [ color="green" ];
+"testCreationWithExistingUser" [ color="green" ];
+"testUserUpdateWithAndWithValidAndInvalidDataAndDelete" [ color="green" ];
+}
+subgraph "cluster_StudentSystemTest" {
+label="";
+"testCreationAndRetrival" [ color="green" ];
+"testCreationWithExistingUser" [ color="green" ];
+"testUserUpdateWithAndWithValidAndInvalidDataAndDelete" [ color="green" ];
+}
+subgraph "cluster_InstructorSystemTest" {
+label="";
+"testCreationAndRetrival" [ color="green" ];
+"testCreationWithExistingUser" [ color="green" ];
+"testUserUpdateWithAndWithValidAndInvalidDataAndDelete" [ color="green" ];
+}
+subgraph "cluster_CustomEventSystemTest" {
+label="";
+"testCreationAndRetrival" [ color="green" ];
+"testCreationWithExistingCustomEvent" [ color="green" ];
+"testCustomEventEntries" [ color="green" ];
+"testCustomEventUpdateWithInvalidData" [ color="green" ];
+}
+subgraph "cluster_UC001Test" {
+label="";
+"testSuccessfulStudentRegistration" [ color="green" ];
+"testMissingFieldsStudentRegistration" [ color="green" ];
+"testRegisterExistingStudentLeaderRegistration" [ color="green" ];
+}
+subgraph "cluster_UC002Test" {
+label="";
+"testSuccessfulInstructorRegistration" [ color="green" ];
+"testMissingFieldsStudentRegistration" [ color="green" ];
+"testRegisterExistingInstructorRegistration" [ color="green" ];
+}
+subgraph "cluster_UC003Test" {
+label="";
+"testValidUserLogin" [ color="green" ];
+"testWrongFieldsLogin" [ color="red" ];
+"testMissingFieldsLogin" [ color="red" ];
+}
+subgraph "cluster_UC004Test" {
+label="";
+"testValidUserView" [ color="red" ];
+"testWrongFieldsView" [ color="red" ];
+"testMissingFieldsView" [ color="red" ];
+}
+subgraph "cluster_UC100Test" {
+label="";
+"testWorkspaceCreation" [ color="green" ];
+"testExceptionEmptyParams" [ color="green" ];
+"testExceptionInexistentUserId" [ color="green" ];
+}
+subgraph "cluster_UC101Test" {
+label="";
+"testViewExistingWorkspace" [ color="green" ];
+"testViewInexistingWorkspace" [ color="green" ];
+}
+subgraph "cluster_UC102Test" {
+label="";
+"testRetreiveWorkspaceCollection" [ color="green" ];
+"testExemptionUserIDEmpty" [ color="green" ];
+"testExemptionInexistentUserId" [ color="green" ];
+}
+subgraph "cluster_UC103Test" {
+label="";
+"testUpdateProfile" [ color="green" ];
+"testExceptionEmptyArgs" [ color="green" ];
+"testExceptionInexistentWorkspaceId" [ color="green" ];
+}
+subgraph "cluster_UC104Test" {
+label="";
+"testShareWorkspace" [ color="green" ];
+"testExemptionWorkspaceIDEmpty" [ color="green" ];
+"testExemptionUserJnUsernameWithWhomToShareWorkspaceEmpty" [ color="green" ];
+"testExemptionInexistentWorkspaceId" [ color="green" ];
+"testExemptionInexistentJnUsernameWithWhomToShareWorkspaceEmpty" [ color="green" ];
+"testExemptionWorkspaceAlreadyBeingShared" [ color="green" ];
+}
+subgraph "cluster_UC105Test" {
+label="";
+"testChangeWorkspaceState" [ color="green" ];
+"testExceptionEmptyParams" [ color="green" ];
+"testExceptionInvalidNewState" [ color="green" ];
+"testExceptionInexistentWorkspaceId" [ color="green" ];
+}
+subgraph "cluster_UC404Test" {
+label="";
+"testValidUserAuthentication" [ color="green" ];
+"testMissingFieldsAuthentication" [ color="green" ];
+"testWrongFieldsAuthentication" [ color="green" ];
+}
+"PHPUnit" -> "PHPUnit";
+"PHPUnit" -> "PHPUnit Framework";
+"PHPUnit Framework" -> "AbstractCollectionTest";
+"AbstractCollectionTest" -> "testCollectionCreation";
+"AbstractCollectionTest" -> "testManipulationCollection";
+"AbstractCollectionTest" -> "testDifferentSizeAndEmpty";
+"AbstractCollectionTest" -> "testAddCollections";
+"PHPUnit Framework" -> "ArrayListTest";
+"ArrayListTest" -> "testCollectionCreation";
+"ArrayListTest" -> "testManipulationWithIndexes";
+"ArrayListTest" -> "testAddAllWithClearIndexes";
+"PHPUnit Framework" -> "DateTimeUtilTest";
+"DateTimeUtilTest" -> "testHumanReadableDateTimeToMySQLDateFormat";
+"DateTimeUtilTest" -> "testIsoDateTimeToMySQLDateFormat";
+"DateTimeUtilTest" -> "testHumanReadableDateTimeToMySQLDateTimeFormat";
+"DateTimeUtilTest" -> "testIsoDateTimeToMySQLDateTimeFormat";
+"PHPUnit Framework" -> "FullnameJNUsernameInMemoryCacheTest";
+"FullnameJNUsernameInMemoryCacheTest" -> "testFindingExistingUsernameForFullname";
+"FullnameJNUsernameInMemoryCacheTest" -> "testNotFindingExistingUsernameForFullname";
+"PHPUnit Framework" -> "PersonalAgentTest";
+"PersonalAgentTest" -> "testPersonalAgentCreation";
+"PersonalAgentTest" -> "testPersonalAgentLogin";
+"PersonalAgentTest" -> "testPeronalAgentComparison";
+"PHPUnit Framework" -> "InstructorTest";
+"InstructorTest" -> "testUserComparison";
+"PHPUnit Framework" -> "StudentTest";
+"StudentTest" -> "testUserComparison";
+"PHPUnit Framework" -> "UserTest";
+"UserTest" -> "testProperties";
+"UserTest" -> "testUserComparison";
+"PHPUnit Framework" -> "UserSystemTest";
+"UserSystemTest" -> "testCreationAndRetrival";
+"UserSystemTest" -> "testCreationWithExistingUser";
+"UserSystemTest" -> "testUserUpdateWithAndWithValidAndInvalidDataAndDelete";
+"PHPUnit Framework" -> "StudentSystemTest";
+"StudentSystemTest" -> "testCreationAndRetrival";
+"StudentSystemTest" -> "testCreationWithExistingUser";
+"StudentSystemTest" -> "testUserUpdateWithAndWithValidAndInvalidDataAndDelete";
+"PHPUnit Framework" -> "InstructorSystemTest";
+"InstructorSystemTest" -> "testCreationAndRetrival";
+"InstructorSystemTest" -> "testCreationWithExistingUser";
+"InstructorSystemTest" -> "testUserUpdateWithAndWithValidAndInvalidDataAndDelete";
+"PHPUnit Framework" -> "CustomEventSystemTest";
+"CustomEventSystemTest" -> "testCreationAndRetrival";
+"CustomEventSystemTest" -> "testCreationWithExistingCustomEvent";
+"CustomEventSystemTest" -> "testCustomEventEntries";
+"CustomEventSystemTest" -> "testCustomEventUpdateWithInvalidData";
+"PHPUnit Framework" -> "UC001Test";
+"UC001Test" -> "testSuccessfulStudentRegistration";
+"UC001Test" -> "testMissingFieldsStudentRegistration";
+"UC001Test" -> "testRegisterExistingStudentLeaderRegistration";
+"PHPUnit Framework" -> "UC002Test";
+"UC002Test" -> "testSuccessfulInstructorRegistration";
+"UC002Test" -> "testMissingFieldsStudentRegistration";
+"UC002Test" -> "testRegisterExistingInstructorRegistration";
+"PHPUnit Framework" -> "UC003Test";
+"UC003Test" -> "testValidUserLogin";
+"UC003Test" -> "testWrongFieldsLogin";
+"UC003Test" -> "testMissingFieldsLogin";
+"PHPUnit Framework" -> "UC004Test";
+"UC004Test" -> "testValidUserView";
+"UC004Test" -> "testWrongFieldsView";
+"UC004Test" -> "testMissingFieldsView";
+"PHPUnit Framework" -> "UC100Test";
+"UC100Test" -> "testWorkspaceCreation";
+"UC100Test" -> "testExceptionEmptyParams";
+"UC100Test" -> "testExceptionInexistentUserId";
+"PHPUnit Framework" -> "UC101Test";
+"UC101Test" -> "testViewExistingWorkspace";
+"UC101Test" -> "testViewInexistingWorkspace";
+"PHPUnit Framework" -> "UC102Test";
+"UC102Test" -> "testRetreiveWorkspaceCollection";
+"UC102Test" -> "testExemptionUserIDEmpty";
+"UC102Test" -> "testExemptionInexistentUserId";
+"PHPUnit Framework" -> "UC103Test";
+"UC103Test" -> "testUpdateProfile";
+"UC103Test" -> "testExceptionEmptyArgs";
+"UC103Test" -> "testExceptionInexistentWorkspaceId";
+"PHPUnit Framework" -> "UC104Test";
+"UC104Test" -> "testShareWorkspace";
+"UC104Test" -> "testExemptionWorkspaceIDEmpty";
+"UC104Test" -> "testExemptionUserJnUsernameWithWhomToShareWorkspaceEmpty";
+"UC104Test" -> "testExemptionInexistentWorkspaceId";
+"UC104Test" -> "testExemptionInexistentJnUsernameWithWhomToShareWorkspaceEmpty";
+"UC104Test" -> "testExemptionWorkspaceAlreadyBeingShared";
+"PHPUnit Framework" -> "UC105Test";
+"UC105Test" -> "testChangeWorkspaceState";
+"UC105Test" -> "testExceptionEmptyParams";
+"UC105Test" -> "testExceptionInvalidNewState";
+"UC105Test" -> "testExceptionInexistentWorkspaceId";
+"PHPUnit Framework" -> "UC404Test";
+"UC404Test" -> "testValidUserAuthentication";
+"UC404Test" -> "testMissingFieldsAuthentication";
+"UC404Test" -> "testWrongFieldsAuthentication";
+}

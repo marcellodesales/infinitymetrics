@@ -1,0 +1,2055 @@
+LineTally 1.7 Report
+
+Date: 12/24/2008
+Time: 1:45 AM
+
+Project Name: Unspecified
+
+Number of Source Files in project: 226
+
+Results:
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\cetracker\addCustomEvent.php
+Code Lines: 108
+Comment Lines: 6
+Blank Lines: 0
+Mixed Lines: 33
+Total Lines Altogether: 147
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\cetracker\addCustomEventEntry.php
+Code Lines: 103
+Comment Lines: 6
+Blank Lines: 0
+Mixed Lines: 32
+Total Lines Altogether: 141
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\cetracker\deleteCustomEventEntry.php
+Code Lines: 74
+Comment Lines: 5
+Blank Lines: 0
+Mixed Lines: 31
+Total Lines Altogether: 110
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\cetracker\editCustomEvent.php
+Code Lines: 109
+Comment Lines: 6
+Blank Lines: 0
+Mixed Lines: 32
+Total Lines Altogether: 147
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\cetracker\index.php
+Code Lines: 59
+Comment Lines: 5
+Blank Lines: 0
+Mixed Lines: 26
+Total Lines Altogether: 90
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\cetracker\viewCustomEvent.php
+Code Lines: 66
+Comment Lines: 5
+Blank Lines: 0
+Mixed Lines: 27
+Total Lines Altogether: 98
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\cetracker\viewCustomEvents.php
+Code Lines: 76
+Comment Lines: 5
+Blank Lines: 0
+Mixed Lines: 30
+Total Lines Altogether: 111
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\controller\CustomEventController.class.php
+Code Lines: 115
+Comment Lines: 58
+Blank Lines: 0
+Mixed Lines: 10
+Total Lines Altogether: 183
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\controller\MetricsWorkspaceController.class.php
+Code Lines: 216
+Comment Lines: 126
+Blank Lines: 0
+Mixed Lines: 39
+Total Lines Altogether: 381
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\controller\PersonalAgentController.class.php
+Code Lines: 69
+Comment Lines: 87
+Blank Lines: 0
+Mixed Lines: 3
+Total Lines Altogether: 159
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\controller\ReportController.class.php
+Code Lines: 329
+Comment Lines: 5
+Blank Lines: 4
+Mixed Lines: 104
+Total Lines Altogether: 442
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\controller\UserManagementController.class.php
+Code Lines: 588
+Comment Lines: 194
+Blank Lines: 10
+Mixed Lines: 95
+Total Lines Altogether: 887
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\model\cetracker\CustomEvent.class.php
+Code Lines: 25
+Comment Lines: 37
+Blank Lines: 0
+Mixed Lines: 6
+Total Lines Altogether: 68
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\model\cetracker\CustomEventEntry.class.php
+Code Lines: 16
+Comment Lines: 36
+Blank Lines: 0
+Mixed Lines: 4
+Total Lines Altogether: 56
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\model\cetracker\CustomEventStateEnum.class.php
+Code Lines: 15
+Comment Lines: 10
+Blank Lines: 0
+Mixed Lines: 5
+Total Lines Altogether: 30
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\model\InfinityMetricsException.class.php
+Code Lines: 18
+Comment Lines: 8
+Blank Lines: 0
+Mixed Lines: 5
+Total Lines Altogether: 31
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\model\institution\Institution.class.php
+Code Lines: 15
+Comment Lines: 19
+Blank Lines: 0
+Mixed Lines: 2
+Total Lines Altogether: 36
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\model\institution\Instructor.class.php
+Code Lines: 12
+Comment Lines: 33
+Blank Lines: 0
+Mixed Lines: 0
+Total Lines Altogether: 45
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\model\institution\Student.class.php
+Code Lines: 12
+Comment Lines: 32
+Blank Lines: 0
+Mixed Lines: 0
+Total Lines Altogether: 44
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\model\ModelAbstractFactory.class.php
+Code Lines: 13
+Comment Lines: 27
+Blank Lines: 0
+Mixed Lines: 5
+Total Lines Altogether: 45
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\model\report\Event.class.php
+Code Lines: 13
+Comment Lines: 34
+Blank Lines: 0
+Mixed Lines: 5
+Total Lines Altogether: 52
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\model\report\EventCategory.class.php
+Code Lines: 29
+Comment Lines: 55
+Blank Lines: 0
+Mixed Lines: 10
+Total Lines Altogether: 94
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\model\report\EventChannel.class.php
+Code Lines: 9
+Comment Lines: 24
+Blank Lines: 0
+Mixed Lines: 3
+Total Lines Altogether: 36
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\model\report\Report.class.php
+Code Lines: 200
+Comment Lines: 68
+Blank Lines: 3
+Mixed Lines: 57
+Total Lines Altogether: 328
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\model\user\agent\reasoning\FullnameJNUsernameInMemoryCache.class.php
+Code Lines: 57
+Comment Lines: 32
+Blank Lines: 0
+Mixed Lines: 2
+Total Lines Altogether: 91
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\model\user\agent\reasoning\JNRssParserSubject.class.php
+Code Lines: 96
+Comment Lines: 39
+Blank Lines: 0
+Mixed Lines: 11
+Total Lines Altogether: 146
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\model\user\agent\reasoning\ProjectHistoryToDatabase.class.php
+Code Lines: 81
+Comment Lines: 12
+Blank Lines: 0
+Mixed Lines: 7
+Total Lines Altogether: 100
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\model\user\agent\reasoning\RssToDatabaseObserver.class.php
+Code Lines: 82
+Comment Lines: 51
+Blank Lines: 0
+Mixed Lines: 4
+Total Lines Altogether: 137
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\model\user\PersonalAgent.class.php
+Code Lines: 105
+Comment Lines: 131
+Blank Lines: 0
+Mixed Lines: 5
+Total Lines Altogether: 241
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\model\user\User.class.php
+Code Lines: 23
+Comment Lines: 45
+Blank Lines: 0
+Mixed Lines: 3
+Total Lines Altogether: 71
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\model\user\UserTypeEnum.class.php
+Code Lines: 15
+Comment Lines: 33
+Blank Lines: 0
+Mixed Lines: 3
+Total Lines Altogether: 51
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\model\workspace\MetricsWorkspace.class.php
+Code Lines: 28
+Comment Lines: 6
+Blank Lines: 0
+Mixed Lines: 10
+Total Lines Altogether: 44
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\model\workspace\Project.class.php
+Code Lines: 13
+Comment Lines: 5
+Blank Lines: 0
+Mixed Lines: 4
+Total Lines Altogether: 22
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\model\workspace\WorkspaceState.class.php
+Code Lines: 15
+Comment Lines: 43
+Blank Lines: 0
+Mixed Lines: 4
+Total Lines Altogether: 62
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\orm\config\om-classmap.php
+Code Lines: 48
+Comment Lines: 1
+Blank Lines: 0
+Mixed Lines: 0
+Total Lines Altogether: 49
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\orm\config\om-conf.php
+Code Lines: 21
+Comment Lines: 2
+Blank Lines: 0
+Mixed Lines: 0
+Total Lines Altogether: 23
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\orm\map\PersistentChannelMapBuilder.php
+Code Lines: 23
+Comment Lines: 39
+Blank Lines: 2
+Mixed Lines: 15
+Total Lines Altogether: 79
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\orm\map\PersistentCustomEventEntryMapBuilder.php
+Code Lines: 23
+Comment Lines: 39
+Blank Lines: 2
+Mixed Lines: 15
+Total Lines Altogether: 79
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\orm\map\PersistentCustomEventMapBuilder.php
+Code Lines: 24
+Comment Lines: 39
+Blank Lines: 2
+Mixed Lines: 16
+Total Lines Altogether: 81
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\orm\map\PersistentEventMapBuilder.php
+Code Lines: 24
+Comment Lines: 39
+Blank Lines: 2
+Mixed Lines: 16
+Total Lines Altogether: 81
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\orm\map\PersistentInstitutionMapBuilder.php
+Code Lines: 25
+Comment Lines: 39
+Blank Lines: 2
+Mixed Lines: 17
+Total Lines Altogether: 83
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\orm\map\PersistentProjectMapBuilder.php
+Code Lines: 22
+Comment Lines: 39
+Blank Lines: 2
+Mixed Lines: 14
+Total Lines Altogether: 77
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\orm\map\PersistentUserMapBuilder.php
+Code Lines: 26
+Comment Lines: 39
+Blank Lines: 2
+Mixed Lines: 18
+Total Lines Altogether: 85
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\orm\map\PersistentUserXInstitutionMapBuilder.php
+Code Lines: 22
+Comment Lines: 39
+Blank Lines: 2
+Mixed Lines: 14
+Total Lines Altogether: 77
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\orm\map\PersistentUserXProjectMapBuilder.php
+Code Lines: 22
+Comment Lines: 39
+Blank Lines: 2
+Mixed Lines: 14
+Total Lines Altogether: 77
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\orm\map\PersistentWorkspaceMapBuilder.php
+Code Lines: 25
+Comment Lines: 39
+Blank Lines: 2
+Mixed Lines: 17
+Total Lines Altogether: 83
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\orm\map\PersistentWorkspaceShareMapBuilder.php
+Code Lines: 21
+Comment Lines: 39
+Blank Lines: 2
+Mixed Lines: 13
+Total Lines Altogether: 75
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\orm\om\PersistentBaseChannel.php
+Code Lines: 355
+Comment Lines: 376
+Blank Lines: 18
+Mixed Lines: 115
+Total Lines Altogether: 864
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\orm\om\PersistentBaseChannelPeer.php
+Code Lines: 410
+Comment Lines: 351
+Blank Lines: 26
+Mixed Lines: 132
+Total Lines Altogether: 919
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\orm\om\PersistentBaseCustomEvent.php
+Code Lines: 524
+Comment Lines: 470
+Blank Lines: 28
+Mixed Lines: 150
+Total Lines Altogether: 1,172
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\orm\om\PersistentBaseCustomEventEntry.php
+Code Lines: 390
+Comment Lines: 391
+Blank Lines: 24
+Mixed Lines: 116
+Total Lines Altogether: 921
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\orm\om\PersistentBaseCustomEventEntryPeer.php
+Code Lines: 420
+Comment Lines: 354
+Blank Lines: 26
+Mixed Lines: 136
+Total Lines Altogether: 936
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\orm\om\PersistentBaseCustomEventPeer.php
+Code Lines: 440
+Comment Lines: 375
+Blank Lines: 27
+Mixed Lines: 145
+Total Lines Altogether: 987
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\orm\om\PersistentBaseEvent.php
+Code Lines: 378
+Comment Lines: 372
+Blank Lines: 22
+Mixed Lines: 115
+Total Lines Altogether: 887
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\orm\om\PersistentBaseEventPeer.php
+Code Lines: 297
+Comment Lines: 295
+Blank Lines: 16
+Mixed Lines: 87
+Total Lines Altogether: 695
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\orm\om\PersistentBaseInstitution.php
+Code Lines: 497
+Comment Lines: 449
+Blank Lines: 26
+Mixed Lines: 145
+Total Lines Altogether: 1,117
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\orm\om\PersistentBaseInstitutionPeer.php
+Code Lines: 333
+Comment Lines: 325
+Blank Lines: 17
+Mixed Lines: 103
+Total Lines Altogether: 778
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\orm\om\PersistentBaseProject.php
+Code Lines: 760
+Comment Lines: 604
+Blank Lines: 30
+Mixed Lines: 209
+Total Lines Altogether: 1,603
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\orm\om\PersistentBaseProjectPeer.php
+Code Lines: 326
+Comment Lines: 321
+Blank Lines: 17
+Mixed Lines: 101
+Total Lines Altogether: 765
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\orm\om\PersistentBaseUser.php
+Code Lines: 920
+Comment Lines: 693
+Blank Lines: 36
+Mixed Lines: 251
+Total Lines Altogether: 1,900
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\orm\om\PersistentBaseUserPeer.php
+Code Lines: 355
+Comment Lines: 339
+Blank Lines: 17
+Mixed Lines: 118
+Total Lines Altogether: 829
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\orm\om\PersistentBaseUserXInstitution.php
+Code Lines: 369
+Comment Lines: 387
+Blank Lines: 17
+Mixed Lines: 119
+Total Lines Altogether: 892
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\orm\om\PersistentBaseUserXInstitutionPeer.php
+Code Lines: 601
+Comment Lines: 444
+Blank Lines: 43
+Mixed Lines: 215
+Total Lines Altogether: 1,303
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\orm\om\PersistentBaseUserXProject.php
+Code Lines: 373
+Comment Lines: 388
+Blank Lines: 17
+Mixed Lines: 120
+Total Lines Altogether: 898
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\orm\om\PersistentBaseUserXProjectPeer.php
+Code Lines: 601
+Comment Lines: 444
+Blank Lines: 43
+Mixed Lines: 215
+Total Lines Altogether: 1,303
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\orm\om\PersistentBaseWorkspace.php
+Code Lines: 581
+Comment Lines: 510
+Blank Lines: 26
+Mixed Lines: 169
+Total Lines Altogether: 1,286
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\orm\om\PersistentBaseWorkspacePeer.php
+Code Lines: 635
+Comment Lines: 470
+Blank Lines: 44
+Mixed Lines: 232
+Total Lines Altogether: 1,381
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\orm\om\PersistentBaseWorkspaceShare.php
+Code Lines: 343
+Comment Lines: 372
+Blank Lines: 16
+Mixed Lines: 113
+Total Lines Altogether: 844
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\orm\om\PersistentBaseWorkspaceSharePeer.php
+Code Lines: 599
+Comment Lines: 443
+Blank Lines: 43
+Mixed Lines: 213
+Total Lines Altogether: 1,298
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\orm\PersistentChannel.php
+Code Lines: 35
+Comment Lines: 34
+Blank Lines: 1
+Mixed Lines: 14
+Total Lines Altogether: 84
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\orm\PersistentChannelPeer.php
+Code Lines: 3
+Comment Lines: 15
+Blank Lines: 1
+Mixed Lines: 4
+Total Lines Altogether: 23
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\orm\PersistentCustomEvent.php
+Code Lines: 7
+Comment Lines: 21
+Blank Lines: 1
+Mixed Lines: 5
+Total Lines Altogether: 34
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\orm\PersistentCustomEventEntry.php
+Code Lines: 7
+Comment Lines: 21
+Blank Lines: 1
+Mixed Lines: 5
+Total Lines Altogether: 34
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\orm\PersistentCustomEventEntryPeer.php
+Code Lines: 3
+Comment Lines: 15
+Blank Lines: 1
+Mixed Lines: 4
+Total Lines Altogether: 23
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\orm\PersistentCustomEventPeer.php
+Code Lines: 3
+Comment Lines: 15
+Blank Lines: 1
+Mixed Lines: 4
+Total Lines Altogether: 23
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\orm\PersistentEvent.php
+Code Lines: 7
+Comment Lines: 21
+Blank Lines: 1
+Mixed Lines: 5
+Total Lines Altogether: 34
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\orm\PersistentEventPeer.php
+Code Lines: 3
+Comment Lines: 15
+Blank Lines: 1
+Mixed Lines: 4
+Total Lines Altogether: 23
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\orm\PersistentInstitution.php
+Code Lines: 7
+Comment Lines: 21
+Blank Lines: 1
+Mixed Lines: 5
+Total Lines Altogether: 34
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\orm\PersistentInstitutionPeer.php
+Code Lines: 3
+Comment Lines: 15
+Blank Lines: 1
+Mixed Lines: 4
+Total Lines Altogether: 23
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\orm\PersistentProject.php
+Code Lines: 38
+Comment Lines: 30
+Blank Lines: 1
+Mixed Lines: 14
+Total Lines Altogether: 83
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\orm\PersistentProjectPeer.php
+Code Lines: 3
+Comment Lines: 15
+Blank Lines: 1
+Mixed Lines: 4
+Total Lines Altogether: 23
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\orm\PersistentUser.php
+Code Lines: 21
+Comment Lines: 34
+Blank Lines: 1
+Mixed Lines: 4
+Total Lines Altogether: 60
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\orm\PersistentUserPeer.php
+Code Lines: 3
+Comment Lines: 15
+Blank Lines: 1
+Mixed Lines: 4
+Total Lines Altogether: 23
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\orm\PersistentUserXInstitution.php
+Code Lines: 7
+Comment Lines: 21
+Blank Lines: 1
+Mixed Lines: 5
+Total Lines Altogether: 34
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\orm\PersistentUserXInstitutionPeer.php
+Code Lines: 3
+Comment Lines: 15
+Blank Lines: 1
+Mixed Lines: 4
+Total Lines Altogether: 23
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\orm\PersistentUserXProject.php
+Code Lines: 7
+Comment Lines: 21
+Blank Lines: 1
+Mixed Lines: 5
+Total Lines Altogether: 34
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\orm\PersistentUserXProjectPeer.php
+Code Lines: 3
+Comment Lines: 15
+Blank Lines: 1
+Mixed Lines: 4
+Total Lines Altogether: 23
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\orm\PersistentWorkspace.php
+Code Lines: 35
+Comment Lines: 25
+Blank Lines: 1
+Mixed Lines: 9
+Total Lines Altogether: 70
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\orm\PersistentWorkspacePeer.php
+Code Lines: 3
+Comment Lines: 15
+Blank Lines: 1
+Mixed Lines: 4
+Total Lines Altogether: 23
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\orm\PersistentWorkspaceShare.php
+Code Lines: 7
+Comment Lines: 21
+Blank Lines: 1
+Mixed Lines: 5
+Total Lines Altogether: 34
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\orm\PersistentWorkspaceSharePeer.php
+Code Lines: 3
+Comment Lines: 15
+Blank Lines: 1
+Mixed Lines: 4
+Total Lines Altogether: 23
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\orm\sql\schema.sql
+Code Lines: 190
+Comment Lines: 0
+Blank Lines: 33
+Mixed Lines: 46
+Total Lines Altogether: 269
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\tests\AllFunctionalTestSuites.class.php
+Code Lines: 15
+Comment Lines: 24
+Blank Lines: 0
+Mixed Lines: 3
+Total Lines Altogether: 42
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\tests\AllSystemTestSuites.class.php
+Code Lines: 15
+Comment Lines: 24
+Blank Lines: 0
+Mixed Lines: 3
+Total Lines Altogether: 42
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\tests\AllTestSuites.class.php
+Code Lines: 15
+Comment Lines: 28
+Blank Lines: 0
+Mixed Lines: 3
+Total Lines Altogether: 46
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\tests\AllUnitTestSuites.class.php
+Code Lines: 15
+Comment Lines: 24
+Blank Lines: 0
+Mixed Lines: 3
+Total Lines Altogether: 42
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\agent\UC400Test.class.php
+Code Lines: 61
+Comment Lines: 72
+Blank Lines: 0
+Mixed Lines: 9
+Total Lines Altogether: 142
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\agent\UC401Test.class.php
+Code Lines: 41
+Comment Lines: 29
+Blank Lines: 0
+Mixed Lines: 8
+Total Lines Altogether: 78
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\agent\UC402Test.class.php
+Code Lines: 43
+Comment Lines: 39
+Blank Lines: 0
+Mixed Lines: 9
+Total Lines Altogether: 91
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\agent\UC403Test.class.php
+Code Lines: 50
+Comment Lines: 35
+Blank Lines: 0
+Mixed Lines: 9
+Total Lines Altogether: 94
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\agent\UC404Test.class.php
+Code Lines: 59
+Comment Lines: 39
+Blank Lines: 0
+Mixed Lines: 12
+Total Lines Altogether: 110
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\AllPersonalAgentFunctionalTests.class.php
+Code Lines: 18
+Comment Lines: 25
+Blank Lines: 0
+Mixed Lines: 3
+Total Lines Altogether: 46
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\AllUserFunctionalTests.class.php
+Code Lines: 23
+Comment Lines: 25
+Blank Lines: 0
+Mixed Lines: 3
+Total Lines Altogether: 51
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\AllWorkspaceFunctionalTests.class.php
+Code Lines: 21
+Comment Lines: 24
+Blank Lines: 0
+Mixed Lines: 3
+Total Lines Altogether: 48
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\cetracker\UC200Test.class.php
+Code Lines: 97
+Comment Lines: 41
+Blank Lines: 0
+Mixed Lines: 12
+Total Lines Altogether: 150
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\cetracker\UC202Test.class.php
+Code Lines: 83
+Comment Lines: 41
+Blank Lines: 0
+Mixed Lines: 13
+Total Lines Altogether: 137
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\user\UC001Test.class.php
+Code Lines: 153
+Comment Lines: 50
+Blank Lines: 0
+Mixed Lines: 23
+Total Lines Altogether: 226
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\user\UC002aTest.class.php
+Code Lines: 105
+Comment Lines: 42
+Blank Lines: 0
+Mixed Lines: 32
+Total Lines Altogether: 179
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\user\UC002Test.class.php
+Code Lines: 125
+Comment Lines: 49
+Blank Lines: 0
+Mixed Lines: 21
+Total Lines Altogether: 195
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\user\UC003Test.class.php
+Code Lines: 226
+Comment Lines: 64
+Blank Lines: 0
+Mixed Lines: 40
+Total Lines Altogether: 330
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\user\UC004Test.class.php
+Code Lines: 162
+Comment Lines: 60
+Blank Lines: 0
+Mixed Lines: 28
+Total Lines Altogether: 250
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\user\UC005Test.class.php
+Code Lines: 158
+Comment Lines: 42
+Blank Lines: 0
+Mixed Lines: 34
+Total Lines Altogether: 234
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\user\UC006Test.class.php
+Code Lines: 166
+Comment Lines: 46
+Blank Lines: 0
+Mixed Lines: 30
+Total Lines Altogether: 242
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\workspace\UC100Test.class.php
+Code Lines: 84
+Comment Lines: 7
+Blank Lines: 0
+Mixed Lines: 17
+Total Lines Altogether: 108
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\workspace\UC101Test.class.php
+Code Lines: 61
+Comment Lines: 7
+Blank Lines: 0
+Mixed Lines: 15
+Total Lines Altogether: 83
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\workspace\UC102Test.class.php
+Code Lines: 96
+Comment Lines: 7
+Blank Lines: 0
+Mixed Lines: 21
+Total Lines Altogether: 124
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\workspace\UC103Test.class.php
+Code Lines: 77
+Comment Lines: 5
+Blank Lines: 0
+Mixed Lines: 17
+Total Lines Altogether: 99
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\workspace\UC104Test.class.php
+Code Lines: 108
+Comment Lines: 6
+Blank Lines: 0
+Mixed Lines: 24
+Total Lines Altogether: 138
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\tests\functional\workspace\UC105Test.class.php
+Code Lines: 80
+Comment Lines: 6
+Blank Lines: 0
+Mixed Lines: 20
+Total Lines Altogether: 106
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\tests\system\agent\FullnameJNUsernameInMemoryCacheSystemTest.class.php
+Code Lines: 93
+Comment Lines: 34
+Blank Lines: 0
+Mixed Lines: 13
+Total Lines Altogether: 140
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\tests\system\agent\PersonalAgentSystemTests.class.php
+Code Lines: 105
+Comment Lines: 62
+Blank Lines: 0
+Mixed Lines: 19
+Total Lines Altogether: 186
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\tests\system\AllCustomEventSystemTests.class.php
+Code Lines: 11
+Comment Lines: 24
+Blank Lines: 0
+Mixed Lines: 3
+Total Lines Altogether: 38
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\tests\system\AllPersonalAgentSystemTests.class.php
+Code Lines: 13
+Comment Lines: 25
+Blank Lines: 0
+Mixed Lines: 3
+Total Lines Altogether: 41
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\tests\system\AllUserSystemTests.class.php
+Code Lines: 15
+Comment Lines: 24
+Blank Lines: 0
+Mixed Lines: 3
+Total Lines Altogether: 42
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\tests\system\cetracker\CustomEventSystemTest.class.php
+Code Lines: 116
+Comment Lines: 34
+Blank Lines: 0
+Mixed Lines: 27
+Total Lines Altogether: 177
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\tests\system\user\InstructorSystemTest.class.php
+Code Lines: 112
+Comment Lines: 33
+Blank Lines: 1
+Mixed Lines: 16
+Total Lines Altogether: 162
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\tests\system\user\StudentSystemTest.class.php
+Code Lines: 112
+Comment Lines: 31
+Blank Lines: 1
+Mixed Lines: 16
+Total Lines Altogether: 160
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\tests\system\user\UserSystemTest.class.php
+Code Lines: 97
+Comment Lines: 31
+Blank Lines: 1
+Mixed Lines: 16
+Total Lines Altogether: 145
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\tests\ui\HomePageTest.class.php
+Code Lines: 13
+Comment Lines: 24
+Blank Lines: 2
+Mixed Lines: 2
+Total Lines Altogether: 41
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\tests\unit\agent\PersonalAgentTest.class.php
+Code Lines: 44
+Comment Lines: 38
+Blank Lines: 0
+Mixed Lines: 7
+Total Lines Altogether: 89
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\tests\unit\AllPersonalAgentUnitTests.class.php
+Code Lines: 11
+Comment Lines: 24
+Blank Lines: 0
+Mixed Lines: 3
+Total Lines Altogether: 38
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\tests\unit\AllUserUnitTests.class.php
+Code Lines: 15
+Comment Lines: 24
+Blank Lines: 0
+Mixed Lines: 3
+Total Lines Altogether: 42
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\tests\unit\AllUtilityLibraryUnitTests.class.php
+Code Lines: 15
+Comment Lines: 24
+Blank Lines: 0
+Mixed Lines: 3
+Total Lines Altogether: 42
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\tests\unit\report\EventCategoryTest.class.php
+Code Lines: 30
+Comment Lines: 5
+Blank Lines: 0
+Mixed Lines: 14
+Total Lines Altogether: 49
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\tests\unit\report\EventChannelTest.class.php
+Code Lines: 90
+Comment Lines: 5
+Blank Lines: 0
+Mixed Lines: 27
+Total Lines Altogether: 122
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\tests\unit\report\EventTest.class.php
+Code Lines: 27
+Comment Lines: 5
+Blank Lines: 0
+Mixed Lines: 12
+Total Lines Altogether: 44
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\tests\unit\report\ReportTest.class.php
+Code Lines: 118
+Comment Lines: 5
+Blank Lines: 0
+Mixed Lines: 31
+Total Lines Altogether: 154
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\tests\unit\user\InstructorTest.class.php
+Code Lines: 36
+Comment Lines: 24
+Blank Lines: 0
+Mixed Lines: 6
+Total Lines Altogether: 66
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\tests\unit\user\StudentTest.class.php
+Code Lines: 34
+Comment Lines: 24
+Blank Lines: 0
+Mixed Lines: 7
+Total Lines Altogether: 65
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\tests\unit\user\UserTest.class.php
+Code Lines: 36
+Comment Lines: 25
+Blank Lines: 0
+Mixed Lines: 9
+Total Lines Altogether: 70
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\tests\unit\util\AbstractCollectionTest.class.php
+Code Lines: 56
+Comment Lines: 14
+Blank Lines: 0
+Mixed Lines: 8
+Total Lines Altogether: 78
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\tests\unit\util\ArrayListTest.class.php
+Code Lines: 50
+Comment Lines: 11
+Blank Lines: 0
+Mixed Lines: 8
+Total Lines Altogether: 69
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\tests\unit\util\DateTimeUtilTest.class.php
+Code Lines: 30
+Comment Lines: 7
+Blank Lines: 0
+Mixed Lines: 5
+Total Lines Altogether: 42
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\tests\unit\workspace\MetricsWorkspaceTest.class.php
+Code Lines: 55
+Comment Lines: 12
+Blank Lines: 0
+Mixed Lines: 18
+Total Lines Altogether: 85
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\tests\unit\workspace\ProjectTest.class.php
+Code Lines: 30
+Comment Lines: 13
+Blank Lines: 0
+Mixed Lines: 12
+Total Lines Altogether: 55
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\tests\unit\workspace\WorkspaceStateTest.class.php
+Code Lines: 47
+Comment Lines: 28
+Blank Lines: 0
+Mixed Lines: 7
+Total Lines Altogether: 82
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\util\AbstractCollection.class.php
+Code Lines: 45
+Comment Lines: 66
+Blank Lines: 0
+Mixed Lines: 1
+Total Lines Altogether: 112
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\util\ArrayList.class.php
+Code Lines: 39
+Comment Lines: 42
+Blank Lines: 0
+Mixed Lines: 5
+Total Lines Altogether: 86
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\util\Collection.interface.php
+Code Lines: 12
+Comment Lines: 36
+Blank Lines: 0
+Mixed Lines: 1
+Total Lines Altogether: 49
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\util\DateTimeUtil.class.php
+Code Lines: 13
+Comment Lines: 20
+Blank Lines: 0
+Mixed Lines: 5
+Total Lines Altogether: 38
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\util\EncodingUtil.class.php
+Code Lines: 15
+Comment Lines: 31
+Blank Lines: 0
+Mixed Lines: 5
+Total Lines Altogether: 51
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\util\Enum.class.php
+Code Lines: 23
+Comment Lines: 45
+Blank Lines: 0
+Mixed Lines: 6
+Total Lines Altogether: 74
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\util\go4pattenrs\behavorial\observer\Observable.class.php
+Code Lines: 7
+Comment Lines: 40
+Blank Lines: 0
+Mixed Lines: 2
+Total Lines Altogether: 49
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\util\go4pattenrs\behavorial\observer\ObservableSubject.class.php
+Code Lines: 29
+Comment Lines: 33
+Blank Lines: 0
+Mixed Lines: 9
+Total Lines Altogether: 71
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\util\go4pattenrs\behavorial\observer\Observer.class.php
+Code Lines: 5
+Comment Lines: 33
+Blank Lines: 0
+Mixed Lines: 2
+Total Lines Altogether: 40
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\util\go4pattenrs\creational\AbstractBuilder.class.php
+Code Lines: 5
+Comment Lines: 33
+Blank Lines: 0
+Mixed Lines: 2
+Total Lines Altogether: 40
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\util\HtmlParser.php
+Code Lines: 276
+Comment Lines: 58
+Blank Lines: 0
+Mixed Lines: 30
+Total Lines Altogether: 364
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\util\HttpClient.class.php
+Code Lines: 93
+Comment Lines: 14
+Blank Lines: 2
+Mixed Lines: 12
+Total Lines Altogether: 121
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\util\IndexedList.interface.php
+Code Lines: 8
+Comment Lines: 27
+Blank Lines: 0
+Mixed Lines: 1
+Total Lines Altogether: 36
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\util\javanet\rssparser\CollabnetRssChannel.class.php
+Code Lines: 52
+Comment Lines: 61
+Blank Lines: 0
+Mixed Lines: 2
+Total Lines Altogether: 115
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\util\javanet\rssparser\RssChannel.class.php
+Code Lines: 56
+Comment Lines: 105
+Blank Lines: 0
+Mixed Lines: 1
+Total Lines Altogether: 162
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\util\javanet\rssparser\RssItem.class.php
+Code Lines: 90
+Comment Lines: 158
+Blank Lines: 0
+Mixed Lines: 0
+Total Lines Altogether: 248
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\util\javanet\rssparser\RssItemBuilder.class.php
+Code Lines: 85
+Comment Lines: 140
+Blank Lines: 0
+Mixed Lines: 7
+Total Lines Altogether: 232
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\util\screenscraperapi\JNUrlBuilder.class.php
+Code Lines: 47
+Comment Lines: 95
+Blank Lines: 0
+Mixed Lines: 2
+Total Lines Altogether: 144
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\util\screenscraperapi\mailinglist\JNMailingListsImpl.class.php
+Code Lines: 103
+Comment Lines: 71
+Blank Lines: 0
+Mixed Lines: 12
+Total Lines Altogether: 186
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\util\screenscraperapi\mailinglist\JNMailinglistsScraper.class.php
+Code Lines: 179
+Comment Lines: 70
+Blank Lines: 0
+Mixed Lines: 15
+Total Lines Altogether: 264
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\util\screenscraperapi\mailinglist\JNMailingListsWSInterface.interface.php
+Code Lines: 7
+Comment Lines: 37
+Blank Lines: 0
+Mixed Lines: 1
+Total Lines Altogether: 45
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\util\screenscraperapi\projecthome\JNProjectHomeImpl.class.php
+Code Lines: 69
+Comment Lines: 23
+Blank Lines: 3
+Mixed Lines: 16
+Total Lines Altogether: 111
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\util\screenscraperapi\projecthome\JNProjectHomeScraper.class.php
+Code Lines: 148
+Comment Lines: 23
+Blank Lines: 0
+Mixed Lines: 16
+Total Lines Altogether: 187
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\util\screenscraperapi\projecthome\JNProjectWSInterface.interface.php
+Code Lines: 7
+Comment Lines: 16
+Blank Lines: 0
+Mixed Lines: 2
+Total Lines Altogether: 25
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\util\screenscraperapi\rss\JNRssImpl.class.php
+Code Lines: 52
+Comment Lines: 35
+Blank Lines: 0
+Mixed Lines: 10
+Total Lines Altogether: 97
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\util\screenscraperapi\rss\JNRssWSInterface.interface.php
+Code Lines: 6
+Comment Lines: 16
+Blank Lines: 0
+Mixed Lines: 3
+Total Lines Altogether: 25
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\util\screenscraperapi\session\AbstractServiceImpl.class.php
+Code Lines: 33
+Comment Lines: 44
+Blank Lines: 0
+Mixed Lines: 2
+Total Lines Altogether: 79
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\util\screenscraperapi\session\JNSessionException.class.php
+Code Lines: 7
+Comment Lines: 0
+Blank Lines: 0
+Mixed Lines: 2
+Total Lines Altogether: 9
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\util\screenscraperapi\session\JNSessionImpl.class.php
+Code Lines: 113
+Comment Lines: 121
+Blank Lines: 0
+Mixed Lines: 16
+Total Lines Altogether: 250
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\util\screenscraperapi\session\JNSessionWSInterface.interface.php
+Code Lines: 10
+Comment Lines: 21
+Blank Lines: 0
+Mixed Lines: 2
+Total Lines Altogether: 33
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\util\screenscraperapi\useredit\JNUserEditImpl.class.php
+Code Lines: 60
+Comment Lines: 12
+Blank Lines: 0
+Mixed Lines: 11
+Total Lines Altogether: 83
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\util\screenscraperapi\useredit\JNUserEditScraper.class.php
+Code Lines: 69
+Comment Lines: 27
+Blank Lines: 0
+Mixed Lines: 5
+Total Lines Altogether: 101
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\util\screenscraperapi\useredit\JNUserEditWSInterface.interface.php
+Code Lines: 8
+Comment Lines: 19
+Blank Lines: 0
+Mixed Lines: 1
+Total Lines Altogether: 28
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\classes\infinitymetrics\util\SendEmail.class.php
+Code Lines: 25
+Comment Lines: 21
+Blank Lines: 0
+Mixed Lines: 4
+Total Lines Altogether: 50
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\help\index.php
+Code Lines: 108
+Comment Lines: 0
+Blank Lines: 0
+Mixed Lines: 22
+Total Lines Altogether: 130
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\index.php
+Code Lines: 94
+Comment Lines: 0
+Blank Lines: 0
+Mixed Lines: 18
+Total Lines Altogether: 112
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\report\projectReport.php
+Code Lines: 152
+Comment Lines: 2
+Blank Lines: 1
+Mixed Lines: 28
+Total Lines Altogether: 183
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\report\userReport.php
+Code Lines: 107
+Comment Lines: 2
+Blank Lines: 1
+Mixed Lines: 21
+Total Lines Altogether: 131
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\template\footer.php
+Code Lines: 10
+Comment Lines: 0
+Blank Lines: 0
+Mixed Lines: 1
+Total Lines Altogether: 11
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\template\header-left-nav.php
+Code Lines: 44
+Comment Lines: 0
+Blank Lines: 0
+Mixed Lines: 4
+Total Lines Altogether: 48
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\template\header-no-left-nav.php
+Code Lines: 44
+Comment Lines: 0
+Blank Lines: 0
+Mixed Lines: 4
+Total Lines Altogether: 48
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\template\header-title.php
+Code Lines: 1
+Comment Lines: 0
+Blank Lines: 0
+Mixed Lines: 0
+Total Lines Altogether: 1
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\template\infinitymetrics-bootstrap.php
+Code Lines: 43
+Comment Lines: 7
+Blank Lines: 1
+Mixed Lines: 9
+Total Lines Altogether: 60
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\template\static-js-css.php
+Code Lines: 18
+Comment Lines: 2
+Blank Lines: 2
+Mixed Lines: 1
+Total Lines Altogether: 23
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\template\top-navigation.php
+Code Lines: 30
+Comment Lines: 0
+Blank Lines: 0
+Mixed Lines: 2
+Total Lines Altogether: 32
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\template\top-navigation-menu.php
+Code Lines: 42
+Comment Lines: 0
+Blank Lines: 0
+Mixed Lines: 2
+Total Lines Altogether: 44
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\template\user-signup-header-adds.php
+Code Lines: 1
+Comment Lines: 0
+Blank Lines: 0
+Mixed Lines: 0
+Total Lines Altogether: 1
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\template\with-leftnav.php
+Code Lines: 142
+Comment Lines: 0
+Blank Lines: 0
+Mixed Lines: 4
+Total Lines Altogether: 146
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\template\without-leftnav.php
+Code Lines: 161
+Comment Lines: 0
+Blank Lines: 0
+Mixed Lines: 19
+Total Lines Altogether: 180
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\user\index.php
+Code Lines: 68
+Comment Lines: 0
+Blank Lines: 0
+Mixed Lines: 20
+Total Lines Altogether: 88
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\user\instructor\index.php
+Code Lines: 3
+Comment Lines: 0
+Blank Lines: 0
+Mixed Lines: 0
+Total Lines Altogether: 3
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\user\instructor\signup-step1.php
+Code Lines: 127
+Comment Lines: 0
+Blank Lines: 0
+Mixed Lines: 31
+Total Lines Altogether: 158
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\user\instructor\signup-step2.php
+Code Lines: 194
+Comment Lines: 0
+Blank Lines: 0
+Mixed Lines: 32
+Total Lines Altogether: 226
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\user\instructor\signup-step2a.php
+Code Lines: 1,180
+Comment Lines: 5
+Blank Lines: 0
+Mixed Lines: 277
+Total Lines Altogether: 1,462
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\user\instructor\signup-step3.php
+Code Lines: 161
+Comment Lines: 0
+Blank Lines: 0
+Mixed Lines: 28
+Total Lines Altogether: 189
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\user\javaNetUser\index.php
+Code Lines: 3
+Comment Lines: 0
+Blank Lines: 0
+Mixed Lines: 0
+Total Lines Altogether: 3
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\user\javaNetUser\signup-step1.php
+Code Lines: 128
+Comment Lines: 0
+Blank Lines: 0
+Mixed Lines: 29
+Total Lines Altogether: 157
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\user\javaNetUser\signup-step2.php
+Code Lines: 172
+Comment Lines: 0
+Blank Lines: 0
+Mixed Lines: 31
+Total Lines Altogether: 203
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\user\javaNetUser\signup-step3.php
+Code Lines: 151
+Comment Lines: 0
+Blank Lines: 0
+Mixed Lines: 29
+Total Lines Altogether: 180
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\user\login.php
+Code Lines: 114
+Comment Lines: 5
+Blank Lines: 0
+Mixed Lines: 30
+Total Lines Altogether: 149
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\user\logout.php
+Code Lines: 14
+Comment Lines: 0
+Blank Lines: 0
+Mixed Lines: 4
+Total Lines Altogether: 18
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\user\profile\index.php
+Code Lines: 3
+Comment Lines: 0
+Blank Lines: 0
+Mixed Lines: 0
+Total Lines Altogether: 3
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\user\profile\viewProfile.php
+Code Lines: 176
+Comment Lines: 4
+Blank Lines: 0
+Mixed Lines: 48
+Total Lines Altogether: 228
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\user\student\index.php
+Code Lines: 3
+Comment Lines: 0
+Blank Lines: 0
+Mixed Lines: 0
+Total Lines Altogether: 3
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\user\student\signup-step1.php
+Code Lines: 128
+Comment Lines: 0
+Blank Lines: 0
+Mixed Lines: 29
+Total Lines Altogether: 157
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\user\student\signup-step2.php
+Code Lines: 193
+Comment Lines: 0
+Blank Lines: 0
+Mixed Lines: 30
+Total Lines Altogether: 223
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\user\student\signup-step3.php
+Code Lines: 166
+Comment Lines: 0
+Blank Lines: 0
+Mixed Lines: 29
+Total Lines Altogether: 195
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\user\viewProfile.php
+Code Lines: 158
+Comment Lines: 10
+Blank Lines: 0
+Mixed Lines: 59
+Total Lines Altogether: 227
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\workspace\createWorkspace.php
+Code Lines: 124
+Comment Lines: 0
+Blank Lines: 1
+Mixed Lines: 15
+Total Lines Altogether: 140
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\workspace\index.php
+Code Lines: 3
+Comment Lines: 0
+Blank Lines: 0
+Mixed Lines: 0
+Total Lines Altogether: 3
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\workspace\shareWorkspace.php
+Code Lines: 153
+Comment Lines: 8
+Blank Lines: 0
+Mixed Lines: 27
+Total Lines Altogether: 188
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\workspace\updateForm.php
+Code Lines: 74
+Comment Lines: 0
+Blank Lines: 0
+Mixed Lines: 0
+Total Lines Altogether: 74
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\workspace\updateWorkspace.php
+Code Lines: 168
+Comment Lines: 5
+Blank Lines: 0
+Mixed Lines: 34
+Total Lines Altogether: 207
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\workspace\viewWorkspace.php
+Code Lines: 226
+Comment Lines: 2
+Blank Lines: 1
+Mixed Lines: 37
+Total Lines Altogether: 266
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\workspace\workspaceCollection.php
+Code Lines: 224
+Comment Lines: 1
+Blank Lines: 0
+Mixed Lines: 39
+Total Lines Altogether: 264
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\app\workspace\wsStateReminder.html
+Code Lines: 6
+Comment Lines: 0
+Blank Lines: 0
+Mixed Lines: 0
+Total Lines Altogether: 6
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\build.xml
+Code Lines: 143
+Comment Lines: 8
+Blank Lines: 0
+Mixed Lines: 20
+Total Lines Altogether: 171
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\propel\runtime-conf.xml
+Code Lines: 12
+Comment Lines: 8
+Blank Lines: 3
+Mixed Lines: 1
+Total Lines Altogether: 24
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\propel\schema.xml
+Code Lines: 188
+Comment Lines: 1
+Blank Lines: 0
+Mixed Lines: 0
+Total Lines Altogether: 189
+
+________________________________________________________________________________________________________________________________________________________
+
+File: C:\ppm8-dev\propel\schema-transformed.xml
+Code Lines: 4
+Comment Lines: 0
+Blank Lines: 0
+Mixed Lines: 0
+Total Lines Altogether: 4
+
+________________________________________________________________________________________________________________________________________________________
+________________________________________________________________________________________________________________________________________________________
+
+Total Code Lines: 24,866 (53.78%)
+Total Comment Lines: 14,462 (31.28%)
+Total Mixed Lines: 693 (1.49%)
+Total Blank Lines: 6,209 (13.43%)
+Total Lines: 46,230
+
+End of Report
