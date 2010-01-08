@@ -126,7 +126,7 @@ CREATE TABLE `workspace` (
   `title`            varchar(64) NOT NULL,
   `description`      varchar(255),
   `project_jn_name`  varchar(50) NOT NULL,
-  PRIMARY KEY (`workspace_id`),
+  PRIMARY KEY (`workspace_id`)
 ) ENGINE = InnoDB;
 
 DROP TABLE IF EXISTS `workspace_share`;
