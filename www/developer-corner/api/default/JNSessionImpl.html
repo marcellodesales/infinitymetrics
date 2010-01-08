@@ -1,0 +1,879 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs For Class JNSessionImpl</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class JNSessionImpl</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+													<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+											<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+						
+			</div>
+	<div class="info-box-body">
+                <p class="implements">
+            Implements interfaces:
+            <ul>
+                <li><a href="../default/JNSessionWSInterface.html">JNSessionWSInterface</a></li>            </ul>
+        </p>
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">JNSessionImpl is the implementation of the session class to make HTTP requests.</p>
+	<ul class="tags">
+				<li><span class="field">author:</span> Marcello de Sales &lt;<a href="mailto:marcello.sales@gmail.com">marcello.sales@gmail.com</a>&gt;</li>
+				<li><span class="field">version:</span> $Id$</li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_util---screenscraperapi---session---JNSessionImpl.class.php.html">/util/screenscraperapi/session/JNSessionImpl.class.php</a> (line <span class="field">31</span>)
+		</p>
+		
+				
+		<pre></pre>
+	
+			</div>
+</div>
+
+
+	<a name="sec-const-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Class Constant Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Constants</span> (<a href="#sec-consts">details</a>)
+												<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<div class="const-summary">
+								<div class="const-title">
+					<img src="../media/images/Constant.png" alt=" " />
+					<a href="#AGENT_NAME" title="details" class="const-name">AGENT_NAME</a> = 					<span class="var-type"> &quot;∞Metrics Personal Agent 1.0 (ppm-8.def.java.net)&quot;</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../media/images/Constant.png" alt=" " />
+					<a href="#DEFAULT_COOKIES_DIR" title="details" class="const-name">DEFAULT_COOKIES_DIR</a> = 					<span class="var-type"> &quot;c:/ppm8-dev/sessions/&quot;</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../media/images/Constant.png" alt=" " />
+					<a href="#DEFAULT_COOKIES_PREFIX" title="details" class="const-name">DEFAULT_COOKIES_PREFIX</a> = 					<span class="var-type"> &quot;-infinitymetrics-agent-cookie&quot;</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../media/images/Constant.png" alt=" " />
+					<a href="#LOGIN_URL_AND_DETOUR" title="details" class="const-name">LOGIN_URL_AND_DETOUR</a> = 					<span class="var-type"> &quot;https://www.dev.java.net/servlets/TLogin?detour=&quot;</span>
+
+				</div>
+							</div>
+		</div>
+	</div>
+
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variable Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+															<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+																																																																<div class="var-title">
+					<span class="var-type">string</span>
+					<a href="#$cookiesFilePath" title="details" class="var-name">$cookiesFilePath</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">string</span>
+					<a href="#$currentHtml" title="details" class="var-name">$currentHtml</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">string</span>
+					<a href="#$currentPageURL" title="details" class="var-name">$currentPageURL</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">string</span>
+					<a href="#$password" title="details" class="var-name">$password</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">string</span>
+					<a href="#$referrerUrl" title="details" class="var-name">$referrerUrl</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">string</span>
+					<a href="#$username" title="details" class="var-name">$username</a>
+				</div>
+											</div>
+		</div>
+	</div>
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+							
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																																																																																																																				
+												<div class="method-definition">
+											<span class="method-result">JNSessionImpl</span>
+										<a href="#__construct" title="details" class="method-name">__construct</a>
+											(<span class="var-type">username</span>&nbsp;<span class="var-name">$username</span>, <span class="var-type">password</span>&nbsp;<span class="var-name">$password</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#doGet" title="details" class="method-name">doGet</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$url</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#doPost" title="details" class="method-name">doPost</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$url</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$fieldsString</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#getClientIpAddress" title="details" class="method-name">getClientIpAddress</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">the</span>
+										<a href="#getCookiesFilePath" title="details" class="method-name">getCookiesFilePath</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#getCurrentHtml" title="details" class="method-name">getCurrentHtml</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#getCurrentPageURL" title="details" class="method-name">getCurrentPageURL</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">the</span>
+										<a href="#getPassword" title="details" class="method-name">getPassword</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#getProjectName" title="details" class="method-name">getProjectName</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">the</span>
+										<a href="#getUsername" title="details" class="method-name">getUsername</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#isOpen" title="details" class="method-name">isOpen</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">the</span>
+										<a href="#makeLogin" title="details" class="method-name">makeLogin</a>
+											([<span class="var-type">urlToGoAfterLogin</span>&nbsp;<span class="var-name">$urlToGoAfterLogin</span> = <span class="var-default">null</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#preparePostVariables" title="details" class="method-name">preparePostVariables</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$variablesHash</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setCookiesFilePath" title="details" class="method-name">setCookiesFilePath</a>
+											(<span class="var-type">dir</span>&nbsp;<span class="var-name">$dir</span>, <span class="var-type">prefix</span>&nbsp;<span class="var-name">$prefix</span>)
+									</div>
+								</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+												<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+							
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<a name="var$cookiesFilePath" id="$cookiesFilePath"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">string</span>
+			<span class="var-name">$cookiesFilePath</span>
+						(line <span class="line-number">56</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">The cookiesFilePath of the session. It must be passed forward to the next  web page visits.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$currentHtml" id="$currentHtml"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">string</span>
+			<span class="var-name">$currentHtml</span>
+						(line <span class="line-number">68</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">The current HTML content of the page in session.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$currentPageURL" id="$currentPageURL"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">string</span>
+			<span class="var-name">$currentPageURL</span>
+						(line <span class="line-number">74</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">The current page URL in session.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$password" id="$password"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">string</span>
+			<span class="var-name">$password</span>
+						(line <span class="line-number">49</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">The password of a Java.net real user</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$referrerUrl" id="$referrerUrl"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">string</span>
+			<span class="var-name">$referrerUrl</span>
+						(line <span class="line-number">62</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">The previous URL of an access.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$username" id="$username"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">string</span>
+			<span class="var-name">$username</span>
+						(line <span class="line-number">43</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">The username of a Java.net real user</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+						
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+																			<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+							
+										<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+
+<a name="method__construct" id="__construct"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">81</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Constructs a new ...Session implementation for a given project, using  the username and password from the user.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">JNSessionImpl</span>
+		<span class="method-name">
+			__construct
+		</span>
+					(<span class="var-type">username</span>&nbsp;<span class="var-name">$username</span>, <span class="var-type">password</span>&nbsp;<span class="var-name">$password</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">username</span>
+				<span class="var-name">$username</span><span class="var-description">: the java.net username of the user</span>			</li>
+					<li>
+				<span class="var-type">password</span>
+				<span class="var-name">$password</span><span class="var-description">: the password from the user</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methoddoGet" id="doGet"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">doGet</span> (line <span class="line-number">185</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">return:</span> The complete HTML page from a Request variable</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			doGet
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$url</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$url</span><span class="var-description">: is the url to access it.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methoddoPost" id="doPost"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">doPost</span> (line <span class="line-number">201</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			doPost
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$url</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$fieldsString</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$url</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$fieldsString</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetClientIpAddress" id="getClientIpAddress"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getClientIpAddress</span> (line <span class="line-number">95</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			getClientIpAddress
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetCookiesFilePath" id="getCookiesFilePath"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getCookiesFilePath</span> (line <span class="line-number">120</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">return:</span> user's session's cookie complete file name</li>
+				<li><span class="field">see:</span> <a href="http://www.php.net/tempnam">tempnam</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">the</span>
+		<span class="method-name">
+			getCookiesFilePath
+		</span>
+				()
+			</div>
+	
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../default/JNSessionWSInterface.html#methodgetCookiesFilePath">JNSessionWSInterface::getCookiesFilePath()</a></dt>
+						<dd>Returns the path to the cookie of the current session</dd>
+					</dl>
+			
+	</div>
+<a name="methodgetCurrentHtml" id="getCurrentHtml"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getCurrentHtml</span> (line <span class="line-number">129</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			getCurrentHtml
+		</span>
+				()
+			</div>
+	
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../default/JNSessionWSInterface.html#methodgetCurrentHtml">JNSessionWSInterface::getCurrentHtml()</a></dt>
+						<dd>Returns the current HTML content of the page</dd>
+					</dl>
+			
+	</div>
+<a name="methodgetCurrentPageURL" id="getCurrentPageURL"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getCurrentPageURL</span> (line <span class="line-number">133</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			getCurrentPageURL
+		</span>
+				()
+			</div>
+	
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../default/JNSessionWSInterface.html#methodgetCurrentPageURL">JNSessionWSInterface::getCurrentPageURL()</a></dt>
+						<dd>Returns the current page URL</dd>
+					</dl>
+			
+	</div>
+<a name="methodgetPassword" id="getPassword"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getPassword</span> (line <span class="line-number">113</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">return:</span> user's password for the login</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">the</span>
+		<span class="method-name">
+			getPassword
+		</span>
+				()
+			</div>
+	
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../default/JNSessionWSInterface.html#methodgetPassword">JNSessionWSInterface::getPassword()</a></dt>
+						<dd>Returns the password of the user in the session</dd>
+					</dl>
+			
+	</div>
+<a name="methodgetProjectName" id="getProjectName"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getProjectName</span> (line <span class="line-number">124</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			getProjectName
+		</span>
+				()
+			</div>
+	
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../default/JNSessionWSInterface.html#methodgetProjectName">JNSessionWSInterface::getProjectName()</a></dt>
+						<dd>Returns the project name of the current URL</dd>
+					</dl>
+			
+	</div>
+<a name="methodgetUsername" id="getUsername"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getUsername</span> (line <span class="line-number">107</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">return:</span> user's username for the login</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">the</span>
+		<span class="method-name">
+			getUsername
+		</span>
+				()
+			</div>
+	
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../default/JNSessionWSInterface.html#methodgetUsername">JNSessionWSInterface::getUsername()</a></dt>
+						<dd>Returns the username of the user in the session</dd>
+					</dl>
+			
+	</div>
+<a name="methodisOpen" id="isOpen"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">isOpen</span> (line <span class="line-number">137</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			isOpen
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodmakeLogin" id="makeLogin"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">makeLogin</span> (line <span class="line-number">226</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">return:</span> contents of the parameter $urlToGoAfterLogin</li>
+				<li><span class="field">see:</span> tempnam function to create temporary files.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">the</span>
+		<span class="method-name">
+			makeLogin
+		</span>
+					([<span class="var-type">urlToGoAfterLogin</span>&nbsp;<span class="var-name">$urlToGoAfterLogin</span> = <span class="var-default">null</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">urlToGoAfterLogin</span>
+				<span class="var-name">$urlToGoAfterLogin</span><span class="var-description">: the URL where the crawler/agent goes after  the login.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodpreparePostVariables" id="preparePostVariables"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">preparePostVariables</span> (line <span class="line-number">173</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			preparePostVariables
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$variablesHash</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$variablesHash</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsetCookiesFilePath" id="setCookiesFilePath"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">setCookiesFilePath</span> (line <span class="line-number">91</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Sets the cookies file path</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setCookiesFilePath
+		</span>
+					(<span class="var-type">dir</span>&nbsp;<span class="var-name">$dir</span>, <span class="var-type">prefix</span>&nbsp;<span class="var-name">$prefix</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">dir</span>
+				<span class="var-name">$dir</span><span class="var-description">: the directory where the cookies will be created for the ENTIRE session</span>			</li>
+					<li>
+				<span class="var-type">prefix</span>
+				<span class="var-name">$prefix</span><span class="var-description">: the prefix used to create the file.</span>			</li>
+				</ul>
+		
+			
+	</div>
+						
+		</div>
+	</div>
+
+	<a name="sec-consts"></a>
+	<div class="info-box">
+		<div class="info-box-title">Class Constants</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Constants</a> (<span class="disabled">details</span>)
+						
+			
+												<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+														| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<a name="constAGENT_NAME" id="AGENT_NAME"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<img src="../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">AGENT_NAME</span>
+			 = <span class="const-default"> &quot;∞Metrics Personal Agent 1.0 (ppm-8.def.java.net)&quot;</span>
+			(line <span class="line-number">34</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constDEFAULT_COOKIES_DIR" id="DEFAULT_COOKIES_DIR"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<img src="../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">DEFAULT_COOKIES_DIR</span>
+			 = <span class="const-default"> &quot;c:/ppm8-dev/sessions/&quot;</span>
+			(line <span class="line-number">36</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constDEFAULT_COOKIES_PREFIX" id="DEFAULT_COOKIES_PREFIX"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<img src="../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">DEFAULT_COOKIES_PREFIX</span>
+			 = <span class="const-default"> &quot;-infinitymetrics-agent-cookie&quot;</span>
+			(line <span class="line-number">35</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constLOGIN_URL_AND_DETOUR" id="LOGIN_URL_AND_DETOUR"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<img src="../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">LOGIN_URL_AND_DETOUR</span>
+			 = <span class="const-default"> &quot;https://www.dev.java.net/servlets/TLogin?detour=&quot;</span>
+			(line <span class="line-number">33</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+						
+		</div>
+	</div>
+
+	<p class="notes" id="credit">
+		Documentation generated on Thu, 07 Jan 2010 17:19:38 -0800 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.2</a>
+	</p>
+	</div></body>
+</html>

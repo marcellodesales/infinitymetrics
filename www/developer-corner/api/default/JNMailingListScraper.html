@@ -1,0 +1,538 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs For Class JNMailingListScraper</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class JNMailingListScraper</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+													<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+                <p class="implements">
+            Implements interfaces:
+            <ul>
+                <li><a href="../default/JNMailingListsWSInterface.html">JNMailingListsWSInterface</a></li>            </ul>
+        </p>
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">JavanetUrlBuilder final class builds URLs necessary for Java.net in a safe-way.</p>
+	<ul class="tags">
+				<li><span class="field">author:</span> Marcello de Sales &lt;<a href="mailto:marcello.sales@gmail.com">marcello.sales@gmail.com</a>&gt;</li>
+				<li><span class="field">version:</span> $Id$</li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_util---screenscraperapi---mailinglist---JNMailinglistsScraper.class.php.html">/util/screenscraperapi/mailinglist/JNMailinglistsScraper.class.php</a> (line <span class="field">8</span>)
+		</p>
+		
+				
+		<pre><a href="../default/AbstractServiceImpl.html">AbstractServiceImpl</a>
+   |
+   --JNMailingListScraper</pre>
+	
+			</div>
+</div>
+
+
+
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variable Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+								</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+																																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$eventsCache" title="details" class="var-name">$eventsCache</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$projectsListsCache" title="details" class="var-name">$projectsListsCache</a>
+				</div>
+											</div>
+		</div>
+	</div>
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																		<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																																																																												
+												<div class="method-definition">
+											<span class="method-result">JNMailingListScraper</span>
+										<a href="#__construct" title="details" class="method-name">__construct</a>
+											(<span class="var-type">jnProjectHomeHtml</span>&nbsp;<span class="var-name">0</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">forums[]</span>
+										<a href="#getListOfDiscussionForums" title="details" class="method-name">getListOfDiscussionForums</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$projectName</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">mailinglists[]</span>
+										<a href="#getListOfMailingLists" title="details" class="method-name">getListOfMailingLists</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$projectName</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">events[username]</span>
+										<a href="#getMailingListHistory" title="details" class="method-name">getMailingListHistory</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$mailingListId</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$projectName</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">the</span>
+										<a href="#getTotalNumberOfEmails" title="details" class="method-name">getTotalNumberOfEmails</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$mailingListId</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$projectName</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">forum[id][name]</span>
+										<a href="#parseListOfDiscussionForums" title="details" class="method-name">parseListOfDiscussionForums</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$jnDiscussionForumHtml</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$projectName</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#parseListOfMailingLists" title="details" class="method-name">parseListOfMailingLists</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$mailingListHtml</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$projectName</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">eventsCache[projectName][mailingListId][username|fullname|email]</span>
+										<a href="#parseMailingListHistory" title="details" class="method-name">parseMailingListHistory</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$jnDiscussionForumHtml</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$mailingListId</span>, <span class="var-type">String</span>&nbsp;<span class="var-name">$projectName</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">int</span>
+										<a href="#parseMailingListSummary" title="details" class="method-name">parseMailingListSummary</a>
+											(<span class="var-type"><type></span>&nbsp;<span class="var-name">$jnSummaryHtml</span>, <span class="var-type"><type></span>&nbsp;<span class="var-name">$mailingListId</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$projectName</span>)
+									</div>
+								</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<a name="var$eventsCache" id="$eventsCache"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$eventsCache</span>
+						(line <span class="line-number">11</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$projectsListsCache" id="$projectsListsCache"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$projectsListsCache</span>
+						(line <span class="line-number">10</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+							<h4>Inherited Variables</h4>
+				<A NAME='inherited_vars'><!-- --></A>
+									<p>Inherited from <span class="classname"><a href="../default/AbstractServiceImpl.html">AbstractServiceImpl</a></span></p>
+					<blockquote>
+													<span class="var-title">
+								<span class="var-name"><a href="../default/AbstractServiceImpl.html#var$jnProjectHomeHtmlContents">AbstractServiceImpl::$jnProjectHomeHtmlContents</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../default/AbstractServiceImpl.html#var$userCreditionalsAreValid">AbstractServiceImpl::$userCreditionalsAreValid</a></span><br>
+							</span>
+											</blockquote> 
+										
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+																	<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+
+<a name="method__construct" id="__construct"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">16</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Constructs a new scraper for the project home page.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">JNMailingListScraper</span>
+		<span class="method-name">
+			__construct
+		</span>
+					(<span class="var-type">jnProjectHomeHtml</span>&nbsp;<span class="var-name">0</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">jnProjectHomeHtml</span>
+				<span class="var-name">0</span><span class="var-description">: the home page of a Java.net project.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetListOfDiscussionForums" id="getListOfDiscussionForums"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getListOfDiscussionForums</span> (line <span class="line-number">50</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">return:</span> <p>the list of all discussion forums available in the website.  id = the numeric id of the discussion forum (12345)  forums[id][description] = the description of the discussion forum &quot;General discussions about this project&quot;  forums[id][totalMessages] = the current number of total messages on the forum</p><p>https://ppm-8.dev.java.net/servlets/ProjectForumView</p></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">forums[]</span>
+		<span class="method-name">
+			getListOfDiscussionForums
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$projectName</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$projectName</span>			</li>
+				</ul>
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../default/JNMailingListsWSInterface.html#methodgetListOfDiscussionForums">JNMailingListsWSInterface::getListOfDiscussionForums()</a></dt>
+					</dl>
+			
+	</div>
+<a name="methodgetListOfMailingLists" id="getListOfMailingLists"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getListOfMailingLists</span> (line <span class="line-number">33</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">If the mailing list is dev@ppm-8.dev.java.net, the service must only retrieve &quot;dev&quot;.</p>
+<p class="description"><p>Project owners has the complete visibility, while regular users just the public ones. They are captured from the  website https://ppm-8.dev.java.net/servlets/ProjectMailingListList</p><p>Fromt the website, there's no way to determine if a mailing list if public or private. There's a need to login  twice to the service.</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the list of all mailing lists NAMES, including private ones, that the user can acces.  mailinglist[id][description] = the description as defined on the website  mailinglist[id][totalMessages] = may be included if the session included calls to the number of messages</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">mailinglists[]</span>
+		<span class="method-name">
+			getListOfMailingLists
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$projectName</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$projectName</span>			</li>
+				</ul>
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../default/JNMailingListsWSInterface.html#methodgetListOfMailingLists">JNMailingListsWSInterface::getListOfMailingLists()</a></dt>
+						<dd>If the mailing list is dev@ppm-8.dev.java.net, the service must only retrieve &quot;dev&quot;.</dd>
+					</dl>
+			
+	</div>
+<a name="methodgetMailingListHistory" id="getMailingListHistory"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getMailingListHistory</span> (line <span class="line-number">199</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">return:</span> identifies each set of events separated by users          events[username][id] is the identifier of the event          events[username][date] is the date</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">events[username]</span>
+		<span class="method-name">
+			getMailingListHistory
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$mailingListId</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$projectName</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$mailingListId</span><span class="var-description">: is the name of the mailing list</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$projectName</span><span class="var-description">: is the name of the Java.net project</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetTotalNumberOfEmails" id="getTotalNumberOfEmails"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getTotalNumberOfEmails</span> (line <span class="line-number">64</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">return:</span> total number of emails on a given mailing list.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">the</span>
+		<span class="method-name">
+			getTotalNumberOfEmails
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$mailingListId</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$projectName</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$mailingListId</span><span class="var-description">: is the name of the mailing list</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$projectName</span><span class="var-description">: is not used in this implementation</span>			</li>
+				</ul>
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../default/JNMailingListsWSInterface.html#methodgetTotalNumberOfEmails">JNMailingListsWSInterface::getTotalNumberOfEmails()</a></dt>
+					</dl>
+			
+	</div>
+<a name="methodparseListOfDiscussionForums" id="parseListOfDiscussionForums"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">parseListOfDiscussionForums</span> (line <span class="line-number">149</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">return:</span> = Milestone 1          forum[id][description] = Everything about Milestone 1          forum[id][totalMessages] = 1234</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">forum[id][name]</span>
+		<span class="method-name">
+			parseListOfDiscussionForums
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$jnDiscussionForumHtml</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$projectName</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$jnDiscussionForumHtml</span><span class="var-description">: is the HTML representation of all projects.</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$projectName</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodparseListOfMailingLists" id="parseListOfMailingLists"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">parseListOfMailingLists</span> (line <span class="line-number">76</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Parses the entire document to extract the contents. This is a blocking method, and for this reason, the client  of this API should verify first if the credentials are correct, and then verify for the methods.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			parseListOfMailingLists
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$mailingListHtml</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$projectName</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$mailingListHtml</span><span class="var-description">: <p>is the entire HTML page.</p><p>mailinglists[id][description] = description  mailinglists[id][totalMessages] = totalMessages</p></span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$projectName</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodparseMailingListHistory" id="parseMailingListHistory"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">parseMailingListHistory</span> (line <span class="line-number">214</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">return:</span> = event(array)      where    event[id] = 1234               event[date] = 2008-12-07</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">eventsCache[projectName][mailingListId][username|fullname|email]</span>
+		<span class="method-name">
+			parseMailingListHistory
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$jnDiscussionForumHtml</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$mailingListId</span>, <span class="var-type">String</span>&nbsp;<span class="var-name">$projectName</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$mailingListId</span><span class="var-description">: is the name of the mailing list</span>			</li>
+					<li>
+				<span class="var-type">String</span>
+				<span class="var-name">$projectName</span><span class="var-description">: is the java.net project name</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$jnDiscussionForumHtml</span><span class="var-description">: is the HTML representation of all projects.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodparseMailingListSummary" id="parseMailingListSummary"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">parseMailingListSummary</span> (line <span class="line-number">119</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">return:</span> The number of messages in a mailinglist. All values &gt;= 0 are accurate values from the page, while  a -1 value indicates that the mailing list id doesn't existing for the project name that generated the summary  html.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">int</span>
+		<span class="method-name">
+			parseMailingListSummary
+		</span>
+					(<span class="var-type"><type></span>&nbsp;<span class="var-name">$jnSummaryHtml</span>, <span class="var-type"><type></span>&nbsp;<span class="var-name">$mailingListId</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$projectName</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><type></span>
+				<span class="var-name">$jnSummaryHtml</span>			</li>
+					<li>
+				<span class="var-type"><type></span>
+				<span class="var-name">$mailingListId</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$projectName</span>			</li>
+				</ul>
+		
+			
+	</div>
+							<h4>Inherited Methods</h4>
+				<a name='inherited_methods'><!-- --></a>	
+									<!-- =========== Summary =========== -->
+					<p>Inherited From <span class="classname"><a href="../default/AbstractServiceImpl.html">AbstractServiceImpl</a></span></p>
+					<blockquote>
+													<span class="method-name"><a href="../default/AbstractServiceImpl.html#methodareUserCredentialsValid">AbstractServiceImpl::areUserCredentialsValid()</a></span><br>
+													<span class="method-name"><a href="../default/AbstractServiceImpl.html#methodgetHtmlParserForHtmlContent">AbstractServiceImpl::getHtmlParserForHtmlContent()</a></span><br>
+													<span class="method-name"><a href="../default/AbstractServiceImpl.html#methodparseUserValidation">AbstractServiceImpl::parseUserValidation()</a></span><br>
+											</blockquote>
+										
+		</div>
+	</div>
+
+
+	<p class="notes" id="credit">
+		Documentation generated on Thu, 07 Jan 2010 17:19:34 -0800 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.2</a>
+	</p>
+	</div></body>
+</html>

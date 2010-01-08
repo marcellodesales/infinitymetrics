@@ -1,0 +1,1108 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs For Class RssItem</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class RssItem</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+													<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+											<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+						
+			</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Representation of the Item from the Rss feeds from CollabNet's Java.net implementation.</p>
+	<ul class="tags">
+				<li><span class="field">author:</span> Marcello de Sales &lt;<a href="mailto:marcello.sales@gmail.com">marcello.sales@gmail.com</a>&gt; Nov 15, 2008 10:34 PST</li>
+				<li><span class="field">version:</span> <p>$Id$</p><p>&lt;item&gt;      &lt;title&gt;[Issue 5750] [other]  Hudson : java.net.MalformedURLException: Unknown protocol:&lt;/title&gt;      &lt;link&gt;https://glassfish.dev.java.net/servlets/ReadMsg?list=issues&amp;amp;msgNo=32302&lt;/link&gt;     &lt;description&gt;[Issue 5750] [other]  Hudson : java.net.MalformedURLException: Unknown protocol:&lt;/description&gt;      &lt;pubDate&gt;Mon, 15 Sep 2008 07:00:00 GMT&lt;/pubDate&gt;      &lt;author&gt;mk111283@dev.java.net&lt;/author&gt;      &lt;guid&gt;https://glassfish.dev.java.net/servlets/ReadMsg?list=issues&amp;amp;msgNo=32302&lt;/guid&gt;</p><p>&lt;dc:creator&gt;mk111283@dev.java.net&lt;/dc:creator&gt;      &lt;dc:date&gt;2008-09-15T07:00:00Z&lt;/dc:date&gt;    &lt;/item&gt;</p></li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_util---javanet---rssparser---RssItem.class.php.html">/util/javanet/rssparser/RssItem.class.php</a> (line <span class="field">40</span>)
+		</p>
+		
+				
+		<pre></pre>
+	
+			</div>
+</div>
+
+
+	<a name="sec-const-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Class Constant Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Constants</span> (<a href="#sec-consts">details</a>)
+												<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<div class="const-summary">
+								<div class="const-title">
+					<img src="../media/images/Constant.png" alt=" " />
+					<a href="#DOMAIN" title="details" class="const-name">DOMAIN</a> = 					<span class="var-type"> &quot;dev.java.net&quot;</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../media/images/Constant.png" alt=" " />
+					<a href="#LINK_FORUM_MESSAGE_SERVLET" title="details" class="const-name">LINK_FORUM_MESSAGE_SERVLET</a> = 					<span class="var-type"> &quot;/servlets/ProjectForumMessageView?forumID={_FORUM_ID_}&amp;messageID={_EVENT_ID_}&quot;</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../media/images/Constant.png" alt=" " />
+					<a href="#LINK_MAILING_LIST_SERVLET" title="details" class="const-name">LINK_MAILING_LIST_SERVLET</a> = 					<span class="var-type"> &quot;/servlets/ReadMsg?list={_MAILING_LIST_ID_}&amp;amp;msgNo={_EVENT_ID_}&quot;</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../media/images/Constant.png" alt=" " />
+					<a href="#PROTOCOL" title="details" class="const-name">PROTOCOL</a> = 					<span class="var-type"> &quot;https://&quot;</span>
+
+				</div>
+							</div>
+		</div>
+	</div>
+
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variable Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+															<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+																																																																																<div class="var-title">
+					<span class="var-type">string</span>
+					<a href="#$authorUsername" title="details" class="var-name">$authorUsername</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">string</span>
+					<a href="#$creatorEmail" title="details" class="var-name">$creatorEmail</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">string</span>
+					<a href="#$description" title="details" class="var-name">$description</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">string</span>
+					<a href="#$isoDate" title="details" class="var-name">$isoDate</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">int</span>
+					<a href="#$messageNumber" title="details" class="var-name">$messageNumber</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">string</span>
+					<a href="#$pubDate" title="details" class="var-name">$pubDate</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">string</span>
+					<a href="#$realName" title="details" class="var-name">$realName</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">string</span>
+					<a href="#$title" title="details" class="var-name">$title</a>
+				</div>
+											</div>
+		</div>
+	</div>
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+							
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																																																																																																																																																																				
+												<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#containsRealName" title="details" class="method-name">containsRealName</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#getAuthorEmail" title="details" class="method-name">getAuthorEmail</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#getAuthorRealName" title="details" class="method-name">getAuthorRealName</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#getAuthorUsername" title="details" class="method-name">getAuthorUsername</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#getDescription" title="details" class="method-name">getDescription</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#getGuid" title="details" class="method-name">getGuid</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$projectName</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$channelId</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$isForum</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$channelCategory</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><type></span>
+										<a href="#getLink" title="details" class="method-name">getLink</a>
+											(<span class="var-type"><type></span>&nbsp;<span class="var-name">$projectName</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$channelId</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$isForum</span>, <span class="var-type"><type></span>&nbsp;<span class="var-name">$channelCategory</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">int</span>
+										<a href="#getMessageNumber" title="details" class="method-name">getMessageNumber</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#getPublicationDate" title="details" class="method-name">getPublicationDate</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#getPublicationDateForMySql" title="details" class="method-name">getPublicationDateForMySql</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#getTitle" title="details" class="method-name">getTitle</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setAuthorUsername" title="details" class="method-name">setAuthorUsername</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$username</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setCreatorEmail" title="details" class="method-name">setCreatorEmail</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$email</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setDescription" title="details" class="method-name">setDescription</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$description</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setIsoDate" title="details" class="method-name">setIsoDate</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$isoDate</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setMessageNumber" title="details" class="method-name">setMessageNumber</a>
+											(<span class="var-type">int</span>&nbsp;<span class="var-name">$messageNumber</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setPublicationDate" title="details" class="method-name">setPublicationDate</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$pubDate</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setRealName" title="details" class="method-name">setRealName</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$realName</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setTitle" title="details" class="method-name">setTitle</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$title</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#__toString" title="details" class="method-name">__toString</a>
+										()
+									</div>
+								</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+												<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+							
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<a name="var$authorUsername" id="$authorUsername"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">string</span>
+			<span class="var-name">$authorUsername</span>
+						(line <span class="line-number">78</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">var:</span> mk111283@dev.java.net Username. The username will be the only kept. The  output must be decorated on the get method, or have overloaded getters;</li>
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$creatorEmail" id="$creatorEmail"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">string</span>
+			<span class="var-name">$creatorEmail</span>
+						(line <span class="line-number">83</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">var:</span> is the email address of the creator. It can be just like with the Java.net  domain mk111283@dev.java.net</li>
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$description" id="$description"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">string</span>
+			<span class="var-name">$description</span>
+						(line <span class="line-number">63</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">var:</span> the description of the item. If the same as the title, will be empty</li>
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$isoDate" id="$isoDate"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">string</span>
+			<span class="var-name">$isoDate</span>
+						(line <span class="line-number">87</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">var:</span> is the iso data format 2008-09-15T07:00:00Z</li>
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$messageNumber" id="$messageNumber"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">int</span>
+			<span class="var-name">$messageNumber</span>
+						(line <span class="line-number">69</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">var:</span> https://glassfish.dev.java.net/servlets/ReadMsg?list=issues&amp;amp;msgNo=32302  The link will only hold the msgNo as the primary object. It also applies  to the guid that has the same address as the link.</li>
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$pubDate" id="$pubDate"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">string</span>
+			<span class="var-name">$pubDate</span>
+						(line <span class="line-number">73</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">var:</span> this is the complete date information Mon, 15 Sep 2008 07:00:00 GMT</li>
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$realName" id="$realName"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">string</span>
+			<span class="var-name">$realName</span>
+						(line <span class="line-number">92</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">var:</span> if the username or email is not given, the real name is used instead. The  value must be then converted by the one used by the username.</li>
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$title" id="$title"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">string</span>
+			<span class="var-name">$title</span>
+						(line <span class="line-number">59</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">var:</span> The title of the item.</li>
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+						
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+																			<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+							
+										<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+
+<a name="methodcontainsRealName" id="containsRealName"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">containsRealName</span> (line <span class="line-number">118</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">return:</span> verifies if the RssItem contains the real name of the user instead of the  username or email address.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			containsRealName
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetAuthorEmail" id="getAuthorEmail"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getAuthorEmail</span> (line <span class="line-number">234</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">return:</span> the domain of the creator in the current domain. Basically it uses the username  captured by the creator or username.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			getAuthorEmail
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetAuthorRealName" id="getAuthorRealName"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getAuthorRealName</span> (line <span class="line-number">111</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">return:</span> the real name of th author of the post</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			getAuthorRealName
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetAuthorUsername" id="getAuthorUsername"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getAuthorUsername</span> (line <span class="line-number">227</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">return:</span> the author Java.net username</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			getAuthorUsername
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetDescription" id="getDescription"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getDescription</span> (line <span class="line-number">183</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">return:</span> the description of the Item. It can return the value as the title in case  the values were the same on the RssItem.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			getDescription
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetGuid" id="getGuid"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getGuid</span> (line <span class="line-number">209</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Gets the GUID from the RSS</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the string for the GUID</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			getGuid
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$projectName</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$channelId</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$isForum</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$channelCategory</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$projectName</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$channelCategory</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$channelId</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$isForum</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetLink" id="getLink"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getLink</span> (line <span class="line-number">192</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Gets the link for the RssItem</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><type></span>
+		<span class="method-name">
+			getLink
+		</span>
+					(<span class="var-type"><type></span>&nbsp;<span class="var-name">$projectName</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$channelId</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$isForum</span>, <span class="var-type"><type></span>&nbsp;<span class="var-name">$channelCategory</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><type></span>
+				<span class="var-name">$projectName</span>			</li>
+					<li>
+				<span class="var-type"><type></span>
+				<span class="var-name">$channelCategory</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$channelId</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$isForum</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetMessageNumber" id="getMessageNumber"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getMessageNumber</span> (line <span class="line-number">170</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">return:</span> this is the identification number of the message on collabNet.  https://glassfish.dev.java.net/servlets/ReadMsg?list=issues&amp;amp;msgNo=32302  The link will only hold the msgNo as the primary object. It also applies  to the guid that has the same address as the link.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">int</span>
+		<span class="method-name">
+			getMessageNumber
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetPublicationDate" id="getPublicationDate"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getPublicationDate</span> (line <span class="line-number">215</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">return:</span> the publication date.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			getPublicationDate
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetPublicationDateForMySql" id="getPublicationDateForMySql"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getPublicationDateForMySql</span> (line <span class="line-number">221</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">return:</span> the publication date in the MySQL format</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			getPublicationDateForMySql
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetTitle" id="getTitle"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getTitle</span> (line <span class="line-number">176</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">return:</span> returns the title of the RSS item.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			getTitle
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodsetAuthorUsername" id="setAuthorUsername"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">setAuthorUsername</span> (line <span class="line-number">147</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Sets the author java.net username</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setAuthorUsername
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$username</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$username</span><span class="var-description">: the username of the user on Java.net</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsetCreatorEmail" id="setCreatorEmail"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">setCreatorEmail</span> (line <span class="line-number">154</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Sets the creator email address in case it is given</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setCreatorEmail
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$email</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$email</span><span class="var-description">: is the java.net email address used on the RSS.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsetDescription" id="setDescription"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">setDescription</span> (line <span class="line-number">126</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Sets the description of the Rss item</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setDescription
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$description</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$description</span><span class="var-description">: is the long description</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsetIsoDate" id="setIsoDate"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">setIsoDate</span> (line <span class="line-number">161</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Sets the ISO date for the item.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setIsoDate
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$isoDate</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$isoDate</span><span class="var-description">: is the iso date for the item</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsetMessageNumber" id="setMessageNumber"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">setMessageNumber</span> (line <span class="line-number">133</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Sets the message number.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setMessageNumber
+		</span>
+					(<span class="var-type">int</span>&nbsp;<span class="var-name">$messageNumber</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$messageNumber</span><span class="var-description">: it is the id of the message to be opened online.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsetPublicationDate" id="setPublicationDate"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">setPublicationDate</span> (line <span class="line-number">140</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Sets the publication date</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setPublicationDate
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$pubDate</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$pubDate</span><span class="var-description">: is the date on any format (ISO or Human-readable)</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsetRealName" id="setRealName"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">setRealName</span> (line <span class="line-number">105</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Sets the real name of the user. If it contains the real name, the method containsRealName  should be used to verify this fact instead of using null values for the username.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setRealName
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$realName</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$realName</span><span class="var-description">: is the real name of the user.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsetTitle" id="setTitle"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">setTitle</span> (line <span class="line-number">97</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Sets the RSS Item title</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setTitle
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$title</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$title</span><span class="var-description">: is the title of the RSS</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="method__toString" id="__toString"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">__toString</span> (line <span class="line-number">240</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">return:</span> representation of an item in the string</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			__toString
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+						
+		</div>
+	</div>
+
+	<a name="sec-consts"></a>
+	<div class="info-box">
+		<div class="info-box-title">Class Constants</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Constants</a> (<span class="disabled">details</span>)
+						
+			
+												<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+														| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<a name="constDOMAIN" id="DOMAIN"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<img src="../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">DOMAIN</span>
+			 = <span class="const-default"> &quot;dev.java.net&quot;</span>
+			(line <span class="line-number">46</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">var:</span> this is the definition of a domain.  TODO: this value should be created by the bootstrap as an environment variable.</li>
+			</ul>
+	
+	
+</div>
+<a name="constLINK_FORUM_MESSAGE_SERVLET" id="LINK_FORUM_MESSAGE_SERVLET"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<img src="../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">LINK_FORUM_MESSAGE_SERVLET</span>
+			 = <span class="const-default"> &quot;/servlets/ProjectForumMessageView?forumID={_FORUM_ID_}&amp;messageID={_EVENT_ID_}&quot;</span>
+			(line <span class="line-number">55</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">var:</span> the forum view servlet to view the item of a discussion forum. It must be  parsed  to get correct value for the forum ID and the message ID.</li>
+			</ul>
+	
+	
+</div>
+<a name="constLINK_MAILING_LIST_SERVLET" id="LINK_MAILING_LIST_SERVLET"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<img src="../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">LINK_MAILING_LIST_SERVLET</span>
+			 = <span class="const-default"> &quot;/servlets/ReadMsg?list={_MAILING_LIST_ID_}&amp;amp;msgNo={_EVENT_ID_}&quot;</span>
+			(line <span class="line-number">50</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">var:</span> the mailing list servlet to make one able to view the Rss item.</li>
+			</ul>
+	
+	
+</div>
+<a name="constPROTOCOL" id="PROTOCOL"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<img src="../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">PROTOCOL</span>
+			 = <span class="const-default"> &quot;https://&quot;</span>
+			(line <span class="line-number">41</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+						
+		</div>
+	</div>
+
+	<p class="notes" id="credit">
+		Documentation generated on Thu, 07 Jan 2010 17:21:52 -0800 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.2</a>
+	</p>
+	</div></body>
+</html>

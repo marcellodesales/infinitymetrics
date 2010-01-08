@@ -1,0 +1,878 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs For Class HtmlParser</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class HtmlParser</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+													<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Class HtmlParser.</p>
+<p class="description"><p>To use, create an instance of the class passing  HTML text. Then invoke parse() until it's false.  When parse() returns true, $iNodeType, $iNodeName  $iNodeValue and $iNodeAttributes are updated.</p><p>To create an HtmlParser instance you may also  use convenience functions HtmlParser_ForFile  and HtmlParser_ForURL.</p></p>
+		<p class="notes">
+			Located in <a class="field" href="_util---HtmlParser.php.html">/util/HtmlParser.php</a> (line <span class="field">31</span>)
+		</p>
+		
+				
+		<pre></pre>
+	
+			</div>
+</div>
+
+
+
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variable Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+								</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+																																																																																																								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$BOE_ARRAY" title="details" class="var-name">$BOE_ARRAY</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$BOS_ARRAY" title="details" class="var-name">$BOS_ARRAY</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$B_ARRAY" title="details" class="var-name">$B_ARRAY</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$iHtmlCurrentChar" title="details" class="var-name">$iHtmlCurrentChar</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$iHtmlText" title="details" class="var-name">$iHtmlText</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$iHtmlTextIndex" title="details" class="var-name">$iHtmlTextIndex</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$iHtmlTextLength" title="details" class="var-name">$iHtmlTextLength</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$iNodeAttributes" title="details" class="var-name">$iNodeAttributes</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$iNodeName" title="details" class="var-name">$iNodeName</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$iNodeType" title="details" class="var-name">$iNodeType</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$iNodeValue" title="details" class="var-name">$iNodeValue</a>
+				</div>
+											</div>
+		</div>
+	</div>
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																		<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																																																																																																																																																												
+												<div class="method-definition">
+											<span class="method-result">HtmlParser</span>
+										<a href="#HtmlParser" title="details" class="method-name">HtmlParser</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$aHtmlText</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#clearAttributes" title="details" class="method-name">clearAttributes</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#isValidTagIdentifier" title="details" class="method-name">isValidTagIdentifier</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$name</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#moveNext" title="details" class="method-name">moveNext</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#parse" title="details" class="method-name">parse</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#readTag" title="details" class="method-name">readTag</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#readValueInTag" title="details" class="method-name">readValueInTag</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setTextIndex" title="details" class="method-name">setTextIndex</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$index</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#skipBlanksInTag" title="details" class="method-name">skipBlanksInTag</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#skipEndOfTag" title="details" class="method-name">skipEndOfTag</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#skipEqualsInTag" title="details" class="method-name">skipEqualsInTag</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#skipInTag" title="details" class="method-name">skipInTag</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$chars</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#skipMaxInTag" title="details" class="method-name">skipMaxInTag</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$chars</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$maxChars</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#skipToBlanksInTag" title="details" class="method-name">skipToBlanksInTag</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#skipToBlanksOrEqualsInTag" title="details" class="method-name">skipToBlanksOrEqualsInTag</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#skipToBlanksOrSlashInTag" title="details" class="method-name">skipToBlanksOrSlashInTag</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#skipToElement" title="details" class="method-name">skipToElement</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#skipToInTag" title="details" class="method-name">skipToInTag</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$chars</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#skipToStringInTag" title="details" class="method-name">skipToStringInTag</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$needle</span>)
+									</div>
+								</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<a name="var$BOE_ARRAY" id="$BOE_ARRAY"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$BOE_ARRAY</span>
+						(line <span class="line-number">65</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+		
+		
+
+</div>
+<a name="var$BOS_ARRAY" id="$BOS_ARRAY"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$BOS_ARRAY</span>
+						(line <span class="line-number">67</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+		
+		
+
+</div>
+<a name="var$B_ARRAY" id="$B_ARRAY"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$B_ARRAY</span>
+						(line <span class="line-number">66</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+		
+		
+
+</div>
+<a name="var$iHtmlCurrentChar" id="$iHtmlCurrentChar"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$iHtmlCurrentChar</span>
+						(line <span class="line-number">64</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+		
+		
+
+</div>
+<a name="var$iHtmlText" id="$iHtmlText"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$iHtmlText</span>
+						(line <span class="line-number">61</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+		
+		
+
+</div>
+<a name="var$iHtmlTextIndex" id="$iHtmlTextIndex"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$iHtmlTextIndex</span>
+			 = <span class="var-default"> 0</span>			(line <span class="line-number">63</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+		
+		
+
+</div>
+<a name="var$iHtmlTextLength" id="$iHtmlTextLength"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$iHtmlTextLength</span>
+						(line <span class="line-number">62</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+		
+		
+
+</div>
+<a name="var$iNodeAttributes" id="$iNodeAttributes"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$iNodeAttributes</span>
+						(line <span class="line-number">56</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Field iNodeAttributes.</p>
+<p class="description"><p>A string-indexed array containing attribute values  of the current node. Indexes are always lowercase.</p></p>
+	
+	
+		
+		
+
+</div>
+<a name="var$iNodeName" id="$iNodeName"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$iNodeName</span>
+			 = <span class="var-default"> &quot;&quot;</span>			(line <span class="line-number">43</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Field iNodeName.</p>
+<p class="description"><p>For elements, it's the name of the element.</p></p>
+	
+	
+		
+		
+
+</div>
+<a name="var$iNodeType" id="$iNodeType"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$iNodeType</span>
+						(line <span class="line-number">37</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Field iNodeType.</p>
+<p class="description"><p>May be one of the NODE_TYPE_* constants above.</p></p>
+	
+	
+		
+		
+
+</div>
+<a name="var$iNodeValue" id="$iNodeValue"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$iNodeValue</span>
+			 = <span class="var-default"> &quot;&quot;</span>			(line <span class="line-number">49</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Field iNodeValue.</p>
+<p class="description"><p>For text nodes, it's the text.</p></p>
+	
+	
+		
+		
+
+</div>
+						
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+																	<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+
+<a name="methodHtmlParser" id="HtmlParser"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">Constructor HtmlParser</span> (line <span class="line-number">74</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Constructor.</p>
+<p class="description"><p>Constructs an HtmlParser instance with  the HTML text given.</p></p>
+	
+	<div class="method-signature">
+		<span class="method-result">HtmlParser</span>
+		<span class="method-name">
+			HtmlParser
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$aHtmlText</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$aHtmlText</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodclearAttributes" id="clearAttributes"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">clearAttributes</span> (line <span class="line-number">102</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			clearAttributes
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodisValidTagIdentifier" id="isValidTagIdentifier"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">isValidTagIdentifier</span> (line <span class="line-number">176</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			isValidTagIdentifier
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$name</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$name</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodmoveNext" id="moveNext"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">moveNext</span> (line <span class="line-number">229</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			moveNext
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodparse" id="parse"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">parse</span> (line <span class="line-number">91</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Method parse.</p>
+<p class="description"><p>Parses the next node. Returns false only if  the end of the HTML text has been reached.  Updates values of iNode* fields.</p></p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			parse
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodreadTag" id="readTag"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">readTag</span> (line <span class="line-number">106</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			readTag
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodreadValueInTag" id="readValueInTag"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">readValueInTag</span> (line <span class="line-number">200</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			readValueInTag
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodsetTextIndex" id="setTextIndex"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">setTextIndex</span> (line <span class="line-number">219</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setTextIndex
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$index</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$index</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodskipBlanksInTag" id="skipBlanksInTag"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">skipBlanksInTag</span> (line <span class="line-number">180</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			skipBlanksInTag
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodskipEndOfTag" id="skipEndOfTag"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">skipEndOfTag</span> (line <span class="line-number">239</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			skipEndOfTag
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodskipEqualsInTag" id="skipEqualsInTag"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">skipEqualsInTag</span> (line <span class="line-number">196</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			skipEqualsInTag
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodskipInTag" id="skipInTag"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">skipInTag</span> (line <span class="line-number">249</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			skipInTag
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$chars</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$chars</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodskipMaxInTag" id="skipMaxInTag"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">skipMaxInTag</span> (line <span class="line-number">272</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			skipMaxInTag
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$chars</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$maxChars</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$chars</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$maxChars</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodskipToBlanksInTag" id="skipToBlanksInTag"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">skipToBlanksInTag</span> (line <span class="line-number">188</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			skipToBlanksInTag
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodskipToBlanksOrEqualsInTag" id="skipToBlanksOrEqualsInTag"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">skipToBlanksOrEqualsInTag</span> (line <span class="line-number">184</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			skipToBlanksOrEqualsInTag
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodskipToBlanksOrSlashInTag" id="skipToBlanksOrSlashInTag"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">skipToBlanksOrSlashInTag</span> (line <span class="line-number">192</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			skipToBlanksOrSlashInTag
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodskipToElement" id="skipToElement"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">skipToElement</span> (line <span class="line-number">317</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			skipToElement
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodskipToInTag" id="skipToInTag"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">skipToInTag</span> (line <span class="line-number">296</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			skipToInTag
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$chars</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$chars</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodskipToStringInTag" id="skipToStringInTag"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">skipToStringInTag</span> (line <span class="line-number">335</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns text between current position and $needle,  inclusive, or &quot;&quot; if not found. The current index is moved to a point  after the location of $needle, or not moved at all  if nothing is found.</p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			skipToStringInTag
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$needle</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$needle</span>			</li>
+				</ul>
+		
+			
+	</div>
+						
+		</div>
+	</div>
+
+
+	<p class="notes" id="credit">
+		Documentation generated on Thu, 07 Jan 2010 17:19:24 -0800 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.2</a>
+	</p>
+	</div></body>
+</html>

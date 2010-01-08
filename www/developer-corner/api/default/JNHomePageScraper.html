@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs For Class JNHomePageScraper</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class JNHomePageScraper</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+													<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+                <p class="implements">
+            Implements interfaces:
+            <ul>
+                <li><a href="../default/JNProjectWSInterface.html">JNProjectWSInterface</a></li>            </ul>
+        </p>
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">JavanetUrlBuilder final class builds URLs necessary for Java.net in a safe-way.</p>
+	<ul class="tags">
+				<li><span class="field">author:</span> Marcello de Sales &lt;<a href="mailto:marcello.sales@gmail.com">marcello.sales@gmail.com</a>&gt;</li>
+				<li><span class="field">version:</span> $Id$</li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_util---screenscraperapi---projecthome---JNProjectHomeScraper.class.php.html">/util/screenscraperapi/projecthome/JNProjectHomeScraper.class.php</a> (line <span class="field">8</span>)
+		</p>
+		
+				
+		<pre><a href="../default/AbstractServiceImpl.html">AbstractServiceImpl</a>
+   |
+   --JNHomePageScraper</pre>
+	
+			</div>
+</div>
+
+
+
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variable Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+								</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+																																								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$ownersList" title="details" class="var-name">$ownersList</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$projectSummary" title="details" class="var-name">$projectSummary</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$subprojectsList" title="details" class="var-name">$subprojectsList</a>
+				</div>
+											</div>
+		</div>
+	</div>
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																		<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																																																																				
+												<div class="method-definition">
+											<span class="method-result">JNHomePageScraper</span>
+										<a href="#__construct" title="details" class="method-name">__construct</a>
+											(<span class="var-type">jnProjectHomeHtml</span>&nbsp;<span class="var-name">0</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">ownerUSername[i]</span>
+										<a href="#getOwnersList" title="details" class="method-name">getOwnersList</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$proj</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">subprojects[i][name]</span>
+										<a href="#getSubprojectsList" title="details" class="method-name">getSubprojectsList</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$proj</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#getSummary" title="details" class="method-name">getSummary</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$proj</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#parseAll" title="details" class="method-name">parseAll</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$jnProjectHomeHtml</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#parseProjectHeader" title="details" class="method-name">parseProjectHeader</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$jnProjectHomeHtml</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#parseSubprojects" title="details" class="method-name">parseSubprojects</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$jnProjectHomeHtml</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#reset" title="details" class="method-name">reset</a>
+										()
+									</div>
+								</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<a name="var$ownersList" id="$ownersList"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$ownersList</span>
+						(line <span class="line-number">10</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$projectSummary" id="$projectSummary"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$projectSummary</span>
+						(line <span class="line-number">12</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$subprojectsList" id="$subprojectsList"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$subprojectsList</span>
+						(line <span class="line-number">11</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+							<h4>Inherited Variables</h4>
+				<A NAME='inherited_vars'><!-- --></A>
+									<p>Inherited from <span class="classname"><a href="../default/AbstractServiceImpl.html">AbstractServiceImpl</a></span></p>
+					<blockquote>
+													<span class="var-title">
+								<span class="var-name"><a href="../default/AbstractServiceImpl.html#var$jnProjectHomeHtmlContents">AbstractServiceImpl::$jnProjectHomeHtmlContents</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../default/AbstractServiceImpl.html#var$userCreditionalsAreValid">AbstractServiceImpl::$userCreditionalsAreValid</a></span><br>
+							</span>
+											</blockquote> 
+										
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+																	<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+
+<a name="method__construct" id="__construct"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">18</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Constructs a new scraper for the project home page.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">JNHomePageScraper</span>
+		<span class="method-name">
+			__construct
+		</span>
+					(<span class="var-type">jnProjectHomeHtml</span>&nbsp;<span class="var-name">0</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">jnProjectHomeHtml</span>
+				<span class="var-name">0</span><span class="var-description">: the home page of a Java.net project.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetOwnersList" id="getOwnersList"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getOwnersList</span> (line <span class="line-number">30</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">return:</span> are the the jn_usernames of the project owners of a given Java.net project</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">ownerUSername[i]</span>
+		<span class="method-name">
+			getOwnersList
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$proj</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$proj</span>			</li>
+				</ul>
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../default/JNProjectWSInterface.html#methodgetOwnersList">JNProjectWSInterface::getOwnersList()</a></dt>
+						<dd>Returns the list of the owners of the project home page</dd>
+					</dl>
+			
+	</div>
+<a name="methodgetSubprojectsList" id="getSubprojectsList"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getSubprojectsList</span> (line <span class="line-number">37</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">return:</span> = is the project name on Java.net, usually the one in the domain name          subprojects[i][title] = is the currect project title on Java.net</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">subprojects[i][name]</span>
+		<span class="method-name">
+			getSubprojectsList
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$proj</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$proj</span>			</li>
+				</ul>
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../default/JNProjectWSInterface.html#methodgetSubprojectsList">JNProjectWSInterface::getSubprojectsList()</a></dt>
+						<dd>Returns the list of subprojects from the project home page</dd>
+					</dl>
+			
+	</div>
+<a name="methodgetSummary" id="getSummary"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getSummary</span> (line <span class="line-number">43</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">return:</span> the parent project summary</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			getSummary
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$proj</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$proj</span>			</li>
+				</ul>
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../default/JNProjectWSInterface.html#methodgetSummary">JNProjectWSInterface::getSummary()</a></dt>
+						<dd>Returns the summary of the project home page</dd>
+					</dl>
+			
+	</div>
+<a name="methodparseAll" id="parseAll"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">parseAll</span> (line <span class="line-number">52</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Parses the entire document to extract the contents. This is a blocking method, and for this reason, the client  of this API should verify first if the credentials are correct, and then verify for the methods.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			parseAll
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$jnProjectHomeHtml</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$jnProjectHomeHtml</span><span class="var-description">: is the entire HTML page.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodparseProjectHeader" id="parseProjectHeader"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">parseProjectHeader</span> (line <span class="line-number">147</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			parseProjectHeader
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$jnProjectHomeHtml</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$jnProjectHomeHtml</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodparseSubprojects" id="parseSubprojects"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">parseSubprojects</span> (line <span class="line-number">117</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			parseSubprojects
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$jnProjectHomeHtml</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$jnProjectHomeHtml</span><span class="var-description">: is the entire parent project page.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodreset" id="reset"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">reset</span> (line <span class="line-number">22</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			reset
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+							<h4>Inherited Methods</h4>
+				<a name='inherited_methods'><!-- --></a>	
+									<!-- =========== Summary =========== -->
+					<p>Inherited From <span class="classname"><a href="../default/AbstractServiceImpl.html">AbstractServiceImpl</a></span></p>
+					<blockquote>
+													<span class="method-name"><a href="../default/AbstractServiceImpl.html#methodareUserCredentialsValid">AbstractServiceImpl::areUserCredentialsValid()</a></span><br>
+													<span class="method-name"><a href="../default/AbstractServiceImpl.html#methodgetHtmlParserForHtmlContent">AbstractServiceImpl::getHtmlParserForHtmlContent()</a></span><br>
+													<span class="method-name"><a href="../default/AbstractServiceImpl.html#methodparseUserValidation">AbstractServiceImpl::parseUserValidation()</a></span><br>
+											</blockquote>
+										
+		</div>
+	</div>
+
+
+	<p class="notes" id="credit">
+		Documentation generated on Thu, 07 Jan 2010 17:19:36 -0800 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.2</a>
+	</p>
+	</div></body>
+</html>

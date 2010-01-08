@@ -1,0 +1,812 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs For Class PersonalAgent</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class PersonalAgent</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+													<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Basic user class for the metrics workspace. User has username, password from  Java.net.</p>
+	<ul class="tags">
+				<li><span class="field">author:</span> Marcello de Sales &lt;<a href="mailto:marcello.sales@gmail.com">marcello.sales@gmail.com</a>&gt; Nov 15, 2008 10:34 PST</li>
+				<li><span class="field">version:</span> $Id$</li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_model---user---PersonalAgent.class.php.html">/model/user/PersonalAgent.class.php</a> (line <span class="field">40</span>)
+		</p>
+		
+				
+		<pre></pre>
+	
+			</div>
+</div>
+
+
+
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variable Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+								</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+																																																								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$mailingListsWSImpl" title="details" class="var-name">$mailingListsWSImpl</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$projectHomeWSImpl" title="details" class="var-name">$projectHomeWSImpl</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$session" title="details" class="var-name">$session</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type"><a href="../infinitymetrics-orm/User.html">User</a></span>
+					<a href="#$user" title="details" class="var-name">$user</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type"><a href="../default/JNUserEditWSInterface.html">JNUserEditWSInterface</a></span>
+					<a href="#$userEditWSImpl" title="details" class="var-name">$userEditWSImpl</a>
+				</div>
+											</div>
+		</div>
+	</div>
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																		<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																																																																																																																																												
+												<div class="method-definition">
+											<span class="method-result">PersonalAgent</span>
+										<a href="#__construct" title="details" class="method-name">__construct</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$user</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">if</span>
+										<a href="#areUserCredentialsValidOnJN" title="details" class="method-name">areUserCredentialsValidOnJN</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#collectDataFromProjectMailingListHistory" title="details" class="method-name">collectDataFromProjectMailingListHistory</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$projectName</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$mailingList</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$mailingListDesc</span>, <span class="var-type"><a href="../default/Observer.html">Observer</a></span>&nbsp;<span class="var-name">$observer</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#collectRssDataFromProject" title="details" class="method-name">collectRssDataFromProject</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$projectName</span>, <span class="var-type"><a href="../default/Observer.html">Observer</a></span>&nbsp;<span class="var-name">$observer</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#collectRssDataFromProjectForum" title="details" class="method-name">collectRssDataFromProjectForum</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$projectName</span>, <span class="var-type">int</span>&nbsp;<span class="var-name">$forumId</span>, <span class="var-type"><a href="../default/Observer.html">Observer</a></span>&nbsp;<span class="var-name">$observer</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#collectRssDataFromProjectMailingList" title="details" class="method-name">collectRssDataFromProjectMailingList</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$projectName</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$mailingList</span>, <span class="var-type"><a href="../default/Observer.html">Observer</a></span>&nbsp;<span class="var-name">$observer</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#equals" title="details" class="method-name">equals</a>
+											(<span class="var-type"><a href="../default/PersonalAgent.html">PersonalAgent</a></span>&nbsp;<span class="var-name">$other</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#getAuthenticatedEmail" title="details" class="method-name">getAuthenticatedEmail</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">String</span>
+										<a href="#getAuthenticatedFullName" title="details" class="method-name">getAuthenticatedFullName</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">project[name]</span>
+										<a href="#getAuthenticatedProjectsMembershipList" title="details" class="method-name">getAuthenticatedProjectsMembershipList</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">$userProfile["username"]</span>
+										<a href="#getAuthenticatedUserProfile" title="details" class="method-name">getAuthenticatedUserProfile</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">String</span>
+										<a href="#getJnUsername" title="details" class="method-name">getJnUsername</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">mailinglists[]</span>
+										<a href="#getListOfRssChannels" title="details" class="method-name">getListOfRssChannels</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$projectName</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">owners[]</span>
+										<a href="#getProjectOwnersList" title="details" class="method-name">getProjectOwnersList</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$projectName</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#getProjectSummary" title="details" class="method-name">getProjectSummary</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$projectName</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">projectNames[]</span>
+										<a href="#getSubprojectsFromProject" title="details" class="method-name">getSubprojectsFromProject</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$projectName</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../infinitymetrics-orm/User.html">User</a></span>
+										<a href="#getUser" title="details" class="method-name">getUser</a>
+										()
+									</div>
+								</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<a name="var$mailingListsWSImpl" id="$mailingListsWSImpl"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$mailingListsWSImpl</span>
+						(line <span class="line-number">53</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$projectHomeWSImpl" id="$projectHomeWSImpl"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$projectHomeWSImpl</span>
+						(line <span class="line-number">54</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$session" id="$session"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$session</span>
+						(line <span class="line-number">46</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$user" id="$user"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type"><a href="../infinitymetrics-orm/User.html">User</a></span>
+			<span class="var-name">$user</span>
+						(line <span class="line-number">44</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">var:</span> is the user in which the Personal Agent represent online.</li>
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$userEditWSImpl" id="$userEditWSImpl"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type"><a href="../default/JNUserEditWSInterface.html">JNUserEditWSInterface</a></span>
+			<span class="var-name">$userEditWSImpl</span>
+						(line <span class="line-number">52</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">var:</span> The information from the UserEdit page  for a given Java.net User. This is used by UC001 and UC002 during the  user's registration.</li>
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+						
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+																	<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+
+<a name="method__construct" id="__construct"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">60</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Constructs a new PersonalAgent for a given user. The agent will be going</p>
+<p class="description"><p>to Java.net and try to navigate as a user</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">PersonalAgent</span>
+		<span class="method-name">
+			__construct
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$user</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../infinitymetrics-orm/User.html">User</a></span>
+				<span class="var-name">$user</span><span class="var-description">: is the user that the Agent will represent online.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodareUserCredentialsValidOnJN" id="areUserCredentialsValidOnJN"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">areUserCredentialsValidOnJN</span> (line <span class="line-number">95</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">return:</span> the user credentials are valid on Java.net. That is, if the user provided the correct  Username and password for Java.net and can login</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">if</span>
+		<span class="method-name">
+			areUserCredentialsValidOnJN
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodcollectDataFromProjectMailingListHistory" id="collectDataFromProjectMailingListHistory"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">collectDataFromProjectMailingListHistory</span> (line <span class="line-number">193</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Collects the RSS Data feed from the given MAILING LIST for a given observer to process.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			collectDataFromProjectMailingListHistory
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$projectName</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$mailingList</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$mailingListDesc</span>, <span class="var-type"><a href="../default/Observer.html">Observer</a></span>&nbsp;<span class="var-name">$observer</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$projectName</span><span class="var-description">: is the java.net project name.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$mailingList</span><span class="var-description">: is the mailing list name id used in the URLs of the RSS feeds. (dev, users, issues)</span>			</li>
+					<li>
+				<span class="var-type"><a href="../default/Observer.html">Observer</a></span>
+				<span class="var-name">$observer</span><span class="var-description">: is an instance of an observer interested in the Rss data.</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$mailingListDesc</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodcollectRssDataFromProject" id="collectRssDataFromProject"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">collectRssDataFromProject</span> (line <span class="line-number">156</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Collects all the RssData for a given project. That means: <ol><li>Get the list of all Rss Channels based on the call of getListOfRssChannels($projectName).</li></ol></p>
+<p class="description"><p>2. Add the entire list (after filtering with some preferences);</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			collectRssDataFromProject
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$projectName</span>, <span class="var-type"><a href="../default/Observer.html">Observer</a></span>&nbsp;<span class="var-name">$observer</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$projectName</span><span class="var-description">: is the java.net project name</span>			</li>
+					<li>
+				<span class="var-type"><a href="../default/Observer.html">Observer</a></span>
+				<span class="var-name">$observer</span><span class="var-description">: an observer with regards to the Database feed of data.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodcollectRssDataFromProjectForum" id="collectRssDataFromProjectForum"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">collectRssDataFromProjectForum</span> (line <span class="line-number">206</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Collects the RSS Data feed from the given Discussion Forum for a given observer to process.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			collectRssDataFromProjectForum
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$projectName</span>, <span class="var-type">int</span>&nbsp;<span class="var-name">$forumId</span>, <span class="var-type"><a href="../default/Observer.html">Observer</a></span>&nbsp;<span class="var-name">$observer</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$projectName</span><span class="var-description">: is the java.net project name.</span>			</li>
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$forumId</span><span class="var-description">: is the forum id used in the URLs of the RSS feeds. 2342, etc.</span>			</li>
+					<li>
+				<span class="var-type"><a href="../default/Observer.html">Observer</a></span>
+				<span class="var-name">$observer</span><span class="var-description">: is an instance of an observer interested in the Rss data.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodcollectRssDataFromProjectMailingList" id="collectRssDataFromProjectMailingList"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">collectRssDataFromProjectMailingList</span> (line <span class="line-number">179</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Collects the RSS Data feed from the given MAILING LIST for a given observer to process.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			collectRssDataFromProjectMailingList
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$projectName</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$mailingList</span>, <span class="var-type"><a href="../default/Observer.html">Observer</a></span>&nbsp;<span class="var-name">$observer</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$projectName</span><span class="var-description">: is the java.net project name.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$mailingList</span><span class="var-description">: is the mailing list name id used in the URLs of the RSS feeds. (dev, users, issues)</span>			</li>
+					<li>
+				<span class="var-type"><a href="../default/Observer.html">Observer</a></span>
+				<span class="var-name">$observer</span><span class="var-description">: is an instance of an observer interested in the Rss data.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodequals" id="equals"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">equals</span> (line <span class="line-number">72</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Compares 2 instances of the Personal Agent class by comparing the Java.net User instance..</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> if the given PersonalAgent &quot;other&quot; is the same as the current instance.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			equals
+		</span>
+					(<span class="var-type"><a href="../default/PersonalAgent.html">PersonalAgent</a></span>&nbsp;<span class="var-name">$other</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../default/PersonalAgent.html">PersonalAgent</a></span>
+				<span class="var-name">$other</span><span class="var-description">: is the other personal agent to be compared</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetAuthenticatedEmail" id="getAuthenticatedEmail"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getAuthenticatedEmail</span> (line <span class="line-number">117</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">return:</span> the user's email</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			getAuthenticatedEmail
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetAuthenticatedFullName" id="getAuthenticatedFullName"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getAuthenticatedFullName</span> (line <span class="line-number">125</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">TODO: this method is BROKEN.java.net doesn't show the full name of the user,  as the website Tigris.org does.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> return the full name of the user</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">String</span>
+		<span class="method-name">
+			getAuthenticatedFullName
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetAuthenticatedProjectsMembershipList" id="getAuthenticatedProjectsMembershipList"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getAuthenticatedProjectsMembershipList</span> (line <span class="line-number">132</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Gets the memberships of the user</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> = {role1, role2, role3, ...}</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">project[name]</span>
+		<span class="method-name">
+			getAuthenticatedProjectsMembershipList
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetAuthenticatedUserProfile" id="getAuthenticatedUserProfile"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getAuthenticatedUserProfile</span> (line <span class="line-number">106</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">return:</span> = just the copy of the username wrapped into the profile for verification                                     purposes          $userProfile[&quot;fullName&quot;] = the full name of the user (STILL BROKEN)          $userProfile[&quot;email&quot;] = the email address from the user on Java.net          $userProfile[&quot;memberships&quot;] = the list of projects the user has one of more roles. For each projec, the           list of roles is also given.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">$userProfile["username"]</span>
+		<span class="method-name">
+			getAuthenticatedUserProfile
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetJnUsername" id="getJnUsername"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getJnUsername</span> (line <span class="line-number">88</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">return:</span> returns the Java.net username.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">String</span>
+		<span class="method-name">
+			getJnUsername
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetListOfRssChannels" id="getListOfRssChannels"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getListOfRssChannels</span> (line <span class="line-number">145</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">return:</span> <p>returns the list of all RSS channels, including private ones, for a given project.  mailinglist[id][description] = the description as defined on the website  mailinglist[id][totalMessages] = may be included if the session included calls to the number of messages.</p><p>For discussion services, they will include the total number of messages, while for all the mailing lists, they  will NOT be set, thus isset(mailinglist[id][totalMessages]) == false. For this reason, the client must  get the total number of all different RSs channels in separate calls to  mailingListsWSImpl-&gt;getTotalNumberOfEmails(mailinglist[id], $projectName)</p></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">mailinglists[]</span>
+		<span class="method-name">
+			getListOfRssChannels
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$projectName</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$projectName</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetProjectOwnersList" id="getProjectOwnersList"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getProjectOwnersList</span> (line <span class="line-number">231</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">return:</span> is the list of all project owners of a project</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">owners[]</span>
+		<span class="method-name">
+			getProjectOwnersList
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$projectName</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$projectName</span><span class="var-description">: is the name of the project</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetProjectSummary" id="getProjectSummary"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getProjectSummary</span> (line <span class="line-number">224</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">return:</span> the summary of a given Java.net project</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			getProjectSummary
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$projectName</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$projectName</span><span class="var-description">: is the name of the project</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetSubprojectsFromProject" id="getSubprojectsFromProject"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getSubprojectsFromProject</span> (line <span class="line-number">217</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">return:</span> of all subprojects for the given projectName</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">projectNames[]</span>
+		<span class="method-name">
+			getSubprojectsFromProject
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$projectName</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$projectName</span><span class="var-description">: is the name of the projecr</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetUser" id="getUser"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getUser</span> (line <span class="line-number">82</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">return:</span> returns an instance of User (it can be also Student or Instructor, depending on the user).</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../infinitymetrics-orm/User.html">User</a></span>
+		<span class="method-name">
+			getUser
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+						
+		</div>
+	</div>
+
+
+	<p class="notes" id="credit">
+		Documentation generated on Thu, 07 Jan 2010 17:21:44 -0800 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.2</a>
+	</p>
+	</div></body>
+</html>

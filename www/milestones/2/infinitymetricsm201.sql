@@ -14,11 +14,11 @@
 
 SET FOREIGN_KEY_CHECKS=0;
 
-CREATE DATABASE `infinitymetricsm201`
+CREATE DATABASE `infinitymetricsm303`
   CHARACTER SET `utf8`
   COLLATE `utf8_bin`;
 
-USE `infinitymetricsm201`;
+USE `infinitymetricsm303`;
 
 /* Tables */
 CREATE TABLE `channel` (
@@ -30,18 +30,18 @@ CREATE TABLE `channel` (
   PRIMARY KEY (`channel_id`, `project_jn_name`, `channel_name`)
 ) ENGINE = InnoDB;
 
-CREATE TABLE `dispute` (
-  `dispute_id`       smallint(5) UNSIGNED AUTO_INCREMENT NOT NULL,
+CREATE TABLE `custom_event` (
+  `custom_event_id`       smallint(5) UNSIGNED AUTO_INCREMENT NOT NULL,
   `title`            varchar(64) NOT NULL,
   `date`             date NOT NULL,
   `project_jn_name`  varchar(50) NOT NULL,
-  PRIMARY KEY (`dispute_id`)
+  PRIMARY KEY (`custom_event_id`)
 ) ENGINE = InnoDB;
 
-CREATE TABLE `dispute_entry` (
+CREATE TABLE `custome_event_entry` (
   `entry_id`    int(10) UNSIGNED AUTO_INCREMENT NOT NULL,
   `notes`       varchar(255) NOT NULL,
-  `dispute_id`  smallint(5) UNSIGNED NOT NULL,
+  `custom_event_id`  smallint(5) UNSIGNED NOT NULL,
   `date`        timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`entry_id`)
 ) ENGINE = InnoDB;
@@ -64,22 +64,10 @@ CREATE TABLE `institution` (
   PRIMARY KEY (`institution_id`)
 ) ENGINE = InnoDB;
 
-CREATE TABLE `instructors` (
-  `user_id`         int(10) UNSIGNED NOT NULL,
-  `institution_id`  smallint(5) UNSIGNED NOT NULL,
-  PRIMARY KEY (`user_id`)
-) ENGINE = InnoDB;
-
 CREATE TABLE `project` (
   `project_jn_name`  varchar(50) NOT NULL,
   `summary`          varchar(64),
   PRIMARY KEY (`project_jn_name`)
-) ENGINE = InnoDB;
-
-CREATE TABLE `student` (
-  `user_id`         int(10) UNSIGNED NOT NULL,
-  `institution_id`  smallint(5) UNSIGNED NOT NULL,
-  PRIMARY KEY (`user_id`)
 ) ENGINE = InnoDB;
 
 CREATE TABLE `student_x_project` (
@@ -96,7 +84,8 @@ CREATE TABLE `user` (
   `first_name`   varchar(50) NOT NULL,
   `last_name`    varchar(50) NOT NULL,
   `email`        varchar(255) NOT NULL,
-  `type`         enum ('STUDENT','INSTRUCTOR','REGULAR'),
+  `type`         enum ('S','I','J'),
+  `institution_id`  NOT NULL,
   PRIMARY KEY (`user_id`)
 ) ENGINE = InnoDB;
 
@@ -131,13 +120,17 @@ CREATE INDEX `idx_fk_channel_project_jn_name`
   ON `channel`
   (`project_jn_name`);
 
-CREATE INDEX `idx_fk_dispute_project_jn_name`
-  ON `dispute`
+CREATE INDEX `idx_fk_custom_event_project_jn_name`
+  ON `custom_event`
   (`project_jn_name`);
 
-CREATE INDEX `idx_fk_entry_dispute_id`
-  ON `dispute_entry`
-  (`dispute_id`);
+CREATE INDEX `idx_fk_entry_custom_event_id`
+  ON `custom_event_entry`
+  (`custom_event_id`);
+
+CREATE INDEX `idx_fk_user_institution_id`
+  ON `user`
+  (`institution_id`);
 
 CREATE INDEX `idx_creator_username`
   ON `event`
@@ -146,14 +139,6 @@ CREATE INDEX `idx_creator_username`
 CREATE INDEX `idx_publication_date`
   ON `event`
   (`date`);
-
-CREATE INDEX `idx_fk_institution`
-  ON `instructors`
-  (`institution_id`);
-
-CREATE INDEX `idx_fk_student_institution_id`
-  ON `student`
-  (`institution_id`);
 
 CREATE INDEX `idx_fk_project_x_project_jn_name`
   ON `student_x_project`
@@ -187,17 +172,22 @@ ALTER TABLE `channel`
     ON DELETE CASCADE
     ON UPDATE RESTRICT;
 
-ALTER TABLE `dispute`
-  ADD CONSTRAINT `idx_fk_dispute_project_jn_name`
+ALTER TABLE `user`
+  ADD CONSTRAINT `idx_fk_user_institution`
+  FOREIGN KEY (`institution_id`)
+    REFERENCES `institution`(`institution_id`);
+
+ALTER TABLE `custom_event`
+  ADD CONSTRAINT `idx_fk_custom_event_project_jn_name`
   FOREIGN KEY (`project_jn_name`)
     REFERENCES `project`(`project_jn_name`)
     ON DELETE CASCADE
     ON UPDATE RESTRICT;
 
-ALTER TABLE `dispute_entry`
-  ADD CONSTRAINT `idx_fk_entry_dispute_id`
-  FOREIGN KEY (`dispute_id`)
-    REFERENCES `dispute`(`dispute_id`)
+ALTER TABLE `custom_event_entry`
+  ADD CONSTRAINT `idx_fk_entry_custom_event_id`
+  FOREIGN KEY (`custom_event_id`)
+    REFERENCES `custom_event`(`custom_event_id`)
     ON DELETE CASCADE
     ON UPDATE RESTRICT;
 
@@ -215,45 +205,10 @@ ALTER TABLE `event`
     ON DELETE CASCADE
     ON UPDATE RESTRICT;
 
-ALTER TABLE `instructors`
-  ADD CONSTRAINT `idx_fk_institution`
-  FOREIGN KEY (`institution_id`)
-    REFERENCES `institution`(`institution_id`)
-    ON DELETE CASCADE
-    ON UPDATE RESTRICT;
-
-ALTER TABLE `instructors`
-  ADD CONSTRAINT `idx_fk_user_id`
-  FOREIGN KEY (`user_id`)
-    REFERENCES `user`(`user_id`)
-    ON DELETE CASCADE
-    ON UPDATE RESTRICT;
-
-ALTER TABLE `student`
-  ADD CONSTRAINT `idx_fk_student_institution_id`
-  FOREIGN KEY (`institution_id`)
-    REFERENCES `institution`(`institution_id`)
-    ON DELETE CASCADE
-    ON UPDATE RESTRICT;
-
-ALTER TABLE `student`
-  ADD CONSTRAINT `idx_fk_student_x_user_id`
-  FOREIGN KEY (`user_id`)
-    REFERENCES `user`(`user_id`)
-    ON DELETE CASCADE
-    ON UPDATE RESTRICT;
-
 ALTER TABLE `student_x_project`
   ADD CONSTRAINT `idx_fk_project_x_project_jn_name`
   FOREIGN KEY (`project_jn_name`)
     REFERENCES `project`(`project_jn_name`)
-    ON DELETE CASCADE
-    ON UPDATE RESTRICT;
-
-ALTER TABLE `student_x_project`
-  ADD CONSTRAINT `idx_fk_user_x_user_id`
-  FOREIGN KEY (`user_id`)
-    REFERENCES `student`(`user_id`)
     ON DELETE CASCADE
     ON UPDATE RESTRICT;
 
@@ -296,11 +251,11 @@ ALTER TABLE `workspace_share`
 COMMIT;
 
 
-/* Data for table "dispute" */
+/* Data for table "custom_event" */
 COMMIT;
 
 
-/* Data for table "dispute_entry" */
+/* Data for table "custom_event_entry" */
 COMMIT;
 
 
@@ -312,15 +267,7 @@ COMMIT;
 COMMIT;
 
 
-/* Data for table "instructors" */
-COMMIT;
-
-
 /* Data for table "project" */
-COMMIT;
-
-
-/* Data for table "student" */
 COMMIT;
 
 

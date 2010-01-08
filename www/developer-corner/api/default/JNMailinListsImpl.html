@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs For Class JNMailinListsImpl</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class JNMailinListsImpl</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+													<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+                <p class="implements">
+            Implements interfaces:
+            <ul>
+                <li><a href="../default/JNMailingListsWSInterface.html">JNMailingListsWSInterface</a></li>            </ul>
+        </p>
+        		<!-- ========== Info from phpDoc block ========= -->
+		<p class="notes">
+			Located in <a class="field" href="_util---screenscraperapi---mailinglist---JNMailingListsImpl.class.php.html">/util/screenscraperapi/mailinglist/JNMailingListsImpl.class.php</a> (line <span class="field">7</span>)
+		</p>
+		
+				
+		<pre></pre>
+	
+			</div>
+</div>
+
+
+
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variable Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+								</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+																																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$mailingListsScraper" title="details" class="var-name">$mailingListsScraper</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$session" title="details" class="var-name">$session</a>
+				</div>
+											</div>
+		</div>
+	</div>
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																		<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																																																												
+												<div class="method-definition">
+											<span class="method-result">JNMailinListsImpl</span>
+										<a href="#__construct" title="details" class="method-name">__construct</a>
+											(<span class="var-type"><a href="../default/JNSessionImpl.html">JNSessionImpl</a></span>&nbsp;<span class="var-name">$session</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#areUserCredentialsValid" title="details" class="method-name">areUserCredentialsValid</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$url</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$mailingListId</span> = <span class="var-default">0</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">channels[]</span>
+										<a href="#getCompleteListOfChannels" title="details" class="method-name">getCompleteListOfChannels</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$projectName</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">events[username][id]</span>
+										<a href="#getCompleteMailingListHistory" title="details" class="method-name">getCompleteMailingListHistory</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$mailingListId</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$projectName</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">forums[]</span>
+										<a href="#getListOfDiscussionForums" title="details" class="method-name">getListOfDiscussionForums</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$projectName</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">mailinglists[]</span>
+										<a href="#getListOfMailingLists" title="details" class="method-name">getListOfMailingLists</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$projectName</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">the</span>
+										<a href="#getTotalNumberOfEmails" title="details" class="method-name">getTotalNumberOfEmails</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$mailingListId</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$projectName</span>)
+									</div>
+								</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<a name="var$mailingListsScraper" id="$mailingListsScraper"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$mailingListsScraper</span>
+						(line <span class="line-number">11</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$session" id="$session"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$session</span>
+						(line <span class="line-number">9</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+						
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+																	<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+
+<a name="method__construct" id="__construct"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">17</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Constructs a new JNMailingListsImpl for a give user's credential to access the given project</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">JNMailinListsImpl</span>
+		<span class="method-name">
+			__construct
+		</span>
+					(<span class="var-type"><a href="../default/JNSessionImpl.html">JNSessionImpl</a></span>&nbsp;<span class="var-name">$session</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../default/JNSessionImpl.html">JNSessionImpl</a></span>
+				<span class="var-name">$session</span><span class="var-description">: is the session containing the user's credentials and the HTML</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodareUserCredentialsValid" id="areUserCredentialsValid"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">areUserCredentialsValid</span> (line <span class="line-number">26</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">verifies if the credentias are good to go</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> if the credentials are correct</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			areUserCredentialsValid
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$url</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$mailingListId</span> = <span class="var-default">0</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$url</span><span class="var-description">: is the url to go after the login</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$mailingListId</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetCompleteListOfChannels" id="getCompleteListOfChannels"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getCompleteListOfChannels</span> (line <span class="line-number">108</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">return:</span> the list of all mailing lists and discussion forums available on the website. For this list,  the most basic distiction is that discussion forums are identified by a numeric value, while the the mailing  lists are alpha characters.  $channels[&quot;mailingLists&quot;]  $channels[&quot;forums&quot;]</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">channels[]</span>
+		<span class="method-name">
+			getCompleteListOfChannels
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$projectName</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$projectName</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetCompleteMailingListHistory" id="getCompleteMailingListHistory"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getCompleteMailingListHistory</span> (line <span class="line-number">145</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">return:</span> this is the identification of a given event          events[username][date] this is the date of the event for the given username (2008-12-07) format</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">events[username][id]</span>
+		<span class="method-name">
+			getCompleteMailingListHistory
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$mailingListId</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$projectName</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$mailingListId</span><span class="var-description">: is the mailing list ID</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$projectName</span><span class="var-description">: is the project name.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetListOfDiscussionForums" id="getListOfDiscussionForums"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getListOfDiscussionForums</span> (line <span class="line-number">83</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">return:</span> <p>the list of all discussion forums available in the website.  forums[n][id] = the numeric id of the discussion forum (12345)  forums[n][description] = the description of the discussion forum &quot;General discussions about this project&quot;  forums[n][totalMessages] = the current number of total messages on the forum</p><p>https://ppm-8.dev.java.net/servlets/ProjectForumView</p></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">forums[]</span>
+		<span class="method-name">
+			getListOfDiscussionForums
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$projectName</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$projectName</span>			</li>
+				</ul>
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../default/JNMailingListsWSInterface.html#methodgetListOfDiscussionForums">JNMailingListsWSInterface::getListOfDiscussionForums()</a></dt>
+					</dl>
+			
+	</div>
+<a name="methodgetListOfMailingLists" id="getListOfMailingLists"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getListOfMailingLists</span> (line <span class="line-number">57</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">If the mailing list is dev@ppm-8.dev.java.net, the service must only retrieve &quot;dev&quot;.</p>
+<p class="description"><p>Project owners has the complete visibility, while regular users just the public ones. They are captured from the  website https://ppm-8.dev.java.net/servlets/ProjectMailingListList</p><p>Fromt the website, there's no way to determine if a mailing list if public or private. There's a need to login  twice to the service.</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the list of all mailing lists NAMES, including private ones, that the user can acces.  mailinglist[n][id] = name of the mailing list (dev, users...)  mailinglist[n][description] = the description as defined on the website  mailinglist[n][totalMessages] = can also be incorporated, after successfully call the method for the sizes.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">mailinglists[]</span>
+		<span class="method-name">
+			getListOfMailingLists
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$projectName</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$projectName</span>			</li>
+				</ul>
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../default/JNMailingListsWSInterface.html#methodgetListOfMailingLists">JNMailingListsWSInterface::getListOfMailingLists()</a></dt>
+						<dd>If the mailing list is dev@ppm-8.dev.java.net, the service must only retrieve &quot;dev&quot;.</dd>
+					</dl>
+			
+	</div>
+<a name="methodgetTotalNumberOfEmails" id="getTotalNumberOfEmails"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getTotalNumberOfEmails</span> (line <span class="line-number">119</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">It returns the total number of messages on a given forum.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> total number of emails on a given mailing list.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">the</span>
+		<span class="method-name">
+			getTotalNumberOfEmails
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$mailingListId</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$projectName</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$projectName</span><span class="var-description">: is the name of the project</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$mailingListId</span><span class="var-description">: is the name of the mailing list</span>			</li>
+				</ul>
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../default/JNMailingListsWSInterface.html#methodgetTotalNumberOfEmails">JNMailingListsWSInterface::getTotalNumberOfEmails()</a></dt>
+					</dl>
+			
+	</div>
+						
+		</div>
+	</div>
+
+
+	<p class="notes" id="credit">
+		Documentation generated on Thu, 07 Jan 2010 17:19:34 -0800 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.2</a>
+	</p>
+	</div></body>
+</html>

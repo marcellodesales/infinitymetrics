@@ -1,0 +1,650 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs For Class MetricsWorkspaceController</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class MetricsWorkspaceController</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+															<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Description of MetricsWorkspaceController</p>
+	<ul class="tags">
+				<li><span class="field">author:</span> Andres Ardila &lt;<a href="mailto:aardila1@fau.edu">aardila1@fau.edu</a>&gt;</li>
+				<li><span class="field">author:</span> Marcello de Sales &lt;<a href="mailto:marcello.sales@gmail.com">marcello.sales@gmail.com</a>&gt;</li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_controller---MetricsWorkspaceController.class.php.html">/controller/MetricsWorkspaceController.class.php</a> (line <span class="field">31</span>)
+		</p>
+		
+				
+		<pre></pre>
+	
+			</div>
+</div>
+
+
+
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+												<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+												<div class="method-definition">
+					static 						<span class="method-result"><a href="../infinitymetrics-orm/PersistentWorkspace.html">PersistentWorkspace</a></span>
+										<a href="#changeWorkspaceState" title="details" class="method-name">changeWorkspaceState</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$workspace_id</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$newState</span>)
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result"><a href="../infinitymetrics-orm/PersistentWorkspace.html">PersistentWorkspace</a></span>
+										<a href="#createWorkspace" title="details" class="method-name">createWorkspace</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$userId</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$parentProjectName</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$title</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$description</span> = <span class="var-default">null</span>], <span class="var-type">string</span>&nbsp;<span class="var-name">$projectName</span>)
+									</div>
+																								<div class="method-definition">
+					static 						<span class="method-result">void</span>
+										<a href="#registerParentProject" title="details" class="method-name">registerParentProject</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$user</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$parentProjectName</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$projectSummary</span>)
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result">void</span>
+										<a href="#registerProject" title="details" class="method-name">registerProject</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$projectName</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$parentProjectName</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$projectSummary</span>)
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result"><a href="../infinitymetrics-orm/PersistentProject.html">PersistentProject</a></span>
+										<a href="#retrieveProject" title="details" class="method-name">retrieveProject</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$projectName</span>)
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result"><a href="../infinitymetrics-orm/PersistentWorkspace.html">PersistentWorkspace</a></span>
+										<a href="#retrieveWorkspace" title="details" class="method-name">retrieveWorkspace</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$workspace_id</span>)
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result">workspace['OWN']</span>
+										<a href="#retrieveWorkspaceCollection" title="details" class="method-name">retrieveWorkspaceCollection</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$user_id</span>)
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result"><a href="../infinitymetrics-orm/PersistentWorkspaceShare.html">PersistentWorkspaceShare</a></span>
+										<a href="#shareWorkspace" title="details" class="method-name">shareWorkspace</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$workspace_id</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$userIdWithWhomToShareWorkspace</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$jnUsernameWithWhomToShareWorkspace</span>)
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result"><a href="../infinitymetrics-orm/PersistentWorkspace.html">PersistentWorkspace</a></span>
+										<a href="#updateWorkspaceProfile" title="details" class="method-name">updateWorkspaceProfile</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$workspace_id</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$newTitle</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$newDescription</span> = <span class="var-default">null</span>])
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result">void</span>
+										<a href="#validateChangeStateForm" title="details" class="method-name">validateChangeStateForm</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$workspace_id</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$newState</span>)
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result">void</span>
+										<a href="#validateShareWorkspaceForm" title="details" class="method-name">validateShareWorkspaceForm</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$workspace_id</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$userIdWithWhomToShareWorkspace</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$jnUsernameWithWhomToShareWorkspace</span>)
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result">void</span>
+										<a href="#validateUpdateWorkspaceForm" title="details" class="method-name">validateUpdateWorkspaceForm</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$workspaceId</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$title</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$description</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$projectName</span>)
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result">void</span>
+										<a href="#validateWorkspaceForm" title="details" class="method-name">validateWorkspaceForm</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$userId</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$projectName</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$title</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$description</span> = <span class="var-default">null</span>])
+									</div>
+								
+																												<div class="method-definition">
+											<span class="method-result"><CSS</span>
+										<a href="#getStateColor" title="details" class="method-name">getStateColor</a>
+											(<span class="var-type"><string></span>&nbsp;<span class="var-name">$state</span>)
+									</div>
+																																																																																																</div>
+		</div>
+	</div>		
+
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+<a name="methodchangeWorkspaceState" id="changeWorkspaceState"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method changeWorkspaceState</span> (line <span class="line-number">159</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">This method implements UC105 Change Workspace State</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the workspace with the changed state</li>
+				<li><span class="field">throws:</span> InfinityMetricsException if any of the given parameters is invalid. Also if the workspace_id refers to  a non-existing workspace, and other possible persistence problems.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result"><a href="../infinitymetrics-orm/PersistentWorkspace.html">PersistentWorkspace</a></span>
+		<span class="method-name">
+			changeWorkspaceState
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$workspace_id</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$newState</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$workspace_id</span><span class="var-description">: is the workspace identification</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$newState</span><span class="var-description">: is one of the valid states 'NEW', 'ACTIVE', 'INACTIVE', 'PAUSED'</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodcreateWorkspace" id="createWorkspace"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method createWorkspace</span> (line <span class="line-number">87</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Implements the UC100 Create Workspace</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the newly created workspaced based on the input</li>
+				<li><span class="field">throws:</span> InfinityMetricsException if any of the given parameters is invalid. Also if the projectName refers to  a non-existing project, and other possible persistence problems.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result"><a href="../infinitymetrics-orm/PersistentWorkspace.html">PersistentWorkspace</a></span>
+		<span class="method-name">
+			createWorkspace
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$userId</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$parentProjectName</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$title</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$description</span> = <span class="var-default">null</span>], <span class="var-type">string</span>&nbsp;<span class="var-name">$projectName</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$userId</span><span class="var-description">: is the user identification</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$projectName</span><span class="var-description">: is the project name</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$title</span><span class="var-description">: is the title of the workspace</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$description</span><span class="var-description">: is the description of the workspace</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$parentProjectName</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodregisterParentProject" id="registerParentProject"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method registerParentProject</span> (line <span class="line-number">351</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Registers a parent project and all its subprojects</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">void</span>
+		<span class="method-name">
+			registerParentProject
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$user</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$parentProjectName</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$projectSummary</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../infinitymetrics-orm/PersistentUser.html">PersistentUser</a></span>
+				<span class="var-name">$user</span><span class="var-description">: is the user requesting the registration</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$parentProjectName</span><span class="var-description">: is the name of the parent project on Java.net</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$projectSummary</span><span class="var-description">: is the summary of the parent project</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodregisterProject" id="registerProject"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method registerProject</span> (line <span class="line-number">338</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Registers a single project</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">void</span>
+		<span class="method-name">
+			registerProject
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$projectName</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$parentProjectName</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$projectSummary</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$projectName</span><span class="var-description">: is the name of the Java.net project</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$parentProjectName</span><span class="var-description">: is the name of the parent project. Can be &quot;&quot; empty if it's the parent</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$projectSummary</span><span class="var-description">: is the summary of the project</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodretrieveProject" id="retrieveProject"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method retrieveProject</span> (line <span class="line-number">63</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Retrieves a Project based on the project name</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the instance of the project based on the given project name.</li>
+				<li><span class="field">throws:</span> InfinityMetricsException if the project name is empty or if the given project name doesn't exist.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result"><a href="../infinitymetrics-orm/PersistentProject.html">PersistentProject</a></span>
+		<span class="method-name">
+			retrieveProject
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$projectName</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$projectName</span><span class="var-description">: is the java.net project name</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodretrieveWorkspace" id="retrieveWorkspace"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method retrieveWorkspace</span> (line <span class="line-number">220</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">This method implements UC101 View Workspace Profile</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the instance of the workspace for the given workspace_id</li>
+				<li><span class="field">throws:</span> InfinityMetricsException if the given workspace_id is empty. Also if it refers to a non-existing workspace.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result"><a href="../infinitymetrics-orm/PersistentWorkspace.html">PersistentWorkspace</a></span>
+		<span class="method-name">
+			retrieveWorkspace
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$workspace_id</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$workspace_id</span><span class="var-description">: is the workspace identification or any other and other possible persistence problems.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodretrieveWorkspaceCollection" id="retrieveWorkspaceCollection"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method retrieveWorkspaceCollection</span> (line <span class="line-number">185</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">This method implements UC102 View Workspace Collection</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> = array with owned workspaces          workspace['SHARED'] = array with shared workspaces</li>
+				<li><span class="field">throws:</span> InfinityMetricsException if the user_id is empty. Also if it refers to a non-existing user, and other  possible persistence problems.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">workspace['OWN']</span>
+		<span class="method-name">
+			retrieveWorkspaceCollection
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$user_id</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$user_id</span><span class="var-description">: is the user identification</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodshareWorkspace" id="shareWorkspace"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method shareWorkspace</span> (line <span class="line-number">260</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">This method implements UC104 Share Metrics Workspace</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the instance of the workspace share as a confirmation</li>
+				<li><span class="field">throws:</span> InfinityMetricsException if the given parameters are invalid. Also, if either the workspace or the given  user identification to be have the workspace shared with doesn't exist, or other related persistence problems.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result"><a href="../infinitymetrics-orm/PersistentWorkspaceShare.html">PersistentWorkspaceShare</a></span>
+		<span class="method-name">
+			shareWorkspace
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$workspace_id</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$userIdWithWhomToShareWorkspace</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$jnUsernameWithWhomToShareWorkspace</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$workspace_id</span><span class="var-description">: is the identification of the workspace</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$jnUsernameWithWhomToShareWorkspace</span><span class="var-description">: the username of the user to share the workspace with</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$userIdWithWhomToShareWorkspace</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodupdateWorkspaceProfile" id="updateWorkspaceProfile"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method updateWorkspaceProfile</span> (line <span class="line-number">315</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Implements the UC103 Update Workspace Profile</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the udpated version of the workspace</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result"><a href="../infinitymetrics-orm/PersistentWorkspace.html">PersistentWorkspace</a></span>
+		<span class="method-name">
+			updateWorkspaceProfile
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$workspace_id</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$newTitle</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$newDescription</span> = <span class="var-default">null</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$workspace_id</span><span class="var-description">: is the identification of the workspace</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$newTitle</span><span class="var-description">: is the title of the workspace</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$newDescription</span><span class="var-description">: is the description of the workspace</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodvalidateChangeStateForm" id="validateChangeStateForm"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method validateChangeStateForm</span> (line <span class="line-number">133</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Validates the change state input form</p>
+	<ul class="tags">
+				<li><span class="field">throws:</span> InfinityMetricsException if any of the given parameters is invalid.</li>
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">void</span>
+		<span class="method-name">
+			validateChangeStateForm
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$workspace_id</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$newState</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$workspace_id</span><span class="var-description">: the workspace id</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$newState</span><span class="var-description">: new state</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodvalidateShareWorkspaceForm" id="validateShareWorkspaceForm"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method validateShareWorkspaceForm</span> (line <span class="line-number">239</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Validates the share of worspace</p>
+	<ul class="tags">
+				<li><span class="field">throws:</span> InfinityMetricsException if any of the given parameters is invalid.</li>
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">void</span>
+		<span class="method-name">
+			validateShareWorkspaceForm
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$workspace_id</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$userIdWithWhomToShareWorkspace</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$jnUsernameWithWhomToShareWorkspace</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$workspace_id</span><span class="var-description">: is the identification of the workspace</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$jnUsernameWithWhomToShareWorkspace</span><span class="var-description">: username for the user</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$userIdWithWhomToShareWorkspace</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodvalidateUpdateWorkspaceForm" id="validateUpdateWorkspaceForm"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method validateUpdateWorkspaceForm</span> (line <span class="line-number">294</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Validates the update workspace form</p>
+	<ul class="tags">
+				<li><span class="field">throws:</span> InfinityMetricsException if any of the given parameters is invalid</li>
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">void</span>
+		<span class="method-name">
+			validateUpdateWorkspaceForm
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$workspaceId</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$title</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$description</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$projectName</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$workspaceId</span><span class="var-description">: is the identification of the user</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$projectName</span><span class="var-description">: is the project name</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$title</span><span class="var-description">: is the title for the workspace</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$description</span><span class="var-description">: is the description for the workspace</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodvalidateWorkspaceForm" id="validateWorkspaceForm"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method validateWorkspaceForm</span> (line <span class="line-number">40</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Validates the create workspace form</p>
+	<ul class="tags">
+				<li><span class="field">throws:</span> InfinityMetricsException if any of the given parameters is invalid</li>
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">void</span>
+		<span class="method-name">
+			validateWorkspaceForm
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$userId</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$projectName</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$title</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$description</span> = <span class="var-default">null</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$userId</span><span class="var-description">: is the identification of the user</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$projectName</span><span class="var-description">: is the project name</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$title</span><span class="var-description">: is the title for the workspace</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$description</span><span class="var-description">: is the description for the workspace</span>			</li>
+				</ul>
+		
+			
+	</div>
+
+<a name="methodgetStateColor" id="getStateColor"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getStateColor</span> (line <span class="line-number">370</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns the corresponding CSS color name for a given state</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Color&gt;</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><CSS</span>
+		<span class="method-name">
+			getStateColor
+		</span>
+					(<span class="var-type"><string></span>&nbsp;<span class="var-name">$state</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><string></span>
+				<span class="var-name">$state</span>			</li>
+				</ul>
+		
+			
+	</div>
+						
+		</div>
+	</div>
+
+
+	<p class="notes" id="credit">
+		Documentation generated on Thu, 07 Jan 2010 17:19:45 -0800 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.2</a>
+	</p>
+	</div></body>
+</html>
