@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<project name="InfinityMetrics" default="prepare" basedir=".">
+<project name="InfinityMetrics - Java.Net" default="prepare" basedir=".">
 
     <tstamp/>
     <property file="build.properties" />
